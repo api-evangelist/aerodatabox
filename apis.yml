@@ -23,7 +23,7 @@ type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 created: '2025-02-24'
-modified: '2025-02-28'
+modified: '2026-03-16'
 position: Consumer
 description: >-
   AeroDataBox is a cutting-edge data management platform tailored specifically
@@ -37,5 +37,5 @@ description: >-
   standard for data-driven decision-making in the aerospace sector.
 maintainers:
   - FN: Kin Lane
-    email: info@apievangelist.com
+    email: kin@apievangelist.com
 specificationVersion: '0.19'
