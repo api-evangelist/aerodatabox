@@ -6,10 +6,13 @@ apis:
     name: AeroDataBox
     tags:
       - API
-    humanURL: ' https://aerodatabox.com/'
+    humanURL: https://doc.aerodatabox.com/
+    baseURL: https://aerodatabox.p.rapidapi.com
     properties:
-      - url: ' https://aerodatabox.com/'
+      - url: https://doc.aerodatabox.com/
         type: Documentation
+      - url: openapi/aerodatabox-openapi.yml
+        type: OpenAPI
     description: >-
       Aviation and Flight Data API aviation and flight data API for your
       application which is actually affordable tailored for small and medium
@@ -23,7 +26,7 @@ type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 created: '2025-02-24'
-modified: '2026-03-16'
+modified: '2026-04-01'
 position: Consumer
 description: >-
   AeroDataBox is a cutting-edge data management platform tailored specifically
