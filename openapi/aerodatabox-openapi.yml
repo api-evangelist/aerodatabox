@@ -3,8 +3,7 @@ servers:
   - url: https://prod.api.market/api/v1/aedbx/aerodatabox
 info:
   title: AeroDataBox API - Aviation and Flight API
-  description: Affordable aviation & flight data API tailored for small and medium
-    businesses, teams and individual developers.
+  description: Affordable aviation & flight data API tailored for small and medium businesses, teams and individual developers.
   termsOfService: https://aerodatabox.com/terms/
   contact:
     url: https://aerodatabox.com/contact/
@@ -14,12 +13,8 @@ paths:
     get:
       tags:
         - Aircraft API
-      summary: Single aircraft (by tail-number, Mode-S or ID) / TIER 1
-      description: "*Returns:* Single aircraft, *best* matching specified search
-        criteria, if found. Please note that all found aircraft will be
-        impersonated with registration information matching the requested tail
-        number or Mode-S even though an aircraft might be flying under a
-        different registration right now."
+      summary: AeroDataBox Single aircraft (by tail-number, Mode-S or ID) / TIER 1
+      description: "*Returns:* Single aircraft, *best* matching specified search criteria, if found. Please note that all found aircraft will be impersonated with registration information matching the requested tail number or Mode-S even though an aircraft might be flying under a different registration right now."
       operationId: GetAircraft
       parameters:
         - name: searchBy
@@ -29,43 +24,7 @@ paths:
             $ref: "#/components/schemas/AircraftSearchByEnum"
         - name: searchParam
           in: path
-          description: "Value of the search criteria. If `searchBy` is: \r
-
-            * `id`: then this field should be an ID of an aircraft (as specified
-            in the database of this API);\r
-
-            * `reg`: then this field should be a tail-number of an aircraft
-            (with or without spaces or dashes, any case formats are acceptable,
-            e.g.PH-BXO, DeMhJ), multiple matches are possible - see below;\r
-
-            * `icao24`, then this field should be a ICAO 24-bit Mode-S address
-            of an aircraft specified in hexadecimal format (e.g. 484161,
-            483EFD), multiple matches are possible - see below.\r
-
-            \r
-
-            *If multiple matches are possible:*\r
-
-            \r
-
-            There cannot be more than one aircraft actively flying with the same
-            tail-number or ICAO 24-bit Mode-S address at any moment of time. \r
-
-            However, historically aircraft tail-numbers or addresses may be used
-            multiple times by different aircraft.\r
-
-            This endpoint is supposed to return a **single** aircraft data. In
-            case if multiple aircraft satisfy the search criteria, the best
-            match will be chosen as follows:\r
-
-            * If an active aircraft is found according to the requested critera,
-            it is returned.\r
-
-            * Otherwise, an aircraft that used requested tail-number/address the
-            most recently is returned. \r
-
-            * If usage time may not be determined, the aircraft stored in the
-            database the most recently is returned."
+          description: "Value of the search criteria. If `searchBy` is: \r\n* `id`: then this field should be an ID of an aircraft (as specified in the database of this API);\r\n* `reg`: then this field should be a tail-number of an aircraft (with or without spaces or dashes, any case formats are acceptable, e.g.PH-BXO, DeMhJ), multiple matches are possible - see below;\r\n* `icao24`, then this field should be a ICAO 24-bit Mode-S address of an aircraft specified in hexadecimal format (e.g. 484161, 483EFD), multiple matches are possible - see below.\r\n\r\n*If multiple matches are possible:*\r\n\r\nThere cannot be more than one aircraft actively flying with the same tail-number or ICAO 24-bit Mode-S address at any moment of time. \r\nHowever, historically aircraft tail-numbers or addresses may be used multiple times by different aircraft.\r\nThis endpoint is supposed to return a **single** aircraft data. In case if multiple aircraft satisfy the search criteria, the best match will be chosen as follows:\r\n* If an active aircraft is found according to the requested critera, it is returned.\r\n* Otherwise, an aircraft that used requested tail-number/address the most recently is returned. \r\n* If usage time may not be determined, the aircraft stored in the database the most recently is returned."
           required: true
           schema:
             maxLength: 10
@@ -78,8 +37,7 @@ paths:
             default: false
         - name: withRegistrations
           in: query
-          description: "Should include the history of aircraft registrations (default:
-            false)."
+          description: "Should include the history of aircraft registrations (default: false)."
           schema:
             type: boolean
             default: false
@@ -150,10 +108,8 @@ paths:
     get:
       tags:
         - Aircraft API
-      summary: Single aircraft registration history (by tail-number, Mode-S or ID) /
-        TIER 1
-      description: "*Returns:* A list of all known registrations of a single aircraft,
-        *best* matching specified search criteria, if found"
+      summary: AeroDataBox Single aircraft registration history (by tail-number, Mode-S or ID) / TIER 1
+      description: "*Returns:* A list of all known registrations of a single aircraft, *best* matching specified search criteria, if found"
       operationId: GetAircraftRegistrations
       parameters:
         - name: searchBy
@@ -163,23 +119,7 @@ paths:
             $ref: "#/components/schemas/AircraftSearchByEnum"
         - name: searchParam
           in: path
-          description: "Value of the search criteria. If `searchBy` is: \r
-
-            * `id`, then this field should be an ID of an aircraft (as specified
-            in the database of this API);\r
-
-            * `reg`, then this field should be a tail-number of an aircraft
-            (with or without spaces or dashes, any case formats are acceptable,
-            e.g.PH-BXO, DeMhJ), multiple matches are possible - see below;\r
-
-            * `icao24`, then this field should be a ICAO 24-bit Mode-S address
-            of an aircraft specified in hexadecimal format (e.g. 484161,
-            483EFD), multiple matches are possible - see below.\r
-
-            \r
-
-            *If multiple matches are possible:* see similar remark to `Single
-            aircraft` endpoint."
+          description: "Value of the search criteria. If `searchBy` is: \r\n* `id`, then this field should be an ID of an aircraft (as specified in the database of this API);\r\n* `reg`, then this field should be a tail-number of an aircraft (with or without spaces or dashes, any case formats are acceptable, e.g.PH-BXO, DeMhJ), multiple matches are possible - see below;\r\n* `icao24`, then this field should be a ICAO 24-bit Mode-S address of an aircraft specified in hexadecimal format (e.g. 484161, 483EFD), multiple matches are possible - see below.\r\n\r\n*If multiple matches are possible:* see similar remark to `Single aircraft` endpoint."
           required: true
           schema:
             maxLength: 10
@@ -248,12 +188,8 @@ paths:
     get:
       tags:
         - Aircraft API
-      summary: Aircraft by tail-number, Mode-S or ID / TIER 1
-      description: "*Returns:* A list of all aircraft ever matched the requested
-        criteria. Please note that all found aircraft will be impersonated with
-        registration information matching the requested tail number or Mode-S
-        even though an aircraft might be flying under a different registration
-        right now."
+      summary: AeroDataBox Aircraft by tail-number, Mode-S or ID / TIER 1
+      description: "*Returns:* A list of all aircraft ever matched the requested criteria. Please note that all found aircraft will be impersonated with registration information matching the requested tail number or Mode-S even though an aircraft might be flying under a different registration right now."
       operationId: GetAllAircraft
       parameters:
         - name: searchBy
@@ -263,18 +199,7 @@ paths:
             $ref: "#/components/schemas/AircraftSearchByEnum"
         - name: searchParam
           in: path
-          description: "Value of the search criteria. If `searchBy` is: \r
-
-            * `id`, then this field should be an ID of an aircraft (as specified
-            in the database of this API);\r
-
-            * `reg`, then this field should be a tail-number of an aircraft
-            (with or without spaces or dashes, any case formats are acceptable,
-            e.g.PH-BXO, DeMhJ);\r
-
-            * `icao24`, then this field should be a ICAO 24-bit Mode-S address
-            of an aircraft specified in hexadecimal format (e.g. 484161,
-            483EFD)."
+          description: "Value of the search criteria. If `searchBy` is: \r\n* `id`, then this field should be an ID of an aircraft (as specified in the database of this API);\r\n* `reg`, then this field should be a tail-number of an aircraft (with or without spaces or dashes, any case formats are acceptable, e.g.PH-BXO, DeMhJ);\r\n* `icao24`, then this field should be a ICAO 24-bit Mode-S address of an aircraft specified in hexadecimal format (e.g. 484161, 483EFD)."
           required: true
           schema:
             maxLength: 10
@@ -287,8 +212,7 @@ paths:
             default: false
         - name: withRegistrations
           in: query
-          description: "Should include the history of aircraft registrations (default:
-            false)."
+          description: "Should include the history of aircraft registrations (default: false)."
           schema:
             type: boolean
             default: false
@@ -356,29 +280,13 @@ paths:
     get:
       tags:
         - Aircraft API
-      summary: Airline fleet / Aircraft list by airline code (BETA) / TIER 3
-      description: "*Returns:* A paged list of aircraft in the fleet of the specified
-        airline. \r
-
-        \r
-
-        That will include *active* aircraft currently flying in an *active*
-        airline, verfified through more than one source.\r
-
-        Unconfirmed sightings of an aircraft will not qualify said aircraft to
-        be listed in the fleet."
+      summary: AeroDataBox Airline fleet / Aircraft list by airline code (BETA) / TIER 3
+      description: "*Returns:* A paged list of aircraft in the fleet of the specified airline. \r\n\r\nThat will include *active* aircraft currently flying in an *active* airline, verfified through more than one source.\r\nUnconfirmed sightings of an aircraft will not qualify said aircraft to be listed in the fleet."
       operationId: GetAirlineFleet
       parameters:
         - name: airlineCode
           in: path
-          description: "3-character ICAO-code of the airliner (e.g., KLM, ACA); or\r
-
-            2-character IATA-code of the airline (e.g., KL, AC).\r
-
-            \            \r
-
-            Please note that more than one active airline may have the same IATA
-            code, therefore IATA codes are not recommended for this endpoint."
+          description: "3-character ICAO-code of the airliner (e.g., KLM, ACA); or\r\n2-character IATA-code of the airline (e.g., KL, AC).\r\n            \r\nPlease note that more than one active airline may have the same IATA code, therefore IATA codes are not recommended for this endpoint."
           required: true
           schema:
             maxLength: 3
@@ -386,10 +294,7 @@ paths:
             type: string
         - name: pageSize
           in: query
-          description: "The number of returned records will be capped at this value.\r
-
-            Must be a positive value and not exceed the limit stipulated by your
-            pricing plan."
+          description: "The number of returned records will be capped at this value.\r\nMust be a positive value and not exceed the limit stipulated by your pricing plan."
           required: true
           schema:
             maximum: 2147483647
@@ -398,9 +303,7 @@ paths:
             format: int32
         - name: pageOffset
           in: query
-          description: The number of records to skip before listing a page of records. In
-            conjunction with `pageSize` effectively determines the page number
-            (default  - 0).
+          description: The number of records to skip before listing a page of records. In conjunction with `pageSize` effectively determines the page number (default  - 0).
           schema:
             maximum: 2147483647
             minimum: 0
@@ -409,8 +312,7 @@ paths:
             default: 0
         - name: withRegistrations
           in: query
-          description: "Should include the history of aircraft registrations (default:
-            false)."
+          description: "Should include the history of aircraft registrations (default: false)."
           schema:
             type: boolean
             default: false
@@ -474,30 +376,13 @@ paths:
     get:
       tags:
         - Aircraft API
-      summary: Aircraft image by tail-number / TIER 2
-      description: "**What is the aircraft photo?**\r
-
-        \r
-
-        Aircraft images are being searched in external sources by certain
-        criteria without any manual intervention. \r
-
-        Therefore, false matches may be returned. Only images with licenses
-        approved for commercial use are returned. Please be advised that you may
-        be required to mention author attribution before using the image.\r
-
-        \r
-
-        *Returns:* Image data with medium-sized direct image URL and licence
-        approved for commercial use\r
-
-        is returned."
+      summary: AeroDataBox Aircraft image by tail-number / TIER 2
+      description: "**What is the aircraft photo?**\r\n\r\nAircraft images are being searched in external sources by certain criteria without any manual intervention. \r\nTherefore, false matches may be returned. Only images with licenses approved for commercial use are returned. Please be advised that you may be required to mention author attribution before using the image.\r\n\r\n*Returns:* Image data with medium-sized direct image URL and licence approved for commercial use\r\nis returned."
       operationId: GetAircraftImageByRegistration
       parameters:
         - name: reg
           in: path
-          description: Tail-number of the aircraft (full, stripped and any case formats
-            are acceptable).
+          description: Tail-number of the aircraft (full, stripped and any case formats are acceptable).
           required: true
           schema:
             type: string
@@ -561,9 +446,8 @@ paths:
     get:
       tags:
         - Aircraft API
-      summary: Search active aircraft tail numbers by term / TIER 2
-      description: "*Returns:* List of active aircraft registrations with tail numbers
-        starting from the term."
+      summary: AeroDataBox Search active aircraft tail numbers by term / TIER 2
+      description: "*Returns:* List of active aircraft registrations with tail numbers starting from the term."
       operationId: SearchAircraftByTerm
       parameters:
         - name: q
@@ -585,12 +469,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/StringAircraftContractSearchResultCollectionContrac\
-                  t"
+                $ref: "#/components/schemas/StringAircraftContractSearchResultCollectionContract"
             application/xml:
               schema:
-                $ref: "#/components/schemas/StringAircraftContractSearchResultCollectionContrac\
-                  t"
+                $ref: "#/components/schemas/StringAircraftContractSearchResultCollectionContract"
         "204":
           description: No Content
         "400":
@@ -641,13 +523,8 @@ paths:
     get:
       tags:
         - Airport API
-      summary: Airport by code / TIER 1
-      description: "At the moment airports having both ICAO and IATA code are present
-        in database only.\r
-
-        \r
-
-        *Returns*: Single airport data, if found."
+      summary: AeroDataBox Airport by code / TIER 1
+      description: "At the moment airports having both ICAO and IATA code are present in database only.\r\n\r\n*Returns*: Single airport data, if found."
       operationId: GetAirport
       parameters:
         - name: codeType
@@ -657,17 +534,7 @@ paths:
             $ref: "#/components/schemas/AirportCodesByEnum"
         - name: code
           in: path
-          description: "If `codeType` is:\r
-
-            * `icao`, then this field must be a 4-character ICAO-code of the
-            airport (e.g.: EHAM, KLAX, UUEE, etc.);\r
-
-            * `iata`, then this field must be a 3-character IATA-code of the
-            airport (e.g.: AMS, SFO, LAX, etc.).\r
-
-            \r
-
-            Full, stripped and any case formats are acceptable."
+          description: "If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
           required: true
           schema:
             maxLength: 4
@@ -745,17 +612,8 @@ paths:
     get:
       tags:
         - Airport API
-      summary: Airport runways / TIER 1
-      description: "**Which runways does this airport have?**\r
-
-        \r
-
-        At the moment airports having both ICAO and IATA code are present in
-        database only.\r
-
-        \r
-
-        *Returns*: Collection of runway data items."
+      summary: AeroDataBox Airport runways / TIER 1
+      description: "**Which runways does this airport have?**\r\n\r\nAt the moment airports having both ICAO and IATA code are present in database only.\r\n\r\n*Returns*: Collection of runway data items."
       operationId: GetAirportRunways
       parameters:
         - name: codeType
@@ -765,17 +623,7 @@ paths:
             $ref: "#/components/schemas/AirportCodesByEnum"
         - name: code
           in: path
-          description: "If `codeType` is:\r
-
-            * `icao`, then this field must be a 4-character ICAO-code of the
-            airport (e.g.: EHAM, KLAX, UUEE, etc.);\r
-
-            * `iata`, then this field must be a 3-character IATA-code of the
-            airport (e.g.: AMS, SFO, LAX, etc.).\r
-
-            \r
-
-            Full, stripped and any case formats are acceptable."
+          description: "If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
           required: true
           schema:
             maxLength: 4
@@ -845,18 +693,8 @@ paths:
     get:
       tags:
         - Airport API
-      summary: Search airports by location / TIER 2
-      description: "**What are the airports closest to the location?**\r
-
-        \r
-
-        At the moment airports having both ICAO and IATA code and flight
-        schedules are present available only.\r
-
-        \r
-
-        *Returns:* A list of airports found within the specified radius around
-        the specified location."
+      summary: AeroDataBox Search airports by location / TIER 2
+      description: "**What are the airports closest to the location?**\r\n\r\nAt the moment airports having both ICAO and IATA code and flight schedules are present available only.\r\n\r\n*Returns:* A list of airports found within the specified radius around the specified location."
       operationId: SearchAirportsByLocation
       parameters:
         - name: lat
@@ -868,16 +706,14 @@ paths:
             format: float
         - name: lon
           in: query
-          description: Longitude location coordinate in decimal format (between -180 and
-            180)
+          description: Longitude location coordinate in decimal format (between -180 and 180)
           required: true
           schema:
             type: number
             format: float
         - name: radiusKm
           in: query
-          description: Radius of search around specified location in kilometers (max. 1000
-            km)
+          description: Radius of search around specified location in kilometers (max. 1000 km)
           required: true
           schema:
             type: integer
@@ -891,8 +727,7 @@ paths:
             format: int32
         - name: withFlightInfoOnly
           in: query
-          description: If set to true, will only return airports which have flight data
-            (scheduled or live) available. Default = false.
+          description: If set to true, will only return airports which have flight data (scheduled or live) available. Default = false.
           schema:
             type: boolean
             default: false
@@ -902,12 +737,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GeoCoordinatesContractListingAirportContractSearchR\
-                  esultCollectionContract"
+                $ref: "#/components/schemas/GeoCoordinatesContractListingAirportContractSearchResultCollectionContract"
             application/xml:
               schema:
-                $ref: "#/components/schemas/GeoCoordinatesContractListingAirportContractSearchR\
-                  esultCollectionContract"
+                $ref: "#/components/schemas/GeoCoordinatesContractListingAirportContractSearchResultCollectionContract"
         "204":
           description: No Content
         "400":
@@ -958,34 +791,8 @@ paths:
     get:
       tags:
         - Airport API
-      summary: Search airports by IP address geolocation / TIER 2
-      description: "**What are the airports closest to the customer, based on their IP
-        address?**\r
-
-        **What are the airports closest to the location determined (geo-located)
-        by a IP address?**\r
-
-        \r
-
-        This endpoint determines the location by the IP address provided and
-        then returns the list of the nearest airports\r
-
-        in the same way as `Search airports by location` endpoint does. \r
-
-        \r
-
-        Please note:\r
-
-        * IP geo-location is not a precise method and it determines an
-        approximate location only.\r
-
-        * At the moment airports having both ICAO and IATA code and flight
-        schedules are present available only.\r
-
-        \r
-
-        *Returns:* A list of airports found within the specified radius around
-        the location approximated (geo-located) from the specified IP address."
+      summary: AeroDataBox Search airports by IP address geolocation / TIER 2
+      description: "**What are the airports closest to the customer, based on their IP address?**\r\n**What are the airports closest to the location determined (geo-located) by a IP address?**\r\n\r\nThis endpoint determines the location by the IP address provided and then returns the list of the nearest airports\r\nin the same way as `Search airports by location` endpoint does. \r\n\r\nPlease note:\r\n* IP geo-location is not a precise method and it determines an approximate location only.\r\n* At the moment airports having both ICAO and IATA code and flight schedules are present available only.\r\n\r\n*Returns:* A list of airports found within the specified radius around the location approximated (geo-located) from the specified IP address."
       operationId: SearchAirportsByIpGeoLocation
       parameters:
         - name: q
@@ -996,8 +803,7 @@ paths:
             type: string
         - name: radiusKm
           in: query
-          description: Radius of search around specified location in kilometers (max. 1000
-            km)
+          description: Radius of search around specified location in kilometers (max. 1000 km)
           required: true
           schema:
             type: integer
@@ -1011,8 +817,7 @@ paths:
             format: int32
         - name: withFlightInfoOnly
           in: query
-          description: If set to true, will only return airports which have flight data
-            (scheduled or live) available. Default = false.
+          description: If set to true, will only return airports which have flight data (scheduled or live) available. Default = false.
           schema:
             type: boolean
             default: false
@@ -1022,12 +827,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GeoCoordinatesContractListingAirportContractSearchR\
-                  esultCollectionContract"
+                $ref: "#/components/schemas/GeoCoordinatesContractListingAirportContractSearchResultCollectionContract"
             application/xml:
               schema:
-                $ref: "#/components/schemas/GeoCoordinatesContractListingAirportContractSearchR\
-                  esultCollectionContract"
+                $ref: "#/components/schemas/GeoCoordinatesContractListingAirportContractSearchResultCollectionContract"
         "204":
           description: No Content
         "400":
@@ -1078,14 +881,8 @@ paths:
     get:
       tags:
         - Airport API
-      summary: Search airports by free text / TIER 2
-      description: "At the moment airports having both ICAO and IATA code and flight
-        schedules are present available only.\r
-
-        \r
-
-        *Returns:* List of airports with names and city names (and IATA/ICAO
-        code, if enabled) matching the search term."
+      summary: AeroDataBox Search airports by free text / TIER 2
+      description: "At the moment airports having both ICAO and IATA code and flight schedules are present available only.\r\n\r\n*Returns:* List of airports with names and city names (and IATA/ICAO code, if enabled) matching the search term."
       operationId: SearchAirportByTerm
       parameters:
         - name: q
@@ -1103,23 +900,13 @@ paths:
             default: 10
         - name: withFlightInfoOnly
           in: query
-          description: If set to true, will only return airports which have flight data
-            (scheduled or live) available. Default = false.
+          description: If set to true, will only return airports which have flight data (scheduled or live) available. Default = false.
           schema:
             type: boolean
             default: false
         - name: withSearchByCode
           in: query
-          description: "If set to true, will attempt to interpret short words within the
-            search query as IATA or ICAO code\r
-
-            and prioritize exact matches by these codes (they will appear higher
-            than others). \r
-
-            Otherwise, the search by code will be completely excluded (only the
-            name of an airport or its city will be searched). \r
-
-            Default = true."
+          description: "If set to true, will attempt to interpret short words within the search query as IATA or ICAO code\r\nand prioritize exact matches by these codes (they will appear higher than others). \r\nOtherwise, the search by code will be completely excluded (only the name of an airport or its city will be searched). \r\nDefault = true."
           schema:
             type: boolean
             default: true
@@ -1129,12 +916,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/StringListingAirportContractSearchResultCollectionC\
-                  ontract"
+                $ref: "#/components/schemas/StringListingAirportContractSearchResultCollectionContract"
             application/xml:
               schema:
-                $ref: "#/components/schemas/StringListingAirportContractSearchResultCollectionC\
-                  ontract"
+                $ref: "#/components/schemas/StringListingAirportContractSearchResultCollectionContract"
         "204":
           description: No Content
         "400":
@@ -1185,185 +970,9 @@ paths:
     post:
       tags:
         - Flight Alert API
-      summary: Create web-hook subscription / TIER 4
-      description: "*This endpoitns is a part of Flight alert PUSH API currently
-        powered by webhooks.  \r
-
-        If you are running your own web service, you can subscribe to flights by
-        number or airport code. \r
-
-        After that, your HTTP endpoint will be called (notified) whenever the
-        flight information gets \r
-
-        updated.*\r
-
-        \r
-
-        Creates a web-hook subscription on a subject (e.g., flight alerts by
-        number or by airport code).\r
-
-        Returns information about created subscription. Subscription ID
-        contained in it\r
-
-        can be used to refresh or remove it.\r
-
-        \r
-
-        Every time a subject gets updated, a HTTP request will be sent to\r
-
-        the URL specified in `url` parameter. Request will be of a POST type \r
-
-        and contain JSON-formatted `FlightNotificationContract` object
-        containing subscription\r
-
-        and flights information in  the body (see example response for status
-        code 199\r
-
-        of this endpoint documentation).\r
-
-        \r
-
-        All flight alerts / notifications are delivered in best-effort manner.
-        They might be missing\r
-
-        or delayed. If there was an error delivering a notification for any
-        reason, for example, your\r
-
-        endpoint was not available, returned non-2xx status code, or did not
-        respond within timeout period,\r
-
-        there will be 2 more retries after 5 and 15 minutes (**this behavior is
-        changing, see below**).\r
-
-        \r
-
-        If subscribed to a specific flight or to flights operated in a specific
-        airport:\r
-
-        * Ensure that the flight is within the live updates / ADS-B data
-        coverage. There is no sense in subscribing to a flight which operates in
-        airports having poor or  no live updates or ADS-B coverage: there simply
-        will be no updates. To check if an airport is tracked and on which
-        level, use `/health/services/airports/{icao}/feeds` endpoint. You can
-        also use `/health/services/feeds/{service}/airports` to get the list of
-        covered airports. Read more about coverage here:
-        https://www.aerodatabox.com/data-coverage.\r
-
-        * Notifications will cover updates for flights commencing from 6 hours
-        ago up to 72 hours in future.\r
-
-        * Among these, notifications will contain only those flight items which
-        were actually updated this time.\r
-
-        \r
-
-        ** ! WARNING OF THE UPCOMING BREAKING CHANGES ! **\r
-
-        \r
-
-        WE ARE CHANGING HOW WEB-HOOK SUBSCRIPTION BILLING AND NOTIFICATION RETRY
-        IS HANDLED. \r
-
-        \r
-
-        If you're already using Flight Alert API you need to adjust your code to
-        prevent service interruption.\r
-
-        \r
-
-        **CURRENT BEHAVIOR (BEING PHASED OUT):**\r
-
-        \r
-
-        * Web-hook subscriptions created using this endpoint have a life-time of
-        7 days. Expiration date-time is provided in the response to this
-        endpoint. \r
-
-        * After that expiration date the subscription will be removed
-        automatically. If you want to prevent expiration and extend the
-        subscription, use `PATCH /webhook/{subscriptionId}/refresh` endpoint to
-        refresh the subscription. You may also remove the subscription manually
-        using DELETE `webhook/{subscriptionId}`.\r
-
-        * As long as a web-hook subscription is active, you will receive
-        notifications if there are any.\r
-
-        * You are billed for every call when you create or refresh a
-        subscription as per Tier 4 API quota.\r
-
-        * You are **not** billed for the amount of notifications generated or
-        delivered to you.\r
-
-        * You may **not** be refunded for unused time on your subscription if
-        you remove it manually before expiration or if there were no
-        notifications.\r
-
-        * Each failed notification delivery attempt is retried 2 times by
-        default, regardless of the reason of failure.\r
-
-        \r
-
-        **UPCOMING BEHAVIOR:**\r
-
-        \r
-
-        * Web-hook subscriptions no longer expire, unless you remove them
-        manually.\r
-
-        * This endpoint is moved to the Free Tier and both creating and
-        refreshing subscriptions will be free of charge.\r
-
-        * Every API consumer will now have a dedicated flight alert credit
-        balance separate from the API quota. \r
-
-        * Credits are deducted from your balance each time an alert notification
-        is sent to your webhook. The cost is 1 credit per flight item in the
-        notification. If a notification contains 1 flight, it costs 1 credit. If
-        a notification contains 5 flights (common with airport subscriptions),
-        it costs 5 credits.\r
-
-        * Use caution when subscribing to an airport with a lot of traffic, as
-        it may drain your balance quickly.\r
-
-        * As soon as your balance reaches zero, all your web-hook subscriptions
-        will pause and no notifications will be sent until you refill your
-        balance.The balance is shared among all web-hook subscriptions created
-        by you.\r
-
-        * To refill the balance, refer to `POST /subscriptions/balance/refill`
-        API endpoint.\r
-
-        * To check the balance, refer to `GET /subscriptions/balance`
-        endpoint.\r
-
-        * `PATCH /webhook/{subscriptionId}/refresh` is now deprecated will be
-        removed after the transition period. Pricing Tier 4 will be discontinued
-        too.\r
-
-        * Each failed notification delivery attempt is not retried by default,
-        unless you explicitly set amount of retries when creating the
-        subscription using `maxDeliveryRetries` parameter in the request body.\r
-
-        * Each retry attempt costs the same amount of credits as the original
-        notification delivery attempt.\r
-
-        \r
-
-        **WHEN THE CHANGE WILL HAPPEN?**\r
-
-        \r
-
-        * Transition period will end on **the 4th of April, 2026**. Both systems
-        will co-exist during the transition period until then. After that date
-        only the credit-based billing system will remain operational. \r
-
-        \r
-
-        **MIGRATION GUIDE / LEARN MORE**\r
-
-        \r
-
-        Read our guide at https://aerodatabox.com/flight-alert-api-2026/"
+      summary: AeroDataBox Create web-hook subscription / TIER 4
+      description: "*This endpoitns is a part of Flight alert PUSH API currently powered by webhooks.  \r\nIf you are running your own web service, you can subscribe to flights by number or airport code. \r\nAfter that, your HTTP endpoint will be called (notified) whenever the flight information gets \r\nupdated.*\r\n\r\nCreates a web-hook subscription on a subject (e.g., flight alerts by number or by airport code).\r\nReturns information about created subscription. Subscription ID contained in it\r\ncan be used to refresh or remove it.\r\n\r\nEvery time a subject gets updated, a HTTP request will be sent to\r\nthe URL specified in `url` parameter. Request will be of a POST type \r\nand contain JSON-formatted `FlightNotificationContract` object containing subscription\r\nand flights information in  the body (see example response for status code 199\r\nof this endpoint documentation).\r\n\r\nAll flight alerts / notifications are delivered in best-effort manner. They might be missing\r\nor delayed. If there was an error delivering a notification for any reason, for example, your\r\nendpoint was not available, returned non-2xx status code, or did not respond within timeout period,\r\nthere will be 2 more retries after 5 and 15 minutes (**this behavior is changing, see below**).\r\n\r\nIf subscribed to a specific flight or to flights operated in a specific airport:\r\n* Ensure that the flight is within the live updates / ADS-B data coverage. There is no sense in subscribing to a flight which operates in airports having poor or  no live updates or ADS-B coverage: there simply will be no updates. To check if an airport is tracked and on which level, use `/health/services/airports/{icao}/feeds` endpoint. You can also use `/health/services/feeds/{service}/airports` to get the list of covered airports. Read more about coverage here: https://www.aerodatabox.com/data-coverage.\r\n* Notifications will cover updates for flights commencing from 6 hours ago up to 72 hours in future.\r\n* Among these, notifications will contain only those flight items which were actually updated this time.\r\n\r\n** ! WARNING OF THE UPCOMING BREAKING CHANGES ! **\r\n\r\nWE ARE CHANGING HOW WEB-HOOK SUBSCRIPTION BILLING AND NOTIFICATION RETRY IS HANDLED. \r\n\r\nIf you're already using Flight Alert API you need to adjust your code to prevent service interruption.\r\n\r\n**CURRENT BEHAVIOR (BEING PHASED OUT):**\r\n\r\n* Web-hook subscriptions created using this endpoint have a life-time of 7 days. Expiration date-time is provided in the response to this endpoint. \r\n* After that expiration date the subscription will be removed automatically. If you want to prevent expiration and extend the subscription, use `PATCH /webhook/{subscriptionId}/refresh` endpoint to refresh the subscription. You may also remove the subscription manually using DELETE `webhook/{subscriptionId}`.\r\n* As long as a web-hook subscription is active, you will receive notifications if there are any.\r\n* You are billed for every call when you create or refresh a subscription as per Tier 4 API quota.\r\n* You are **not** billed for the amount of notifications generated or delivered to you.\r\n* You may **not** be refunded for unused time on your subscription if you remove it manually before expiration or if there were no notifications.\r\n* Each failed notification delivery attempt is retried 2 times by default, regardless of the reason of failure.\r\n\r\n**UPCOMING BEHAVIOR:**\r\n\r\n* Web-hook subscriptions no longer expire, unless you remove them manually.\r\n* This endpoint is moved to the Free Tier and both creating and refreshing subscriptions will be free of charge.\r\n* Every API consumer will now have a dedicated flight alert credit balance separate from the API quota. \r\n* Credits are deducted from your balance each time an alert notification is sent to your webhook. The cost is 1 credit per flight item in the notification. If a notification contains 1 flight, it costs 1 credit. If a notification contains 5 flights (common with airport subscriptions), it costs 5 credits.\r\n*
+        Use caution when subscribing to an airport with a lot of traffic, as it may drain your balance quickly.\r\n* As soon as your balance reaches zero, all your web-hook subscriptions will pause and no notifications will be sent until you refill your balance.The balance is shared among all web-hook subscriptions created by you.\r\n* To refill the balance, refer to `POST /subscriptions/balance/refill` API endpoint.\r\n* To check the balance, refer to `GET /subscriptions/balance` endpoint.\r\n* `PATCH /webhook/{subscriptionId}/refresh` is now deprecated will be removed after the transition period. Pricing Tier 4 will be discontinued too.\r\n* Each failed notification delivery attempt is not retried by default, unless you explicitly set amount of retries when creating the subscription using `maxDeliveryRetries` parameter in the request body.\r\n* Each retry attempt costs the same amount of credits as the original notification delivery attempt.\r\n\r\n**WHEN THE CHANGE WILL HAPPEN?**\r\n\r\n* Transition period will end on **the 4th of April, 2026**. Both systems will co-exist during the transition period until then. After that date only the credit-based billing system will remain operational. \r\n\r\n**MIGRATION GUIDE / LEARN MORE**\r\n\r\nRead our guide at https://aerodatabox.com/flight-alert-api-2026/"
       operationId: SubscribeWebhook
       parameters:
         - name: subjectType
@@ -1373,30 +982,13 @@ paths:
             $ref: "#/components/schemas/SubscriptionSubjectType"
         - name: subjectId
           in: path
-          description: "Subject ID. If `subjectType` is: \r
-
-            * `FlightByNumber`, then this field must be a flight number (with or
-            without spaces, IATA or ICAO, any case formats are acceptable, e.g.
-            KL1395, Klm 1395);\r
-
-            * `FlightByAirportIcao`, then this field must be a 4-character
-            ICAO-code of the airport where flights are operated (e.g.: EHAM,
-            KLAX, UUEE, etc.);"
+          description: "Subject ID. If `subjectType` is: \r\n* `FlightByNumber`, then this field must be a flight number (with or without spaces, IATA or ICAO, any case formats are acceptable, e.g. KL1395, Klm 1395);\r\n* `FlightByAirportIcao`, then this field must be a 4-character ICAO-code of the airport where flights are operated (e.g.: EHAM, KLAX, UUEE, etc.);"
           required: true
           schema:
             type: string
         - name: useCredits
           in: query
-          description: "THIS IS A TEMPORARY MIGRATION PARAMETER FOR EASIER TRANSITION. \r
-
-            Default value: false.\r
-
-            Set to true to create a web-hook subscription under the new,
-            credit-based billing model.In this case, the call will be free of
-            charge despite Tier 4.\r
-
-            After transition this parameter will be ignored as all subscriptions
-            will be created as credit-based and you will be able to remove it."
+          description: "THIS IS A TEMPORARY MIGRATION PARAMETER FOR EASIER TRANSITION. \r\nDefault value: false.\r\nSet to true to create a web-hook subscription under the new, credit-based billing model.In this case, the call will be free of charge despite Tier 4.\r\nAfter transition this parameter will be ignored as all subscriptions will be created as credit-based and you will be able to remove it."
           schema:
             type: boolean
             default: false
@@ -1475,21 +1067,8 @@ paths:
     get:
       tags:
         - Flight Alert API
-      summary: Get web-hook subscription / FREE TIER
-      description: "*This endpoint is a part of Flight alert PUSH API currently
-        powered by webhooks.  \r
-
-        If you are running your own web service, you can subscribe to flights by
-        number or airport code. \r
-
-        After that, your HTTP endpoint will be called (notified) whenever the
-        flight information gets \r
-
-        updated.*\r
-
-        \r
-
-        Gets information about an existing active web-hook subscription."
+      summary: AeroDataBox Get web-hook subscription / FREE TIER
+      description: "*This endpoint is a part of Flight alert PUSH API currently powered by webhooks.  \r\nIf you are running your own web service, you can subscribe to flights by number or airport code. \r\nAfter that, your HTTP endpoint will be called (notified) whenever the flight information gets \r\nupdated.*\r\n\r\nGets information about an existing active web-hook subscription."
       operationId: GetWebhook
       parameters:
         - name: subscriptionId
@@ -1556,21 +1135,8 @@ paths:
     delete:
       tags:
         - Flight Alert API
-      summary: Remove web-hook subscription / FREE TIER
-      description: "*This endpoitns is a part of Flight alert PUSH API currently
-        powered by webhooks.  \r
-
-        If you are running your own web service, you can subscribe to flights by
-        number or airport code. \r
-
-        After that, your HTTP endpoint will be called (notified) whenever the
-        flight information gets \r
-
-        updated.*\r
-
-        \r
-
-        Removes the subscription"
+      summary: AeroDataBox Remove web-hook subscription / FREE TIER
+      description: "*This endpoitns is a part of Flight alert PUSH API currently powered by webhooks.  \r\nIf you are running your own web service, you can subscribe to flights by number or airport code. \r\nAfter that, your HTTP endpoint will be called (notified) whenever the flight information gets \r\nupdated.*\r\n\r\nRemoves the subscription"
       operationId: UnsubscribeWebhook
       parameters:
         - name: subscriptionId
@@ -1633,21 +1199,8 @@ paths:
     get:
       tags:
         - Flight Alert API
-      summary: List web-hook subscriptions / FREE TIER
-      description: "*This endpoitns is a part of Flight alert PUSH API currently
-        powered by webhooks.  \r
-
-        If you are running your own web service, you can subscribe to flights by
-        number or airport code. \r
-
-        After that, your HTTP endpoint will be called (notified) whenever the
-        flight information gets \r
-
-        updated.*\r
-
-        \r
-
-        Get the list of existing active web-hook subscriptions"
+      summary: AeroDataBox List web-hook subscriptions / FREE TIER
+      description: "*This endpoitns is a part of Flight alert PUSH API currently powered by webhooks.  \r\nIf you are running your own web service, you can subscribe to flights by number or airport code. \r\nAfter that, your HTTP endpoint will be called (notified) whenever the flight information gets \r\nupdated.*\r\n\r\nGet the list of existing active web-hook subscriptions"
       operationId: GetWebhookList
       responses:
         "200":
@@ -1713,61 +1266,8 @@ paths:
     patch:
       tags:
         - Flight Alert API
-      summary: Refresh web-hook subscription (DEPRECATED) / TIER 4
-      description: " *This endpoitns is a part of Flight alert PUSH API currently
-        powered by webhooks.  \r
-
-        \ If you are running your own web service, you can subscribe to flights
-        by number or airport code. \r
-
-        \ After that, your HTTP endpoint will be called (notified) whenever the
-        flight information gets \r
-
-        \ updated.*\r
-
-        \ \r
-
-        \ Refreshes an existing web-hook subscription\r
-
-        \ \r
-
-        \ If the subscription had an expiration date-time set when created, this
-        endpoint \r
-
-        \ will extend it by the same period of time as the one it was originally
-        created with. \r
-
-        \ E.g., if subscription was originally created for 7 days, this endpoint
-        will\r
-
-        \ add extra 7 days to the expiration date-time. Note, that web-hook
-        subscriptions\r
-
-        \ cannot be extended beyond the sliding window of 60 days from the
-        current date-time. \r
-
-        \ \r
-
-        \ If the subscription had no expiration date-time set, nothing occurs.\r
-
-        \ \r
-
-        \ **! WARNING OF THE UPCOMING BREAKING CHANGES !**\r
-
-        \ \r
-
-        \ DUE TO TRANSITIONING TO A NEW CREDIT-BASED BILLING MODEL FOR WEB-HOOK
-        SUBSCRIPTIONS, \r
-
-        \tTHIS ENDPOINT WILL BE DEPRECATED AND REMOVED LATER ON.\r
-
-        \r
-
-        \ **MIGRATION GUIDE / LEARN MORE**\r
-
-        \ \r
-
-        \ Read our guide at https://aerodatabox.com/flight-alert-api-2026/"
+      summary: AeroDataBox Refresh web-hook subscription (DEPRECATED) / TIER 4
+      description: " *This endpoitns is a part of Flight alert PUSH API currently powered by webhooks.  \r\n If you are running your own web service, you can subscribe to flights by number or airport code. \r\n After that, your HTTP endpoint will be called (notified) whenever the flight information gets \r\n updated.*\r\n \r\n Refreshes an existing web-hook subscription\r\n \r\n If the subscription had an expiration date-time set when created, this endpoint \r\n will extend it by the same period of time as the one it was originally created with. \r\n E.g., if subscription was originally created for 7 days, this endpoint will\r\n add extra 7 days to the expiration date-time. Note, that web-hook subscriptions\r\n cannot be extended beyond the sliding window of 60 days from the current date-time. \r\n \r\n If the subscription had no expiration date-time set, nothing occurs.\r\n \r\n **! WARNING OF THE UPCOMING BREAKING CHANGES !**\r\n \r\n DUE TO TRANSITIONING TO A NEW CREDIT-BASED BILLING MODEL FOR WEB-HOOK SUBSCRIPTIONS, \r\n\tTHIS ENDPOINT WILL BE DEPRECATED AND REMOVED LATER ON.\r\n\r\n **MIGRATION GUIDE / LEARN MORE**\r\n \r\n Read our guide at https://aerodatabox.com/flight-alert-api-2026/"
       operationId: RefreshWebhook
       parameters:
         - name: subscriptionId
@@ -1779,13 +1279,7 @@ paths:
             format: uuid
         - name: useCredits
           in: query
-          description: "THIS IS A TEMPORARY MIGRATION PARAMETER FOR EASIER TRANSITION. \r
-
-            Default value: false.\r
-
-            Set to true to refresh an existing web-hook subscription under the
-            new, credit-based billing model. In this case, the call will be free
-            of charge despite Tier 4."
+          description: "THIS IS A TEMPORARY MIGRATION PARAMETER FOR EASIER TRANSITION. \r\nDefault value: false.\r\nSet to true to refresh an existing web-hook subscription under the new, credit-based billing model. In this case, the call will be free of charge despite Tier 4."
           schema:
             type: boolean
             default: false
@@ -1850,14 +1344,8 @@ paths:
     get:
       tags:
         - Flight Alert API
-      summary: Get web-hook subscription balance / FREE TIER
-      description: "The current web-hook subscription balance information.\r
-
-        This is separate from your API marketplace quota and is used solely for
-        billing of web-hook subscriptions.\r
-
-        For more details about how flight alert API billing works, refer to our
-        guide at https://aerodatabox.com/flight-alert-api-2026/"
+      summary: AeroDataBox Get web-hook subscription balance / FREE TIER
+      description: "The current web-hook subscription balance information.\r\nThis is separate from your API marketplace quota and is used solely for billing of web-hook subscriptions.\r\nFor more details about how flight alert API billing works, refer to our guide at https://aerodatabox.com/flight-alert-api-2026/"
       operationId: GetBalance
       responses:
         "200":
@@ -1919,39 +1407,11 @@ paths:
     post:
       tags:
         - Flight Alert API
-      summary: Refill web-hook subscription balance / TIER 1
-      description: "Performs refill operation on the web-hook subscription balance by
-        the specified amount of credits.\r
-
-        This balance is separate from your API marketplace quota and is used
-        solely for billing of web-hook subscriptions.\r
-
-        \r
-
-        In the request body, you specify how many credits you want to add. This
-        is a variable-rate endpoint and the amount of API units \r
-
-        deducted from your API quota depends on the amount of flight alerts
-        credits requested.\r
-
-        The conversion rate is: 1 credit = 1 API unit.\r
-
-        \r
-
-        Additional limits apply with regard to how many credits you can request
-        per single refill operation and how many credits\r
-
-        you can have in your balance at any given time. These limits depend on
-        your pricing plan (https://aerodatabox.com/pricing).\r
-
-        \r
-
-        For more details about how flight alert API billing works, refer to our
-        guide at https://aerodatabox.com/flight-alert-api-2026/"
+      summary: AeroDataBox Refill web-hook subscription balance / TIER 1
+      description: "Performs refill operation on the web-hook subscription balance by the specified amount of credits.\r\nThis balance is separate from your API marketplace quota and is used solely for billing of web-hook subscriptions.\r\n\r\nIn the request body, you specify how many credits you want to add. This is a variable-rate endpoint and the amount of API units \r\ndeducted from your API quota depends on the amount of flight alerts credits requested.\r\nThe conversion rate is: 1 credit = 1 API unit.\r\n\r\nAdditional limits apply with regard to how many credits you can request per single refill operation and how many credits\r\nyou can have in your balance at any given time. These limits depend on your pricing plan (https://aerodatabox.com/pricing).\r\n\r\nFor more details about how flight alert API billing works, refer to our guide at https://aerodatabox.com/flight-alert-api-2026/"
       operationId: RefillBalance
       requestBody:
-        description: The details of the balance refill operation, including the amount
-          of credits to add.
+        description: The details of the balance refill operation, including the amount of credits to add.
         content:
           application/json:
             schema:
@@ -2016,80 +1476,8 @@ paths:
     get:
       tags:
         - Flight API
-      summary: Flight Status (single day) / TIER 2
-      description: "**What is the status of a specific flight?**\r
-
-        **What is the historical status or schedule of a specific flight on a
-        specific date in past or in future?**\r
-
-        \r
-
-        This endpoint returns data about a specific flight  live flight status
-        (if the flight is within the coverage and not in distant future), \r
-
-        or flight schedule data otherwise.\r
-
-        \r
-
-        If `dateLocal` is specified, gets data about flight(s) departing or
-        arriving on the day specified (local time).\r
-
-        Otherwise, gets data about the status of flight(s) operating on the
-        nearest date (either in past or in future).\r
-
-        \r
-
-        A flight can be searched by:\r
-
-        * flight number it's being operated under; or\r
-
-        * ATC-callsign it's being operated under; or\r
-
-        * tail-number of the aircraft it's being operated by; or\r
-
-        * Mode-S 24-bit ICAO Transponder address of the aircraft it's being
-        operated by.\r
-
-        \r
-
-        Flight data may include airport of arrival and departure, scheduled and
-        actual times, flight status, type of aircraft, \r
-
-        tail-number and aircraft image.\r
-
-        \r
-
-        Some flights may have partial data. The data may be absent for either
-        arrival \r
-
-        or departure airport or may not include live updates of time and status.
-        Check quality markers inside the response to \r
-
-        determine which data is available.\r
-
-        \r
-
-        Normally, information with live status updates and estimated/actual
-        arrival/departure times is only available \r
-
-        for airports tracked live or with ADS-B by our system. Otherwise flight
-        information will be with scheduled info only \r
-
-        or absent. \r
-
-        \r
-
-        To check if an airport is currently tracked and on which level, \r
-
-        use `/health/services/airports/{icao}/feeds` endpoint. You can also use
-        `/health/services/feeds/{service}/airports` to get \r
-
-        the list of covered airports. \r
-
-        \r
-
-        Read more about coverage and flight data limitations here:
-        https://www.aerodatabox.com/data-coverage."
+      summary: AeroDataBox Flight Status (single day) / TIER 2
+      description: "**What is the status of a specific flight?**\r\n**What is the historical status or schedule of a specific flight on a specific date in past or in future?**\r\n\r\nThis endpoint returns data about a specific flight  live flight status (if the flight is within the coverage and not in distant future), \r\nor flight schedule data otherwise.\r\n\r\nIf `dateLocal` is specified, gets data about flight(s) departing or arriving on the day specified (local time).\r\nOtherwise, gets data about the status of flight(s) operating on the nearest date (either in past or in future).\r\n\r\nA flight can be searched by:\r\n* flight number it's being operated under; or\r\n* ATC-callsign it's being operated under; or\r\n* tail-number of the aircraft it's being operated by; or\r\n* Mode-S 24-bit ICAO Transponder address of the aircraft it's being operated by.\r\n\r\nFlight data may include airport of arrival and departure, scheduled and actual times, flight status, type of aircraft, \r\ntail-number and aircraft image.\r\n\r\nSome flights may have partial data. The data may be absent for either arrival \r\nor departure airport or may not include live updates of time and status. Check quality markers inside the response to \r\ndetermine which data is available.\r\n\r\nNormally, information with live status updates and estimated/actual arrival/departure times is only available \r\nfor airports tracked live or with ADS-B by our system. Otherwise flight information will be with scheduled info only \r\nor absent. \r\n\r\nTo check if an airport is currently tracked and on which level, \r\nuse `/health/services/airports/{icao}/feeds` endpoint. You can also use `/health/services/feeds/{service}/airports` to get \r\nthe list of covered airports. \r\n\r\nRead more about coverage and flight data limitations here: https://www.aerodatabox.com/data-coverage."
       operationId: GetFlight_FlightNearest
       parameters:
         - name: searchBy
@@ -2099,83 +1487,31 @@ paths:
             $ref: "#/components/schemas/FlightSearchByEnum"
         - name: searchParam
           in: path
-          description: "Value of the search criteria. If `searchBy` is: \r
-
-            * `number`, then this field shoud be Flight number (with or without
-            spaces, IATA or ICAO, any case formats are acceptable, e.g. KL1395,
-            Klm 1395)\r
-
-            * `callsign`, then this field should be ATC call-sign of the flight
-            (with or without spaces, any case formats are acceptable,
-            e.g.AFL1482, nca 008X);\r
-
-            * `reg`, then this field should be Aircraft tail-number (with or
-            without spaces or dashes, any case formats are acceptable,
-            e.g.PH-BXO, DeMhJ);\r
-
-            * `icao24`, then this field should be Aircraft ICAO 24-bit Mode-S
-            address specified in hexadecimal format (e.g. 484161, 483EFD)."
+          description: "Value of the search criteria. If `searchBy` is: \r\n* `number`, then this field shoud be Flight number (with or without spaces, IATA or ICAO, any case formats are acceptable, e.g. KL1395, Klm 1395)\r\n* `callsign`, then this field should be ATC call-sign of the flight (with or without spaces, any case formats are acceptable, e.g.AFL1482, nca 008X);\r\n* `reg`, then this field should be Aircraft tail-number (with or without spaces or dashes, any case formats are acceptable, e.g.PH-BXO, DeMhJ);\r\n* `icao24`, then this field should be Aircraft ICAO 24-bit Mode-S address specified in hexadecimal format (e.g. 484161, 483EFD)."
           required: true
           schema:
             maxLength: 10
             type: string
         - name: dateLocalRole
           in: query
-          description: "* If set to `Both` (default, recommended for best results) then
-            the dateLocal parameter shall be considered as both departure and
-            arrival date. If a flight departs OR arrives on that date (in the
-            local timezone of the origin or destination, respectively), it will
-            be returned.\r
-
-            * If set to `Departure` then the dateLocal parameter shall be
-            considered as departure date only. Only the flights departing on
-            that date (in the local timezone of origin) will be returned.\r
-
-            * If set to `Arrival` then the dateLocal parameter shall be
-            considered as arrival date only. Only the flights arriving on that
-            date (in the local timezone of destination) will be returned."
+          description: "* If set to `Both` (default, recommended for best results) then the dateLocal parameter shall be considered as both departure and arrival date. If a flight departs OR arrives on that date (in the local timezone of the origin or destination, respectively), it will be returned.\r\n* If set to `Departure` then the dateLocal parameter shall be considered as departure date only. Only the flights departing on that date (in the local timezone of origin) will be returned.\r\n* If set to `Arrival` then the dateLocal parameter shall be considered as arrival date only. Only the flights arriving on that date (in the local timezone of destination) will be returned."
           schema:
             $ref: "#/components/schemas/FlightDirection"
         - name: withAircraftImage
           in: query
-          description: "Should include aircraft image (default: false).\r
-
-            \r
-
-            Aircraft images are being searched in external sources by certain
-            criteria without any manual intervention. \r
-
-            Therefore, false matches may be returned. Only images with licenses
-            approved for commercial use are returned. \r
-
-            Please be advised that you may be required to mention author
-            attribution before using the image."
+          description: "Should include aircraft image (default: false).\r\n\r\nAircraft images are being searched in external sources by certain criteria without any manual intervention. \r\nTherefore, false matches may be returned. Only images with licenses approved for commercial use are returned. \r\nPlease be advised that you may be required to mention author attribution before using the image."
           schema:
             type: boolean
             default: false
         - name: withLocation
           in: query
-          description: "Should include real-time positional data, e.g.: location, speed,
-            altitude, etc., if available (default: false)."
+          description: "Should include real-time positional data, e.g.: location, speed, altitude, etc., if available (default: false)."
           schema:
             type: boolean
             default: false
         - name: withFlightPlan
           in: query
-          description: "Should include the flight plan filed with the ATC for the flight
-            (default: false).\r
-
-            \r
-
-            * NOTE 1: Generally availabe to flights departing from, arriving to
-            or crossing the mainland U.S. airspace.\r
-
-            * NOTE 2: Only available on Basic and Ultra, Ultra-2 and Mega
-            pricing plans.\r
-
-            * NOTE 3: If set to true and the flight plan is found for one or
-            more flights returned, **the request will be billed as 2 requests**
-            against your API quota (except on Mega plan)."
+          description: "Should include the flight plan filed with the ATC for the flight (default: false).\r\n\r\n* NOTE 1: Generally availabe to flights departing from, arriving to or crossing the mainland U.S. airspace.\r\n* NOTE 2: Only available on Basic and Ultra, Ultra-2 and Mega pricing plans.\r\n* NOTE 3: If set to true and the flight plan is found for one or more flights returned, **the request will be billed as 2 requests** against your API quota (except on Mega plan)."
           schema:
             type: boolean
             default: false
@@ -2243,80 +1579,8 @@ paths:
     get:
       tags:
         - Flight API
-      summary: Flight Status (single day) / TIER 2
-      description: "**What is the status of a specific flight?**\r
-
-        **What is the historical status or schedule of a specific flight on a
-        specific date in past or in future?**\r
-
-        \r
-
-        This endpoint returns data about a specific flight  live flight status
-        (if the flight is within the coverage and not in distant future), \r
-
-        or flight schedule data otherwise.\r
-
-        \r
-
-        If `dateLocal` is specified, gets data about flight(s) departing or
-        arriving on the day specified (local time).\r
-
-        Otherwise, gets data about the status of flight(s) operating on the
-        nearest date (either in past or in future).\r
-
-        \r
-
-        A flight can be searched by:\r
-
-        * flight number it's being operated under; or\r
-
-        * ATC-callsign it's being operated under; or\r
-
-        * tail-number of the aircraft it's being operated by; or\r
-
-        * Mode-S 24-bit ICAO Transponder address of the aircraft it's being
-        operated by.\r
-
-        \r
-
-        Flight data may include airport of arrival and departure, scheduled and
-        actual times, flight status, type of aircraft, \r
-
-        tail-number and aircraft image.\r
-
-        \r
-
-        Some flights may have partial data. The data may be absent for either
-        arrival \r
-
-        or departure airport or may not include live updates of time and status.
-        Check quality markers inside the response to \r
-
-        determine which data is available.\r
-
-        \r
-
-        Normally, information with live status updates and estimated/actual
-        arrival/departure times is only available \r
-
-        for airports tracked live or with ADS-B by our system. Otherwise flight
-        information will be with scheduled info only \r
-
-        or absent. \r
-
-        \r
-
-        To check if an airport is currently tracked and on which level, \r
-
-        use `/health/services/airports/{icao}/feeds` endpoint. You can also use
-        `/health/services/feeds/{service}/airports` to get \r
-
-        the list of covered airports. \r
-
-        \r
-
-        Read more about coverage and flight data limitations here:
-        https://www.aerodatabox.com/data-coverage."
+      summary: AeroDataBox Flight Status (single day) / TIER 2
+      description: "**What is the status of a specific flight?**\r\n**What is the historical status or schedule of a specific flight on a specific date in past or in future?**\r\n\r\nThis endpoint returns data about a specific flight  live flight status (if the flight is within the coverage and not in distant future), \r\nor flight schedule data otherwise.\r\n\r\nIf `dateLocal` is specified, gets data about flight(s) departing or arriving on the day specified (local time).\r\nOtherwise, gets data about the status of flight(s) operating on the nearest date (either in past or in future).\r\n\r\nA flight can be searched by:\r\n* flight number it's being operated under; or\r\n* ATC-callsign it's being operated under; or\r\n* tail-number of the aircraft it's being operated by; or\r\n* Mode-S 24-bit ICAO Transponder address of the aircraft it's being operated by.\r\n\r\nFlight data may include airport of arrival and departure, scheduled and actual times, flight status, type of aircraft, \r\ntail-number and aircraft image.\r\n\r\nSome flights may have partial data. The data may be absent for either arrival \r\nor departure airport or may not include live updates of time and status. Check quality markers inside the response to \r\ndetermine which data is available.\r\n\r\nNormally, information with live status updates and estimated/actual arrival/departure times is only available \r\nfor airports tracked live or with ADS-B by our system. Otherwise flight information will be with scheduled info only \r\nor absent. \r\n\r\nTo check if an airport is currently tracked and on which level, \r\nuse `/health/services/airports/{icao}/feeds` endpoint. You can also use `/health/services/feeds/{service}/airports` to get \r\nthe list of covered airports. \r\n\r\nRead more about coverage and flight data limitations here: https://www.aerodatabox.com/data-coverage."
       operationId: GetFlight_FlightOnSpecificDate
       parameters:
         - name: searchBy
@@ -2326,31 +1590,14 @@ paths:
             $ref: "#/components/schemas/FlightSearchByEnum"
         - name: searchParam
           in: path
-          description: "Value of the search criteria. If `searchBy` is: \r
-
-            * `number`, then this field shoud be Flight number (with or without
-            spaces, IATA or ICAO, any case formats are acceptable, e.g. KL1395,
-            Klm 1395)\r
-
-            * `callsign`, then this field should be ATC call-sign of the flight
-            (with or without spaces, any case formats are acceptable,
-            e.g.AFL1482, nca 008X);\r
-
-            * `reg`, then this field should be Aircraft tail-number (with or
-            without spaces or dashes, any case formats are acceptable,
-            e.g.PH-BXO, DeMhJ);\r
-
-            * `icao24`, then this field should be Aircraft ICAO 24-bit Mode-S
-            address specified in hexadecimal format (e.g. 484161, 483EFD)."
+          description: "Value of the search criteria. If `searchBy` is: \r\n* `number`, then this field shoud be Flight number (with or without spaces, IATA or ICAO, any case formats are acceptable, e.g. KL1395, Klm 1395)\r\n* `callsign`, then this field should be ATC call-sign of the flight (with or without spaces, any case formats are acceptable, e.g.AFL1482, nca 008X);\r\n* `reg`, then this field should be Aircraft tail-number (with or without spaces or dashes, any case formats are acceptable, e.g.PH-BXO, DeMhJ);\r\n* `icao24`, then this field should be Aircraft ICAO 24-bit Mode-S address specified in hexadecimal format (e.g. 484161, 483EFD)."
           required: true
           schema:
             maxLength: 10
             type: string
         - name: dateLocal
           in: path
-          description: "Local date of departure or arrival (in format: YYYY-MM-DD, e.g.:
-            2019-08-29). Maximum/minimum allowable date is determined by the
-            current data coverage limitations and your pricing plan."
+          description: "Local date of departure or arrival (in format: YYYY-MM-DD, e.g.: 2019-08-29). Maximum/minimum allowable date is determined by the current data coverage limitations and your pricing plan."
           required: true
           schema:
             pattern: \d{4}-\d{2}-\d{2}(T\d{2}:\d{2})?
@@ -2358,61 +1605,24 @@ paths:
             format: date-time
         - name: dateLocalRole
           in: query
-          description: "* If set to `Both` (default, recommended for best results) then
-            the dateLocal parameter shall be considered as both departure and
-            arrival date. If a flight departs OR arrives on that date (in the
-            local timezone of the origin or destination, respectively), it will
-            be returned.\r
-
-            * If set to `Departure` then the dateLocal parameter shall be
-            considered as departure date only. Only the flights departing on
-            that date (in the local timezone of origin) will be returned.\r
-
-            * If set to `Arrival` then the dateLocal parameter shall be
-            considered as arrival date only. Only the flights arriving on that
-            date (in the local timezone of destination) will be returned."
+          description: "* If set to `Both` (default, recommended for best results) then the dateLocal parameter shall be considered as both departure and arrival date. If a flight departs OR arrives on that date (in the local timezone of the origin or destination, respectively), it will be returned.\r\n* If set to `Departure` then the dateLocal parameter shall be considered as departure date only. Only the flights departing on that date (in the local timezone of origin) will be returned.\r\n* If set to `Arrival` then the dateLocal parameter shall be considered as arrival date only. Only the flights arriving on that date (in the local timezone of destination) will be returned."
           schema:
             $ref: "#/components/schemas/FlightDirection"
         - name: withAircraftImage
           in: query
-          description: "Should include aircraft image (default: false).\r
-
-            \r
-
-            Aircraft images are being searched in external sources by certain
-            criteria without any manual intervention. \r
-
-            Therefore, false matches may be returned. Only images with licenses
-            approved for commercial use are returned. \r
-
-            Please be advised that you may be required to mention author
-            attribution before using the image."
+          description: "Should include aircraft image (default: false).\r\n\r\nAircraft images are being searched in external sources by certain criteria without any manual intervention. \r\nTherefore, false matches may be returned. Only images with licenses approved for commercial use are returned. \r\nPlease be advised that you may be required to mention author attribution before using the image."
           schema:
             type: boolean
             default: false
         - name: withLocation
           in: query
-          description: "Should include real-time positional data, e.g.: location, speed,
-            altitude, etc., if available (default: false)."
+          description: "Should include real-time positional data, e.g.: location, speed, altitude, etc., if available (default: false)."
           schema:
             type: boolean
             default: false
         - name: withFlightPlan
           in: query
-          description: "Should include the flight plan filed with the ATC for the flight
-            (default: false).\r
-
-            \r
-
-            * NOTE 1: Generally availabe to flights departing from, arriving to
-            or crossing the mainland U.S. airspace.\r
-
-            * NOTE 2: Only available on Basic and Ultra, Ultra-2 and Mega
-            pricing plans.\r
-
-            * NOTE 3: If set to true and the flight plan is found for one or
-            more flights returned, **the request will be billed as 2 requests**
-            against your API quota (except on Mega plan)."
+          description: "Should include the flight plan filed with the ATC for the flight (default: false).\r\n\r\n* NOTE 1: Generally availabe to flights departing from, arriving to or crossing the mainland U.S. airspace.\r\n* NOTE 2: Only available on Basic and Ultra, Ultra-2 and Mega pricing plans.\r\n* NOTE 3: If set to true and the flight plan is found for one or more flights returned, **the request will be billed as 2 requests** against your API quota (except on Mega plan)."
           schema:
             type: boolean
             default: false
@@ -2480,24 +1690,8 @@ paths:
     get:
       tags:
         - Flight API
-      summary: Flight History and Schedule (range of days) / TIER 3
-      description: "**What is the history or schedule of a specific flight within a
-        specific range of dates in past or in future?**\r
-
-        \r
-
-        This endpoint is the similar to the `Flight status` endpoint. \r
-
-        The only difference is that instead of returning the flight data on a
-        single date, it returns the data over a range of dates, thus\r
-
-        allowing to get insights on the flight history or schedule within the
-        specified range.\r
-
-        \r
-
-        All limitations and considerations applicable to `Flight status`
-        endpoint are applicable to this endpoint as well."
+      summary: AeroDataBox Flight History and Schedule (range of days) / TIER 3
+      description: "**What is the history or schedule of a specific flight within a specific range of dates in past or in future?**\r\n\r\nThis endpoint is the similar to the `Flight status` endpoint. \r\nThe only difference is that instead of returning the flight data on a single date, it returns the data over a range of dates, thus\r\nallowing to get insights on the flight history or schedule within the specified range.\r\n\r\nAll limitations and considerations applicable to `Flight status` endpoint are applicable to this endpoint as well."
       operationId: GetFlightHistory_FlightHistory
       parameters:
         - name: searchBy
@@ -2507,32 +1701,14 @@ paths:
             $ref: "#/components/schemas/FlightSearchByEnum"
         - name: searchParam
           in: path
-          description: "Value of the search criteria. If `searchBy` is: \r
-
-            * `number`, then this field shoud be Flight number (with or without
-            spaces, IATA or ICAO, any case formats are acceptable, e.g. KL1395,
-            Klm 1395)\r
-
-            * `callsign`, then this field should be ATC call-sign of the flight
-            (with or without spaces, any case formats are acceptable,
-            e.g.AFL1482, nca 008X);\r
-
-            * `reg`, then this field should be Aircraft tail-number (with or
-            without spaces or dashes, any case formats are acceptable,
-            e.g.PH-BXO, DeMhJ);\r
-
-            * `icao24`, then this field should be Aircraft ICAO 24-bit Mode-S
-            address specified in hexadecimal format (e.g. 484161, 483EFD)."
+          description: "Value of the search criteria. If `searchBy` is: \r\n* `number`, then this field shoud be Flight number (with or without spaces, IATA or ICAO, any case formats are acceptable, e.g. KL1395, Klm 1395)\r\n* `callsign`, then this field should be ATC call-sign of the flight (with or without spaces, any case formats are acceptable, e.g.AFL1482, nca 008X);\r\n* `reg`, then this field should be Aircraft tail-number (with or without spaces or dashes, any case formats are acceptable, e.g.PH-BXO, DeMhJ);\r\n* `icao24`, then this field should be Aircraft ICAO 24-bit Mode-S address specified in hexadecimal format (e.g. 484161, 483EFD)."
           required: true
           schema:
             maxLength: 10
             type: string
         - name: dateFromLocal
           in: path
-          description: "Beginning of the range of local dates of departure or arrival (in
-            format: YYYY-MM-DD, e.g.: 2019-08-29). Maximum/minimum allowable
-            value is determined by the current data coverage limitations and
-            your pricing plan."
+          description: "Beginning of the range of local dates of departure or arrival (in format: YYYY-MM-DD, e.g.: 2019-08-29). Maximum/minimum allowable value is determined by the current data coverage limitations and your pricing plan."
           required: true
           schema:
             pattern: \d{4}-\d{2}-\d{2}(T\d{2}:\d{2})?
@@ -2540,13 +1716,7 @@ paths:
             format: date-time
         - name: dateToLocal
           in: path
-          description: "End of the range of local dates of departure or arrival (in
-            format: YYYY-MM-DD, e.g.: 2019-08-29). Maximum/minimum allowable
-            value is determined by the current data coverage limitations and
-            your pricing plan. This date must be bigger than the dateFromLocal.
-            The maximum difference between this date and dateFromLocal is
-            limited and is determined by your pricing plan (ranging from 7 to 30
-            days as per moment of writing)."
+          description: "End of the range of local dates of departure or arrival (in format: YYYY-MM-DD, e.g.: 2019-08-29). Maximum/minimum allowable value is determined by the current data coverage limitations and your pricing plan. This date must be bigger than the dateFromLocal. The maximum difference between this date and dateFromLocal is limited and is determined by your pricing plan (ranging from 7 to 30 days as per moment of writing)."
           required: true
           schema:
             pattern: \d{4}-\d{2}-\d{2}(T\d{2}:\d{2})?
@@ -2554,21 +1724,7 @@ paths:
             format: date-time
         - name: dateLocalRole
           in: query
-          description: "* If set to `Both` (default, recommended for best results) then
-            the dateFromLocal and dateToLocal parameters shall be considered as
-            both departure and arrival dates. If a flight departs OR arrives on
-            dates within the specified range (in the local timezone of the
-            origin or destination, respectively), it will be returned.\r
-
-            * If set to `Departure` then the dateFromLocal and
-            dateToLocal  parameters shall be considered as departure dates only.
-            Only the flights departing on dates within the specified rang(in the
-            local timezone of origin) will be returned.\r
-
-            * If set to `Arrival` then the dateFromLocal and
-            dateToLocal  parameters shall be considered as arrival dates only.
-            Only the flights arriving on dates within the specified rangd (in
-            the local timezone of destination) will be returned."
+          description: "* If set to `Both` (default, recommended for best results) then the dateFromLocal and dateToLocal parameters shall be considered as both departure and arrival dates. If a flight departs OR arrives on dates within the specified range (in the local timezone of the origin or destination, respectively), it will be returned.\r\n* If set to `Departure` then the dateFromLocal and dateToLocal  parameters shall be considered as departure dates only. Only the flights departing on dates within the specified rang(in the local timezone of origin) will be returned.\r\n* If set to `Arrival` then the dateFromLocal and dateToLocal  parameters shall be considered as arrival dates only. Only the flights arriving on dates within the specified rangd (in the local timezone of destination) will be returned."
           schema:
             $ref: "#/components/schemas/FlightDirection"
       responses:
@@ -2635,28 +1791,8 @@ paths:
     get:
       tags:
         - Flight API
-      summary: Flight departure dates / TIER 2
-      description: "**On which days the flight operates?** or **What is the flight
-        schedule?**\r
-
-        \r
-
-        Flight can be searched by:\r
-
-        * flight number it's being operated under; or\r
-
-        * ATC-callsign it's being operated under; or\r
-
-        * tail-number of the aircraft it's being operated by; or\r
-
-        * Mode-S 24-bit ICAO Transponder address of the aircraft it's being
-        operated by.\r
-
-        \r
-
-        *Returns:* Array of local departure dates in (YYYY-MM-DD) format for
-        flights operated under speified call-sign and within the time range
-        specified."
+      summary: AeroDataBox Flight departure dates / TIER 2
+      description: "**On which days the flight operates?** or **What is the flight schedule?**\r\n\r\nFlight can be searched by:\r\n* flight number it's being operated under; or\r\n* ATC-callsign it's being operated under; or\r\n* tail-number of the aircraft it's being operated by; or\r\n* Mode-S 24-bit ICAO Transponder address of the aircraft it's being operated by.\r\n\r\n*Returns:* Array of local departure dates in (YYYY-MM-DD) format for flights operated under speified call-sign and within the time range specified."
       operationId: GetFlightDates_FlightDatesAll
       parameters:
         - name: searchBy
@@ -2666,22 +1802,7 @@ paths:
             $ref: "#/components/schemas/FlightSearchByEnum"
         - name: searchParam
           in: path
-          description: "Value of the search criteria. If **searchBy** is: \r
-
-            * `number`, then this field shoud be Flight number (with or without
-            spaces, IATA or ICAO, any case formats are acceptable, e.g. KL1395,
-            Klm 1395)\r
-
-            * `callsign`, then this field should be ATC call-sign of the flight
-            (with or without spaces, any case formats are acceptable,
-            e.g.AFL1482, nca 008X);\r
-
-            * `reg`: then this field should be Aircraft tail-number (with or
-            without spaces or dashes, any case formats are acceptable,
-            e.g.PH-BXO, DeMhJ);\r
-
-            * `icao24`, then this field should be Aircraft ICAO 24-bit Mode-S
-            address specified in hexadecimal format (e.g. 484161, 483EFD)."
+          description: "Value of the search criteria. If **searchBy** is: \r\n* `number`, then this field shoud be Flight number (with or without spaces, IATA or ICAO, any case formats are acceptable, e.g. KL1395, Klm 1395)\r\n* `callsign`, then this field should be ATC call-sign of the flight (with or without spaces, any case formats are acceptable, e.g.AFL1482, nca 008X);\r\n* `reg`: then this field should be Aircraft tail-number (with or without spaces or dashes, any case formats are acceptable, e.g.PH-BXO, DeMhJ);\r\n* `icao24`, then this field should be Aircraft ICAO 24-bit Mode-S address specified in hexadecimal format (e.g. 484161, 483EFD)."
           required: true
           schema:
             maxLength: 10
@@ -2750,28 +1871,8 @@ paths:
     get:
       tags:
         - Flight API
-      summary: Flight departure dates / TIER 2
-      description: "**On which days the flight operates?** or **What is the flight
-        schedule?**\r
-
-        \r
-
-        Flight can be searched by:\r
-
-        * flight number it's being operated under; or\r
-
-        * ATC-callsign it's being operated under; or\r
-
-        * tail-number of the aircraft it's being operated by; or\r
-
-        * Mode-S 24-bit ICAO Transponder address of the aircraft it's being
-        operated by.\r
-
-        \r
-
-        *Returns:* Array of local departure dates in (YYYY-MM-DD) format for
-        flights operated under speified call-sign and within the time range
-        specified."
+      summary: AeroDataBox Flight departure dates / TIER 2
+      description: "**On which days the flight operates?** or **What is the flight schedule?**\r\n\r\nFlight can be searched by:\r\n* flight number it's being operated under; or\r\n* ATC-callsign it's being operated under; or\r\n* tail-number of the aircraft it's being operated by; or\r\n* Mode-S 24-bit ICAO Transponder address of the aircraft it's being operated by.\r\n\r\n*Returns:* Array of local departure dates in (YYYY-MM-DD) format for flights operated under speified call-sign and within the time range specified."
       operationId: GetFlightDates_FlightDatesInRange
       parameters:
         - name: searchBy
@@ -2781,22 +1882,7 @@ paths:
             $ref: "#/components/schemas/FlightSearchByEnum"
         - name: searchParam
           in: path
-          description: "Value of the search criteria. If **searchBy** is: \r
-
-            * `number`, then this field shoud be Flight number (with or without
-            spaces, IATA or ICAO, any case formats are acceptable, e.g. KL1395,
-            Klm 1395)\r
-
-            * `callsign`, then this field should be ATC call-sign of the flight
-            (with or without spaces, any case formats are acceptable,
-            e.g.AFL1482, nca 008X);\r
-
-            * `reg`: then this field should be Aircraft tail-number (with or
-            without spaces or dashes, any case formats are acceptable,
-            e.g.PH-BXO, DeMhJ);\r
-
-            * `icao24`, then this field should be Aircraft ICAO 24-bit Mode-S
-            address specified in hexadecimal format (e.g. 484161, 483EFD)."
+          description: "Value of the search criteria. If **searchBy** is: \r\n* `number`, then this field shoud be Flight number (with or without spaces, IATA or ICAO, any case formats are acceptable, e.g. KL1395, Klm 1395)\r\n* `callsign`, then this field should be ATC call-sign of the flight (with or without spaces, any case formats are acceptable, e.g.AFL1482, nca 008X);\r\n* `reg`: then this field should be Aircraft tail-number (with or without spaces or dashes, any case formats are acceptable, e.g.PH-BXO, DeMhJ);\r\n* `icao24`, then this field should be Aircraft ICAO 24-bit Mode-S address specified in hexadecimal format (e.g. 484161, 483EFD)."
           required: true
           schema:
             maxLength: 10
@@ -2881,42 +1967,8 @@ paths:
     get:
       tags:
         - Flight API
-      summary: FIDS (airport departures and arrivals) - by local time range / TIER 2
-      description: "**What are current departures or arrivals at the airport?** or
-        **What is the flight schedule at the airport?** or **What is flight
-        history at the airport?**\r
-
-        \r
-
-        Flights may contain live updates with corresponding information related
-        to the actual progress of the flight \r
-
-        (including actual/estimated arrival/departure times). In this case this
-        endpoint serves as a FIDS endpoint. \r
-
-        Presense of live updates is subject to data coverage: not all airports
-        have this coverage in our system.\r
-
-        \r
-
-        Otherwise flight information will be limited to scheduled only and will
-        not be updated real-time. Much more airports\r
-
-        have this type of coverage. To check if airport is tracked and on which
-        level, use */health/services/airports/{icao}/feeds* endpoint. \r
-
-        You can also use */health/services/feeds/{service}/airports* to get the
-        list of supported airports for this\r
-
-        or that layer of coverage. To learn more about the data coverage, refer
-        to *https://www.aerodatabox.com/data-coverage*.\r
-
-        \r
-
-        *Returns*: the list of arriving and/or departing flights scheduled
-        and/or planned and/or commenced within a specified \r
-
-        time range for a specified airport."
+      summary: AeroDataBox FIDS (airport departures and arrivals) - by local time range / TIER 2
+      description: "**What are current departures or arrivals at the airport?** or **What is the flight schedule at the airport?** or **What is flight history at the airport?**\r\n\r\nFlights may contain live updates with corresponding information related to the actual progress of the flight \r\n(including actual/estimated arrival/departure times). In this case this endpoint serves as a FIDS endpoint. \r\nPresense of live updates is subject to data coverage: not all airports have this coverage in our system.\r\n\r\nOtherwise flight information will be limited to scheduled only and will not be updated real-time. Much more airports\r\nhave this type of coverage. To check if airport is tracked and on which level, use */health/services/airports/{icao}/feeds* endpoint. \r\nYou can also use */health/services/feeds/{service}/airports* to get the list of supported airports for this\r\nor that layer of coverage. To learn more about the data coverage, refer to *https://www.aerodatabox.com/data-coverage*.\r\n\r\n*Returns*: the list of arriving and/or departing flights scheduled and/or planned and/or commenced within a specified \r\ntime range for a specified airport."
       operationId: GetAirportFlights
       parameters:
         - name: codeType
@@ -2926,17 +1978,7 @@ paths:
             $ref: "#/components/schemas/AirportCodesByEnum"
         - name: code
           in: path
-          description: "If `codeType` is:\r
-
-            * `icao`, then this field must be a 4-character ICAO-code of the
-            airport (e.g.: EHAM, KLAX, UUEE, etc.);\r
-
-            * `iata`, then this field must be a 3-character IATA-code of the
-            airport (e.g.: AMS, SFO, LAX, etc.).\r
-
-            \r
-
-            Full, stripped and any case formats are acceptable."
+          description: "If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
           required: true
           schema:
             maxLength: 4
@@ -2944,8 +1986,7 @@ paths:
             type: string
         - name: fromLocal
           in: path
-          description: "Beginning of the search range (local time, format:
-            YYYY-MM-DDTHH:mm)"
+          description: "Beginning of the search range (local time, format: YYYY-MM-DDTHH:mm)"
           required: true
           schema:
             pattern: \d{4}-\d{2}-\d{2}(T\d{2}:\d{2})?
@@ -2953,9 +1994,7 @@ paths:
             format: date-time
         - name: toLocal
           in: path
-          description: "End of the search range (local time, format: YYYY-MM-DDTHH:mm).
-            Must be more than beginning of the search range by no more than 12
-            hours."
+          description: "End of the search range (local time, format: YYYY-MM-DDTHH:mm). Must be more than beginning of the search range by no more than 12 hours."
           required: true
           schema:
             pattern: \d{4}-\d{2}-\d{2}(T\d{2}:\d{2})?
@@ -2968,63 +2007,37 @@ paths:
             $ref: "#/components/schemas/FlightDirection"
         - name: withLeg
           in: query
-          description: "If set to true, the result will include movement information from
-            airport opposite in this flight leg (airport of origin for arriving
-            flight or airport of destination for departing flight).\r
-
-            In this case, Movement property will be replaced with Departure and
-            Arrival properties for each flight.\r
-
-            Default: false."
+          description: "If set to true, the result will include movement information from airport opposite in this flight leg (airport of origin for arriving flight or airport of destination for departing flight).\r\nIn this case, Movement property will be replaced with Departure and Arrival properties for each flight.\r\nDefault: false."
           schema:
             type: boolean
             default: false
         - name: withCancelled
           in: query
-          description: "If set to true, result will include cancelled, divered, likely
-            cancelled (CanceledUncertain) flights.\r
-
-            Default: true."
+          description: "If set to true, result will include cancelled, divered, likely cancelled (CanceledUncertain) flights.\r\nDefault: true."
           schema:
             type: boolean
             default: true
         - name: withCodeshared
           in: query
-          description: "If set to true, the result will include flights with all
-            code-shared statuses.\r
-
-            Otherwise, code-sharing flights will be exclued. For airports, where
-            no information about code-share statuses\r
-
-            of flights are supplied (all flights are CodeshareStatus=Unknown),
-            complex filtering will be applied \r
-
-            to determine which flights are likely to be operational (caution:
-            false results are possible)."
+          description: "If set to true, the result will include flights with all code-shared statuses.\r\nOtherwise, code-sharing flights will be exclued. For airports, where no information about code-share statuses\r\nof flights are supplied (all flights are CodeshareStatus=Unknown), complex filtering will be applied \r\nto determine which flights are likely to be operational (caution: false results are possible)."
           schema:
             type: boolean
             default: true
         - name: withCargo
           in: query
-          description: If set to true, the result will include cargo flights (subject to
-            availability).
+          description: If set to true, the result will include cargo flights (subject to availability).
           schema:
             type: boolean
             default: true
         - name: withPrivate
           in: query
-          description: If set to true, the result will include private flights (subject to
-            availability).
+          description: If set to true, the result will include private flights (subject to availability).
           schema:
             type: boolean
             default: true
         - name: withLocation
           in: query
-          description: "If set to true, each currently active flight within the result
-            will be populated \r
-
-            with its present real-time location, altitude, speed and track
-            (subject to availability)."
+          description: "If set to true, each currently active flight within the result will be populated \r\nwith its present real-time location, altitude, speed and track (subject to availability)."
           schema:
             type: boolean
             default: false
@@ -3088,43 +2101,8 @@ paths:
     get:
       tags:
         - Flight API
-      summary: FIDS (airport departures and arrivals) - by relative time / by current
-        time / TIER 2
-      description: "**What are current departures or arrivals at the airport?** or
-        **What is the flight schedule at the airport?** or **What is flight
-        history at the airport?**\r
-
-        \r
-
-        Flights may contain live updates with corresponding information related
-        to the actual progress of the flight \r
-
-        (including actual/estimated arrival/departure times). In this case this
-        endpoint serves as a FIDS endpoint. \r
-
-        Presense of live updates is subject to data coverage: not all airports
-        have this coverage in our system.\r
-
-        \r
-
-        Otherwise flight information will be limited to scheduled only and will
-        not be updated real-time. Much more airports\r
-
-        have this type of coverage. To check if airport is tracked and on which
-        level, use */health/services/airports/{icao}/feeds* endpoint. \r
-
-        You can also use */health/services/feeds/{service}/airports* to get the
-        list of supported airports for this\r
-
-        or that layer of coverage. To learn more about the data coverage, refer
-        to *https://www.aerodatabox.com/data-coverage*.\r
-
-        \r
-
-        *Returns*: the list of arriving and/or departing flights scheduled
-        and/or planned and/or commenced within a time range specified \r
-
-        relatively to the current local time at the airport."
+      summary: AeroDataBox FIDS (airport departures and arrivals) - by relative time / by current time / TIER 2
+      description: "**What are current departures or arrivals at the airport?** or **What is the flight schedule at the airport?** or **What is flight history at the airport?**\r\n\r\nFlights may contain live updates with corresponding information related to the actual progress of the flight \r\n(including actual/estimated arrival/departure times). In this case this endpoint serves as a FIDS endpoint. \r\nPresense of live updates is subject to data coverage: not all airports have this coverage in our system.\r\n\r\nOtherwise flight information will be limited to scheduled only and will not be updated real-time. Much more airports\r\nhave this type of coverage. To check if airport is tracked and on which level, use */health/services/airports/{icao}/feeds* endpoint. \r\nYou can also use */health/services/feeds/{service}/airports* to get the list of supported airports for this\r\nor that layer of coverage. To learn more about the data coverage, refer to *https://www.aerodatabox.com/data-coverage*.\r\n\r\n*Returns*: the list of arriving and/or departing flights scheduled and/or planned and/or commenced within a time range specified \r\nrelatively to the current local time at the airport."
       operationId: GetAirportFlightsRelative
       parameters:
         - name: codeType
@@ -3134,17 +2112,7 @@ paths:
             $ref: "#/components/schemas/AirportCodesByEnum"
         - name: code
           in: path
-          description: "If `codeType` is:\r
-
-            * `icao`, then this field must be a 4-character ICAO-code of the
-            airport (e.g.: EHAM, KLAX, UUEE, etc.);\r
-
-            * `iata`, then this field must be a 3-character IATA-code of the
-            airport (e.g.: AMS, SFO, LAX, etc.).\r
-
-            \r
-
-            Full, stripped and any case formats are acceptable."
+          description: "If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
           required: true
           schema:
             maxLength: 4
@@ -3152,16 +2120,14 @@ paths:
             type: string
         - name: offsetMinutes
           in: query
-          description: "Beginning of the search range expressed in minutes relative to the
-            current time at the airport (default: `-120`)"
+          description: "Beginning of the search range expressed in minutes relative to the current time at the airport (default: `-120`)"
           schema:
             type: integer
             format: int64
             default: -120
         - name: durationMinutes
           in: query
-          description: "Length (duration) of the search range expressed in minutes
-            (default: `720`)"
+          description: "Length (duration) of the search range expressed in minutes (default: `720`)"
           schema:
             type: integer
             format: int64
@@ -3173,63 +2139,37 @@ paths:
             $ref: "#/components/schemas/FlightDirection"
         - name: withLeg
           in: query
-          description: "If set to true, the result will include movement information from
-            airport opposite in this flight leg (airport of origin for arriving
-            flight or airport of destination for departing flight).\r
-
-            In this case, Movement property will be replaced with Departure and
-            Arrival properties for each flight.\r
-
-            Default: false."
+          description: "If set to true, the result will include movement information from airport opposite in this flight leg (airport of origin for arriving flight or airport of destination for departing flight).\r\nIn this case, Movement property will be replaced with Departure and Arrival properties for each flight.\r\nDefault: false."
           schema:
             type: boolean
             default: false
         - name: withCancelled
           in: query
-          description: "If set to true, result will include cancelled, divered, likely
-            cancelled (CanceledUncertain) flights.\r
-
-            Default: true."
+          description: "If set to true, result will include cancelled, divered, likely cancelled (CanceledUncertain) flights.\r\nDefault: true."
           schema:
             type: boolean
             default: true
         - name: withCodeshared
           in: query
-          description: "If set to true, the result will include flights with all
-            code-shared statuses.\r
-
-            Otherwise, code-sharing flights will be exclued. For airports, where
-            no information about code-share statuses\r
-
-            of flights are supplied (all flights are CodeshareStatus=Unknown),
-            complex filtering will be applied \r
-
-            to determine which flights are likely to be operational (caution:
-            false results are possible)."
+          description: "If set to true, the result will include flights with all code-shared statuses.\r\nOtherwise, code-sharing flights will be exclued. For airports, where no information about code-share statuses\r\nof flights are supplied (all flights are CodeshareStatus=Unknown), complex filtering will be applied \r\nto determine which flights are likely to be operational (caution: false results are possible)."
           schema:
             type: boolean
             default: true
         - name: withCargo
           in: query
-          description: If set to true, the result will include cargo flights (subject to
-            availability).
+          description: If set to true, the result will include cargo flights (subject to availability).
           schema:
             type: boolean
             default: true
         - name: withPrivate
           in: query
-          description: If set to true, the result will include private flights (subject to
-            availability).
+          description: If set to true, the result will include private flights (subject to availability).
           schema:
             type: boolean
             default: true
         - name: withLocation
           in: query
-          description: "If set to true, each currently active flight within the result
-            will be populated \r
-
-            with its present real-time location, altitude, speed and track
-            (subject to availability)."
+          description: "If set to true, each currently active flight within the result will be populated \r\nwith its present real-time location, altitude, speed and track (subject to availability)."
           schema:
             type: boolean
             default: false
@@ -3293,9 +2233,8 @@ paths:
     get:
       tags:
         - Flight API
-      summary: Search flight numbers by term / TIER 2
-      description: "*Returns:* Distinct list of available flight numbers which start
-        with the search query."
+      summary: AeroDataBox Search flight numbers by term / TIER 2
+      description: "*Returns:* Distinct list of available flight numbers which start with the search query."
       operationId: SearchFlightsByTerm
       parameters:
         - name: q
@@ -3317,12 +2256,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/StringFlightSearchItemContractSearchResultCollectio\
-                  nContract"
+                $ref: "#/components/schemas/StringFlightSearchItemContractSearchResultCollectionContract"
             application/xml:
               schema:
-                $ref: "#/components/schemas/StringFlightSearchItemContractSearchResultCollectio\
-                  nContract"
+                $ref: "#/components/schemas/StringFlightSearchItemContractSearchResultCollectionContract"
         "204":
           description: No Content
         "400":
@@ -3373,12 +2310,8 @@ paths:
     get:
       tags:
         - Healthcheck API
-      summary: General status of data feed services / FREE TIER
-      description: "**Which is the general health of the data feed service?**\r
-
-        \ \r
-
-        *Returns:* Status of the service in general, regardless of the airports"
+      summary: AeroDataBox General status of data feed services / FREE TIER
+      description: "**Which is the general health of the data feed service?**\r\n \r\n*Returns:* Status of the service in general, regardless of the airports"
       operationId: GetFeedServiceStatus
       parameters:
         - name: service
@@ -3388,8 +2321,7 @@ paths:
             $ref: "#/components/schemas/FeedServiceEnum"
         - name: withHttpCode
           in: query
-          description: If true, reflect status of the service in the HTTP code of the
-            response (if the service is down, HTTP code will be 503).
+          description: If true, reflect status of the service in the HTTP code of the response (if the service is down, HTTP code will be 503).
           schema:
             type: boolean
             default: false
@@ -3460,24 +2392,13 @@ paths:
     get:
       tags:
         - Healthcheck API
-      summary: Data feed services status by ICAO code / FREE TIER
-      description: "**What is the status of data updates for the airport?**\r
-
-        \r
-
-        At the moment airports having both ICAO and IATA code are present in
-        database only.\r
-
-        \r
-
-        *Returns:* Current status of airport data feed services (live flight
-        updates, flight schedules, etc.) for requested airport."
+      summary: AeroDataBox Data feed services status by ICAO code / FREE TIER
+      description: "**What is the status of data updates for the airport?**\r\n\r\nAt the moment airports having both ICAO and IATA code are present in database only.\r\n\r\n*Returns:* Current status of airport data feed services (live flight updates, flight schedules, etc.) for requested airport."
       operationId: GetAirportFeedStatus
       parameters:
         - name: icao
           in: path
-          description: "4-digit ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.).
-            Full, stripped and any case formats are acceptable."
+          description: "4-digit ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.). Full, stripped and any case formats are acceptable."
           required: true
           schema:
             maxLength: 4
@@ -3543,19 +2464,8 @@ paths:
     get:
       tags:
         - Healthcheck API
-      summary: Airports supporting data feed service / FREE TIER
-      description: "**Which airports support flight schedules?** or **Which airports
-        support live flight updates?**\r
-
-        \r
-
-        \ At the moment airports having both ICAO and IATA code are present in
-        database only.\r
-
-        \ \r
-
-        *Returns:* Collection ICAO codes of airports supporting specified
-        airport data feed service."
+      summary: AeroDataBox Airports supporting data feed service / FREE TIER
+      description: "**Which airports support flight schedules?** or **Which airports support live flight updates?**\r\n\r\n At the moment airports having both ICAO and IATA code are present in database only.\r\n \r\n*Returns:* Collection ICAO codes of airports supporting specified airport data feed service."
       operationId: GetFeedAirports
       parameters:
         - name: service
@@ -3623,28 +2533,8 @@ paths:
     get:
       tags:
         - Industry API
-      summary: FAA LADD Aircraft Status / TIER 3
-      description: "*Returns:* The **current** status of the specified aircraft in the
-        Limiting Aircraft Displayed program\r
-
-        of the Federal Aviation Administration of the U.S. Department of
-        Transportation (FAA LADD). \r
-
-        The industry list of blocked aircraft is synchrornized weekly with the
-        FAA. \r
-
-        More information about FAA LADD: https://www.faa.gov/pilots/ladd\r
-
-        \r
-
-        **DISCLAIMER.** This endpoint is designed to provide easy access to
-        verification against the FAA LADD industry list.\r
-
-        Even though it is based on the official data distributed weekly by the
-        FAA, this is **NOT the official source\r
-
-        of the FAA LADD data**. For the official sources, always contact the FAA
-        directly."
+      summary: AeroDataBox FAA LADD Aircraft Status / TIER 3
+      description: "*Returns:* The **current** status of the specified aircraft in the Limiting Aircraft Displayed program\r\nof the Federal Aviation Administration of the U.S. Department of Transportation (FAA LADD). \r\nThe industry list of blocked aircraft is synchrornized weekly with the FAA. \r\nMore information about FAA LADD: https://www.faa.gov/pilots/ladd\r\n\r\n**DISCLAIMER.** This endpoint is designed to provide easy access to verification against the FAA LADD industry list.\r\nEven though it is based on the official data distributed weekly by the FAA, this is **NOT the official source\r\nof the FAA LADD data**. For the official sources, always contact the FAA directly."
       operationId: GetFaaLaddAircraftStatus
       parameters:
         - name: id
@@ -3715,17 +2605,8 @@ paths:
     get:
       tags:
         - Miscellaneous API
-      summary: Current local time at the airport / TIER 1
-      description: "**What is the current local time at the airport?**\r
-
-        \r
-
-        At the moment airports having both ICAO and IATA code are present in
-        database only.\r
-
-        \r
-
-        *Returns:* Local time at the airport, if airport is found."
+      summary: AeroDataBox Current local time at the airport / TIER 1
+      description: "**What is the current local time at the airport?**\r\n\r\nAt the moment airports having both ICAO and IATA code are present in database only.\r\n\r\n*Returns:* Local time at the airport, if airport is found."
       operationId: GetAirportLocalTime
       parameters:
         - name: codeType
@@ -3735,17 +2616,7 @@ paths:
             $ref: "#/components/schemas/AirportCodesByEnum"
         - name: code
           in: path
-          description: "If `codeType` is:\r
-
-            * `icao`, then this field must be a 4-character ICAO-code of the
-            airport (e.g.: EHAM, KLAX, UUEE, etc.);\r
-
-            * `iata`, then this field must be a 3-character IATA-code of the
-            airport (e.g.: AMS, SFO, LAX, etc.).\r
-
-            \r
-
-            Full, stripped and any case formats are acceptable."
+          description: "If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
           required: true
           schema:
             maxLength: 4
@@ -3811,29 +2682,8 @@ paths:
     get:
       tags:
         - Miscellaneous API
-      summary: Solar and day time at the airport / TIER 1
-      description: "**What is the sun position in the sky now at a specific time at
-        the airport?** or\r
-
-        **When does the sun rise and set at the airport today or on the other
-        day at the airport?** or\r
-
-        **Is it dark now or is it day at the airport?**\r
-
-        \r
-
-        At the moment airports having both ICAO and IATA code are present in
-        database only.\r
-
-        \r
-
-        *Returns:* If airport is found, returns various solar-related
-        information: sun position in the sky,\r
-
-        daytime (day, night, twilight: civil, nautical, astronomical,
-        golden/blue hours), \r
-
-        sunrise and sunset times, etc."
+      summary: AeroDataBox Solar and day time at the airport / TIER 1
+      description: "**What is the sun position in the sky now at a specific time at the airport?** or\r\n**When does the sun rise and set at the airport today or on the other day at the airport?** or\r\n**Is it dark now or is it day at the airport?**\r\n\r\nAt the moment airports having both ICAO and IATA code are present in database only.\r\n\r\n*Returns:* If airport is found, returns various solar-related information: sun position in the sky,\r\ndaytime (day, night, twilight: civil, nautical, astronomical, golden/blue hours), \r\nsunrise and sunset times, etc."
       operationId: GetAirportSolarTime_SolarTimeCurrent
       parameters:
         - name: codeType
@@ -3843,17 +2693,7 @@ paths:
             $ref: "#/components/schemas/AirportCodesByEnum"
         - name: code
           in: path
-          description: "If `codeType` is:\r
-
-            * `icao`, then this field must be a 4-character ICAO-code of the
-            airport (e.g.: EHAM, KLAX, UUEE, etc.);\r
-
-            * `iata`, then this field must be a 3-character IATA-code of the
-            airport (e.g.: AMS, SFO, LAX, etc.).\r
-
-            \r
-
-            Full, stripped and any case formats are acceptable."
+          description: "If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
           required: true
           schema:
             maxLength: 4
@@ -3919,29 +2759,8 @@ paths:
     get:
       tags:
         - Miscellaneous API
-      summary: Solar and day time at the airport / TIER 1
-      description: "**What is the sun position in the sky now at a specific time at
-        the airport?** or\r
-
-        **When does the sun rise and set at the airport today or on the other
-        day at the airport?** or\r
-
-        **Is it dark now or is it day at the airport?**\r
-
-        \r
-
-        At the moment airports having both ICAO and IATA code are present in
-        database only.\r
-
-        \r
-
-        *Returns:* If airport is found, returns various solar-related
-        information: sun position in the sky,\r
-
-        daytime (day, night, twilight: civil, nautical, astronomical,
-        golden/blue hours), \r
-
-        sunrise and sunset times, etc."
+      summary: AeroDataBox Solar and day time at the airport / TIER 1
+      description: "**What is the sun position in the sky now at a specific time at the airport?** or\r\n**When does the sun rise and set at the airport today or on the other day at the airport?** or\r\n**Is it dark now or is it day at the airport?**\r\n\r\nAt the moment airports having both ICAO and IATA code are present in database only.\r\n\r\n*Returns:* If airport is found, returns various solar-related information: sun position in the sky,\r\ndaytime (day, night, twilight: civil, nautical, astronomical, golden/blue hours), \r\nsunrise and sunset times, etc."
       operationId: GetAirportSolarTime_SolarTimeSpecificDate
       parameters:
         - name: codeType
@@ -3951,17 +2770,7 @@ paths:
             $ref: "#/components/schemas/AirportCodesByEnum"
         - name: code
           in: path
-          description: "If `codeType` is:\r
-
-            * `icao`, then this field must be a 4-character ICAO-code of the
-            airport (e.g.: EHAM, KLAX, UUEE, etc.);\r
-
-            * `iata`, then this field must be a 3-character IATA-code of the
-            airport (e.g.: AMS, SFO, LAX, etc.).\r
-
-            \r
-
-            Full, stripped and any case formats are acceptable."
+          description: "If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
           required: true
           schema:
             maxLength: 4
@@ -3969,10 +2778,7 @@ paths:
             type: string
         - name: dateLocal
           in: path
-          description: "The moment of time which solar data is request for (local time,
-            format: YYYY-MM-DDTHH:mm). \r
-
-            Default - current time."
+          description: "The moment of time which solar data is request for (local time, format: YYYY-MM-DDTHH:mm). \r\nDefault - current time."
           required: true
           schema:
             pattern: \d{4}-\d{2}-\d{2}(T\d{2}:\d{2})?
@@ -4038,26 +2844,8 @@ paths:
     get:
       tags:
         - Miscellaneous API
-      summary: Distance and flight time between airports / TIER 2
-      description: "**What is the great circle distance between airports?** \r
-
-        **What is approximate flight time between airports?**\r
-
-        ** What is the flight time between airports based on history of flights
-        and/or aircraft type?** (machine-learning based)\r
-
-        \r
-
-        Use `flightTimeModel` = <a href=\"#model-ModelFlightTimeEnum\">ML01</a>
-        to get more accurate results based on historical performance of flights
-        on a specific route \r
-
-        and aircraft type.\r
-
-        \r
-
-        *Returns:* Distance and approximate flight time between airports, if
-        both airports found."
+      summary: AeroDataBox Distance and flight time between airports / TIER 2
+      description: "**What is the great circle distance between airports?** \r\n**What is approximate flight time between airports?**\r\n** What is the flight time between airports based on history of flights and/or aircraft type?** (machine-learning based)\r\n\r\nUse `flightTimeModel` = <a href=\"#model-ModelFlightTimeEnum\">ML01</a> to get more accurate results based on historical performance of flights on a specific route \r\nand aircraft type.\r\n\r\n*Returns:* Distance and approximate flight time between airports, if both airports found."
       operationId: GetAirportDistanceTime
       parameters:
         - name: codeType
@@ -4067,17 +2855,7 @@ paths:
             $ref: "#/components/schemas/AirportCodesByEnum"
         - name: codeFrom
           in: path
-          description: "If `codeType` is:\r
-
-            * `icao`, then this field must be a 4-character ICAO-code of the
-            origin airport (e.g.: EHAM, KLAX, UUEE, etc.);\r
-
-            * `iata`, then this field must be a 3-character IATA-code of the
-            origin  airport (e.g.: AMS, SFO, LAX, etc.).\r
-
-            \r
-
-            Full, stripped and any case formats are acceptable."
+          description: "If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the origin airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the origin  airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
           required: true
           schema:
             maxLength: 4
@@ -4085,21 +2863,7 @@ paths:
             type: string
         - name: codeTo
           in: path
-          description: "If `codeType` is:\r
-
-            * `icao`, then this field must be a 4-character ICAO-code of the
-            destination airport (e.g.: EHAM, KLAX, UUEE, etc.);\r
-
-            * `iata`, then this field must be a 3-character IATA-code of the
-            destination  airport (e.g.: AMS, SFO, LAX, etc.);\r
-
-            * `local`, then the format of this field is subject to specific
-            standards of relevant national or local airport codification
-            systems.\r
-
-            \r
-
-            Full, stripped and any case formats are acceptable."
+          description: "If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the destination airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the destination  airport (e.g.: AMS, SFO, LAX, etc.);\r\n* `local`, then the format of this field is subject to specific standards of relevant national or local airport codification systems.\r\n\r\nFull, stripped and any case formats are acceptable."
           required: true
           schema:
             maxLength: 4
@@ -4107,22 +2871,12 @@ paths:
             type: string
         - name: aircraftName
           in: query
-          description: "Aircraft type name (free text). \r
-
-            If specified, the aircraft type will be attempted to be taken into
-            account to provide more accurate result."
+          description: "Aircraft type name (free text). \r\nIf specified, the aircraft type will be attempted to be taken into account to provide more accurate result."
           schema:
             type: string
         - name: flightTimeModel
           in: query
-          description: "Model of calculation of the flight time. Default is <a
-            href=\"#model-ModelFlightTimeEnum\"></a>\r
-
-            More advanced model(s) is available, including machine
-            learning-based models.\r
-
-            See <a href=\"#model-ModelFlightTimeEnum\">ModelFlightTimeEnum</a>
-            for details."
+          description: "Model of calculation of the flight time. Default is <a href=\"#model-ModelFlightTimeEnum\"></a>\r\nMore advanced model(s) is available, including machine learning-based models.\r\nSee <a href=\"#model-ModelFlightTimeEnum\">ModelFlightTimeEnum</a> for details."
           schema:
             $ref: "#/components/schemas/ModelFlightTimeEnum"
       responses:
@@ -4185,29 +2939,8 @@ paths:
     get:
       tags:
         - Statistical API
-      summary: Airport delays (current or historical moment) / TIER 3
-      description: "**What is the current or historical average delay in the
-        airport?** or **What is the delay index of the airport right now or at a
-        moment in past?**\r
-
-        \r
-
-        Please read more about airport delays on here:
-        https://aerodatabox.com/api-airport-delays/\r
-
-        \r
-
-        *Returns*: Statistical delay information about delays (median delay,
-        delay index, cancelled flights) of arrivals and departures for the
-        requested airport, represented by:\r
-
-        * a single `AirportDelayContract` item displaying the delay information
-        based on flight movements within the 2 hours prior to the current
-        moment, if no `dateLocal` is specified;\r
-
-        * a single `AirportDelayContract` item displaying the delay information
-        based on flight movements within the 2 hours prior to the moment
-        requested in `dateLocal`, if `dateLocal` is specified;"
+      summary: AeroDataBox Airport delays (current or historical moment) / TIER 3
+      description: "**What is the current or historical average delay in the airport?** or **What is the delay index of the airport right now or at a moment in past?**\r\n\r\nPlease read more about airport delays on here: https://aerodatabox.com/api-airport-delays/\r\n\r\n*Returns*: Statistical delay information about delays (median delay, delay index, cancelled flights) of arrivals and departures for the requested airport, represented by:\r\n* a single `AirportDelayContract` item displaying the delay information based on flight movements within the 2 hours prior to the current moment, if no `dateLocal` is specified;\r\n* a single `AirportDelayContract` item displaying the delay information based on flight movements within the 2 hours prior to the moment requested in `dateLocal`, if `dateLocal` is specified;"
       operationId: GetAirportDelay_DelaysCurrent
       parameters:
         - name: codeType
@@ -4217,17 +2950,7 @@ paths:
             $ref: "#/components/schemas/AirportCodesByEnum"
         - name: code
           in: path
-          description: "If `codeType` is:\r
-
-            * `icao`, then this field must be a 4-character ICAO-code of the
-            airport (e.g.: EHAM, KLAX, UUEE, etc.);\r
-
-            * `iata`, then this field must be a 3-character IATA-code of the
-            airport (e.g.: AMS, SFO, LAX, etc.).\r
-
-            \r
-
-            Full, stripped and any case formats are acceptable."
+          description: "If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
           required: true
           schema:
             maxLength: 4
@@ -4293,29 +3016,8 @@ paths:
     get:
       tags:
         - Statistical API
-      summary: Airport delays (current or historical moment) / TIER 3
-      description: "**What is the current or historical average delay in the
-        airport?** or **What is the delay index of the airport right now or at a
-        moment in past?**\r
-
-        \r
-
-        Please read more about airport delays on here:
-        https://aerodatabox.com/api-airport-delays/\r
-
-        \r
-
-        *Returns*: Statistical delay information about delays (median delay,
-        delay index, cancelled flights) of arrivals and departures for the
-        requested airport, represented by:\r
-
-        * a single `AirportDelayContract` item displaying the delay information
-        based on flight movements within the 2 hours prior to the current
-        moment, if no `dateLocal` is specified;\r
-
-        * a single `AirportDelayContract` item displaying the delay information
-        based on flight movements within the 2 hours prior to the moment
-        requested in `dateLocal`, if `dateLocal` is specified;"
+      summary: AeroDataBox Airport delays (current or historical moment) / TIER 3
+      description: "**What is the current or historical average delay in the airport?** or **What is the delay index of the airport right now or at a moment in past?**\r\n\r\nPlease read more about airport delays on here: https://aerodatabox.com/api-airport-delays/\r\n\r\n*Returns*: Statistical delay information about delays (median delay, delay index, cancelled flights) of arrivals and departures for the requested airport, represented by:\r\n* a single `AirportDelayContract` item displaying the delay information based on flight movements within the 2 hours prior to the current moment, if no `dateLocal` is specified;\r\n* a single `AirportDelayContract` item displaying the delay information based on flight movements within the 2 hours prior to the moment requested in `dateLocal`, if `dateLocal` is specified;"
       operationId: GetAirportDelay_DelaysHistorical
       parameters:
         - name: codeType
@@ -4325,17 +3027,7 @@ paths:
             $ref: "#/components/schemas/AirportCodesByEnum"
         - name: code
           in: path
-          description: "If `codeType` is:\r
-
-            * `icao`, then this field must be a 4-character ICAO-code of the
-            airport (e.g.: EHAM, KLAX, UUEE, etc.);\r
-
-            * `iata`, then this field must be a 3-character IATA-code of the
-            airport (e.g.: AMS, SFO, LAX, etc.).\r
-
-            \r
-
-            Full, stripped and any case formats are acceptable."
+          description: "If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
           required: true
           schema:
             maxLength: 4
@@ -4343,10 +3035,7 @@ paths:
             type: string
         - name: dateLocal
           in: path
-          description: "The moment of time for / from which delay data is requested (local
-            time, format: YYYY-MM-DDTHH:mm). \r
-
-            Default - current time."
+          description: "The moment of time for / from which delay data is requested (local time, format: YYYY-MM-DDTHH:mm). \r\nDefault - current time."
           required: true
           schema:
             pattern: \d{4}-\d{2}-\d{2}(T\d{2}:\d{2})?
@@ -4412,22 +3101,8 @@ paths:
     get:
       tags:
         - Statistical API
-      summary: Airport delays (historical period) / TIER 3
-      description: "**What were the delays within a specific period of time?** or
-        **How the delays changed  within a specific period of time?**\r
-
-        \r
-
-        Please read more about airport delays on here:
-        https://aerodatabox.com/api-airport-delays/\r
-
-        \r
-
-        *Returns*: Statistical delay information about delays (median delay,
-        delay index, cancelled flights) of arrivals and departures for the
-        requested airport, represented by a collection of `AiportDelayContract`
-        items displaying the delay information at multiple moments within the
-        period between `dateLocal` and `dateToLocal`."
+      summary: AeroDataBox Airport delays (historical period) / TIER 3
+      description: "**What were the delays within a specific period of time?** or **How the delays changed  within a specific period of time?**\r\n\r\nPlease read more about airport delays on here: https://aerodatabox.com/api-airport-delays/\r\n\r\n*Returns*: Statistical delay information about delays (median delay, delay index, cancelled flights) of arrivals and departures for the requested airport, represented by a collection of `AiportDelayContract` items displaying the delay information at multiple moments within the period between `dateLocal` and `dateToLocal`."
       operationId: GetAirportDelays
       parameters:
         - name: codeType
@@ -4437,17 +3112,7 @@ paths:
             $ref: "#/components/schemas/AirportCodesByEnum"
         - name: code
           in: path
-          description: "If `codeType` is:\r
-
-            * `icao`, then this field must be a 4-character ICAO-code of the
-            airport (e.g.: EHAM, KLAX, UUEE, etc.);\r
-
-            * `iata`, then this field must be a 3-character IATA-code of the
-            airport (e.g.: AMS, SFO, LAX, etc.).\r
-
-            \r
-
-            Full, stripped and any case formats are acceptable."
+          description: "If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
           required: true
           schema:
             maxLength: 4
@@ -4455,8 +3120,7 @@ paths:
             type: string
         - name: dateFromLocal
           in: path
-          description: "The beginning of the period of time for which delay data is
-            requested (local time, format: YYYY-MM-DDTHH:mm)."
+          description: "The beginning of the period of time for which delay data is requested (local time, format: YYYY-MM-DDTHH:mm)."
           required: true
           schema:
             pattern: \d{4}-\d{2}-\d{2}(T\d{2}:\d{2})?
@@ -4464,8 +3128,7 @@ paths:
             format: date-time
         - name: dateToLocal
           in: path
-          description: "The end of the period of time for which delay data is requested
-            (local time, format: YYYY-MM-DDTHH:mm)."
+          description: "The end of the period of time for which delay data is requested (local time, format: YYYY-MM-DDTHH:mm)."
           required: true
           schema:
             pattern: \d{4}-\d{2}-\d{2}(T\d{2}:\d{2})?
@@ -4535,37 +3198,8 @@ paths:
     get:
       tags:
         - Statistical API
-      summary: Airport routes and daily flight destinations / TIER 3
-      description: "**What are the most popular routes from an airport?** or **Where I
-        can fly from an airport?** or \r
-
-        **How many daily flights to different destinations from an airport?**\r
-
-        \r
-
-        The data will only be available for airports which have at least
-        schedules information available. \r
-
-        If the airport is also covered with live or ADS-B coverage, the quality
-        will improve greatly as it will\r
-
-        be based on real data rather than on static scheduled data. To check if
-        an airport is tracked and on which level, \r
-
-        use `/health/services/airports/{icao}/feeds` endpoint. You can also use
-        `/health/services/feeds/{service}/airports` to get \r
-
-        the list of covered airports. \r
-
-        \r
-
-        At the moment airports having both ICAO and IATA code and flight
-        schedules are present available only.\r
-
-        \r
-
-        *Returns:* List of routes and daily flights amount departing from an
-        airport."
+      summary: AeroDataBox Airport routes and daily flight destinations / TIER 3
+      description: "**What are the most popular routes from an airport?** or **Where I can fly from an airport?** or \r\n**How many daily flights to different destinations from an airport?**\r\n\r\nThe data will only be available for airports which have at least schedules information available. \r\nIf the airport is also covered with live or ADS-B coverage, the quality will improve greatly as it will\r\nbe based on real data rather than on static scheduled data. To check if an airport is tracked and on which level, \r\nuse `/health/services/airports/{icao}/feeds` endpoint. You can also use `/health/services/feeds/{service}/airports` to get \r\nthe list of covered airports. \r\n\r\nAt the moment airports having both ICAO and IATA code and flight schedules are present available only.\r\n\r\n*Returns:* List of routes and daily flights amount departing from an airport."
       operationId: GetRouteDailyStatistics_RoutesDailyCurrent
       parameters:
         - name: codeType
@@ -4575,17 +3209,7 @@ paths:
             $ref: "#/components/schemas/AirportCodesByEnum"
         - name: code
           in: path
-          description: "If `codeType` is:\r
-
-            * `icao`, then this field must be a 4-character ICAO-code of the
-            airport (e.g.: EHAM, KLAX, UUEE, etc.);\r
-
-            * `iata`, then this field must be a 3-character IATA-code of the
-            airport (e.g.: AMS, SFO, LAX, etc.).\r
-
-            \r
-
-            Full, stripped and any case formats are acceptable."
+          description: "If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
           required: true
           schema:
             maxLength: 4
@@ -4651,37 +3275,8 @@ paths:
     get:
       tags:
         - Statistical API
-      summary: Airport routes and daily flight destinations / TIER 3
-      description: "**What are the most popular routes from an airport?** or **Where I
-        can fly from an airport?** or \r
-
-        **How many daily flights to different destinations from an airport?**\r
-
-        \r
-
-        The data will only be available for airports which have at least
-        schedules information available. \r
-
-        If the airport is also covered with live or ADS-B coverage, the quality
-        will improve greatly as it will\r
-
-        be based on real data rather than on static scheduled data. To check if
-        an airport is tracked and on which level, \r
-
-        use `/health/services/airports/{icao}/feeds` endpoint. You can also use
-        `/health/services/feeds/{service}/airports` to get \r
-
-        the list of covered airports. \r
-
-        \r
-
-        At the moment airports having both ICAO and IATA code and flight
-        schedules are present available only.\r
-
-        \r
-
-        *Returns:* List of routes and daily flights amount departing from an
-        airport."
+      summary: AeroDataBox Airport routes and daily flight destinations / TIER 3
+      description: "**What are the most popular routes from an airport?** or **Where I can fly from an airport?** or \r\n**How many daily flights to different destinations from an airport?**\r\n\r\nThe data will only be available for airports which have at least schedules information available. \r\nIf the airport is also covered with live or ADS-B coverage, the quality will improve greatly as it will\r\nbe based on real data rather than on static scheduled data. To check if an airport is tracked and on which level, \r\nuse `/health/services/airports/{icao}/feeds` endpoint. You can also use `/health/services/feeds/{service}/airports` to get \r\nthe list of covered airports. \r\n\r\nAt the moment airports having both ICAO and IATA code and flight schedules are present available only.\r\n\r\n*Returns:* List of routes and daily flights amount departing from an airport."
       operationId: GetRouteDailyStatistics_RoutesDailAtSpecificDate
       parameters:
         - name: codeType
@@ -4691,17 +3286,7 @@ paths:
             $ref: "#/components/schemas/AirportCodesByEnum"
         - name: code
           in: path
-          description: "If `codeType` is:\r
-
-            * `icao`, then this field must be a 4-character ICAO-code of the
-            airport (e.g.: EHAM, KLAX, UUEE, etc.);\r
-
-            * `iata`, then this field must be a 3-character IATA-code of the
-            airport (e.g.: AMS, SFO, LAX, etc.).\r
-
-            \r
-
-            Full, stripped and any case formats are acceptable."
+          description: "If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
           required: true
           schema:
             maxLength: 4
@@ -4709,13 +3294,7 @@ paths:
             type: string
         - name: dateLocal
           in: path
-          description: "Local date at the airport (default = null).\r
-
-            If specified, returns statistics based on 7 days prior to the date
-            specified.\r
-
-            Otherwise, returns statistics based on 7 days prior to the current
-            local date at the airport."
+          description: "Local date at the airport (default = null).\r\nIf specified, returns statistics based on 7 days prior to the date specified.\r\nOtherwise, returns statistics based on 7 days prior to the current local date at the airport."
           required: true
           schema:
             pattern: \d{4}-\d{2}-\d{2}(T\d{2}:\d{2})?
@@ -4781,25 +3360,8 @@ paths:
     get:
       tags:
         - Statistical API
-      summary: Global delays (current or historical moment) / TIER 3
-      description: "**What is the current or historical delay situation in all
-        airports?** or **What is the delay index of all airports globally right
-        now or at a moment in past?**\r
-
-        \r
-
-        Please read more about airport delays on here:
-        https://aerodatabox.com/api-airport-delays/\r
-
-        \r
-
-        *Returns*: Statistical delay information about delays (median delay,
-        delay index, cancelled flights) of arrivals and departures for all known
-        airports, represented by a collection of items sorted by \r
-
-        the average of arrival and departure index, descending order (from worst
-        to best). Only qualifying and recent enough delay statistics records are
-        returned."
+      summary: AeroDataBox Global delays (current or historical moment) / TIER 3
+      description: "**What is the current or historical delay situation in all airports?** or **What is the delay index of all airports globally right now or at a moment in past?**\r\n\r\nPlease read more about airport delays on here: https://aerodatabox.com/api-airport-delays/\r\n\r\n*Returns*: Statistical delay information about delays (median delay, delay index, cancelled flights) of arrivals and departures for all known airports, represented by a collection of items sorted by \r\nthe average of arrival and departure index, descending order (from worst to best). Only qualifying and recent enough delay statistics records are returned."
       operationId: GetGlobalDelays_GlobalDelaysCurent
       responses:
         "200":
@@ -4861,33 +3423,13 @@ paths:
     get:
       tags:
         - Statistical API
-      summary: Global delays (current or historical moment) / TIER 3
-      description: "**What is the current or historical delay situation in all
-        airports?** or **What is the delay index of all airports globally right
-        now or at a moment in past?**\r
-
-        \r
-
-        Please read more about airport delays on here:
-        https://aerodatabox.com/api-airport-delays/\r
-
-        \r
-
-        *Returns*: Statistical delay information about delays (median delay,
-        delay index, cancelled flights) of arrivals and departures for all known
-        airports, represented by a collection of items sorted by \r
-
-        the average of arrival and departure index, descending order (from worst
-        to best). Only qualifying and recent enough delay statistics records are
-        returned."
+      summary: AeroDataBox Global delays (current or historical moment) / TIER 3
+      description: "**What is the current or historical delay situation in all airports?** or **What is the delay index of all airports globally right now or at a moment in past?**\r\n\r\nPlease read more about airport delays on here: https://aerodatabox.com/api-airport-delays/\r\n\r\n*Returns*: Statistical delay information about delays (median delay, delay index, cancelled flights) of arrivals and departures for all known airports, represented by a collection of items sorted by \r\nthe average of arrival and departure index, descending order (from worst to best). Only qualifying and recent enough delay statistics records are returned."
       operationId: GetGlobalDelays_GlobalDelaysAtSpecificDate
       parameters:
         - name: dateUtc
           in: path
-          description: "The moment of time for / from which delay data is requested (UTC
-            time, format: YYYY-MM-DDTHH:mm).\r
-
-            Default - current time."
+          description: "The moment of time for / from which delay data is requested (UTC time, format: YYYY-MM-DDTHH:mm).\r\nDefault - current time."
           required: true
           schema:
             pattern: \d{4}-\d{2}-\d{2}(T\d{2}:\d{2})?
@@ -4953,23 +3495,13 @@ paths:
     get:
       tags:
         - Statistical API
-      summary: Flight delay statistics by flight number / TIER 3
-      description: "**By how much the flight is delayed in average?**\r
-
-        \r
-
-        Information is only available for flights which were tracked with live
-        updates at least at origin or at destination within the last 90 days.\r
-
-        \r
-
-        *Returns:* delay statistics for the flight with specified number."
+      summary: AeroDataBox Flight delay statistics by flight number / TIER 3
+      description: "**By how much the flight is delayed in average?**\r\n\r\nInformation is only available for flights which were tracked with live updates at least at origin or at destination within the last 90 days.\r\n\r\n*Returns:* delay statistics for the flight with specified number."
       operationId: GetFlightDelays
       parameters:
         - name: number
           in: path
-          description: Flight number (with or without spaces, IATA or ICAO, any case
-            formats are acceptable, e.g. KL1395, Klm 1395)
+          description: Flight number (with or without spaces, IATA or ICAO, any case formats are acceptable, e.g. KL1395, Klm 1395)
           required: true
           schema:
             maxLength: 8
@@ -5139,18 +3671,13 @@ components:
           $ref: "#/components/schemas/ResourceContract"
         numRegistrations:
           type: integer
-          description: "An aircraft may have a history of past registrations with other
-            airlines or operators.\r
-
-            This field represents a total number of registration records known
-            in our database."
+          description: "An aircraft may have a history of past registrations with other airlines or operators.\r\nThis field represents a total number of registration records known in our database."
           format: int32
         registrations:
           type: array
           items:
             $ref: "#/components/schemas/AircraftRegistrationContract"
-          description: A history of all registrations with other airlines or operators (if
-            provided by the endpoint).
+          description: A history of all registrations with other airlines or operators (if provided by the endpoint).
           nullable: true
       additionalProperties: false
       description: Single aircraft data
@@ -5174,17 +3701,13 @@ components:
           maximum: 2147483647
           minimum: 0
           type: integer
-          description: "The offset of the current page of the collection \r
-
-            (number of items skipped before this page)"
+          description: "The offset of the current page of the collection \r\n(number of items skipped before this page)"
           format: int32
         pageSize:
           maximum: 2147483647
           minimum: 0
           type: integer
-          description: "Maximum number of items on the current page of the collection\r
-
-            (`Count` cannot be more than this value)"
+          description: "Maximum number of items on the current page of the collection\r\n(`Count` cannot be more than this value)"
           format: int32
         hasNextPage:
           type: boolean
@@ -5237,32 +3760,13 @@ components:
         - Reg
         - Icao24
       type: string
-      description: "Criteria to search aircraft by<p>Possible values:</p>\r
-
-        <ul>\r
-
-        <li><b>0 - Id</b>: ID of the aircraft (as stored in this API)</li>\r
-
-        <li><b>1 - Reg</b>: Search by aircraft tail-number</li>\r
-
-        <li><b>2 - Icao24</b>: Search by 24-bit ICAO Mode-S Transponder
-        code</li>\r
-
-        </ul>\r\n"
+      description: "Criteria to search aircraft by<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - Id</b>: ID of the aircraft (as stored in this API)</li>\r\n<li><b>1 - Reg</b>: Search by aircraft tail-number</li>\r\n<li><b>2 - Icao24</b>: Search by 24-bit ICAO Mode-S Transponder code</li>\r\n</ul>\r\n"
     AirportCodesByEnum:
       enum:
         - Icao
         - Iata
       type: string
-      description: "Search by airport code type<p>Possible values:</p>\r
-
-        <ul>\r
-
-        <li><b>0 - Icao</b>: ICAO-code</li>\r
-
-        <li><b>1 - Iata</b>: IATA-code</li>\r
-
-        </ul>\r\n"
+      description: "Search by airport code type<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - Icao</b>: ICAO-code</li>\r\n<li><b>1 - Iata</b>: IATA-code</li>\r\n</ul>\r\n"
     AirportContract:
       required:
         - continent
@@ -5293,8 +3797,7 @@ components:
         fullName:
           minLength: 1
           type: string
-          description: Full name of the airport (derived from own airport name and
-            municipality name)
+          description: Full name of the airport (derived from own airport name and municipality name)
         municipalityName:
           type: string
           description: Name of the municipality this airport belongs to
@@ -5361,19 +3864,10 @@ components:
           $ref: "#/components/schemas/Distance"
         approxFlightTime:
           type: string
-          description: "Approximate flight time based on re-calculation of great circle
-            distance\r
-
-            against statistical duration average of multiple flights covered
-            similar\r
-
-            distance before."
+          description: "Approximate flight time based on re-calculation of great circle distance\r\nagainst statistical duration average of multiple flights covered similar\r\ndistance before."
           format: date-span
       additionalProperties: false
-      description: "Contract containing information on distance and approximate flight
-        time\r
-
-        between specified airports"
+      description: "Contract containing information on distance and approximate flight time\r\nbetween specified airports"
     AirportFeedServiceStatusContract:
       required:
         - adsbUpdatesFeed
@@ -5391,9 +3885,7 @@ components:
         generalAvailability:
           $ref: "#/components/schemas/FlightDataGeneralAvailabilityContract"
       additionalProperties: false
-      description: "Airport data feed services status.\r
-
-        Read https://aerodatabox.com/data-coverage for context."
+      description: "Airport data feed services status.\r\nRead https://aerodatabox.com/data-coverage for context."
     AirportFidsContract:
       type: object
       properties:
@@ -5535,21 +4027,7 @@ components:
         - IsOperator
         - IsCodeshared
       type: string
-      description: "Flight code-share status<p>Possible values:</p>\r
-
-        <ul>\r
-
-        <li><b>0 - Unknown</b>: Code-sharing information is unavailable for this
-        flight. Flight might be operated both by airline owning the flight
-        number as well as by another airliner.</li>\r
-
-        <li><b>1 - IsOperator</b>: Flight is operated by an airline owning the
-        flight number (the same code)</li>\r
-
-        <li><b>2 - IsCodeshared</b>: Flight is code-shared (operated by an
-        airline other than airline owning the flight number)</li>\r
-
-        </ul>\r\n"
+      description: "Flight code-share status<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - Unknown</b>: Code-sharing information is unavailable for this flight. Flight might be operated both by airline owning the flight number as well as by another airliner.</li>\r\n<li><b>1 - IsOperator</b>: Flight is operated by an airline owning the flight number (the same code)</li>\r\n<li><b>2 - IsCodeshared</b>: Flight is code-shared (operated by an airline other than airline owning the flight number)</li>\r\n</ul>\r\n"
     ContinentContract:
       required:
         - code
@@ -5588,50 +4066,12 @@ components:
         url:
           minLength: 1
           type: string
-          description: "Destination HTTP-endpoint where notifications will be sent to.
-            Requirements:\r
-
-            * must be a valid public HTTP(S) URL not requiring additional
-            authorization;\r
-
-            * must use standard or alternative HTTP or HTTPS ports (80, 443,
-            8008, 8080) or any dynamic port greater or equal to 49152;\r
-
-            * must be able to accept HTTP POST request with JSON-formatted body
-            (application/json);\r
-
-            * must respond with one of successful HTTP status codes (2XX) within
-            10 seconds;\r
-
-            * the endpoint owner must be aware of and consent to receiving
-            notifications at it.\r
-
-            \r
-
-            If endpoint is unavailable, responds with error status code or does
-            not respond within timeout,\r
-
-            notification delivery retry may be attempted according to
-            subscription settings."
+          description: "Destination HTTP-endpoint where notifications will be sent to. Requirements:\r\n* must be a valid public HTTP(S) URL not requiring additional authorization;\r\n* must use standard or alternative HTTP or HTTPS ports (80, 443, 8008, 8080) or any dynamic port greater or equal to 49152;\r\n* must be able to accept HTTP POST request with JSON-formatted body (application/json);\r\n* must respond with one of successful HTTP status codes (2XX) within 10 seconds;\r\n* the endpoint owner must be aware of and consent to receiving notifications at it.\r\n\r\nIf endpoint is unavailable, responds with error status code or does not respond within timeout,\r\nnotification delivery retry may be attempted according to subscription settings."
         maxDeliveryRetries:
           maximum: 2
           minimum: 0
           type: integer
-          description: "Maximum number of times a delivery attempt is retried after
-            initial delivery attempt failure.\r
-
-            \r
-
-            Current default value is:\r
-
-            \r
-
-            \t* `2` for the old, lifetime-based web-hook subscriptions (will be
-            phased out after the 4th of April, 2026);\r
-
-            \t* `0` for the new, credit-based web-hook subscriptions (will be
-            the default value for any web-hook subscription after the 4th of
-            April, 2026)."
+          description: "Maximum number of times a delivery attempt is retried after initial delivery attempt failure.\r\n\r\nCurrent default value is:\r\n\r\n\t* `2` for the old, lifetime-based web-hook subscriptions (will be phased out after the 4th of April, 2026);\r\n\t* `0` for the new, credit-based web-hook subscriptions (will be the default value for any web-hook subscription after the 4th of April, 2026)."
           format: int32
           nullable: true
       additionalProperties: false
@@ -5693,25 +4133,7 @@ components:
         - BlueHour
         - GoldenHour
       type: string
-      description: "Daytime states<p>Possible values:</p>\r
-
-        <ul>\r
-
-        <li><b>0 - Night</b></li>\r
-
-        <li><b>1 - TwilightAstronomical</b></li>\r
-
-        <li><b>2 - TwilightNautical</b></li>\r
-
-        <li><b>3 - TwilightCivil</b></li>\r
-
-        <li><b>4 - Day</b></li>\r
-
-        <li><b>5 - BlueHour</b></li>\r
-
-        <li><b>6 - GoldenHour</b></li>\r
-
-        </ul>\r\n"
+      description: "Daytime states<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - Night</b></li>\r\n<li><b>1 - TwilightAstronomical</b></li>\r\n<li><b>2 - TwilightNautical</b></li>\r\n<li><b>3 - TwilightCivil</b></li>\r\n<li><b>4 - Day</b></li>\r\n<li><b>5 - BlueHour</b></li>\r\n<li><b>6 - GoldenHour</b></li>\r\n</ul>\r\n"
     DelayBracketContract:
       required:
         - num
@@ -5719,30 +4141,12 @@ components:
       properties:
         delayedFrom:
           type: string
-          description: "The beginning of the delay range (format: [-]hh:mm:ss).\r
-
-            E.g. in the expresssion \"delayed from 30 to 60 minutes\" stands for
-            \"from 30 minutes\".\r
-
-            Value can be negative (therefore, means early occurence).\r
-
-            \r
-
-            Must be preset if \"DelayedTo\" is not specified."
+          description: "The beginning of the delay range (format: [-]hh:mm:ss).\r\nE.g. in the expresssion \"delayed from 30 to 60 minutes\" stands for \"from 30 minutes\".\r\nValue can be negative (therefore, means early occurence).\r\n\r\nMust be preset if \"DelayedTo\" is not specified."
           format: date-span
           nullable: true
         delayedTo:
           type: string
-          description: "The end of the delay range (format: [-]hh:mm:ss).\r
-
-            E.g. in the expresssion \"delayed from 30 to 60 minutes\" stands for
-            \"to 60 minutes\".\r
-
-            Value can be negative (therefore, means early occurence).\r
-
-            \r
-
-            Must be preset if \"DelayedFrom\" is not specified."
+          description: "The end of the delay range (format: [-]hh:mm:ss).\r\nE.g. in the expresssion \"delayed from 30 to 60 minutes\" stands for \"to 60 minutes\".\r\nValue can be negative (therefore, means early occurence).\r\n\r\nMust be preset if \"DelayedFrom\" is not specified."
           format: date-span
           nullable: true
         num:
@@ -5751,20 +4155,11 @@ components:
           format: int32
         percentage:
           type: number
-          description: "Percentage of records subject to a specified delay range.\r
-
-            \r
-
-            Only available when this delay bracket is provided as a part\r
-
-            of a statistical information of a bigger context and the \"total\"\r
-
-            count of records is known."
+          description: "Percentage of records subject to a specified delay range.\r\n\r\nOnly available when this delay bracket is provided as a part\r\nof a statistical information of a bigger context and the \"total\"\r\ncount of records is known."
           format: float
           nullable: true
       additionalProperties: false
-      description: Delay bracket contract describing how many records are subject to a
-        specific delay range
+      description: Delay bracket contract describing how many records are subject to a specific delay range
     Distance:
       required:
         - feet
@@ -5803,10 +4198,7 @@ components:
         assigned:
           $ref: "#/components/schemas/Distance"
       additionalProperties: false
-      description: "Contract describing unit (altitude, airspeed, etc.) which can be
-        assigned and / or requested\r
-
-        in the context of the flight plan"
+      description: "Contract describing unit (altitude, airspeed, etc.) which can be assigned and / or requested\r\nin the context of the flight plan"
     EngineType:
       enum:
         - Unknown
@@ -5814,19 +4206,7 @@ components:
         - Turboprop
         - Piston
       type: string
-      description: "<p>Possible values:</p>\r
-
-        <ul>\r
-
-        <li><b>0 - Unknown</b></li>\r
-
-        <li><b>1 - Jet</b></li>\r
-
-        <li><b>2 - Turboprop</b></li>\r
-
-        <li><b>3 - Piston</b></li>\r
-
-        </ul>\r\n"
+      description: "<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - Unknown</b></li>\r\n<li><b>1 - Jet</b></li>\r\n<li><b>2 - Turboprop</b></li>\r\n<li><b>3 - Piston</b></li>\r\n</ul>\r\n"
     ErrorContract:
       required:
         - message
@@ -5849,54 +4229,26 @@ components:
           format: string
         isBlocked:
           type: boolean
-          description: Current status of the aircraft / flight in the FAA LADD industry
-            list.
+          description: Current status of the aircraft / flight in the FAA LADD industry list.
         blockedSince:
           type: string
-          description: "For blocked aircraft only: the date when the aircraft / flight was
-            blocked.\r
-
-            Will not be included for blocked dates at or prior to September 15,
-            2024."
+          description: "For blocked aircraft only: the date when the aircraft / flight was blocked.\r\nWill not be included for blocked dates at or prior to September 15, 2024."
           format: date-time
           nullable: true
         lastBlockedOn:
           type: string
-          description: "For unblocked aircraft only: the date when the aircraft / flight
-            was last blocked.\r
-
-            Will not be included for blocked dates at or prior to September 15,
-            2024 or \r
-
-            for the aircraft that were never blocked."
+          description: "For unblocked aircraft only: the date when the aircraft / flight was last blocked.\r\nWill not be included for blocked dates at or prior to September 15, 2024 or \r\nfor the aircraft that were never blocked."
           format: date-time
           nullable: true
       additionalProperties: false
-      description: "Status of the aircraft tail number or callsign in the FAA Limiting
-        Aircraft Data Displayed (LADD) Program list.\r
-
-        See https://www.faa.gov/pilots/ladd for more details."
+      description: "Status of the aircraft tail number or callsign in the FAA Limiting Aircraft Data Displayed (LADD) Program list.\r\nSee https://www.faa.gov/pilots/ladd for more details."
     FeedServiceEnum:
       enum:
         - FlightSchedules
         - FlightLiveUpdates
         - AdsbUpdates
       type: string
-      description: "Airport feed service defininitions<p>Possible values:</p>\r
-
-        <ul>\r
-
-        <li><b>0 - FlightSchedules</b>: Flight schedules data feed for this
-        airport (static schedules data without actual updates)</li>\r
-
-        <li><b>1 - FlightLiveUpdates</b>: Actual flight status and time updates
-        for this airport</li>\r
-
-        <li><b>2 - AdsbUpdates</b>: Flight updates derived from ADS-B data for
-        this airport: runway, actual/estimated time on the runway, call-sign,
-        ModeS 24-bit ICAO code, aircraft registration</li>\r
-
-        </ul>\r\n"
+      description: "Airport feed service defininitions<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - FlightSchedules</b>: Flight schedules data feed for this airport (static schedules data without actual updates)</li>\r\n<li><b>1 - FlightLiveUpdates</b>: Actual flight status and time updates for this airport</li>\r\n<li><b>2 - AdsbUpdates</b>: Flight updates derived from ADS-B data for this airport: runway, actual/estimated time on the runway, call-sign, ModeS 24-bit ICAO code, aircraft registration</li>\r\n</ul>\r\n"
     FeedServiceStatus:
       enum:
         - Down
@@ -5906,25 +4258,7 @@ components:
         - Unknown
         - Unavailable
       type: string
-      description: "Descriptor of feed service status<p>Possible values:</p>\r
-
-        <ul>\r
-
-        <li><b>0 - Down</b>: Service is provided, but is currently down</li>\r
-
-        <li><b>1 - Degraded</b>: Service is up and running, but performance is
-        degraded: delays and disruptions are likely</li>\r
-
-        <li><b>2 - OKPartial</b>: Service is up and running normally, but
-        updates vailable for not all or only few flights</li>\r
-
-        <li><b>3 - OK</b>: Service is up and running normally</li>\r
-
-        <li><b>-2 - Unknown</b>: Status of service is unknown</li>\r
-
-        <li><b>-1 - Unavailable</b>: Service is not provided</li>\r
-
-        </ul>\r\n"
+      description: "Descriptor of feed service status<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - Down</b>: Service is provided, but is currently down</li>\r\n<li><b>1 - Degraded</b>: Service is up and running, but performance is degraded: delays and disruptions are likely</li>\r\n<li><b>2 - OKPartial</b>: Service is up and running normally, but updates vailable for not all or only few flights</li>\r\n<li><b>3 - OK</b>: Service is up and running normally</li>\r\n<li><b>-2 - Unknown</b>: Status of service is unknown</li>\r\n<li><b>-1 - Unavailable</b>: Service is not provided</li>\r\n</ul>\r\n"
     FeedServiceStatusContract:
       required:
         - service
@@ -5943,15 +4277,12 @@ components:
           deprecated: true
         maxAvailableLocalDate:
           type: string
-          description: Date of the most recent flight stored (based on scheduled local
-            times)
+          description: Date of the most recent flight stored (based on scheduled local times)
           format: date-time
           nullable: true
           deprecated: true
       additionalProperties: false
-      description: "Feed service status contract.\r
-
-        Read https://aerodatabox.com/data-coverage for context."
+      description: "Feed service status contract.\r\nRead https://aerodatabox.com/data-coverage for context."
     FlightAircraftContract:
       type: object
       properties:
@@ -6024,18 +4355,13 @@ components:
           nullable: true
         runway:
           type: string
-          description: Name of a runway of landing (for arriving flights) or take-off (for
-            departing flights), if known.
+          description: Name of a runway of landing (for arriving flights) or take-off (for departing flights), if known.
           nullable: true
         quality:
           type: array
           items:
             $ref: "#/components/schemas/FlightAirportMovementQualityEnum"
-          description: "Array of quality characteristics of the data. Check this to know
-            which information\r
-
-            you can expect within this contract (basic, live and/or approximate
-            data)."
+          description: "Array of quality characteristics of the data. Check this to know which information\r\nyou can expect within this contract (basic, live and/or approximate data)."
       additionalProperties: false
       description: Flight arrival or departure information
     FlightAirportMovementQualityEnum:
@@ -6044,18 +4370,7 @@ components:
         - Live
         - Approximate
       type: string
-      description: "Quality characteristics of the information provided within flight
-        FlightAirportMovementContract<p>Possible values:</p>\r
-
-        <ul>\r
-
-        <li><b>0 - Basic</b></li>\r
-
-        <li><b>1 - Live</b></li>\r
-
-        <li><b>2 - Approximate</b></li>\r
-
-        </ul>\r\n"
+      description: "Quality characteristics of the information provided within flight FlightAirportMovementContract<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - Basic</b></li>\r\n<li><b>1 - Live</b></li>\r\n<li><b>2 - Approximate</b></li>\r\n</ul>\r\n"
     FlightBatchDelayContract:
       required:
         - numCancelled
@@ -6069,18 +4384,7 @@ components:
           format: int32
         numQualifiedTotal:
           type: integer
-          description: "Total number of flights in the batch, which were used to to
-            calculate the\r
-
-            delay information (including cancelled). Should equal to or less
-            than `NumTotal`.\r
-
-            \r
-
-            The closer the value of this property to the value of `NumTotal`,
-            the higher the\r
-
-            reliability of delay information"
+          description: "Total number of flights in the batch, which were used to to calculate the\r\ndelay information (including cancelled). Should equal to or less than `NumTotal`.\r\n\r\nThe closer the value of this property to the value of `NumTotal`, the higher the\r\nreliability of delay information"
           format: int32
         numCancelled:
           type: integer
@@ -6088,16 +4392,12 @@ components:
           format: int32
         medianDelay:
           type: string
-          description: "Median delay of flights in the batch (format: [-]hh:mm:ss).\r
-
-            Value can be negative (therefore, means early occurence)."
+          description: "Median delay of flights in the batch (format: [-]hh:mm:ss).\r\nValue can be negative (therefore, means early occurence)."
           format: date-span
           nullable: true
         delayIndex:
           type: number
-          description: Normalized value on scale from 0.0 to 5.0 which corresponds with
-            current amount of delays and cancellations in a given batch of
-            flights (the less - the better).
+          description: Normalized value on scale from 0.0 to 5.0 which corresponds with current amount of delays and cancellations in a given batch of flights (the less - the better).
           format: float
           nullable: true
       additionalProperties: false
@@ -6123,8 +4423,7 @@ components:
           $ref: "#/components/schemas/FlightPlanContract"
         lastUpdatedUtc:
           type: string
-          description: Time (UTC) of the latest update of flight information (excluding
-            Location)
+          description: Time (UTC) of the latest update of flight information (excluding Location)
           format: date-time
         number:
           minLength: 1
@@ -6154,18 +4453,12 @@ components:
       properties:
         minAvailableLocalDate:
           type: string
-          description: "Date of the oldest flight stored (based on scheduled local
-            times)\r
-
-            If not specified, no flight data available"
+          description: "Date of the oldest flight stored (based on scheduled local times)\r\nIf not specified, no flight data available"
           format: date-time
           nullable: true
         maxAvailableLocalDate:
           type: string
-          description: "Date of the most recent flight stored (based on scheduled local
-            times)\r
-
-            If not specified, no flight data available"
+          description: "Date of the most recent flight stored (based on scheduled local times)\r\nIf not specified, no flight data available"
           format: date-time
           nullable: true
       additionalProperties: false
@@ -6189,57 +4482,34 @@ components:
           $ref: "#/components/schemas/StatisticClass"
         scheduledHourUtc:
           type: integer
-          description: "Hour on which flight is scheduled (represented in UTC).\r
-
-            \r
-
-            If provided, it separates the statistics for the same flight
-            departing/arriving at different time of day\r
-
-            on different days within the observed period."
+          description: "Hour on which flight is scheduled (represented in UTC).\r\n\r\nIf provided, it separates the statistics for the same flight departing/arriving at different time of day\r\non different days within the observed period."
           format: int32
           nullable: true
         medianDelay:
           type: string
-          description: "Median historic delay of the flight (format: [-]hh:mm:ss).\r
-
-            Value can be negative (therefore, means early occurence)."
+          description: "Median historic delay of the flight (format: [-]hh:mm:ss).\r\nValue can be negative (therefore, means early occurence)."
           format: date-span
         delayPercentiles:
           type: array
           items:
             $ref: "#/components/schemas/PercentileBracketContract"
-          description: "Distribution of historic delays of the flight in percentiles from
-            5 percentile to 95 percentile in steps of 5 percentile, \r
-
-            allowing for a more detailed analysis of delay patterns beyond
-            simple averages or medians."
+          description: "Distribution of historic delays of the flight in percentiles from 5 percentile to 95 percentile in steps of 5 percentile, \r\nallowing for a more detailed analysis of delay patterns beyond simple averages or medians."
         numConsideredFlights:
           type: integer
-          description: "The number of flight movements taken into account to calculate
-            this\r
-
-            statistics."
+          description: "The number of flight movements taken into account to calculate this\r\nstatistics."
           format: int32
         numFlightsDelayedBrackets:
           type: array
           items:
             $ref: "#/components/schemas/DelayBracketContract"
-          description: "Brackets containing information more detailed information about\r
-
-            how many flights were delayed/early per specific delay range
-            brackets\r
-
-            (e.g. late from 15 to 30 minutes, from 30 to 60, etc.)"
+          description: "Brackets containing information more detailed information about\r\nhow many flights were delayed/early per specific delay range brackets\r\n(e.g. late from 15 to 30 minutes, from 30 to 60, etc.)"
         fromUtc:
           type: string
-          description: The beginning of the time range within which flght delay
-            information is calculated (represented in UTC time)
+          description: The beginning of the time range within which flght delay information is calculated (represented in UTC time)
           format: date-time
         toUtc:
           type: string
-          description: The end of the time range within which flght delay information is
-            calculated (represented in UTC time)
+          description: The end of the time range within which flght delay information is calculated (represented in UTC time)
           format: date-time
       additionalProperties: false
       description: Delay statistics for a flight movement
@@ -6249,17 +4519,7 @@ components:
         - Departure
         - Both
       type: string
-      description: "Direction of flight<p>Possible values:</p>\r
-
-        <ul>\r
-
-        <li><b>1 - Arrival</b></li>\r
-
-        <li><b>2 - Departure</b></li>\r
-
-        <li><b>3 - Both</b></li>\r
-
-        </ul>\r\n"
+      description: "Direction of flight<p>Possible values:</p>\r\n<ul>\r\n<li><b>1 - Arrival</b></li>\r\n<li><b>2 - Departure</b></li>\r\n<li><b>3 - Both</b></li>\r\n</ul>\r\n"
     FlightLegDelayContract:
       required:
         - number
@@ -6307,9 +4567,7 @@ components:
           $ref: "#/components/schemas/Azimuth"
         vsiFpm:
           type: integer
-          description: "Vertical speed, in feet per minute\r
-
-            Not set if unknown or zero."
+          description: "Vertical speed, in feet per minute\r\nNot set if unknown or zero."
           format: int32
           nullable: true
         reportedAtUtc:
@@ -6329,8 +4587,7 @@ components:
           description: Longitude, in degrees
           format: float
       additionalProperties: false
-      description: "Positional information about flight: location, altitude, speed and
-        track"
+      description: "Positional information about flight: location, altitude, speed and track"
     FlightNotificationContract:
       required:
         - flights
@@ -6377,8 +4634,7 @@ components:
           $ref: "#/components/schemas/FlightPlanContract"
         lastUpdatedUtc:
           type: string
-          description: Time (UTC) of the latest update of flight information (excluding
-            Location)
+          description: Time (UTC) of the latest update of flight information (excluding Location)
           format: date-time
         number:
           minLength: 1
@@ -6454,20 +4710,7 @@ components:
         - CallSign
         - Icao24
       type: string
-      description: "Criteria to search flight by<p>Possible values:</p>\r
-
-        <ul>\r
-
-        <li><b>0 - Number</b>: Search by flight number</li>\r
-
-        <li><b>1 - Reg</b>: Search by aircraft registration</li>\r
-
-        <li><b>2 - CallSign</b>: Search by ATC call-sign</li>\r
-
-        <li><b>3 - Icao24</b>: Search by 24-bit ICAO Mode-S Transponder
-        code</li>\r
-
-        </ul>\r\n"
+      description: "Criteria to search flight by<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - Number</b>: Search by flight number</li>\r\n<li><b>1 - Reg</b>: Search by aircraft registration</li>\r\n<li><b>2 - CallSign</b>: Search by ATC call-sign</li>\r\n<li><b>3 - Icao24</b>: Search by 24-bit ICAO Mode-S Transponder code</li>\r\n</ul>\r\n"
     FlightSearchItemContract:
       required:
         - number
@@ -6495,38 +4738,7 @@ components:
         - Diverted
         - CanceledUncertain
       type: string
-      description: "Flight progress status<p>Possible values:</p>\r
-
-        <ul>\r
-
-        <li><b>0 - Unknown</b>: Status is not available for this flight</li>\r
-
-        <li><b>1 - Expected</b>: Expected</li>\r
-
-        <li><b>2 - EnRoute</b>: En route</li>\r
-
-        <li><b>3 - CheckIn</b>: Check-in is open</li>\r
-
-        <li><b>4 - Boarding</b>: Boarding in progress / Last call</li>\r
-
-        <li><b>5 - GateClosed</b>: Gate closed</li>\r
-
-        <li><b>6 - Departed</b>: Departed</li>\r
-
-        <li><b>7 - Delayed</b>: Delayed</li>\r
-
-        <li><b>8 - Approaching</b>: On approach to destination</li>\r
-
-        <li><b>9 - Arrived</b>: Arrived</li>\r
-
-        <li><b>10 - Canceled</b>: Cancelled</li>\r
-
-        <li><b>11 - Diverted</b>: Diverted to another destination</li>\r
-
-        <li><b>12 - CanceledUncertain</b>: Status of the flight is uncertain,
-        may be cancelled</li>\r
-
-        </ul>\r\n"
+      description: "Flight progress status<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - Unknown</b>: Status is not available for this flight</li>\r\n<li><b>1 - Expected</b>: Expected</li>\r\n<li><b>2 - EnRoute</b>: En route</li>\r\n<li><b>3 - CheckIn</b>: Check-in is open</li>\r\n<li><b>4 - Boarding</b>: Boarding in progress / Last call</li>\r\n<li><b>5 - GateClosed</b>: Gate closed</li>\r\n<li><b>6 - Departed</b>: Departed</li>\r\n<li><b>7 - Delayed</b>: Delayed</li>\r\n<li><b>8 - Approaching</b>: On approach to destination</li>\r\n<li><b>9 - Arrived</b>: Arrived</li>\r\n<li><b>10 - Canceled</b>: Cancelled</li>\r\n<li><b>11 - Diverted</b>: Diverted to another destination</li>\r\n<li><b>12 - CanceledUncertain</b>: Status of the flight is uncertain, may be cancelled</li>\r\n</ul>\r\n"
     FlightType:
       enum:
         - Other
@@ -6591,42 +4803,7 @@ components:
         - PublicDomainDedicationCC0
         - PublicDomainMark
       type: string
-      description: "<p>Possible values:</p>\r
-
-        <ul>\r
-
-        <li><b>0 - AllRightsReserved</b>: All Rights Reserved.</li>\r
-
-        <li><b>1 - AttributionNoncommercialShareAlikeCC</b>: Creative Commons:
-        Attribution Non-Commercial, Share-alike License.</li>\r
-
-        <li><b>2 - AttributionNoncommercialCC</b>: Creative Commons: Attribution
-        Non-Commercial License.</li>\r
-
-        <li><b>3 - AttributionNoncommercialNoDerivativesCC</b>: Creative
-        Commons: Attribution Non-Commercial, No Derivatives License.</li>\r
-
-        <li><b>4 - AttributionCC</b>: Creative Commons: Attribution
-        License.</li>\r
-
-        <li><b>5 - AttributionShareAlikeCC</b>: Creative Commons: Attribution
-        Share-alike License.</li>\r
-
-        <li><b>6 - AttributionNoDerivativesCC</b>: Creative Commons: Attribution
-        No Derivatives License.</li>\r
-
-        <li><b>7 - NoKnownCopyrightRestrictions</b>: No Known Copyright
-        Resitrctions (Flickr Commons).</li>\r
-
-        <li><b>8 - UnitedStatesGovernmentWork</b>: United States Government
-        Work</li>\r
-
-        <li><b>9 - PublicDomainDedicationCC0</b>: Public Domain Dedication,
-        CC0</li>\r
-
-        <li><b>10 - PublicDomainMark</b>: Public Domain Mark</li>\r
-
-        </ul>\r\n"
+      description: "<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - AllRightsReserved</b>: All Rights Reserved.</li>\r\n<li><b>1 - AttributionNoncommercialShareAlikeCC</b>: Creative Commons: Attribution Non-Commercial, Share-alike License.</li>\r\n<li><b>2 - AttributionNoncommercialCC</b>: Creative Commons: Attribution Non-Commercial License.</li>\r\n<li><b>3 - AttributionNoncommercialNoDerivativesCC</b>: Creative Commons: Attribution Non-Commercial, No Derivatives License.</li>\r\n<li><b>4 - AttributionCC</b>: Creative Commons: Attribution License.</li>\r\n<li><b>5 - AttributionShareAlikeCC</b>: Creative Commons: Attribution Share-alike License.</li>\r\n<li><b>6 - AttributionNoDerivativesCC</b>: Creative Commons: Attribution No Derivatives License.</li>\r\n<li><b>7 - NoKnownCopyrightRestrictions</b>: No Known Copyright Resitrctions (Flickr Commons).</li>\r\n<li><b>8 - UnitedStatesGovernmentWork</b>: United States Government Work</li>\r\n<li><b>9 - PublicDomainDedicationCC0</b>: Public Domain Dedication, CC0</li>\r\n<li><b>10 - PublicDomainMark</b>: Public Domain Mark</li>\r\n</ul>\r\n"
     ListingAirportContract:
       required:
         - name
@@ -6673,28 +4850,7 @@ components:
         - Standard
         - ML01
       type: string
-      description: "Models of calculating the flight time.<p>Possible values:</p>\r
-
-        <ul>\r
-
-        <li><b>0 - Standard</b>: Standard model of calculation which takes into
-        account the great circle distance and the average speed of all aircraft
-        typically operating on those distances.</li>\r
-
-        <li><b>1 - ML01</b>: Experimental machine learning (ML) model, which
-        attempts to provide more accurate prediction of the flight time by
-        taking into account the history of flights on specified route and
-        aircraft type within the recent year. This may come in handy in case
-        when on certain routes flights take significant detours due to extended
-        airspace closures dictated by war conflicts, sanction regulations, etc.
-        This can result in significantly increased flight times comparing to
-        regular estimations. Or, some routes generally experience longer delays
-        than other routes of the same distance. This model attempts to take such
-        factors into account and reflect it in the prediction. If a model cannot
-        be applied due to lack of historical and/or aircraft data or prediction
-        is too off set, it automatically fallbacks to `Standard`.</li>\r
-
-        </ul>\r\n"
+      description: "Models of calculating the flight time.<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - Standard</b>: Standard model of calculation which takes into account the great circle distance and the average speed of all aircraft typically operating on those distances.</li>\r\n<li><b>1 - ML01</b>: Experimental machine learning (ML) model, which attempts to provide more accurate prediction of the flight time by taking into account the history of flights on specified route and aircraft type within the recent year. This may come in handy in case when on certain routes flights take significant detours due to extended airspace closures dictated by war conflicts, sanction regulations, etc. This can result in significantly increased flight times comparing to regular estimations. Or, some routes generally experience longer delays than other routes of the same distance. This model attempts to take such factors into account and reflect it in the prediction. If a model cannot be applied due to lack of historical and/or aircraft data or prediction is too off set, it automatically fallbacks to `Standard`.</li>\r\n</ul>\r\n"
     PercentileBracketContract:
       required:
         - delay
@@ -6709,12 +4865,10 @@ components:
           format: int32
         delay:
           type: string
-          description: "Delay of the flight for the specific percentile (format:
-            [-]hh:mm:ss)."
+          description: "Delay of the flight for the specific percentile (format: [-]hh:mm:ss)."
           format: date-span
       additionalProperties: false
-      description: Percentile bracket contract describing the flight delay for a
-        specific percentile of the distribution
+      description: Percentile bracket contract describing the flight delay for a specific percentile of the distribution
     Pressure:
       required:
         - hPa
@@ -6767,10 +4921,7 @@ components:
           type: array
           items:
             type: string
-          description: "Attributions maintaining copyright, ownership and other legal
-            information adjusted for displaying\r
-
-            as HTML. Each element represent one line."
+          description: "Attributions maintaining copyright, ownership and other legal information adjusted for displaying\r\nas HTML. Each element represent one line."
           nullable: true
       additionalProperties: false
       description: Single media resource data
@@ -6881,24 +5032,13 @@ components:
         assigned:
           $ref: "#/components/schemas/Speed"
       additionalProperties: false
-      description: "Contract describing unit (altitude, airspeed, etc.) which can be
-        assigned and / or requested\r
-
-        in the context of the flight plan"
+      description: "Contract describing unit (altitude, airspeed, etc.) which can be assigned and / or requested\r\nin the context of the flight plan"
     StatisticClass:
       enum:
         - Flight
         - FlightAndHour
       type: string
-      description: "<p>Possible values:</p>\r
-
-        <ul>\r
-
-        <li><b>0 - Flight</b></li>\r
-
-        <li><b>1 - FlightAndHour</b></li>\r
-
-        </ul>\r\n"
+      description: "<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - Flight</b></li>\r\n<li><b>1 - FlightAndHour</b></li>\r\n</ul>\r\n"
     StringAircraftContractSearchResultCollectionContract:
       required:
         - count
@@ -6909,9 +5049,7 @@ components:
         searchBy:
           minLength: 1
           type: string
-          description: "Search parameter used to find the result. \r
-
-            Please note, it may be different from the actual input provided!"
+          description: "Search parameter used to find the result. \r\nPlease note, it may be different from the actual input provided!"
         count:
           maximum: 2147483647
           minimum: 0
@@ -6954,9 +5092,7 @@ components:
         searchBy:
           minLength: 1
           type: string
-          description: "Search parameter used to find the result. \r
-
-            Please note, it may be different from the actual input provided!"
+          description: "Search parameter used to find the result. \r\nPlease note, it may be different from the actual input provided!"
         count:
           maximum: 2147483647
           minimum: 0
@@ -6980,9 +5116,7 @@ components:
         searchBy:
           minLength: 1
           type: string
-          description: "Search parameter used to find the result. \r
-
-            Please note, it may be different from the actual input provided!"
+          description: "Search parameter used to find the result. \r\nPlease note, it may be different from the actual input provided!"
         count:
           maximum: 2147483647
           minimum: 0
@@ -7029,35 +5163,16 @@ components:
           format: date-time
         lastDeductedUtc:
           type: string
-          description: "The datetime when the balance was last deducated, in UTC.\r
-
-            Deduction typically occurs when an alert notification was
-            dispatched\r
-
-            for one of the alert subscriptions associated with the user
-            account."
+          description: "The datetime when the balance was last deducated, in UTC.\r\nDeduction typically occurs when an alert notification was dispatched\r\nfor one of the alert subscriptions associated with the user account."
           format: date-time
       additionalProperties: false
-      description: "Represents the balance for all alert subscriptions associated with
-        the user acount, including remaining credits and timestamps\r
-
-        for the most recent refill and deduction operations."
+      description: "Represents the balance for all alert subscriptions associated with the user acount, including remaining credits and timestamps\r\nfor the most recent refill and deduction operations."
     SubscriptionBillingType:
       enum:
         - LifetimeBased
         - CreditBased
       type: string
-      description: "Flight alert subscription billing type<p>Possible values:</p>\r
-
-        <ul>\r
-
-        <li><b>0 - LifetimeBased</b>: Subscription billed upon creation based on
-        the life-time with set expiration date-time (BEING DEPRECATED)</li>\r
-
-        <li><b>1 - CreditBased</b>: Subscription with no expiration date, billed
-        based on the amount of notifications sent</li>\r
-
-        </ul>\r\n"
+      description: "Flight alert subscription billing type<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - LifetimeBased</b>: Subscription billed upon creation based on the life-time with set expiration date-time (BEING DEPRECATED)</li>\r\n<li><b>1 - CreditBased</b>: Subscription with no expiration date, billed based on the amount of notifications sent</li>\r\n</ul>\r\n"
     SubscriptionContract:
       required:
         - createdOnUtc
@@ -7069,10 +5184,7 @@ components:
       properties:
         id:
           type: string
-          description: "Identifier of a subscription. \r
-
-            Use this ID to control the subscription in future (e.g. update or
-            delete)."
+          description: "Identifier of a subscription. \r\nUse this ID to control the subscription in future (e.g. update or delete)."
           format: uuid
         isActive:
           type: boolean
@@ -7081,19 +5193,12 @@ components:
           $ref: "#/components/schemas/SubscriptionBillingType"
         activateBeforeUtc:
           type: string
-          description: "Time (UTC) before which subscription must be activated (may be
-            applicable to \r
-
-            some non-active newly created subscriptions)"
+          description: "Time (UTC) before which subscription must be activated (may be applicable to \r\nsome non-active newly created subscriptions)"
           format: date-time
           nullable: true
         expiresOnUtc:
           type: string
-          description: "Time (UTC) when subscription expires and will be removed.\r
-
-            \r
-
-            If not specified, subscription never expires."
+          description: "Time (UTC) when subscription expires and will be removed.\r\n\r\nIf not specified, subscription never expires."
           format: date-time
           nullable: true
         createdOnUtc:
@@ -7121,14 +5226,7 @@ components:
           $ref: "#/components/schemas/SubscriptionSubjectType"
         id:
           type: string
-          description: "Subject ID of a subscription. Complements SubjectType.\r
-
-            \r
-
-            E.g. SubjectType = \"FlightNumber\" and SubjectId = \"DL 47\" means
-            that this\r
-
-            subscription is for all updates of flight with number DL47."
+          description: "Subject ID of a subscription. Complements SubjectType.\r\n\r\nE.g. SubjectType = \"FlightNumber\" and SubjectId = \"DL 47\" means that this\r\nsubscription is for all updates of flight with number DL47."
           nullable: true
       additionalProperties: false
       description: Describes subscription subject
@@ -7137,15 +5235,7 @@ components:
         - FlightByNumber
         - FlightByAirportIcao
       type: string
-      description: "<p>Possible values:</p>\r
-
-        <ul>\r
-
-        <li><b>0 - FlightByNumber</b></li>\r
-
-        <li><b>1 - FlightByAirportIcao</b></li>\r
-
-        </ul>\r\n"
+      description: "<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - FlightByNumber</b></li>\r\n<li><b>1 - FlightByAirportIcao</b></li>\r\n</ul>\r\n"
     SubscriptionsBalanceRefillRequestContract:
       required:
         - credits
@@ -7158,8 +5248,7 @@ components:
           description: Number of credits to add to the notification subscription balance.
           format: int32
       additionalProperties: false
-      description: Represents a contract for refilling flight alert credits on a
-        subscription.
+      description: Represents a contract for refilling flight alert credits on a subscription.
     SurfaceType:
       enum:
         - Unknown
@@ -7172,29 +5261,7 @@ components:
         - Water
         - Snow
       type: string
-      description: "<p>Possible values:</p>\r
-
-        <ul>\r
-
-        <li><b>0 - Unknown</b></li>\r
-
-        <li><b>1 - Asphalt</b></li>\r
-
-        <li><b>2 - Concrete</b></li>\r
-
-        <li><b>3 - Grass</b></li>\r
-
-        <li><b>4 - Dirt</b></li>\r
-
-        <li><b>5 - Gravel</b></li>\r
-
-        <li><b>6 - DryLakebed</b></li>\r
-
-        <li><b>7 - Water</b></li>\r
-
-        <li><b>8 - Snow</b></li>\r
-
-        </ul>\r\n"
+      description: "<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - Unknown</b></li>\r\n<li><b>1 - Asphalt</b></li>\r\n<li><b>2 - Concrete</b></li>\r\n<li><b>3 - Grass</b></li>\r\n<li><b>4 - Dirt</b></li>\r\n<li><b>5 - Gravel</b></li>\r\n<li><b>6 - DryLakebed</b></li>\r\n<li><b>7 - Water</b></li>\r\n<li><b>8 - Snow</b></li>\r\n</ul>\r\n"
   securitySchemes: {}
 security: {}
 tags:
