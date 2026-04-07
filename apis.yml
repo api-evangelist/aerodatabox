@@ -4,8 +4,7 @@ url: >-
 apis:
   - aid: aerodatabox:aerodatabox
     name: AeroDataBox
-    tags:
-      - API
+    tags: []
     humanURL: https://doc.aerodatabox.com/
     baseURL: https://aerodatabox.p.rapidapi.com
     properties:
@@ -20,8 +19,8 @@ apis:
 name: AeroDataBox
 tags:
   - Aerospace
-  - Flights
   - Aviation
+  - Flights
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
