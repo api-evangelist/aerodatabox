@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-structure/aerodatabox-continent-contract-structure.json",
+  "description": "Continent data",
+  "type": "object",
+  "properties": {
+    "code": {
+      "minLength": 1,
+      "type": "string",
+      "description": "Code"
+    },
+    "name": {
+      "type": "string",
+      "description": "Name",
+      "nullable": true
+    }
+  },
+  "required": [
+    "code"
+  ],
+  "additionalProperties": false,
+  "name": "ContinentContract"
+}

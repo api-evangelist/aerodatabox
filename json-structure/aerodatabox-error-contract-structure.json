@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-structure/aerodatabox-error-contract-structure.json",
+  "description": "Error response",
+  "type": "object",
+  "properties": {
+    "message": {
+      "minLength": 1,
+      "type": "string",
+      "description": "Error message"
+    }
+  },
+  "required": [
+    "message"
+  ],
+  "additionalProperties": false,
+  "name": "ErrorContract"
+}

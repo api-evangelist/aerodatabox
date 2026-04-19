@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-structure/aerodatabox-flight-notification-contract-structure.json",
+  "description": "Flight notification contract",
+  "type": "object",
+  "properties": {
+    "flights": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/FlightNotificationItemContract"
+      },
+      "description": "Modified/created flight notification"
+    },
+    "subscription": {
+      "$ref": "#/components/schemas/SubscriptionContract"
+    },
+    "balance": {
+      "$ref": "#/components/schemas/SubscriptionBalanceContract"
+    }
+  },
+  "required": [
+    "flights",
+    "subscription"
+  ],
+  "additionalProperties": false,
+  "name": "FlightNotificationContract"
+}

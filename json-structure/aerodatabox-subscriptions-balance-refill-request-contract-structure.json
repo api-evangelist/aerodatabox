@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-structure/aerodatabox-subscriptions-balance-refill-request-contract-structure.json",
+  "description": "Represents a contract for refilling flight alert credits on a subscription.",
+  "type": "object",
+  "properties": {
+    "credits": {
+      "maximum": 2147483647,
+      "minimum": 1,
+      "type": "int32",
+      "description": "Number of credits to add to the notification subscription balance."
+    }
+  },
+  "required": [
+    "credits"
+  ],
+  "additionalProperties": false,
+  "name": "SubscriptionsBalanceRefillRequestContract"
+}

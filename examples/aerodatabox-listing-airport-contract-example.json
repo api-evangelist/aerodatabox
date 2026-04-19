@@ -1,0 +1,11 @@
+{
+  "icao": "KLAX",
+  "iata": "LAX",
+  "localCode": "example_value",
+  "name": "Los Angeles International",
+  "shortName": "Los Angeles International",
+  "municipalityName": "Los Angeles International",
+  "location": "example_value",
+  "countryCode": "example_value",
+  "timeZone": "example_value"
+}

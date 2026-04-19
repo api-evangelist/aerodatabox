@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-schema/aerodatabox-airport-flight-contract-schema.json",
+  "title": "AirportFlightContract",
+  "description": "Flight data contract represented in airport schedule",
+  "type": "object",
+  "properties": {
+    "movement": {
+      "$ref": "#/components/schemas/FlightAirportMovementContract"
+    },
+    "departure": {
+      "$ref": "#/components/schemas/FlightAirportMovementContract"
+    },
+    "arrival": {
+      "$ref": "#/components/schemas/FlightAirportMovementContract"
+    },
+    "number": {
+      "minLength": 1,
+      "type": "string",
+      "description": "Flight Number"
+    },
+    "callSign": {
+      "type": "string",
+      "description": "ATC call-sign of the flight",
+      "nullable": true
+    },
+    "status": {
+      "$ref": "#/components/schemas/FlightStatus"
+    },
+    "codeshareStatus": {
+      "$ref": "#/components/schemas/CodeshareStatus"
+    },
+    "isCargo": {
+      "type": "boolean",
+      "description": "Is cargo flight"
+    },
+    "aircraft": {
+      "$ref": "#/components/schemas/FlightAircraftContract"
+    },
+    "airline": {
+      "$ref": "#/components/schemas/FlightAirlineContract"
+    },
+    "location": {
+      "$ref": "#/components/schemas/FlightLocationContract"
+    }
+  },
+  "required": [
+    "codeshareStatus",
+    "isCargo",
+    "number",
+    "status"
+  ],
+  "additionalProperties": false
+}

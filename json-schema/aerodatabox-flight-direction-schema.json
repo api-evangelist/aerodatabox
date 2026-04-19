@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-schema/aerodatabox-flight-direction-schema.json",
+  "title": "FlightDirection",
+  "description": "Direction of flight<p>Possible values:</p>\r\n<ul>\r\n<li><b>1 - Arrival</b></li>\r\n<li><b>2 - Departure</b></li>\r\n<li><b>3 - Both</b></li>\r\n</ul>\r\n",
+  "type": "string",
+  "enum": [
+    "Arrival",
+    "Departure",
+    "Both"
+  ]
+}

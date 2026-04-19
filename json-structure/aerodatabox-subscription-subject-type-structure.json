@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-structure/aerodatabox-subscription-subject-type-structure.json",
+  "description": "<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - FlightByNumber</b></li>\r\n<li><b>1 - FlightByAirportIcao</b></li>\r\n</ul>\r\n",
+  "type": "string",
+  "enum": [
+    "FlightByNumber",
+    "FlightByAirportIcao"
+  ],
+  "name": "SubscriptionSubjectType"
+}

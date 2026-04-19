@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-structure/aerodatabox-airport-urls-contract-structure.json",
+  "description": "Airport URLs contract",
+  "type": "object",
+  "properties": {
+    "webSite": {
+      "type": "string",
+      "description": "Main web-site of the airport",
+      "nullable": true
+    },
+    "wikipedia": {
+      "type": "string",
+      "description": "Wikipedia page of the airport",
+      "nullable": true
+    },
+    "twitter": {
+      "type": "string",
+      "description": "Twitter feed of the airport",
+      "nullable": true
+    },
+    "liveAtc": {
+      "type": "string",
+      "description": "LiveAtc page of the airport",
+      "nullable": true
+    },
+    "flightRadar": {
+      "type": "string",
+      "description": "FlightRadar page of the airport",
+      "nullable": true
+    },
+    "googleMaps": {
+      "type": "string",
+      "description": "Google Maps URL of the airport",
+      "nullable": true
+    }
+  },
+  "additionalProperties": false,
+  "name": "AirportUrlsContract"
+}

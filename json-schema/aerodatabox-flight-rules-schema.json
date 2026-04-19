@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-schema/aerodatabox-flight-rules-schema.json",
+  "title": "FlightRules",
+  "description": "FlightRules schema from AeroDataBox API",
+  "type": "string",
+  "enum": [
+    "IFR",
+    "VFR"
+  ]
+}

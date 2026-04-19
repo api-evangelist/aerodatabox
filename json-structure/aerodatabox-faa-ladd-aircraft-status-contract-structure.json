@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-structure/aerodatabox-faa-ladd-aircraft-status-contract-structure.json",
+  "description": "Status of the aircraft tail number or callsign in the FAA Limiting Aircraft Data Displayed (LADD) Program list.\r\nSee https://www.faa.gov/pilots/ladd for more details.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "string"
+    },
+    "isBlocked": {
+      "type": "boolean",
+      "description": "Current status of the aircraft / flight in the FAA LADD industry list."
+    },
+    "blockedSince": {
+      "type": "datetime",
+      "description": "For blocked aircraft only: the date when the aircraft / flight was blocked.\r\nWill not be included for blocked dates at or prior to September 15, 2024.",
+      "nullable": true
+    },
+    "lastBlockedOn": {
+      "type": "datetime",
+      "description": "For unblocked aircraft only: the date when the aircraft / flight was last blocked.\r\nWill not be included for blocked dates at or prior to September 15, 2024 or \r\nfor the aircraft that were never blocked.",
+      "nullable": true
+    }
+  },
+  "required": [
+    "id",
+    "isBlocked"
+  ],
+  "additionalProperties": false,
+  "name": "FaaLaddAircraftStatusContract"
+}

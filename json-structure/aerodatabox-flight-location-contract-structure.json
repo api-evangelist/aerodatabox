@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-structure/aerodatabox-flight-location-contract-structure.json",
+  "description": "Positional information about flight: location, altitude, speed and track",
+  "type": "object",
+  "properties": {
+    "pressureAltitude": {
+      "$ref": "#/components/schemas/Distance"
+    },
+    "altitude": {
+      "$ref": "#/components/schemas/Distance"
+    },
+    "pressure": {
+      "$ref": "#/components/schemas/Pressure"
+    },
+    "groundSpeed": {
+      "$ref": "#/components/schemas/Speed"
+    },
+    "trueTrack": {
+      "$ref": "#/components/schemas/Azimuth"
+    },
+    "vsiFpm": {
+      "type": "int32",
+      "description": "Vertical speed, in feet per minute\r\nNot set if unknown or zero.",
+      "nullable": true
+    },
+    "reportedAtUtc": {
+      "type": "datetime",
+      "description": "Time (UTC) of when this positional data was reported"
+    },
+    "lat": {
+      "maximum": 90,
+      "minimum": -90,
+      "type": "float",
+      "description": "Latitude, in degrees"
+    },
+    "lon": {
+      "maximum": 180,
+      "minimum": -180,
+      "type": "float",
+      "description": "Longitude, in degrees"
+    }
+  },
+  "required": [
+    "altitude",
+    "groundSpeed",
+    "lat",
+    "lon",
+    "pressure",
+    "pressureAltitude",
+    "reportedAtUtc",
+    "trueTrack"
+  ],
+  "additionalProperties": false,
+  "name": "FlightLocationContract"
+}

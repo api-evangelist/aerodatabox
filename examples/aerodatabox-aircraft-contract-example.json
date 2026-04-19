@@ -1,0 +1,30 @@
+{
+  "id": 100,
+  "reg": "example_value",
+  "active": true,
+  "serial": "example_value",
+  "hexIcao": "KLAX",
+  "airlineName": "Los Angeles International",
+  "iataType": "LAX",
+  "iataCodeShort": "LAX",
+  "icaoCode": "KLAX",
+  "model": "example_value",
+  "modelCode": "example_value",
+  "numSeats": 100,
+  "rolloutDate": "2025-03-15T14:30:00Z",
+  "firstFlightDate": "2025-03-15T14:30:00Z",
+  "deliveryDate": "2025-03-15T14:30:00Z",
+  "registrationDate": "2025-03-15T14:30:00Z",
+  "typeName": "Los Angeles International",
+  "numEngines": 100,
+  "engineType": "example_value",
+  "isFreighter": true,
+  "productionLine": "example_value",
+  "ageYears": 1.5,
+  "verified": true,
+  "image": "example_value",
+  "numRegistrations": 100,
+  "registrations": [
+    "example_value"
+  ]
+}

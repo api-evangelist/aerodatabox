@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-schema/aerodatabox-flight-location-contract-schema.json",
+  "title": "FlightLocationContract",
+  "description": "Positional information about flight: location, altitude, speed and track",
+  "type": "object",
+  "properties": {
+    "pressureAltitude": {
+      "$ref": "#/components/schemas/Distance"
+    },
+    "altitude": {
+      "$ref": "#/components/schemas/Distance"
+    },
+    "pressure": {
+      "$ref": "#/components/schemas/Pressure"
+    },
+    "groundSpeed": {
+      "$ref": "#/components/schemas/Speed"
+    },
+    "trueTrack": {
+      "$ref": "#/components/schemas/Azimuth"
+    },
+    "vsiFpm": {
+      "type": "integer",
+      "description": "Vertical speed, in feet per minute\r\nNot set if unknown or zero.",
+      "format": "int32",
+      "nullable": true
+    },
+    "reportedAtUtc": {
+      "type": "string",
+      "description": "Time (UTC) of when this positional data was reported",
+      "format": "date-time"
+    },
+    "lat": {
+      "maximum": 90,
+      "minimum": -90,
+      "type": "number",
+      "description": "Latitude, in degrees",
+      "format": "float"
+    },
+    "lon": {
+      "maximum": 180,
+      "minimum": -180,
+      "type": "number",
+      "description": "Longitude, in degrees",
+      "format": "float"
+    }
+  },
+  "required": [
+    "altitude",
+    "groundSpeed",
+    "lat",
+    "lon",
+    "pressure",
+    "pressureAltitude",
+    "reportedAtUtc",
+    "trueTrack"
+  ],
+  "additionalProperties": false
+}

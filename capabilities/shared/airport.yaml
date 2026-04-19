@@ -1,0 +1,145 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "AeroDataBox Airport API"
+  description: "Retrieve airport information, runway data, local time, solar time, and distance calculations. Search airports by location, IP address, or text."
+  tags:
+    - AeroDataBox
+    - Aviation
+    - Airports
+    - Location
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+binds:
+  - namespace: env
+    keys:
+      AERODATABOX_API_KEY: AERODATABOX_API_KEY
+
+capability:
+  consumes:
+    - type: http
+      namespace: airport
+      baseUri: https://prod.api.market/api/v1/aedbx/aerodatabox
+      description: "AeroDataBox Airport API for airport data and location search."
+      authentication:
+        type: apikey
+        key: x-api-key
+        value: "{{AERODATABOX_API_KEY}}"
+        placement: header
+      resources:
+        - name: airport
+          path: /airports/{codeType}/{code}
+          description: "Get airport data by code."
+          operations:
+            - name: get-airport
+              method: GET
+              description: "Retrieve airport information by IATA or ICAO code."
+              inputParameters:
+                - name: codeType
+                  in: path
+                  type: string
+                  required: true
+                  description: "Airport code type: iata or icao."
+                - name: code
+                  in: path
+                  type: string
+                  required: true
+                  description: "Airport code."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: airport-search
+          path: /airports/search/location
+          description: "Search airports by location."
+          operations:
+            - name: search-airports-by-location
+              method: GET
+              description: "Find airports near a geographic coordinate."
+              inputParameters:
+                - name: lat
+                  in: query
+                  type: number
+                  required: true
+                  description: "Latitude."
+                - name: lon
+                  in: query
+                  type: number
+                  required: true
+                  description: "Longitude."
+                - name: radiusKm
+                  in: query
+                  type: number
+                  required: false
+                  description: "Search radius in kilometers."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8102
+      namespace: aerodatabox-airport-rest
+      resources:
+        - path: /v1/airports/{codeType}/{code}
+          name: airport
+          description: "Get airport data."
+          operations:
+            - method: GET
+              name: get-airport
+              description: "Get airport information."
+              call: "airport.get-airport"
+              with:
+                codeType: "rest.codeType"
+                code: "rest.code"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/airports/search/location
+          name: airport-location-search
+          description: "Search airports by location."
+          operations:
+            - method: GET
+              name: search-airports-by-location
+              description: "Find nearby airports."
+              call: "airport.search-airports-by-location"
+              with:
+                lat: "rest.lat"
+                lon: "rest.lon"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9102
+      namespace: aerodatabox-airport-mcp
+      transport: http
+      tools:
+        - name: get-airport
+          description: "Get airport details by IATA or ICAO code."
+          hints:
+            readOnly: true
+            destructive: false
+          call: "airport.get-airport"
+          with:
+            codeType: "tools.codeType"
+            code: "tools.code"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: search-airports-by-location
+          description: "Find airports near a geographic coordinate."
+          hints:
+            readOnly: true
+            destructive: false
+          call: "airport.search-airports-by-location"
+          with:
+            lat: "tools.lat"
+            lon: "tools.lon"
+          outputParameters:
+            - type: object
+              mapping: "$."

@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-structure/aerodatabox-flight-batch-delay-contract-structure.json",
+  "description": "Delay information about a batch of flights",
+  "type": "object",
+  "properties": {
+    "numTotal": {
+      "type": "int32",
+      "description": "Total number of flights in the the batch (including cancelled)"
+    },
+    "numQualifiedTotal": {
+      "type": "int32",
+      "description": "Total number of flights in the batch, which were used to to calculate the\r\ndelay information (including cancelled). Should equal to or less than `NumTotal`.\r\n\r\nThe closer the value of this property to the value of `NumTotal`, the higher the\r\nreliability of delay information"
+    },
+    "numCancelled": {
+      "type": "int32",
+      "description": "Total amount of flights in the batch"
+    },
+    "medianDelay": {
+      "type": "string",
+      "description": "Median delay of flights in the batch (format: [-]hh:mm:ss).\r\nValue can be negative (therefore, means early occurence).",
+      "format": "date-span",
+      "nullable": true
+    },
+    "delayIndex": {
+      "type": "float",
+      "description": "Normalized value on scale from 0.0 to 5.0 which corresponds with current amount of delays and cancellations in a given batch of flights (the less - the better).",
+      "nullable": true
+    }
+  },
+  "required": [
+    "numCancelled",
+    "numQualifiedTotal",
+    "numTotal"
+  ],
+  "additionalProperties": false,
+  "name": "FlightBatchDelayContract"
+}

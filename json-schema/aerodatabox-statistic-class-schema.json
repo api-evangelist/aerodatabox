@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-schema/aerodatabox-statistic-class-schema.json",
+  "title": "StatisticClass",
+  "description": "<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - Flight</b></li>\r\n<li><b>1 - FlightAndHour</b></li>\r\n</ul>\r\n",
+  "type": "string",
+  "enum": [
+    "Flight",
+    "FlightAndHour"
+  ]
+}

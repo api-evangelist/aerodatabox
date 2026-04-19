@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-structure/aerodatabox-flight-search-item-contract-structure.json",
+  "description": "Flight record found in the search result.",
+  "type": "object",
+  "properties": {
+    "number": {
+      "minLength": 1,
+      "type": "string",
+      "description": "Found flight number."
+    }
+  },
+  "required": [
+    "number"
+  ],
+  "additionalProperties": false,
+  "name": "FlightSearchItemContract"
+}

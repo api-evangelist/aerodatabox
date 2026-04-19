@@ -1,0 +1,7 @@
+{
+  "airportIcao": "KLAX",
+  "from": "example_value",
+  "to": "example_value",
+  "departuresDelayInformation": "example_value",
+  "arrivalsDelayInformation": "example_value"
+}

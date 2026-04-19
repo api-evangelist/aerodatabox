@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-structure/aerodatabox-runway-contract-structure.json",
+  "description": "Single runway data",
+  "type": "object",
+  "properties": {
+    "name": {
+      "minLength": 1,
+      "type": "string",
+      "description": "Name of the runway. E.g.: 27L, 06, 36C, etc."
+    },
+    "trueHdg": {
+      "type": "double",
+      "description": "True heading of the runway in degrees"
+    },
+    "length": {
+      "$ref": "#/components/schemas/Distance"
+    },
+    "width": {
+      "$ref": "#/components/schemas/Distance"
+    },
+    "isClosed": {
+      "type": "boolean",
+      "description": "Marker, if runway is closed"
+    },
+    "location": {
+      "$ref": "#/components/schemas/GeoCoordinatesContract"
+    },
+    "surface": {
+      "$ref": "#/components/schemas/SurfaceType"
+    },
+    "displacedThreshold": {
+      "$ref": "#/components/schemas/Distance"
+    },
+    "hasLighting": {
+      "type": "boolean",
+      "description": "Does runway has lights",
+      "nullable": true
+    }
+  },
+  "required": [
+    "isClosed",
+    "name",
+    "surface",
+    "trueHdg"
+  ],
+  "additionalProperties": false,
+  "name": "RunwayContract"
+}

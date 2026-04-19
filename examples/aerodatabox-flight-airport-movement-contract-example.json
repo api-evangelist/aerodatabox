@@ -1,0 +1,15 @@
+{
+  "airport": "example_value",
+  "scheduledTime": "example_value",
+  "revisedTime": "example_value",
+  "predictedTime": "example_value",
+  "runwayTime": "example_value",
+  "terminal": "example_value",
+  "checkInDesk": "example_value",
+  "gate": "example_value",
+  "baggageBelt": "example_value",
+  "runway": "example_value",
+  "quality": [
+    "example_value"
+  ]
+}

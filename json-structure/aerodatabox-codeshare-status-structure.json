@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-structure/aerodatabox-codeshare-status-structure.json",
+  "description": "Flight code-share status<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - Unknown</b>: Code-sharing information is unavailable for this flight. Flight might be operated both by airline owning the flight number as well as by another airliner.</li>\r\n<li><b>1 - IsOperator</b>: Flight is operated by an airline owning the flight number (the same code)</li>\r\n<li><b>2 - IsCodeshared</b>: Flight is code-shared (operated by an airline other than airline owning the flight number)</li>\r\n</ul>\r\n",
+  "type": "string",
+  "enum": [
+    "Unknown",
+    "IsOperator",
+    "IsCodeshared"
+  ],
+  "name": "CodeshareStatus"
+}

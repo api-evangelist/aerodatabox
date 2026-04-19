@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-schema/aerodatabox-engine-type-schema.json",
+  "title": "EngineType",
+  "description": "<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - Unknown</b></li>\r\n<li><b>1 - Jet</b></li>\r\n<li><b>2 - Turboprop</b></li>\r\n<li><b>3 - Piston</b></li>\r\n</ul>\r\n",
+  "type": "string",
+  "enum": [
+    "Unknown",
+    "Jet",
+    "Turboprop",
+    "Piston"
+  ]
+}

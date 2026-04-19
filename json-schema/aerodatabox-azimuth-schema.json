@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-schema/aerodatabox-azimuth-schema.json",
+  "title": "Azimuth",
+  "description": "Azimuth schema from AeroDataBox API",
+  "type": "object",
+  "properties": {
+    "deg": {
+      "maximum": 360,
+      "minimum": 0,
+      "type": "number",
+      "description": "Angle in degrees (between `0` and `360`)",
+      "format": "double"
+    },
+    "rad": {
+      "maximum": 6.283185307179586,
+      "minimum": 0,
+      "type": "number",
+      "description": "Angle in radians (`0` and `2 * Pi`)",
+      "format": "double"
+    }
+  },
+  "required": [
+    "deg",
+    "rad"
+  ],
+  "additionalProperties": false
+}

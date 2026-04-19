@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-structure/aerodatabox-listing-airport-contract-structure.json",
+  "description": "Flight's airport reference contract",
+  "type": "object",
+  "properties": {
+    "icao": {
+      "type": "string",
+      "description": "ICAO code of the airport",
+      "nullable": true
+    },
+    "iata": {
+      "type": "string",
+      "description": "IATA code of the airport",
+      "nullable": true
+    },
+    "localCode": {
+      "type": "string",
+      "description": "Code of the airport within the local or national codification system",
+      "nullable": true
+    },
+    "name": {
+      "minLength": 1,
+      "type": "string",
+      "description": "Name of the airport"
+    },
+    "shortName": {
+      "type": "string",
+      "description": "Shortened name of the airport",
+      "nullable": true
+    },
+    "municipalityName": {
+      "type": "string",
+      "description": "Name of the municipality this airport belongs to",
+      "nullable": true
+    },
+    "location": {
+      "$ref": "#/components/schemas/GeoCoordinatesContract"
+    },
+    "countryCode": {
+      "type": "string",
+      "description": "Two-letter country code of the airport",
+      "nullable": true
+    },
+    "timeZone": {
+      "type": "string",
+      "description": "Time zone of the airport in Olson format (e.g. \"Europe/Amsterdam\")",
+      "nullable": true
+    }
+  },
+  "required": [
+    "name"
+  ],
+  "additionalProperties": false,
+  "name": "ListingAirportContract"
+}

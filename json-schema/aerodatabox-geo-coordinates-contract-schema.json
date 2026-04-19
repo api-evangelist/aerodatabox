@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-schema/aerodatabox-geo-coordinates-contract-schema.json",
+  "title": "GeoCoordinatesContract",
+  "description": "Geographical coordinates data",
+  "type": "object",
+  "properties": {
+    "lat": {
+      "maximum": 90,
+      "minimum": -90,
+      "type": "number",
+      "description": "Latitude, in degrees",
+      "format": "float"
+    },
+    "lon": {
+      "maximum": 180,
+      "minimum": -180,
+      "type": "number",
+      "description": "Longitude, in degrees",
+      "format": "float"
+    }
+  },
+  "required": [
+    "lat",
+    "lon"
+  ],
+  "additionalProperties": false
+}

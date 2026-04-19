@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-schema/aerodatabox-angle-schema.json",
+  "title": "Angle",
+  "description": "Angle schema from AeroDataBox API",
+  "type": "object",
+  "properties": {
+    "deg": {
+      "maximum": 180,
+      "minimum": -180,
+      "type": "number",
+      "description": "Angle in degrees (between `-180` and `180`)",
+      "format": "double"
+    },
+    "rad": {
+      "maximum": 3.141592653589793,
+      "minimum": -3.141592653589793,
+      "type": "number",
+      "description": "Angle in radians (between `-Pi` and `Pi`)",
+      "format": "double"
+    }
+  },
+  "required": [
+    "deg",
+    "rad"
+  ],
+  "additionalProperties": false
+}

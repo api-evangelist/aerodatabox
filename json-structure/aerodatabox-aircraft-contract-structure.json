@@ -1,0 +1,141 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-structure/aerodatabox-aircraft-contract-structure.json",
+  "description": "Single aircraft data",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "int64",
+      "description": "Unique ID of the aircraft record in our database"
+    },
+    "reg": {
+      "minLength": 1,
+      "type": "string",
+      "description": "Tail-number of the aircraft"
+    },
+    "active": {
+      "type": "boolean",
+      "description": "Indicator if aircraft is operational under this registration"
+    },
+    "serial": {
+      "type": "string",
+      "description": "Serial number",
+      "nullable": true
+    },
+    "hexIcao": {
+      "type": "string",
+      "description": "ICAO 24 bit Mode-S hexadecimal transponder address",
+      "nullable": true
+    },
+    "airlineName": {
+      "type": "string",
+      "description": "Name of the airline operating the aircraft",
+      "nullable": true
+    },
+    "iataType": {
+      "type": "string",
+      "description": "IATA-type of the aircraft",
+      "nullable": true
+    },
+    "iataCodeShort": {
+      "type": "string",
+      "description": "Short variant of IATA-code of the aircraft",
+      "nullable": true
+    },
+    "icaoCode": {
+      "type": "string",
+      "description": "ICAO-code of the aircraft",
+      "nullable": true
+    },
+    "model": {
+      "type": "string",
+      "description": "Model of the aircraft",
+      "nullable": true
+    },
+    "modelCode": {
+      "type": "string",
+      "description": "Model code of the aircraft",
+      "nullable": true
+    },
+    "numSeats": {
+      "type": "int32",
+      "description": "Number of passenger seats",
+      "nullable": true
+    },
+    "rolloutDate": {
+      "type": "datetime",
+      "description": "Date of roll-out (UTC)",
+      "nullable": true
+    },
+    "firstFlightDate": {
+      "type": "datetime",
+      "description": "First flight date",
+      "nullable": true
+    },
+    "deliveryDate": {
+      "type": "datetime",
+      "description": "Date of delivery to the owner",
+      "nullable": true
+    },
+    "registrationDate": {
+      "type": "datetime",
+      "description": "Date of assigning current registration",
+      "nullable": true
+    },
+    "typeName": {
+      "type": "string",
+      "description": "Type name",
+      "nullable": true
+    },
+    "numEngines": {
+      "type": "int32",
+      "description": "Number of engines",
+      "nullable": true
+    },
+    "engineType": {
+      "$ref": "#/components/schemas/EngineType"
+    },
+    "isFreighter": {
+      "type": "boolean",
+      "description": "Marker if aircraft is cargo or not"
+    },
+    "productionLine": {
+      "type": "string",
+      "description": "Production line",
+      "nullable": true
+    },
+    "ageYears": {
+      "type": "float",
+      "description": "Age of the aircraft in year",
+      "nullable": true
+    },
+    "verified": {
+      "type": "boolean"
+    },
+    "image": {
+      "$ref": "#/components/schemas/ResourceContract"
+    },
+    "numRegistrations": {
+      "type": "int32",
+      "description": "An aircraft may have a history of past registrations with other airlines or operators.\r\nThis field represents a total number of registration records known in our database."
+    },
+    "registrations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/AircraftRegistrationContract"
+      },
+      "description": "A history of all registrations with other airlines or operators (if provided by the endpoint).",
+      "nullable": true
+    }
+  },
+  "required": [
+    "active",
+    "id",
+    "isFreighter",
+    "numRegistrations",
+    "reg",
+    "verified"
+  ],
+  "additionalProperties": false,
+  "name": "AircraftContract"
+}

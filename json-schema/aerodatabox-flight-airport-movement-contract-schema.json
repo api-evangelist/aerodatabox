@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-schema/aerodatabox-flight-airport-movement-contract-schema.json",
+  "title": "FlightAirportMovementContract",
+  "description": "Flight arrival or departure information",
+  "type": "object",
+  "properties": {
+    "airport": {
+      "$ref": "#/components/schemas/ListingAirportContract"
+    },
+    "scheduledTime": {
+      "$ref": "#/components/schemas/DateTimeContract"
+    },
+    "revisedTime": {
+      "$ref": "#/components/schemas/DateTimeContract"
+    },
+    "predictedTime": {
+      "$ref": "#/components/schemas/DateTimeContract"
+    },
+    "runwayTime": {
+      "$ref": "#/components/schemas/DateTimeContract"
+    },
+    "terminal": {
+      "type": "string",
+      "description": "Terminal of the flight",
+      "nullable": true
+    },
+    "checkInDesk": {
+      "type": "string",
+      "description": "Check-in desk(s) for the flight (only for departing flights)",
+      "nullable": true
+    },
+    "gate": {
+      "type": "string",
+      "description": "Gate of (un)boarding for the flight",
+      "nullable": true
+    },
+    "baggageBelt": {
+      "type": "string",
+      "description": "Baggage belt(s) for the flight (only for arriving flights)",
+      "nullable": true
+    },
+    "runway": {
+      "type": "string",
+      "description": "Name of a runway of landing (for arriving flights) or take-off (for departing flights), if known.",
+      "nullable": true
+    },
+    "quality": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/FlightAirportMovementQualityEnum"
+      },
+      "description": "Array of quality characteristics of the data. Check this to know which information\r\nyou can expect within this contract (basic, live and/or approximate data)."
+    }
+  },
+  "required": [
+    "airport",
+    "quality"
+  ],
+  "additionalProperties": false
+}

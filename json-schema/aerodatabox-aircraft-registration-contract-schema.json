@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-schema/aerodatabox-aircraft-registration-contract-schema.json",
+  "title": "AircraftRegistrationContract",
+  "description": "Aircraft registration data",
+  "type": "object",
+  "properties": {
+    "reg": {
+      "minLength": 1,
+      "type": "string",
+      "description": "Tail-number of the aircraft"
+    },
+    "active": {
+      "type": "boolean",
+      "description": "Indicator if aircraft is operational under this registration"
+    },
+    "hexIcao": {
+      "type": "string",
+      "description": "ICAO 24 bit Mode-S hexadecimal transponder address",
+      "nullable": true
+    },
+    "airlineName": {
+      "type": "string",
+      "description": "Name of the airline operating the aircraft",
+      "nullable": true
+    },
+    "registrationDate": {
+      "type": "string",
+      "description": "Date of assigning current registration",
+      "format": "date-time",
+      "nullable": true
+    }
+  },
+  "required": [
+    "active",
+    "reg"
+  ],
+  "additionalProperties": false
+}

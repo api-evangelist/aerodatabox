@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-schema/aerodatabox-flight-plan-status-schema.json",
+  "title": "FlightPlanStatus",
+  "description": "FlightPlanStatus schema from AeroDataBox API",
+  "type": "string",
+  "enum": [
+    "Proposed",
+    "Active",
+    "Dropped",
+    "Cancelled",
+    "Completed"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-schema/aerodatabox-daily-route-stat-record-contract-schema.json",
+  "title": "DailyRouteStatRecordContract",
+  "description": "Statistical record of route daily statistics",
+  "type": "object",
+  "properties": {
+    "destination": {
+      "$ref": "#/components/schemas/ListingAirportContract"
+    },
+    "averageDailyFlights": {
+      "type": "number",
+      "description": "Daily average of flights per destination",
+      "format": "float"
+    },
+    "operators": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/FlightAirlineContract"
+      },
+      "description": "Airlines operating on the route"
+    }
+  },
+  "required": [
+    "averageDailyFlights",
+    "destination",
+    "operators"
+  ],
+  "additionalProperties": false
+}

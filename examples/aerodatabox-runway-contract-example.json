@@ -1,0 +1,11 @@
+{
+  "name": "Los Angeles International",
+  "trueHdg": 1.5,
+  "length": "example_value",
+  "width": "example_value",
+  "isClosed": true,
+  "location": "example_value",
+  "surface": "example_value",
+  "displacedThreshold": "example_value",
+  "hasLighting": true
+}

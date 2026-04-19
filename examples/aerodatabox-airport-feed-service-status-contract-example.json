@@ -1,0 +1,6 @@
+{
+  "flightSchedulesFeed": "example_value",
+  "liveFlightUpdatesFeed": "example_value",
+  "adsbUpdatesFeed": "example_value",
+  "generalAvailability": "example_value"
+}

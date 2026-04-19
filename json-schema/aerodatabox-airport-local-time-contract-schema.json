@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-schema/aerodatabox-airport-local-time-contract-schema.json",
+  "title": "AirportLocalTimeContract",
+  "description": "Information about the local time at an airport",
+  "type": "object",
+  "properties": {
+    "time": {
+      "$ref": "#/components/schemas/DateTimeContract"
+    },
+    "timeZoneId": {
+      "minLength": 1,
+      "type": "string",
+      "description": "Timezone ID of the airport (Olson format)"
+    }
+  },
+  "required": [
+    "time",
+    "timeZoneId"
+  ],
+  "additionalProperties": false
+}

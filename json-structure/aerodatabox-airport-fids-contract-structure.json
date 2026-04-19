@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-structure/aerodatabox-airport-fids-contract-structure.json",
+  "description": "Airport schedule contract",
+  "type": "object",
+  "properties": {
+    "departures": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/AirportFlightContract"
+      },
+      "description": "Departing flights",
+      "nullable": true
+    },
+    "arrivals": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/AirportFlightContract"
+      },
+      "description": "Arriving flights",
+      "nullable": true
+    }
+  },
+  "additionalProperties": false,
+  "name": "AirportFidsContract"
+}

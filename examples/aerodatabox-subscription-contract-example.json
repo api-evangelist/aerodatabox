@@ -1,0 +1,13 @@
+{
+  "id": "example_value",
+  "isActive": true,
+  "billingType": "example_value",
+  "activateBeforeUtc": "2025-03-15T14:30:00Z",
+  "expiresOnUtc": "2025-03-15T14:30:00Z",
+  "createdOnUtc": "2025-03-15T14:30:00Z",
+  "subject": "example_value",
+  "subscriber": "example_value",
+  "notices": [
+    "example_value"
+  ]
+}

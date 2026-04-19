@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-structure/aerodatabox-subscription-billing-type-structure.json",
+  "description": "Flight alert subscription billing type<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - LifetimeBased</b>: Subscription billed upon creation based on the life-time with set expiration date-time (BEING DEPRECATED)</li>\r\n<li><b>1 - CreditBased</b>: Subscription with no expiration date, billed based on the amount of notifications sent</li>\r\n</ul>\r\n",
+  "type": "string",
+  "enum": [
+    "LifetimeBased",
+    "CreditBased"
+  ],
+  "name": "SubscriptionBillingType"
+}

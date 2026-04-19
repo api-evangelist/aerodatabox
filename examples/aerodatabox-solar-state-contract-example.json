@@ -1,0 +1,17 @@
+{
+  "location": "example_value",
+  "sunElevation": "example_value",
+  "sunAzimuth": "example_value",
+  "dayTime": [
+    "example_value"
+  ],
+  "dawnAstronomical": "example_value",
+  "dawnNautical": "example_value",
+  "dawnCivil": "example_value",
+  "sunrise": "example_value",
+  "noonTrue": "example_value",
+  "sunset": "example_value",
+  "duskCivil": "example_value",
+  "duskNautical": "example_value",
+  "duskAstronomical": "example_value"
+}

@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-structure/aerodatabox-flight-contract-structure.json",
+  "description": "Individiual flight contract",
+  "type": "object",
+  "properties": {
+    "greatCircleDistance": {
+      "$ref": "#/components/schemas/Distance"
+    },
+    "departure": {
+      "$ref": "#/components/schemas/FlightAirportMovementContract"
+    },
+    "arrival": {
+      "$ref": "#/components/schemas/FlightAirportMovementContract"
+    },
+    "flightPlan": {
+      "$ref": "#/components/schemas/FlightPlanContract"
+    },
+    "lastUpdatedUtc": {
+      "type": "datetime",
+      "description": "Time (UTC) of the latest update of flight information (excluding Location)"
+    },
+    "number": {
+      "minLength": 1,
+      "type": "string",
+      "description": "Flight Number"
+    },
+    "callSign": {
+      "type": "string",
+      "description": "ATC call-sign of the flight",
+      "nullable": true
+    },
+    "status": {
+      "$ref": "#/components/schemas/FlightStatus"
+    },
+    "codeshareStatus": {
+      "$ref": "#/components/schemas/CodeshareStatus"
+    },
+    "isCargo": {
+      "type": "boolean",
+      "description": "Is cargo flight"
+    },
+    "aircraft": {
+      "$ref": "#/components/schemas/FlightAircraftContract"
+    },
+    "airline": {
+      "$ref": "#/components/schemas/FlightAirlineContract"
+    },
+    "location": {
+      "$ref": "#/components/schemas/FlightLocationContract"
+    }
+  },
+  "required": [
+    "arrival",
+    "codeshareStatus",
+    "departure",
+    "isCargo",
+    "lastUpdatedUtc",
+    "number",
+    "status"
+  ],
+  "additionalProperties": false,
+  "name": "FlightContract"
+}

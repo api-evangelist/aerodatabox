@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-schema/aerodatabox-date-time-contract-schema.json",
+  "title": "DateTimeContract",
+  "description": "Descriptor date-time represented in both UTC and local timezones",
+  "type": "object",
+  "properties": {
+    "utc": {
+      "type": "string",
+      "description": "UTC-time",
+      "format": "date-time"
+    },
+    "local": {
+      "type": "string",
+      "description": "Local time",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "local",
+    "utc"
+  ],
+  "additionalProperties": false
+}

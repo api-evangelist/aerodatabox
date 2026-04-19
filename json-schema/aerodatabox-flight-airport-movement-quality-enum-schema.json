@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-schema/aerodatabox-flight-airport-movement-quality-enum-schema.json",
+  "title": "FlightAirportMovementQualityEnum",
+  "description": "Quality characteristics of the information provided within flight FlightAirportMovementContract<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - Basic</b></li>\r\n<li><b>1 - Live</b></li>\r\n<li><b>2 - Approximate</b></li>\r\n</ul>\r\n",
+  "type": "string",
+  "enum": [
+    "Basic",
+    "Live",
+    "Approximate"
+  ]
+}

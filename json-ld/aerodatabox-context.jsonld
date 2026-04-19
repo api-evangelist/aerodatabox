@@ -1,0 +1,905 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "aedbx": "https://aerodatabox.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "AirportUrlsContract": "aedbx:AirportUrlsContract",
+    "SpeedFlightPlanUnitContract": "aedbx:SpeedFlightPlanUnitContract",
+    "SurfaceType": "aedbx:SurfaceType",
+    "AirportFlightContract": "aedbx:AirportFlightContract",
+    "FlightAirportMovementContract": "aedbx:FlightAirportMovementContract",
+    "ListingAirportContract": "aedbx:ListingAirportContract",
+    "GeoCoordinatesContractListingAirportContractSearchResultCollectionContract": "aedbx:GeoCoordinatesContractListingAirportContractSearchResultCollectionContract",
+    "Angle": "aedbx:Angle",
+    "FlightPlanContract": "aedbx:FlightPlanContract",
+    "ModelFlightTimeEnum": "aedbx:ModelFlightTimeEnum",
+    "AirportFidsContract": "aedbx:AirportFidsContract",
+    "SubscriptionSubjectContract": "aedbx:SubscriptionSubjectContract",
+    "AirportDelayContract": "aedbx:AirportDelayContract",
+    "FlightDelayContract": "aedbx:FlightDelayContract",
+    "AirportFeedServiceStatusContract": "aedbx:AirportFeedServiceStatusContract",
+    "DistanceFlightPlanUnitContract": "aedbx:DistanceFlightPlanUnitContract",
+    "DateTimeContract": "aedbx:DateTimeContract",
+    "FlightAirportMovementQualityEnum": "aedbx:FlightAirportMovementQualityEnum",
+    "FeedServiceStatus": "aedbx:FeedServiceStatus",
+    "FlightContract": "aedbx:FlightContract",
+    "AircraftContract": "aedbx:AircraftContract",
+    "ErrorContract": "aedbx:ErrorContract",
+    "SubscriptionContract": "aedbx:SubscriptionContract",
+    "Pressure": "aedbx:Pressure",
+    "AirportDistanceTimeContract": "aedbx:AirportDistanceTimeContract",
+    "FlightAircraftContract": "aedbx:FlightAircraftContract",
+    "SubscriptionSubjectType": "aedbx:SubscriptionSubjectType",
+    "FlightLocationContract": "aedbx:FlightLocationContract",
+    "LicenseType": "aedbx:LicenseType",
+    "StringListingAirportContractSearchResultCollectionContract": "aedbx:StringListingAirportContractSearchResultCollectionContract",
+    "FlightDirection": "aedbx:FlightDirection",
+    "GeoCoordinatesContract": "aedbx:GeoCoordinatesContract",
+    "Azimuth": "aedbx:Azimuth",
+    "AircraftContractPagedCollectionContract": "aedbx:AircraftContractPagedCollectionContract",
+    "StringFlightSearchItemContractSearchResultCollectionContract": "aedbx:StringFlightSearchItemContractSearchResultCollectionContract",
+    "FlightRules": "aedbx:FlightRules",
+    "ContinentContract": "aedbx:ContinentContract",
+    "SolarStateContract": "aedbx:SolarStateContract",
+    "DailyRouteStatContract": "aedbx:DailyRouteStatContract",
+    "Speed": "aedbx:Speed",
+    "AirportLocalTimeContract": "aedbx:AirportLocalTimeContract",
+    "FlightSearchByEnum": "aedbx:FlightSearchByEnum",
+    "CountryContract": "aedbx:CountryContract",
+    "DayTime": "aedbx:DayTime",
+    "AircraftSearchByEnum": "aedbx:AircraftSearchByEnum",
+    "FlightType": "aedbx:FlightType",
+    "AirportContract": "aedbx:AirportContract",
+    "SubscriptionsBalanceRefillRequestContract": "aedbx:SubscriptionsBalanceRefillRequestContract",
+    "FlightNotificationItemContract": "aedbx:FlightNotificationItemContract",
+    "FeedServiceEnum": "aedbx:FeedServiceEnum",
+    "AirportCodesByEnum": "aedbx:AirportCodesByEnum",
+    "CreateWebHookSubscription": "aedbx:CreateWebHookSubscription",
+    "FaaLaddAircraftStatusContract": "aedbx:FaaLaddAircraftStatusContract",
+    "CodeshareStatus": "aedbx:CodeshareStatus",
+    "FlightLegDelayContract": "aedbx:FlightLegDelayContract",
+    "PercentileBracketContract": "aedbx:PercentileBracketContract",
+    "AircraftRegistrationContract": "aedbx:AircraftRegistrationContract",
+    "FlightAirlineContract": "aedbx:FlightAirlineContract",
+    "FlightPlanStatus": "aedbx:FlightPlanStatus",
+    "Distance": "aedbx:Distance",
+    "SubscriberContract": "aedbx:SubscriberContract",
+    "EngineType": "aedbx:EngineType",
+    "DailyRouteStatRecordContract": "aedbx:DailyRouteStatRecordContract",
+    "StringCollectionContract": "aedbx:StringCollectionContract",
+    "SubscriptionBillingType": "aedbx:SubscriptionBillingType",
+    "FeedServiceStatusContract": "aedbx:FeedServiceStatusContract",
+    "RunwayContract": "aedbx:RunwayContract",
+    "StringAircraftContractSearchResultCollectionContract": "aedbx:StringAircraftContractSearchResultCollectionContract",
+    "FlightNotificationContract": "aedbx:FlightNotificationContract",
+    "StatisticClass": "aedbx:StatisticClass",
+    "SubscriptionBalanceContract": "aedbx:SubscriptionBalanceContract",
+    "FlightStatus": "aedbx:FlightStatus",
+    "FlightSearchItemContract": "aedbx:FlightSearchItemContract",
+    "ResourceContract": "aedbx:ResourceContract",
+    "DelayBracketContract": "aedbx:DelayBracketContract",
+    "FlightDataGeneralAvailabilityContract": "aedbx:FlightDataGeneralAvailabilityContract",
+    "FlightBatchDelayContract": "aedbx:FlightBatchDelayContract",
+    "webSite": {
+      "@id": "aedbx:webSite",
+      "@type": "xsd:string"
+    },
+    "wikipedia": {
+      "@id": "aedbx:wikipedia",
+      "@type": "xsd:string"
+    },
+    "twitter": {
+      "@id": "aedbx:twitter",
+      "@type": "xsd:string"
+    },
+    "liveAtc": {
+      "@id": "aedbx:liveAtc",
+      "@type": "xsd:string"
+    },
+    "flightRadar": {
+      "@id": "aedbx:flightRadar",
+      "@type": "xsd:string"
+    },
+    "googleMaps": {
+      "@id": "aedbx:googleMaps",
+      "@type": "xsd:string"
+    },
+    "requested": {
+      "@id": "aedbx:requested",
+      "@type": "xsd:string"
+    },
+    "assigned": {
+      "@id": "aedbx:assigned",
+      "@type": "xsd:string"
+    },
+    "movement": {
+      "@id": "aedbx:movement",
+      "@type": "xsd:string"
+    },
+    "departure": {
+      "@id": "aedbx:departure",
+      "@type": "xsd:string"
+    },
+    "arrival": {
+      "@id": "aedbx:arrival",
+      "@type": "xsd:string"
+    },
+    "number": {
+      "@id": "aedbx:number",
+      "@type": "xsd:string"
+    },
+    "callSign": {
+      "@id": "aedbx:callSign",
+      "@type": "xsd:string"
+    },
+    "status": {
+      "@id": "aedbx:status",
+      "@type": "xsd:string"
+    },
+    "codeshareStatus": {
+      "@id": "aedbx:codeshareStatus",
+      "@type": "xsd:string"
+    },
+    "isCargo": {
+      "@id": "aedbx:isCargo",
+      "@type": "xsd:boolean"
+    },
+    "aircraft": {
+      "@id": "aedbx:aircraft",
+      "@type": "xsd:string"
+    },
+    "airline": {
+      "@id": "aedbx:airline",
+      "@type": "xsd:string"
+    },
+    "location": {
+      "@id": "aedbx:location",
+      "@type": "xsd:string"
+    },
+    "airport": {
+      "@id": "aedbx:airport",
+      "@type": "xsd:string"
+    },
+    "scheduledTime": {
+      "@id": "aedbx:scheduledTime",
+      "@type": "xsd:string"
+    },
+    "revisedTime": {
+      "@id": "aedbx:revisedTime",
+      "@type": "xsd:string"
+    },
+    "predictedTime": {
+      "@id": "aedbx:predictedTime",
+      "@type": "xsd:string"
+    },
+    "runwayTime": {
+      "@id": "aedbx:runwayTime",
+      "@type": "xsd:string"
+    },
+    "terminal": {
+      "@id": "aedbx:terminal",
+      "@type": "xsd:string"
+    },
+    "checkInDesk": {
+      "@id": "aedbx:checkInDesk",
+      "@type": "xsd:string"
+    },
+    "gate": {
+      "@id": "aedbx:gate",
+      "@type": "xsd:string"
+    },
+    "baggageBelt": {
+      "@id": "aedbx:baggageBelt",
+      "@type": "xsd:string"
+    },
+    "runway": {
+      "@id": "aedbx:runway",
+      "@type": "xsd:string"
+    },
+    "quality": {
+      "@id": "aedbx:quality",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "icao": {
+      "@id": "aedbx:icao",
+      "@type": "xsd:string"
+    },
+    "iata": {
+      "@id": "aedbx:iata",
+      "@type": "xsd:string"
+    },
+    "localCode": {
+      "@id": "aedbx:localCode",
+      "@type": "xsd:string"
+    },
+    "name": "schema:name",
+    "shortName": {
+      "@id": "aedbx:shortName",
+      "@type": "xsd:string"
+    },
+    "municipalityName": {
+      "@id": "aedbx:municipalityName",
+      "@type": "xsd:string"
+    },
+    "countryCode": {
+      "@id": "aedbx:countryCode",
+      "@type": "xsd:string"
+    },
+    "timeZone": {
+      "@id": "aedbx:timeZone",
+      "@type": "xsd:string"
+    },
+    "searchBy": {
+      "@id": "aedbx:searchBy",
+      "@type": "xsd:string"
+    },
+    "count": {
+      "@id": "aedbx:count",
+      "@type": "xsd:integer"
+    },
+    "items": {
+      "@id": "aedbx:items",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "deg": {
+      "@id": "aedbx:deg",
+      "@type": "xsd:decimal"
+    },
+    "rad": {
+      "@id": "aedbx:rad",
+      "@type": "xsd:decimal"
+    },
+    "flightRules": {
+      "@id": "aedbx:flightRules",
+      "@type": "xsd:string"
+    },
+    "flightType": {
+      "@id": "aedbx:flightType",
+      "@type": "xsd:string"
+    },
+    "revisionNo": {
+      "@id": "aedbx:revisionNo",
+      "@type": "xsd:integer"
+    },
+    "route": {
+      "@id": "aedbx:route",
+      "@type": "xsd:string"
+    },
+    "altitude": {
+      "@id": "aedbx:altitude",
+      "@type": "xsd:string"
+    },
+    "airspeed": {
+      "@id": "aedbx:airspeed",
+      "@type": "xsd:string"
+    },
+    "lastUpdatedUtc": {
+      "@id": "aedbx:lastUpdatedUtc",
+      "@type": "xsd:dateTime"
+    },
+    "departures": {
+      "@id": "aedbx:departures",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "arrivals": {
+      "@id": "aedbx:arrivals",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "type": {
+      "@id": "aedbx:type",
+      "@type": "xsd:string"
+    },
+    "id": {
+      "@id": "aedbx:id",
+      "@type": "xsd:string"
+    },
+    "airportIcao": {
+      "@id": "aedbx:airportIcao",
+      "@type": "xsd:string"
+    },
+    "from": {
+      "@id": "aedbx:from",
+      "@type": "xsd:string"
+    },
+    "to": {
+      "@id": "aedbx:to",
+      "@type": "xsd:string"
+    },
+    "departuresDelayInformation": {
+      "@id": "aedbx:departuresDelayInformation",
+      "@type": "xsd:string"
+    },
+    "arrivalsDelayInformation": {
+      "@id": "aedbx:arrivalsDelayInformation",
+      "@type": "xsd:string"
+    },
+    "class": {
+      "@id": "aedbx:class",
+      "@type": "xsd:string"
+    },
+    "scheduledHourUtc": {
+      "@id": "aedbx:scheduledHourUtc",
+      "@type": "xsd:integer"
+    },
+    "medianDelay": {
+      "@id": "aedbx:medianDelay",
+      "@type": "xsd:string"
+    },
+    "delayPercentiles": {
+      "@id": "aedbx:delayPercentiles",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "numConsideredFlights": {
+      "@id": "aedbx:numConsideredFlights",
+      "@type": "xsd:integer"
+    },
+    "numFlightsDelayedBrackets": {
+      "@id": "aedbx:numFlightsDelayedBrackets",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "fromUtc": {
+      "@id": "aedbx:fromUtc",
+      "@type": "xsd:dateTime"
+    },
+    "toUtc": {
+      "@id": "aedbx:toUtc",
+      "@type": "xsd:dateTime"
+    },
+    "flightSchedulesFeed": {
+      "@id": "aedbx:flightSchedulesFeed",
+      "@type": "xsd:string"
+    },
+    "liveFlightUpdatesFeed": {
+      "@id": "aedbx:liveFlightUpdatesFeed",
+      "@type": "xsd:string"
+    },
+    "adsbUpdatesFeed": {
+      "@id": "aedbx:adsbUpdatesFeed",
+      "@type": "xsd:string"
+    },
+    "generalAvailability": {
+      "@id": "aedbx:generalAvailability",
+      "@type": "xsd:string"
+    },
+    "utc": {
+      "@id": "aedbx:utc",
+      "@type": "xsd:dateTime"
+    },
+    "local": {
+      "@id": "aedbx:local",
+      "@type": "xsd:dateTime"
+    },
+    "greatCircleDistance": {
+      "@id": "aedbx:greatCircleDistance",
+      "@type": "xsd:string"
+    },
+    "flightPlan": {
+      "@id": "aedbx:flightPlan",
+      "@type": "xsd:string"
+    },
+    "reg": {
+      "@id": "aedbx:reg",
+      "@type": "xsd:string"
+    },
+    "active": {
+      "@id": "aedbx:active",
+      "@type": "xsd:boolean"
+    },
+    "serial": {
+      "@id": "aedbx:serial",
+      "@type": "xsd:string"
+    },
+    "hexIcao": {
+      "@id": "aedbx:hexIcao",
+      "@type": "xsd:string"
+    },
+    "airlineName": {
+      "@id": "aedbx:airlineName",
+      "@type": "xsd:string"
+    },
+    "iataType": {
+      "@id": "aedbx:iataType",
+      "@type": "xsd:string"
+    },
+    "iataCodeShort": {
+      "@id": "aedbx:iataCodeShort",
+      "@type": "xsd:string"
+    },
+    "icaoCode": {
+      "@id": "aedbx:icaoCode",
+      "@type": "xsd:string"
+    },
+    "model": {
+      "@id": "aedbx:model",
+      "@type": "xsd:string"
+    },
+    "modelCode": {
+      "@id": "aedbx:modelCode",
+      "@type": "xsd:string"
+    },
+    "numSeats": {
+      "@id": "aedbx:numSeats",
+      "@type": "xsd:integer"
+    },
+    "rolloutDate": {
+      "@id": "aedbx:rolloutDate",
+      "@type": "xsd:dateTime"
+    },
+    "firstFlightDate": {
+      "@id": "aedbx:firstFlightDate",
+      "@type": "xsd:dateTime"
+    },
+    "deliveryDate": {
+      "@id": "aedbx:deliveryDate",
+      "@type": "xsd:dateTime"
+    },
+    "registrationDate": {
+      "@id": "aedbx:registrationDate",
+      "@type": "xsd:dateTime"
+    },
+    "typeName": {
+      "@id": "aedbx:typeName",
+      "@type": "xsd:string"
+    },
+    "numEngines": {
+      "@id": "aedbx:numEngines",
+      "@type": "xsd:integer"
+    },
+    "engineType": {
+      "@id": "aedbx:engineType",
+      "@type": "xsd:string"
+    },
+    "isFreighter": {
+      "@id": "aedbx:isFreighter",
+      "@type": "xsd:boolean"
+    },
+    "productionLine": {
+      "@id": "aedbx:productionLine",
+      "@type": "xsd:string"
+    },
+    "ageYears": {
+      "@id": "aedbx:ageYears",
+      "@type": "xsd:decimal"
+    },
+    "verified": {
+      "@id": "aedbx:verified",
+      "@type": "xsd:boolean"
+    },
+    "image": {
+      "@id": "aedbx:image",
+      "@type": "xsd:string"
+    },
+    "numRegistrations": {
+      "@id": "aedbx:numRegistrations",
+      "@type": "xsd:integer"
+    },
+    "registrations": {
+      "@id": "aedbx:registrations",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "message": {
+      "@id": "aedbx:message",
+      "@type": "xsd:string"
+    },
+    "isActive": {
+      "@id": "aedbx:isActive",
+      "@type": "xsd:boolean"
+    },
+    "billingType": {
+      "@id": "aedbx:billingType",
+      "@type": "xsd:string"
+    },
+    "activateBeforeUtc": {
+      "@id": "aedbx:activateBeforeUtc",
+      "@type": "xsd:dateTime"
+    },
+    "expiresOnUtc": {
+      "@id": "aedbx:expiresOnUtc",
+      "@type": "xsd:dateTime"
+    },
+    "createdOnUtc": {
+      "@id": "aedbx:createdOnUtc",
+      "@type": "xsd:dateTime"
+    },
+    "subject": {
+      "@id": "aedbx:subject",
+      "@type": "xsd:string"
+    },
+    "subscriber": {
+      "@id": "aedbx:subscriber",
+      "@type": "xsd:string"
+    },
+    "notices": {
+      "@id": "aedbx:notices",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "hPa": {
+      "@id": "aedbx:hPa",
+      "@type": "xsd:decimal"
+    },
+    "inHg": {
+      "@id": "aedbx:inHg",
+      "@type": "xsd:decimal"
+    },
+    "mmHg": {
+      "@id": "aedbx:mmHg",
+      "@type": "xsd:decimal"
+    },
+    "approxFlightTime": {
+      "@id": "aedbx:approxFlightTime",
+      "@type": "xsd:string"
+    },
+    "modeS": {
+      "@id": "aedbx:modeS",
+      "@type": "xsd:string"
+    },
+    "pressureAltitude": {
+      "@id": "aedbx:pressureAltitude",
+      "@type": "xsd:string"
+    },
+    "pressure": {
+      "@id": "aedbx:pressure",
+      "@type": "xsd:string"
+    },
+    "groundSpeed": {
+      "@id": "aedbx:groundSpeed",
+      "@type": "xsd:string"
+    },
+    "trueTrack": {
+      "@id": "aedbx:trueTrack",
+      "@type": "xsd:string"
+    },
+    "vsiFpm": {
+      "@id": "aedbx:vsiFpm",
+      "@type": "xsd:integer"
+    },
+    "reportedAtUtc": {
+      "@id": "aedbx:reportedAtUtc",
+      "@type": "xsd:dateTime"
+    },
+    "lat": {
+      "@id": "aedbx:lat",
+      "@type": "xsd:decimal"
+    },
+    "lon": {
+      "@id": "aedbx:lon",
+      "@type": "xsd:decimal"
+    },
+    "totalCount": {
+      "@id": "aedbx:totalCount",
+      "@type": "xsd:integer"
+    },
+    "pageOffset": {
+      "@id": "aedbx:pageOffset",
+      "@type": "xsd:integer"
+    },
+    "pageSize": {
+      "@id": "aedbx:pageSize",
+      "@type": "xsd:integer"
+    },
+    "hasNextPage": {
+      "@id": "aedbx:hasNextPage",
+      "@type": "xsd:boolean"
+    },
+    "code": {
+      "@id": "aedbx:code",
+      "@type": "xsd:string"
+    },
+    "sunElevation": {
+      "@id": "aedbx:sunElevation",
+      "@type": "xsd:string"
+    },
+    "sunAzimuth": {
+      "@id": "aedbx:sunAzimuth",
+      "@type": "xsd:string"
+    },
+    "dayTime": {
+      "@id": "aedbx:dayTime",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "dawnAstronomical": {
+      "@id": "aedbx:dawnAstronomical",
+      "@type": "xsd:string"
+    },
+    "dawnNautical": {
+      "@id": "aedbx:dawnNautical",
+      "@type": "xsd:string"
+    },
+    "dawnCivil": {
+      "@id": "aedbx:dawnCivil",
+      "@type": "xsd:string"
+    },
+    "sunrise": {
+      "@id": "aedbx:sunrise",
+      "@type": "xsd:string"
+    },
+    "noonTrue": {
+      "@id": "aedbx:noonTrue",
+      "@type": "xsd:string"
+    },
+    "sunset": {
+      "@id": "aedbx:sunset",
+      "@type": "xsd:string"
+    },
+    "duskCivil": {
+      "@id": "aedbx:duskCivil",
+      "@type": "xsd:string"
+    },
+    "duskNautical": {
+      "@id": "aedbx:duskNautical",
+      "@type": "xsd:string"
+    },
+    "duskAstronomical": {
+      "@id": "aedbx:duskAstronomical",
+      "@type": "xsd:string"
+    },
+    "routes": {
+      "@id": "aedbx:routes",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "kt": {
+      "@id": "aedbx:kt",
+      "@type": "xsd:decimal"
+    },
+    "kmPerHour": {
+      "@id": "aedbx:kmPerHour",
+      "@type": "xsd:decimal"
+    },
+    "miPerHour": {
+      "@id": "aedbx:miPerHour",
+      "@type": "xsd:decimal"
+    },
+    "meterPerSecond": {
+      "@id": "aedbx:meterPerSecond",
+      "@type": "xsd:decimal"
+    },
+    "time": {
+      "@id": "aedbx:time",
+      "@type": "xsd:string"
+    },
+    "timeZoneId": {
+      "@id": "aedbx:timeZoneId",
+      "@type": "xsd:string"
+    },
+    "fullName": {
+      "@id": "aedbx:fullName",
+      "@type": "xsd:string"
+    },
+    "elevation": {
+      "@id": "aedbx:elevation",
+      "@type": "xsd:string"
+    },
+    "country": {
+      "@id": "aedbx:country",
+      "@type": "xsd:string"
+    },
+    "continent": {
+      "@id": "aedbx:continent",
+      "@type": "xsd:string"
+    },
+    "urls": {
+      "@id": "aedbx:urls",
+      "@type": "xsd:string"
+    },
+    "runways": {
+      "@id": "aedbx:runways",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "currentTime": {
+      "@id": "aedbx:currentTime",
+      "@type": "xsd:string"
+    },
+    "credits": {
+      "@id": "aedbx:credits",
+      "@type": "xsd:integer"
+    },
+    "notificationSummary": {
+      "@id": "aedbx:notificationSummary",
+      "@type": "xsd:string"
+    },
+    "notificationRemark": {
+      "@id": "aedbx:notificationRemark",
+      "@type": "xsd:string"
+    },
+    "url": "schema:url",
+    "maxDeliveryRetries": {
+      "@id": "aedbx:maxDeliveryRetries",
+      "@type": "xsd:integer"
+    },
+    "isBlocked": {
+      "@id": "aedbx:isBlocked",
+      "@type": "xsd:boolean"
+    },
+    "blockedSince": {
+      "@id": "aedbx:blockedSince",
+      "@type": "xsd:dateTime"
+    },
+    "lastBlockedOn": {
+      "@id": "aedbx:lastBlockedOn",
+      "@type": "xsd:dateTime"
+    },
+    "origins": {
+      "@id": "aedbx:origins",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "destinations": {
+      "@id": "aedbx:destinations",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "percentile": {
+      "@id": "aedbx:percentile",
+      "@type": "xsd:integer"
+    },
+    "delay": {
+      "@id": "aedbx:delay",
+      "@type": "xsd:string"
+    },
+    "meter": {
+      "@id": "aedbx:meter",
+      "@type": "xsd:decimal"
+    },
+    "km": {
+      "@id": "aedbx:km",
+      "@type": "xsd:decimal"
+    },
+    "mile": {
+      "@id": "aedbx:mile",
+      "@type": "xsd:decimal"
+    },
+    "nm": {
+      "@id": "aedbx:nm",
+      "@type": "xsd:decimal"
+    },
+    "feet": {
+      "@id": "aedbx:feet",
+      "@type": "xsd:decimal"
+    },
+    "destination": {
+      "@id": "aedbx:destination",
+      "@type": "xsd:string"
+    },
+    "averageDailyFlights": {
+      "@id": "aedbx:averageDailyFlights",
+      "@type": "xsd:decimal"
+    },
+    "operators": {
+      "@id": "aedbx:operators",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "service": {
+      "@id": "aedbx:service",
+      "@type": "xsd:string"
+    },
+    "minAvailableLocalDate": {
+      "@id": "aedbx:minAvailableLocalDate",
+      "@type": "xsd:dateTime"
+    },
+    "maxAvailableLocalDate": {
+      "@id": "aedbx:maxAvailableLocalDate",
+      "@type": "xsd:dateTime"
+    },
+    "trueHdg": {
+      "@id": "aedbx:trueHdg",
+      "@type": "xsd:decimal"
+    },
+    "length": {
+      "@id": "aedbx:length",
+      "@type": "xsd:string"
+    },
+    "width": {
+      "@id": "aedbx:width",
+      "@type": "xsd:string"
+    },
+    "isClosed": {
+      "@id": "aedbx:isClosed",
+      "@type": "xsd:boolean"
+    },
+    "surface": {
+      "@id": "aedbx:surface",
+      "@type": "xsd:string"
+    },
+    "displacedThreshold": {
+      "@id": "aedbx:displacedThreshold",
+      "@type": "xsd:string"
+    },
+    "hasLighting": {
+      "@id": "aedbx:hasLighting",
+      "@type": "xsd:boolean"
+    },
+    "flights": {
+      "@id": "aedbx:flights",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "subscription": {
+      "@id": "aedbx:subscription",
+      "@type": "xsd:string"
+    },
+    "balance": {
+      "@id": "aedbx:balance",
+      "@type": "xsd:string"
+    },
+    "creditsRemaining": {
+      "@id": "aedbx:creditsRemaining",
+      "@type": "xsd:integer"
+    },
+    "lastRefilledUtc": {
+      "@id": "aedbx:lastRefilledUtc",
+      "@type": "xsd:dateTime"
+    },
+    "lastDeductedUtc": {
+      "@id": "aedbx:lastDeductedUtc",
+      "@type": "xsd:dateTime"
+    },
+    "webUrl": {
+      "@id": "aedbx:webUrl",
+      "@type": "xsd:string"
+    },
+    "author": {
+      "@id": "aedbx:author",
+      "@type": "xsd:string"
+    },
+    "title": {
+      "@id": "aedbx:title",
+      "@type": "xsd:string"
+    },
+    "description": "schema:description",
+    "license": {
+      "@id": "aedbx:license",
+      "@type": "xsd:string"
+    },
+    "htmlAttributions": {
+      "@id": "aedbx:htmlAttributions",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "delayedFrom": {
+      "@id": "aedbx:delayedFrom",
+      "@type": "xsd:string"
+    },
+    "delayedTo": {
+      "@id": "aedbx:delayedTo",
+      "@type": "xsd:string"
+    },
+    "num": {
+      "@id": "aedbx:num",
+      "@type": "xsd:integer"
+    },
+    "percentage": {
+      "@id": "aedbx:percentage",
+      "@type": "xsd:decimal"
+    },
+    "numTotal": {
+      "@id": "aedbx:numTotal",
+      "@type": "xsd:integer"
+    },
+    "numQualifiedTotal": {
+      "@id": "aedbx:numQualifiedTotal",
+      "@type": "xsd:integer"
+    },
+    "numCancelled": {
+      "@id": "aedbx:numCancelled",
+      "@type": "xsd:integer"
+    },
+    "delayIndex": {
+      "@id": "aedbx:delayIndex",
+      "@type": "xsd:decimal"
+    }
+  }
+}

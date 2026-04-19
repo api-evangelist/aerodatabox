@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-structure/aerodatabox-speed-flight-plan-unit-contract-structure.json",
+  "description": "Contract describing unit (altitude, airspeed, etc.) which can be assigned and / or requested\r\nin the context of the flight plan",
+  "type": "object",
+  "properties": {
+    "requested": {
+      "$ref": "#/components/schemas/Speed"
+    },
+    "assigned": {
+      "$ref": "#/components/schemas/Speed"
+    }
+  },
+  "additionalProperties": false,
+  "name": "SpeedFlightPlanUnitContract"
+}

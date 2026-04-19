@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-structure/aerodatabox-subscription-subject-contract-structure.json",
+  "description": "Describes subscription subject",
+  "type": "object",
+  "properties": {
+    "type": {
+      "$ref": "#/components/schemas/SubscriptionSubjectType"
+    },
+    "id": {
+      "type": "string",
+      "description": "Subject ID of a subscription. Complements SubjectType.\r\n\r\nE.g. SubjectType = \"FlightNumber\" and SubjectId = \"DL 47\" means that this\r\nsubscription is for all updates of flight with number DL47.",
+      "nullable": true
+    }
+  },
+  "required": [
+    "type"
+  ],
+  "additionalProperties": false,
+  "name": "SubscriptionSubjectContract"
+}

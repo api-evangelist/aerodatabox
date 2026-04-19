@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-schema/aerodatabox-create-web-hook-subscription-schema.json",
+  "title": "CreateWebHookSubscription",
+  "description": "Command to create web-hook subscription",
+  "type": "object",
+  "properties": {
+    "url": {
+      "minLength": 1,
+      "type": "string",
+      "description": "Destination HTTP-endpoint where notifications will be sent to. Requirements:\r\n* must be a valid public HTTP(S) URL not requiring additional authorization;\r\n* must use standard or alternative HTTP or HTTPS ports (80, 443, 8008, 8080) or any dynamic port greater or equal to 49152;\r\n* must be able to accept HTTP POST request with JSON-formatted body (application/json);\r\n* must respond with one of successful HTTP status codes (2XX) within 10 seconds;\r\n* the endpoint owner must be aware of and consent to receiving notifications at it.\r\n\r\nIf endpoint is unavailable, responds with error status code or does not respond within timeout,\r\nnotification delivery retry may be attempted according to subscription settings."
+    },
+    "maxDeliveryRetries": {
+      "maximum": 2,
+      "minimum": 0,
+      "type": "integer",
+      "description": "Maximum number of times a delivery attempt is retried after initial delivery attempt failure.\r\n\r\nCurrent default value is:\r\n\r\n\t* `2` for the old, lifetime-based web-hook subscriptions (will be phased out after the 4th of April, 2026);\r\n\t* `0` for the new, credit-based web-hook subscriptions (will be the default value for any web-hook subscription after the 4th of April, 2026).",
+      "format": "int32",
+      "nullable": true
+    }
+  },
+  "required": [
+    "url"
+  ],
+  "additionalProperties": false
+}

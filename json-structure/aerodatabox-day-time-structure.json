@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-structure/aerodatabox-day-time-structure.json",
+  "description": "Daytime states<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - Night</b></li>\r\n<li><b>1 - TwilightAstronomical</b></li>\r\n<li><b>2 - TwilightNautical</b></li>\r\n<li><b>3 - TwilightCivil</b></li>\r\n<li><b>4 - Day</b></li>\r\n<li><b>5 - BlueHour</b></li>\r\n<li><b>6 - GoldenHour</b></li>\r\n</ul>\r\n",
+  "type": "string",
+  "enum": [
+    "Night",
+    "TwilightAstronomical",
+    "TwilightNautical",
+    "TwilightCivil",
+    "Day",
+    "BlueHour",
+    "GoldenHour"
+  ],
+  "name": "DayTime"
+}

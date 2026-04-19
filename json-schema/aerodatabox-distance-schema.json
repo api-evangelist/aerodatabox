@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-schema/aerodatabox-distance-schema.json",
+  "title": "Distance",
+  "description": "Distance schema from AeroDataBox API",
+  "type": "object",
+  "properties": {
+    "meter": {
+      "type": "number",
+      "description": "Distance in meters",
+      "format": "double"
+    },
+    "km": {
+      "type": "number",
+      "description": "Distance in kilometers",
+      "format": "double"
+    },
+    "mile": {
+      "type": "number",
+      "description": "Distance in statute miles",
+      "format": "double"
+    },
+    "nm": {
+      "type": "number",
+      "description": "Distance in nautical miles",
+      "format": "double"
+    },
+    "feet": {
+      "type": "number",
+      "description": "Distance in feet",
+      "format": "double"
+    }
+  },
+  "required": [
+    "feet",
+    "km",
+    "meter",
+    "mile",
+    "nm"
+  ],
+  "additionalProperties": false
+}

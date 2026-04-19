@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-structure/aerodatabox-flight-aircraft-contract-structure.json",
+  "description": "Flight's aircraft reference contract",
+  "type": "object",
+  "properties": {
+    "reg": {
+      "type": "string",
+      "description": "Tail-number of the aircraft",
+      "nullable": true
+    },
+    "modeS": {
+      "type": "string",
+      "description": "ICAO 24 bit Mode-S hexadecimal transponder address",
+      "nullable": true
+    },
+    "model": {
+      "type": "string",
+      "description": "Aircraft name and model",
+      "nullable": true
+    },
+    "image": {
+      "$ref": "#/components/schemas/ResourceContract"
+    }
+  },
+  "additionalProperties": false,
+  "name": "FlightAircraftContract"
+}

@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-structure/aerodatabox-airport-contract-structure.json",
+  "description": "Single airport data",
+  "type": "object",
+  "properties": {
+    "icao": {
+      "type": "string",
+      "description": "ICAO code of the airport",
+      "nullable": true
+    },
+    "iata": {
+      "type": "string",
+      "description": "IATA code of the airport",
+      "nullable": true
+    },
+    "localCode": {
+      "type": "string",
+      "description": "Code of the airport within the local or national coding system",
+      "nullable": true
+    },
+    "shortName": {
+      "type": "string",
+      "description": "Shortened name of the airport",
+      "nullable": true
+    },
+    "fullName": {
+      "minLength": 1,
+      "type": "string",
+      "description": "Full name of the airport (derived from own airport name and municipality name)"
+    },
+    "municipalityName": {
+      "type": "string",
+      "description": "Name of the municipality this airport belongs to",
+      "nullable": true
+    },
+    "location": {
+      "$ref": "#/components/schemas/GeoCoordinatesContract"
+    },
+    "elevation": {
+      "$ref": "#/components/schemas/Distance"
+    },
+    "country": {
+      "$ref": "#/components/schemas/CountryContract"
+    },
+    "continent": {
+      "$ref": "#/components/schemas/ContinentContract"
+    },
+    "timeZone": {
+      "minLength": 1,
+      "type": "string",
+      "description": "Time zone of the airport in Olson format (e.g. \"Europe/Amsterdam\")"
+    },
+    "urls": {
+      "$ref": "#/components/schemas/AirportUrlsContract"
+    },
+    "runways": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/RunwayContract"
+      },
+      "description": "List of runway information, if requested",
+      "nullable": true
+    },
+    "currentTime": {
+      "$ref": "#/components/schemas/AirportLocalTimeContract"
+    }
+  },
+  "required": [
+    "continent",
+    "country",
+    "elevation",
+    "fullName",
+    "location",
+    "timeZone",
+    "urls"
+  ],
+  "additionalProperties": false,
+  "name": "AirportContract"
+}

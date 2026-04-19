@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-structure/aerodatabox-feed-service-status-structure.json",
+  "description": "Descriptor of feed service status<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - Down</b>: Service is provided, but is currently down</li>\r\n<li><b>1 - Degraded</b>: Service is up and running, but performance is degraded: delays and disruptions are likely</li>\r\n<li><b>2 - OKPartial</b>: Service is up and running normally, but updates vailable for not all or only few flights</li>\r\n<li><b>3 - OK</b>: Service is up and running normally</li>\r\n<li><b>-2 - Unknown</b>: Status of service is unknown</li>\r\n<li><b>-1 - Unavailable</b>: Service is not provided</li>\r\n</ul>\r\n",
+  "type": "string",
+  "enum": [
+    "Down",
+    "Degraded",
+    "OKPartial",
+    "OK",
+    "Unknown",
+    "Unavailable"
+  ],
+  "name": "FeedServiceStatus"
+}

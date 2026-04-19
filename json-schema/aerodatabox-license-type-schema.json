@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-schema/aerodatabox-license-type-schema.json",
+  "title": "LicenseType",
+  "description": "<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - AllRightsReserved</b>: All Rights Reserved.</li>\r\n<li><b>1 - AttributionNoncommercialShareAlikeCC</b>: Creative Commons: Attribution Non-Commercial, Share-alike License.</li>\r\n<li><b>2 - AttributionNoncommercialCC</b>: Creative Commons: Attribution Non-Commercial License.</li>\r\n<li><b>3 - AttributionNoncommercialNoDerivativesCC</b>: Creative Commons: Attribution Non-Commercial, No Derivatives License.</li>\r\n<li><b>4 - AttributionCC</b>: Creative Commons: Attribution License.</li>\r\n<li><b>5 - AttributionShareAlikeCC</b>: Creative Commons: Attribution Share-alike License.</li>\r\n<li><b>6 - AttributionNoDerivativesCC</b>: Creative Commons: Attribution No Derivatives License.</li>\r\n<li><b>7 - NoKnownCopyrightRestrictions</b>: No Known Copyright Resitrctions (Flickr Commons).</li>\r\n<li><b>8 - UnitedStatesGovernmentWork</b>: United States Government Work</li>\r\n<li><b>9 - PublicDomainDedicationCC0</b>: Public Domain Dedication, CC0</li>\r\n<li><b>10 - PublicDomainMark</b>: Public Domain Mark</li>\r\n</ul>\r\n",
+  "type": "string",
+  "enum": [
+    "AllRightsReserved",
+    "AttributionNoncommercialShareAlikeCC",
+    "AttributionNoncommercialCC",
+    "AttributionNoncommercialNoDerivativesCC",
+    "AttributionCC",
+    "AttributionShareAlikeCC",
+    "AttributionNoDerivativesCC",
+    "NoKnownCopyrightRestrictions",
+    "UnitedStatesGovernmentWork",
+    "PublicDomainDedicationCC0",
+    "PublicDomainMark"
+  ]
+}

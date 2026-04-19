@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-schema/aerodatabox-subscription-contract-schema.json",
+  "title": "SubscriptionContract",
+  "description": "Describes subscription",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Identifier of a subscription. \r\nUse this ID to control the subscription in future (e.g. update or delete).",
+      "format": "uuid"
+    },
+    "isActive": {
+      "type": "boolean",
+      "description": "Specifies if the subscription is active"
+    },
+    "billingType": {
+      "$ref": "#/components/schemas/SubscriptionBillingType"
+    },
+    "activateBeforeUtc": {
+      "type": "string",
+      "description": "Time (UTC) before which subscription must be activated (may be applicable to \r\nsome non-active newly created subscriptions)",
+      "format": "date-time",
+      "nullable": true
+    },
+    "expiresOnUtc": {
+      "type": "string",
+      "description": "Time (UTC) when subscription expires and will be removed.\r\n\r\nIf not specified, subscription never expires.",
+      "format": "date-time",
+      "nullable": true
+    },
+    "createdOnUtc": {
+      "type": "string",
+      "description": "Time (UTC) when subscription was created",
+      "format": "date-time"
+    },
+    "subject": {
+      "$ref": "#/components/schemas/SubscriptionSubjectContract"
+    },
+    "subscriber": {
+      "$ref": "#/components/schemas/SubscriberContract"
+    },
+    "notices": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Additional messages",
+      "nullable": true
+    }
+  },
+  "required": [
+    "createdOnUtc",
+    "id",
+    "isActive",
+    "subject",
+    "subscriber"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-schema/aerodatabox-aircraft-contract-paged-collection-contract-schema.json",
+  "title": "AircraftContractPagedCollectionContract",
+  "description": "AircraftContractPagedCollectionContract schema from AeroDataBox API",
+  "type": "object",
+  "properties": {
+    "totalCount": {
+      "maximum": 2147483647,
+      "minimum": 0,
+      "type": "integer",
+      "description": "The total number of items across all pages",
+      "format": "int32"
+    },
+    "pageOffset": {
+      "maximum": 2147483647,
+      "minimum": 0,
+      "type": "integer",
+      "description": "The offset of the current page of the collection \r\n(number of items skipped before this page)",
+      "format": "int32"
+    },
+    "pageSize": {
+      "maximum": 2147483647,
+      "minimum": 0,
+      "type": "integer",
+      "description": "Maximum number of items on the current page of the collection\r\n(`Count` cannot be more than this value)",
+      "format": "int32"
+    },
+    "hasNextPage": {
+      "type": "boolean",
+      "description": "This value is true when collection has more pages",
+      "readOnly": true
+    },
+    "count": {
+      "maximum": 2147483647,
+      "minimum": 0,
+      "type": "integer",
+      "description": "The number of items in the collection",
+      "format": "int32",
+      "readOnly": true
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/AircraftContract"
+      },
+      "description": "The collection of items"
+    }
+  },
+  "required": [
+    "count",
+    "hasNextPage",
+    "items",
+    "pageOffset",
+    "pageSize",
+    "totalCount"
+  ],
+  "additionalProperties": false
+}

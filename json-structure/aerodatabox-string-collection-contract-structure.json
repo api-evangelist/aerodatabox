@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-structure/aerodatabox-string-collection-contract-structure.json",
+  "description": "StringCollectionContract schema from AeroDataBox API",
+  "type": "object",
+  "properties": {
+    "count": {
+      "maximum": 2147483647,
+      "minimum": 0,
+      "type": "int32",
+      "description": "The number of items in the collection",
+      "readOnly": true
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "The collection of items"
+    }
+  },
+  "required": [
+    "count",
+    "items"
+  ],
+  "additionalProperties": false,
+  "name": "StringCollectionContract"
+}

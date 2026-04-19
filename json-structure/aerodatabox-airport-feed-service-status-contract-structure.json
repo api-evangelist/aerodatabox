@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-structure/aerodatabox-airport-feed-service-status-contract-structure.json",
+  "description": "Airport data feed services status.\r\nRead https://aerodatabox.com/data-coverage for context.",
+  "type": "object",
+  "properties": {
+    "flightSchedulesFeed": {
+      "$ref": "#/components/schemas/FeedServiceStatusContract"
+    },
+    "liveFlightUpdatesFeed": {
+      "$ref": "#/components/schemas/FeedServiceStatusContract"
+    },
+    "adsbUpdatesFeed": {
+      "$ref": "#/components/schemas/FeedServiceStatusContract"
+    },
+    "generalAvailability": {
+      "$ref": "#/components/schemas/FlightDataGeneralAvailabilityContract"
+    }
+  },
+  "required": [
+    "adsbUpdatesFeed",
+    "flightSchedulesFeed",
+    "generalAvailability",
+    "liveFlightUpdatesFeed"
+  ],
+  "additionalProperties": false,
+  "name": "AirportFeedServiceStatusContract"
+}

@@ -1,0 +1,199 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "AeroDataBox Flight Tracking"
+  description: "Unified capability for real-time aviation intelligence combining flight status, aircraft data, and airport information. Enables developers and travel platforms to build comprehensive flight tracking, airport operations monitoring, and aircraft research applications. Primary persona: Developer or Travel Platform Engineer."
+  tags:
+    - AeroDataBox
+    - Aviation
+    - Flight Tracking
+    - Travel
+    - Airport Operations
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+binds:
+  - namespace: env
+    keys:
+      AERODATABOX_API_KEY: AERODATABOX_API_KEY
+
+capability:
+  consumes:
+    - import: flight
+      location: ./shared/flight.yaml
+    - import: aircraft
+      location: ./shared/aircraft.yaml
+    - import: airport
+      location: ./shared/airport.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: aerodatabox-flight-tracking-api
+      description: "Unified REST API for AeroDataBox aviation data."
+      resources:
+        - path: /v1/flights/{searchBy}/{searchParam}
+          name: flight-status
+          description: "Get flight status data."
+          operations:
+            - method: GET
+              name: get-flight-status
+              description: "Track a flight by number."
+              call: "flight.get-flight-status"
+              with:
+                searchBy: "rest.searchBy"
+                searchParam: "rest.searchParam"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/airports/{codeType}/{code}/flights
+          name: airport-fids
+          description: "Get FIDS for an airport."
+          operations:
+            - method: GET
+              name: get-airport-fids
+              description: "Get airport departures and arrivals."
+              call: "flight.get-airport-fids"
+              with:
+                codeType: "rest.codeType"
+                code: "rest.code"
+                fromLocal: "rest.fromLocal"
+                toLocal: "rest.toLocal"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/airports/{codeType}/{code}
+          name: airport
+          description: "Get airport information."
+          operations:
+            - method: GET
+              name: get-airport
+              description: "Retrieve airport details."
+              call: "airport.get-airport"
+              with:
+                codeType: "rest.codeType"
+                code: "rest.code"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/airports/search/location
+          name: airport-search
+          description: "Search airports by location."
+          operations:
+            - method: GET
+              name: search-airports
+              description: "Find nearby airports."
+              call: "airport.search-airports-by-location"
+              with:
+                lat: "rest.lat"
+                lon: "rest.lon"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/aircrafts/{searchBy}/{searchParam}
+          name: aircraft
+          description: "Get aircraft data."
+          operations:
+            - method: GET
+              name: get-aircraft
+              description: "Look up an aircraft."
+              call: "aircraft.get-aircraft"
+              with:
+                searchBy: "rest.searchBy"
+                searchParam: "rest.searchParam"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/airlines/{airlineCode}/aircrafts
+          name: airline-fleet
+          description: "Get airline fleet."
+          operations:
+            - method: GET
+              name: get-airline-fleet
+              description: "Get fleet for an airline."
+              call: "aircraft.get-airline-fleet"
+              with:
+                airlineCode: "rest.airlineCode"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9080
+      namespace: aerodatabox-flight-tracking-mcp
+      transport: http
+      description: "MCP server for AI-assisted aviation data queries using AeroDataBox."
+      tools:
+        - name: get-flight-status
+          description: "Track a flight in real-time by flight number or callsign."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "flight.get-flight-status"
+          with:
+            searchBy: "tools.searchBy"
+            searchParam: "tools.searchParam"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-airport-departures-arrivals
+          description: "Get all departures and arrivals at an airport for a time window."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "flight.get-airport-fids"
+          with:
+            codeType: "tools.codeType"
+            code: "tools.code"
+            fromLocal: "tools.fromLocal"
+            toLocal: "tools.toLocal"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-airport
+          description: "Get details for an airport by IATA or ICAO code."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "airport.get-airport"
+          with:
+            codeType: "tools.codeType"
+            code: "tools.code"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: search-airports-near-location
+          description: "Find airports near a geographic location."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "airport.search-airports-by-location"
+          with:
+            lat: "tools.lat"
+            lon: "tools.lon"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-aircraft
+          description: "Look up aircraft details by tail number or ICAO24 hex code."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "aircraft.get-aircraft"
+          with:
+            searchBy: "tools.searchBy"
+            searchParam: "tools.searchParam"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-airline-fleet
+          description: "Get all aircraft in an airline's fleet."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "aircraft.get-airline-fleet"
+          with:
+            airlineCode: "tools.airlineCode"
+          outputParameters:
+            - type: object
+              mapping: "$."

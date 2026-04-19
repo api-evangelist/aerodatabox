@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-schema/aerodatabox-speed-schema.json",
+  "title": "Speed",
+  "description": "Speed schema from AeroDataBox API",
+  "type": "object",
+  "properties": {
+    "kt": {
+      "type": "number",
+      "description": "Speed in knots",
+      "format": "double"
+    },
+    "kmPerHour": {
+      "type": "number",
+      "description": "Speed in km per hour",
+      "format": "double"
+    },
+    "miPerHour": {
+      "type": "number",
+      "description": "Speed in miles per hour",
+      "format": "double"
+    },
+    "meterPerSecond": {
+      "type": "number",
+      "description": "Speed in meters per second",
+      "format": "double"
+    }
+  },
+  "required": [
+    "kmPerHour",
+    "kt",
+    "meterPerSecond",
+    "miPerHour"
+  ],
+  "additionalProperties": false
+}

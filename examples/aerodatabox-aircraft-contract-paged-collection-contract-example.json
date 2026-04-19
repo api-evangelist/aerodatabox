@@ -1,0 +1,10 @@
+{
+  "totalCount": 100,
+  "pageOffset": 100,
+  "pageSize": 100,
+  "hasNextPage": true,
+  "count": 100,
+  "items": [
+    "example_value"
+  ]
+}

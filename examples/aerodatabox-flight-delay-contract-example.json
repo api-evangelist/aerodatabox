@@ -1,0 +1,15 @@
+{
+  "airportIcao": "KLAX",
+  "class": "example_value",
+  "scheduledHourUtc": 100,
+  "medianDelay": "example_value",
+  "delayPercentiles": [
+    "example_value"
+  ],
+  "numConsideredFlights": 100,
+  "numFlightsDelayedBrackets": [
+    "example_value"
+  ],
+  "fromUtc": "2025-03-15T14:30:00Z",
+  "toUtc": "2025-03-15T14:30:00Z"
+}

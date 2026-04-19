@@ -1,0 +1,11 @@
+{
+  "pressureAltitude": "example_value",
+  "altitude": "example_value",
+  "pressure": "example_value",
+  "groundSpeed": "example_value",
+  "trueTrack": "example_value",
+  "vsiFpm": 100,
+  "reportedAtUtc": "2025-03-15T14:30:00Z",
+  "lat": 1.5,
+  "lon": 1.5
+}

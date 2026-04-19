@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-schema/aerodatabox-flight-plan-contract-schema.json",
+  "title": "FlightPlanContract",
+  "description": "Flight plan contract",
+  "type": "object",
+  "properties": {
+    "flightRules": {
+      "$ref": "#/components/schemas/FlightRules"
+    },
+    "flightType": {
+      "$ref": "#/components/schemas/FlightType"
+    },
+    "revisionNo": {
+      "type": "integer",
+      "description": "No. of revision of the flight plan",
+      "format": "int32",
+      "nullable": true
+    },
+    "status": {
+      "$ref": "#/components/schemas/FlightPlanStatus"
+    },
+    "route": {
+      "minLength": 1,
+      "type": "string",
+      "description": "Route information for the flight as filed in the flight plan"
+    },
+    "altitude": {
+      "$ref": "#/components/schemas/DistanceFlightPlanUnitContract"
+    },
+    "airspeed": {
+      "$ref": "#/components/schemas/SpeedFlightPlanUnitContract"
+    },
+    "lastUpdatedUtc": {
+      "type": "string",
+      "description": "Time (UTC) of the latest known update to the flight plan",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "lastUpdatedUtc",
+    "route"
+  ],
+  "additionalProperties": false
+}

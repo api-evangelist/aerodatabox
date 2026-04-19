@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-structure/aerodatabox-flight-type-structure.json",
+  "description": "FlightType schema from AeroDataBox API",
+  "type": "string",
+  "enum": [
+    "Other",
+    "General",
+    "Scheduled",
+    "NonScheduled",
+    "Military"
+  ],
+  "name": "FlightType"
+}

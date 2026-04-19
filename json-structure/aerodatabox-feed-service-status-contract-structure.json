@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-structure/aerodatabox-feed-service-status-contract-structure.json",
+  "description": "Feed service status contract.\r\nRead https://aerodatabox.com/data-coverage for context.",
+  "type": "object",
+  "properties": {
+    "service": {
+      "$ref": "#/components/schemas/FeedServiceEnum"
+    },
+    "status": {
+      "$ref": "#/components/schemas/FeedServiceStatus"
+    },
+    "minAvailableLocalDate": {
+      "type": "datetime",
+      "description": "Date of the oldest flight stored (based on scheduled local times)",
+      "nullable": true,
+      "deprecated": true
+    },
+    "maxAvailableLocalDate": {
+      "type": "datetime",
+      "description": "Date of the most recent flight stored (based on scheduled local times)",
+      "nullable": true,
+      "deprecated": true
+    }
+  },
+  "required": [
+    "service",
+    "status"
+  ],
+  "additionalProperties": false,
+  "name": "FeedServiceStatusContract"
+}

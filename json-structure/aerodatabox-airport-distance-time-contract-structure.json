@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-structure/aerodatabox-airport-distance-time-contract-structure.json",
+  "description": "Contract containing information on distance and approximate flight time\r\nbetween specified airports",
+  "type": "object",
+  "properties": {
+    "from": {
+      "$ref": "#/components/schemas/ListingAirportContract"
+    },
+    "to": {
+      "$ref": "#/components/schemas/ListingAirportContract"
+    },
+    "greatCircleDistance": {
+      "$ref": "#/components/schemas/Distance"
+    },
+    "approxFlightTime": {
+      "type": "string",
+      "description": "Approximate flight time based on re-calculation of great circle distance\r\nagainst statistical duration average of multiple flights covered similar\r\ndistance before.",
+      "format": "date-span"
+    }
+  },
+  "required": [
+    "approxFlightTime",
+    "from",
+    "greatCircleDistance",
+    "to"
+  ],
+  "additionalProperties": false,
+  "name": "AirportDistanceTimeContract"
+}

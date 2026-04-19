@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-schema/aerodatabox-resource-contract-schema.json",
+  "title": "ResourceContract",
+  "description": "Single media resource data",
+  "type": "object",
+  "properties": {
+    "url": {
+      "minLength": 1,
+      "type": "string",
+      "description": "URL of the resource"
+    },
+    "webUrl": {
+      "type": "string",
+      "description": "URL of web-page containing the resource",
+      "nullable": true
+    },
+    "author": {
+      "type": "string",
+      "description": "Author name of the resource",
+      "nullable": true
+    },
+    "title": {
+      "type": "string",
+      "description": "Title of the resource",
+      "nullable": true
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the resource",
+      "nullable": true
+    },
+    "license": {
+      "$ref": "#/components/schemas/LicenseType"
+    },
+    "htmlAttributions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Attributions maintaining copyright, ownership and other legal information adjusted for displaying\r\nas HTML. Each element represent one line.",
+      "nullable": true
+    }
+  },
+  "required": [
+    "license",
+    "url"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-structure/aerodatabox-string-flight-search-item-contract-search-result-collection-contract-structure.json",
+  "description": "StringFlightSearchItemContractSearchResultCollectionContract schema from AeroDataBox API",
+  "type": "object",
+  "properties": {
+    "searchBy": {
+      "minLength": 1,
+      "type": "string",
+      "description": "Search parameter used to find the result. \r\nPlease note, it may be different from the actual input provided!"
+    },
+    "count": {
+      "maximum": 2147483647,
+      "minimum": 0,
+      "type": "int32",
+      "description": "The number of items in the collection",
+      "readOnly": true
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/FlightSearchItemContract"
+      },
+      "description": "The collection of items"
+    }
+  },
+  "required": [
+    "count",
+    "items",
+    "searchBy"
+  ],
+  "additionalProperties": false,
+  "name": "StringFlightSearchItemContractSearchResultCollectionContract"
+}

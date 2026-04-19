@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-schema/aerodatabox-airport-delay-contract-schema.json",
+  "title": "AirportDelayContract",
+  "description": "AirportDelayContract schema from AeroDataBox API",
+  "type": "object",
+  "properties": {
+    "airportIcao": {
+      "minLength": 1,
+      "type": "string",
+      "description": "Airport ICAO code"
+    },
+    "from": {
+      "$ref": "#/components/schemas/DateTimeContract"
+    },
+    "to": {
+      "$ref": "#/components/schemas/DateTimeContract"
+    },
+    "departuresDelayInformation": {
+      "$ref": "#/components/schemas/FlightBatchDelayContract"
+    },
+    "arrivalsDelayInformation": {
+      "$ref": "#/components/schemas/FlightBatchDelayContract"
+    }
+  },
+  "required": [
+    "airportIcao",
+    "arrivalsDelayInformation",
+    "departuresDelayInformation",
+    "from",
+    "to"
+  ],
+  "additionalProperties": false
+}

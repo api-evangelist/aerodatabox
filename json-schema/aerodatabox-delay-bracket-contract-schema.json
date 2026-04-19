@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-schema/aerodatabox-delay-bracket-contract-schema.json",
+  "title": "DelayBracketContract",
+  "description": "Delay bracket contract describing how many records are subject to a specific delay range",
+  "type": "object",
+  "properties": {
+    "delayedFrom": {
+      "type": "string",
+      "description": "The beginning of the delay range (format: [-]hh:mm:ss).\r\nE.g. in the expresssion \"delayed from 30 to 60 minutes\" stands for \"from 30 minutes\".\r\nValue can be negative (therefore, means early occurence).\r\n\r\nMust be preset if \"DelayedTo\" is not specified.",
+      "format": "date-span",
+      "nullable": true
+    },
+    "delayedTo": {
+      "type": "string",
+      "description": "The end of the delay range (format: [-]hh:mm:ss).\r\nE.g. in the expresssion \"delayed from 30 to 60 minutes\" stands for \"to 60 minutes\".\r\nValue can be negative (therefore, means early occurence).\r\n\r\nMust be preset if \"DelayedFrom\" is not specified.",
+      "format": "date-span",
+      "nullable": true
+    },
+    "num": {
+      "type": "integer",
+      "description": "Count of records subject to a specified delay range",
+      "format": "int32"
+    },
+    "percentage": {
+      "type": "number",
+      "description": "Percentage of records subject to a specified delay range.\r\n\r\nOnly available when this delay bracket is provided as a part\r\nof a statistical information of a bigger context and the \"total\"\r\ncount of records is known.",
+      "format": "float",
+      "nullable": true
+    }
+  },
+  "required": [
+    "num"
+  ],
+  "additionalProperties": false
+}

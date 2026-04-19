@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-structure/aerodatabox-subscriber-contract-structure.json",
+  "description": "Describes subscriber (consumer of the subscription)",
+  "type": "object",
+  "properties": {
+    "type": {
+      "minLength": 1,
+      "type": "string",
+      "description": "Type of subscriber. Completemented by SubscriberId."
+    },
+    "id": {
+      "minLength": 1,
+      "type": "string",
+      "description": "ID"
+    }
+  },
+  "required": [
+    "id",
+    "type"
+  ],
+  "additionalProperties": false,
+  "name": "SubscriberContract"
+}

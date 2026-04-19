@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-structure/aerodatabox-pressure-structure.json",
+  "description": "Pressure schema from AeroDataBox API",
+  "type": "object",
+  "properties": {
+    "hPa": {
+      "type": "double",
+      "description": "Pressure in hectopascals"
+    },
+    "inHg": {
+      "type": "double",
+      "description": "Pressure in inches mercury"
+    },
+    "mmHg": {
+      "type": "double",
+      "description": "Pressure in millimeters mercury"
+    }
+  },
+  "required": [
+    "hPa",
+    "inHg",
+    "mmHg"
+  ],
+  "additionalProperties": false,
+  "name": "Pressure"
+}

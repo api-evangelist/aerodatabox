@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-schema/aerodatabox-solar-state-contract-schema.json",
+  "title": "SolarStateContract",
+  "description": "Solar information at the moment",
+  "type": "object",
+  "properties": {
+    "location": {
+      "$ref": "#/components/schemas/GeoCoordinatesContract"
+    },
+    "sunElevation": {
+      "$ref": "#/components/schemas/Angle"
+    },
+    "sunAzimuth": {
+      "$ref": "#/components/schemas/Azimuth"
+    },
+    "dayTime": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/DayTime"
+      },
+      "description": "Daytime states"
+    },
+    "dawnAstronomical": {
+      "$ref": "#/components/schemas/DateTimeContract"
+    },
+    "dawnNautical": {
+      "$ref": "#/components/schemas/DateTimeContract"
+    },
+    "dawnCivil": {
+      "$ref": "#/components/schemas/DateTimeContract"
+    },
+    "sunrise": {
+      "$ref": "#/components/schemas/DateTimeContract"
+    },
+    "noonTrue": {
+      "$ref": "#/components/schemas/DateTimeContract"
+    },
+    "sunset": {
+      "$ref": "#/components/schemas/DateTimeContract"
+    },
+    "duskCivil": {
+      "$ref": "#/components/schemas/DateTimeContract"
+    },
+    "duskNautical": {
+      "$ref": "#/components/schemas/DateTimeContract"
+    },
+    "duskAstronomical": {
+      "$ref": "#/components/schemas/DateTimeContract"
+    }
+  },
+  "required": [
+    "dayTime",
+    "location",
+    "sunAzimuth",
+    "sunElevation"
+  ],
+  "additionalProperties": false
+}

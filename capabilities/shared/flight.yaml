@@ -1,0 +1,155 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "AeroDataBox Flight API"
+  description: "Real-time and historical flight status data including FIDS departures/arrivals for airports and individual flight tracking."
+  tags:
+    - AeroDataBox
+    - Aviation
+    - Flights
+    - Flight Status
+    - FIDS
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+binds:
+  - namespace: env
+    keys:
+      AERODATABOX_API_KEY: AERODATABOX_API_KEY
+
+capability:
+  consumes:
+    - type: http
+      namespace: flight
+      baseUri: https://prod.api.market/api/v1/aedbx/aerodatabox
+      description: "AeroDataBox Flight API for real-time and historical flight data."
+      authentication:
+        type: apikey
+        key: x-api-key
+        value: "{{AERODATABOX_API_KEY}}"
+        placement: header
+      resources:
+        - name: flight-status
+          path: /flights/{searchBy}/{searchParam}
+          description: "Get current day flight status."
+          operations:
+            - name: get-flight-status
+              method: GET
+              description: "Get flight status for the current day by flight number or other identifier."
+              inputParameters:
+                - name: searchBy
+                  in: path
+                  type: string
+                  required: true
+                  description: "Search type: number, callsign, squawk."
+                - name: searchParam
+                  in: path
+                  type: string
+                  required: true
+                  description: "The search value."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: airport-fids
+          path: /flights/airports/{codeType}/{code}/{fromLocal}/{toLocal}
+          description: "Get FIDS (departures and arrivals) for an airport."
+          operations:
+            - name: get-airport-fids
+              method: GET
+              description: "Get all flights departing and arriving at an airport in a time window."
+              inputParameters:
+                - name: codeType
+                  in: path
+                  type: string
+                  required: true
+                  description: "Airport code type: iata or icao."
+                - name: code
+                  in: path
+                  type: string
+                  required: true
+                  description: "The airport code."
+                - name: fromLocal
+                  in: path
+                  type: string
+                  required: true
+                  description: "Start of time window in local airport time."
+                - name: toLocal
+                  in: path
+                  type: string
+                  required: true
+                  description: "End of time window in local airport time."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8100
+      namespace: aerodatabox-flight-rest
+      resources:
+        - path: /v1/flights/{searchBy}/{searchParam}
+          name: flight-status
+          description: "Get flight status."
+          operations:
+            - method: GET
+              name: get-flight-status
+              description: "Get flight status for a flight."
+              call: "flight.get-flight-status"
+              with:
+                searchBy: "rest.searchBy"
+                searchParam: "rest.searchParam"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/airports/{code}/flights
+          name: airport-fids
+          description: "Get FIDS for an airport."
+          operations:
+            - method: GET
+              name: get-airport-fids
+              description: "Get departures and arrivals for an airport."
+              call: "flight.get-airport-fids"
+              with:
+                codeType: "rest.codeType"
+                code: "rest.code"
+                fromLocal: "rest.fromLocal"
+                toLocal: "rest.toLocal"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9100
+      namespace: aerodatabox-flight-mcp
+      transport: http
+      tools:
+        - name: get-flight-status
+          description: "Get real-time status for a specific flight by flight number."
+          hints:
+            readOnly: true
+            destructive: false
+          call: "flight.get-flight-status"
+          with:
+            searchBy: "tools.searchBy"
+            searchParam: "tools.searchParam"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-airport-departures-arrivals
+          description: "Get all departures and arrivals at an airport for a specified time window."
+          hints:
+            readOnly: true
+            destructive: false
+          call: "flight.get-airport-fids"
+          with:
+            codeType: "tools.codeType"
+            code: "tools.code"
+            fromLocal: "tools.fromLocal"
+            toLocal: "tools.toLocal"
+          outputParameters:
+            - type: object
+              mapping: "$."

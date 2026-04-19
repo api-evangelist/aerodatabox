@@ -1,0 +1,183 @@
+vocabulary: "1.0.0"
+
+info:
+  provider: "AeroDataBox"
+  description: "Unified taxonomy mapping operational (OpenAPI) and capability (Naftiko) dimensions for the AeroDataBox aviation and flight data API."
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+operational:
+  apis:
+    - namespace: aerodatabox-flight-api
+      title: AeroDataBox Flight API
+      baseUrl: https://prod.api.market/api/v1/aedbx/aerodatabox
+      operationCount: 8
+      status: active
+    - namespace: aerodatabox-aircraft-api
+      title: AeroDataBox Aircraft API
+      baseUrl: https://prod.api.market/api/v1/aedbx/aerodatabox
+      operationCount: 6
+      status: active
+    - namespace: aerodatabox-airport-api
+      title: AeroDataBox Airport API
+      baseUrl: https://prod.api.market/api/v1/aedbx/aerodatabox
+      operationCount: 5
+      status: active
+    - namespace: aerodatabox-statistical-api
+      title: AeroDataBox Statistical API
+      baseUrl: https://prod.api.market/api/v1/aedbx/aerodatabox
+      operationCount: 8
+      status: active
+    - namespace: aerodatabox-flight-alert-api
+      title: AeroDataBox Flight Alert API
+      baseUrl: https://prod.api.market/api/v1/aedbx/aerodatabox
+      operationCount: 6
+      status: active
+    - namespace: aerodatabox-healthcheck-api
+      title: AeroDataBox Healthcheck API
+      baseUrl: https://prod.api.market/api/v1/aedbx/aerodatabox
+      operationCount: 3
+      status: active
+    - namespace: aerodatabox-miscellaneous-api
+      title: AeroDataBox Miscellaneous API
+      baseUrl: https://prod.api.market/api/v1/aedbx/aerodatabox
+      operationCount: 4
+      status: active
+  resources:
+    - name: flights
+    - name: airports
+    - name: aircrafts
+    - name: airlines
+    - name: subscriptions
+    - name: health
+    - name: industry
+  actions:
+    - name: retrieve
+      httpMethod: GET
+    - name: create
+      httpMethod: POST
+    - name: delete
+      httpMethod: DELETE
+    - name: search
+      httpMethod: GET
+  schemas:
+    aviation:
+      - Flight
+      - Aircraft
+      - Airport
+      - Airline
+      - Runway
+    alerts:
+      - Subscription
+      - WebhookSubscription
+    statistics:
+      - DelayStatistics
+      - RouteStatistics
+  parameters:
+    identifiers:
+      - code
+      - airlineCode
+      - reg
+      - hex
+      - flightNumber
+    pagination:
+      - limit
+      - offset
+    filters:
+      - dateLocal
+      - fromLocal
+      - toLocal
+      - lat
+      - lon
+      - radiusKm
+  authentication:
+    - name: ApiKeyAuth
+      type: apiKey
+      in: header
+
+capability:
+  workflows:
+    - name: AeroDataBox Flight Tracking
+      file: capabilities/flight-tracking.yaml
+      description: Unified capability combining flight status, aircraft data, and airport information for real-time aviation intelligence.
+      apis:
+        - flight
+        - aircraft
+        - airport
+      toolCount: 6
+  personas:
+    - id: developer
+      name: Developer
+      description: Builds flight tracking, travel, and aviation applications using AeroDataBox APIs.
+    - id: data-analyst
+      name: Data Analyst
+      description: Analyzes aviation performance, delay patterns, and route statistics using historical data.
+    - id: travel-platform-engineer
+      name: Travel Platform Engineer
+      description: Integrates flight data into travel booking and notification systems.
+  domains:
+    - name: Flight Operations
+      description: Real-time and historical flight tracking, status monitoring, and FIDS data.
+    - name: Aircraft Data
+      description: Aircraft registrations, fleet composition, and aircraft imagery.
+    - name: Airport Data
+      description: Airport information, runway data, and location search.
+    - name: Aviation Analytics
+      description: Delay statistics, route performance, and trend analysis.
+  namespaces:
+    - type: consumed
+      name: flight
+    - type: consumed
+      name: aircraft
+    - type: consumed
+      name: airport
+    - type: rest
+      name: aerodatabox-flight-tracking-api
+      port: 8080
+    - type: mcp
+      name: aerodatabox-flight-tracking-mcp
+      port: 9080
+  binds:
+    - name: AERODATABOX_API_KEY
+      workflows:
+        - flight-tracking
+
+crossReference:
+  - resource: flights
+    operations:
+      - get-flight-status
+      - get-airport-fids
+      - search-flight-numbers
+    workflows:
+      - flight-tracking
+    personas:
+      - developer
+      - travel-platform-engineer
+  - resource: airports
+    operations:
+      - get-airport
+      - search-airports-by-location
+      - get-airport-runways
+    workflows:
+      - flight-tracking
+    personas:
+      - developer
+      - travel-platform-engineer
+  - resource: aircrafts
+    operations:
+      - get-aircraft
+      - get-airline-fleet
+      - search-active-aircraft
+    workflows:
+      - flight-tracking
+    personas:
+      - developer
+      - data-analyst
+  - resource: delays
+    operations:
+      - get-airport-delays
+      - get-global-delays
+      - get-flight-delay-statistics
+    workflows: []
+    personas:
+      - data-analyst

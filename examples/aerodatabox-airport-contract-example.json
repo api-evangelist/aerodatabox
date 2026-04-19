@@ -1,0 +1,18 @@
+{
+  "icao": "KLAX",
+  "iata": "LAX",
+  "localCode": "example_value",
+  "shortName": "Los Angeles International",
+  "fullName": "Los Angeles International",
+  "municipalityName": "Los Angeles International",
+  "location": "example_value",
+  "elevation": "example_value",
+  "country": "example_value",
+  "continent": "example_value",
+  "timeZone": "example_value",
+  "urls": "example_value",
+  "runways": [
+    "example_value"
+  ],
+  "currentTime": "example_value"
+}

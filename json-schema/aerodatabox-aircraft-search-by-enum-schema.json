@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-schema/aerodatabox-aircraft-search-by-enum-schema.json",
+  "title": "AircraftSearchByEnum",
+  "description": "Criteria to search aircraft by<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - Id</b>: ID of the aircraft (as stored in this API)</li>\r\n<li><b>1 - Reg</b>: Search by aircraft tail-number</li>\r\n<li><b>2 - Icao24</b>: Search by 24-bit ICAO Mode-S Transponder code</li>\r\n</ul>\r\n",
+  "type": "string",
+  "enum": [
+    "Id",
+    "Reg",
+    "Icao24"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-structure/aerodatabox-daily-route-stat-contract-structure.json",
+  "description": "Route daily statistics of the airport",
+  "type": "object",
+  "properties": {
+    "routes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/DailyRouteStatRecordContract"
+      }
+    }
+  },
+  "required": [
+    "routes"
+  ],
+  "additionalProperties": false,
+  "name": "DailyRouteStatContract"
+}

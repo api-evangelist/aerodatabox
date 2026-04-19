@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-schema/aerodatabox-percentile-bracket-contract-schema.json",
+  "title": "PercentileBracketContract",
+  "description": "Percentile bracket contract describing the flight delay for a specific percentile of the distribution",
+  "type": "object",
+  "properties": {
+    "percentile": {
+      "maximum": 95,
+      "minimum": 5,
+      "type": "integer",
+      "description": "Percentile of the distribution",
+      "format": "int32"
+    },
+    "delay": {
+      "type": "string",
+      "description": "Delay of the flight for the specific percentile (format: [-]hh:mm:ss).",
+      "format": "date-span"
+    }
+  },
+  "required": [
+    "delay",
+    "percentile"
+  ],
+  "additionalProperties": false
+}

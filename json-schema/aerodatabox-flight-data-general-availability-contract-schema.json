@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-schema/aerodatabox-flight-data-general-availability-contract-schema.json",
+  "title": "FlightDataGeneralAvailabilityContract",
+  "description": "FlightDataGeneralAvailabilityContract schema from AeroDataBox API",
+  "type": "object",
+  "properties": {
+    "minAvailableLocalDate": {
+      "type": "string",
+      "description": "Date of the oldest flight stored (based on scheduled local times)\r\nIf not specified, no flight data available",
+      "format": "date-time",
+      "nullable": true
+    },
+    "maxAvailableLocalDate": {
+      "type": "string",
+      "description": "Date of the most recent flight stored (based on scheduled local times)\r\nIf not specified, no flight data available",
+      "format": "date-time",
+      "nullable": true
+    }
+  },
+  "additionalProperties": false
+}

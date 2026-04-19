@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-structure/aerodatabox-flight-airline-contract-structure.json",
+  "description": "Flight's airline reference conract",
+  "type": "object",
+  "properties": {
+    "name": {
+      "minLength": 1,
+      "type": "string",
+      "description": "Airline name"
+    },
+    "iata": {
+      "type": "string",
+      "description": "IATA code of the airline",
+      "nullable": true
+    },
+    "icao": {
+      "type": "string",
+      "description": "ICAO code of the airline",
+      "nullable": true
+    }
+  },
+  "required": [
+    "name"
+  ],
+  "additionalProperties": false,
+  "name": "FlightAirlineContract"
+}

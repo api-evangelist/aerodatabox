@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-structure/aerodatabox-subscription-balance-contract-structure.json",
+  "description": "Represents the balance for all alert subscriptions associated with the user acount, including remaining credits and timestamps\r\nfor the most recent refill and deduction operations.",
+  "type": "object",
+  "properties": {
+    "creditsRemaining": {
+      "type": "int64",
+      "description": "Alert credits remaining for the account."
+    },
+    "lastRefilledUtc": {
+      "type": "datetime",
+      "description": "The datetime when the balance was last re-filled, in UTC."
+    },
+    "lastDeductedUtc": {
+      "type": "datetime",
+      "description": "The datetime when the balance was last deducated, in UTC.\r\nDeduction typically occurs when an alert notification was dispatched\r\nfor one of the alert subscriptions associated with the user account."
+    }
+  },
+  "required": [
+    "creditsRemaining",
+    "lastDeductedUtc",
+    "lastRefilledUtc"
+  ],
+  "additionalProperties": false,
+  "name": "SubscriptionBalanceContract"
+}

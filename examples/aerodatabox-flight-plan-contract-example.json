@@ -1,0 +1,10 @@
+{
+  "flightRules": "example_value",
+  "flightType": "example_value",
+  "revisionNo": 100,
+  "status": "Departed",
+  "route": "example_value",
+  "altitude": "example_value",
+  "airspeed": "example_value",
+  "lastUpdatedUtc": "2025-03-15T14:30:00Z"
+}

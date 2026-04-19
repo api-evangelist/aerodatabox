@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-structure/aerodatabox-feed-service-enum-structure.json",
+  "description": "Airport feed service defininitions<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - FlightSchedules</b>: Flight schedules data feed for this airport (static schedules data without actual updates)</li>\r\n<li><b>1 - FlightLiveUpdates</b>: Actual flight status and time updates for this airport</li>\r\n<li><b>2 - AdsbUpdates</b>: Flight updates derived from ADS-B data for this airport: runway, actual/estimated time on the runway, call-sign, ModeS 24-bit ICAO code, aircraft registration</li>\r\n</ul>\r\n",
+  "type": "string",
+  "enum": [
+    "FlightSchedules",
+    "FlightLiveUpdates",
+    "AdsbUpdates"
+  ],
+  "name": "FeedServiceEnum"
+}

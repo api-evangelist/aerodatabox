@@ -1,0 +1,15 @@
+{
+  "greatCircleDistance": "example_value",
+  "departure": "example_value",
+  "arrival": "example_value",
+  "flightPlan": "example_value",
+  "lastUpdatedUtc": "2025-03-15T14:30:00Z",
+  "number": "example_value",
+  "callSign": "example_value",
+  "status": "Departed",
+  "codeshareStatus": "Departed",
+  "isCargo": true,
+  "aircraft": "example_value",
+  "airline": "example_value",
+  "location": "example_value"
+}

@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-structure/aerodatabox-flight-delay-contract-structure.json",
+  "description": "Delay statistics for a flight movement",
+  "type": "object",
+  "properties": {
+    "airportIcao": {
+      "minLength": 1,
+      "type": "string",
+      "description": "ICAO code of the airport at which statistics is observed"
+    },
+    "class": {
+      "$ref": "#/components/schemas/StatisticClass"
+    },
+    "scheduledHourUtc": {
+      "type": "int32",
+      "description": "Hour on which flight is scheduled (represented in UTC).\r\n\r\nIf provided, it separates the statistics for the same flight departing/arriving at different time of day\r\non different days within the observed period.",
+      "nullable": true
+    },
+    "medianDelay": {
+      "type": "string",
+      "description": "Median historic delay of the flight (format: [-]hh:mm:ss).\r\nValue can be negative (therefore, means early occurence).",
+      "format": "date-span"
+    },
+    "delayPercentiles": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/PercentileBracketContract"
+      },
+      "description": "Distribution of historic delays of the flight in percentiles from 5 percentile to 95 percentile in steps of 5 percentile, \r\nallowing for a more detailed analysis of delay patterns beyond simple averages or medians."
+    },
+    "numConsideredFlights": {
+      "type": "int32",
+      "description": "The number of flight movements taken into account to calculate this\r\nstatistics."
+    },
+    "numFlightsDelayedBrackets": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/DelayBracketContract"
+      },
+      "description": "Brackets containing information more detailed information about\r\nhow many flights were delayed/early per specific delay range brackets\r\n(e.g. late from 15 to 30 minutes, from 30 to 60, etc.)"
+    },
+    "fromUtc": {
+      "type": "datetime",
+      "description": "The beginning of the time range within which flght delay information is calculated (represented in UTC time)"
+    },
+    "toUtc": {
+      "type": "datetime",
+      "description": "The end of the time range within which flght delay information is calculated (represented in UTC time)"
+    }
+  },
+  "required": [
+    "airportIcao",
+    "class",
+    "delayPercentiles",
+    "fromUtc",
+    "medianDelay",
+    "numConsideredFlights",
+    "numFlightsDelayedBrackets",
+    "toUtc"
+  ],
+  "additionalProperties": false,
+  "name": "FlightDelayContract"
+}

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-structure/aerodatabox-date-time-contract-structure.json",
+  "description": "Descriptor date-time represented in both UTC and local timezones",
+  "type": "object",
+  "properties": {
+    "utc": {
+      "type": "datetime",
+      "description": "UTC-time"
+    },
+    "local": {
+      "type": "datetime",
+      "description": "Local time"
+    }
+  },
+  "required": [
+    "local",
+    "utc"
+  ],
+  "additionalProperties": false,
+  "name": "DateTimeContract"
+}

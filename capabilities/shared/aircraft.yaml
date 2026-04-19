@@ -1,0 +1,133 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "AeroDataBox Aircraft API"
+  description: "Search and retrieve aircraft information by tail number, registration, or ICAO24 hex code with airline fleet lookups and images."
+  tags:
+    - AeroDataBox
+    - Aviation
+    - Aircraft
+    - Fleet
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+binds:
+  - namespace: env
+    keys:
+      AERODATABOX_API_KEY: AERODATABOX_API_KEY
+
+capability:
+  consumes:
+    - type: http
+      namespace: aircraft
+      baseUri: https://prod.api.market/api/v1/aedbx/aerodatabox
+      description: "AeroDataBox Aircraft API for aircraft data and fleet information."
+      authentication:
+        type: apikey
+        key: x-api-key
+        value: "{{AERODATABOX_API_KEY}}"
+        placement: header
+      resources:
+        - name: aircraft
+          path: /aircrafts/{searchBy}/{searchParam}
+          description: "Get aircraft information."
+          operations:
+            - name: get-aircraft
+              method: GET
+              description: "Retrieve aircraft data by tail number, registration, or ICAO24."
+              inputParameters:
+                - name: searchBy
+                  in: path
+                  type: string
+                  required: true
+                  description: "Search type: reg, hex, or similar."
+                - name: searchParam
+                  in: path
+                  type: string
+                  required: true
+                  description: "The search value."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: airline-fleet
+          path: /airlines/{airlineCode}/aircrafts
+          description: "Get airline fleet."
+          operations:
+            - name: get-airline-fleet
+              method: GET
+              description: "Get all aircraft in an airline's fleet."
+              inputParameters:
+                - name: airlineCode
+                  in: path
+                  type: string
+                  required: true
+                  description: "IATA airline code."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8101
+      namespace: aerodatabox-aircraft-rest
+      resources:
+        - path: /v1/aircrafts/{searchBy}/{searchParam}
+          name: aircraft
+          description: "Get aircraft data."
+          operations:
+            - method: GET
+              name: get-aircraft
+              description: "Get aircraft information."
+              call: "aircraft.get-aircraft"
+              with:
+                searchBy: "rest.searchBy"
+                searchParam: "rest.searchParam"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/airlines/{airlineCode}/aircrafts
+          name: airline-fleet
+          description: "Get airline fleet."
+          operations:
+            - method: GET
+              name: get-airline-fleet
+              description: "Get aircraft for an airline."
+              call: "aircraft.get-airline-fleet"
+              with:
+                airlineCode: "rest.airlineCode"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9101
+      namespace: aerodatabox-aircraft-mcp
+      transport: http
+      tools:
+        - name: get-aircraft
+          description: "Look up aircraft details by tail number or ICAO24 hex code."
+          hints:
+            readOnly: true
+            destructive: false
+          call: "aircraft.get-aircraft"
+          with:
+            searchBy: "tools.searchBy"
+            searchParam: "tools.searchParam"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-airline-fleet
+          description: "Get the fleet of aircraft for a specific airline."
+          hints:
+            readOnly: true
+            destructive: false
+          call: "aircraft.get-airline-fleet"
+          with:
+            airlineCode: "tools.airlineCode"
+          outputParameters:
+            - type: object
+              mapping: "$."

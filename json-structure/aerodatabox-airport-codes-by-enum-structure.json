@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/json-structure/aerodatabox-airport-codes-by-enum-structure.json",
+  "description": "Search by airport code type<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - Icao</b>: ICAO-code</li>\r\n<li><b>1 - Iata</b>: IATA-code</li>\r\n</ul>\r\n",
+  "type": "string",
+  "enum": [
+    "Icao",
+    "Iata"
+  ],
+  "name": "AirportCodesByEnum"
+}
