@@ -4,107 +4,40 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: AeroDataBox
 providerId: aerodatabox
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
+notes: Rate limits depend on the marketplace tier purchased. RapidAPI enforces a per-second
+  request cap plus a monthly quota set per tier; AeroDataBox's primary docs site is currently
+  blocked to programmatic fetch.
 tags:
+  - Rate Limiting
   - Aviation
   - Flights
-  - Aerospace
-  - Flight Data
-  - Airport Data
-  - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the AeroDataBox API surface. Captures per-tier
-  quotas, burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to
-  be replaced with published provider limits.
-headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
+description: AeroDataBox rate limits are governed by the marketplace tier (RapidAPI / api.market).
+  Each tier defines a per-second cap and a monthly request quota; soft and hard caps are configured
+  on the marketplace.
+sources:
+  - https://rapidapi.com/aedbx-aedbx/api/aerodatabox
+  - https://prod.api.market/api/v1/aedbx/aerodatabox
 responseCodes:
   throttled: 429
   quotaExceeded: 429
-  serviceUnavailable: 503
 limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - AeroDataBox Flight API
-      - AeroDataBox Aircraft API
-      - AeroDataBox Airport API
-      - AeroDataBox Statistical API
-      - AeroDataBox Flight Alert API
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
+  - name: Marketplace tier limit (per-second)
+    scope: key
+    metric: requests_per_second
+    limit: see marketplace tier
+    notes: RapidAPI sets a per-second hard cap per tier; check the listing.
+  - name: Marketplace tier monthly quota
+    scope: key
     metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - AeroDataBox Flight API
-      - AeroDataBox Aircraft API
-      - AeroDataBox Airport API
-      - AeroDataBox Statistical API
-      - AeroDataBox Flight Alert API
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - AeroDataBox Flight API
-      - AeroDataBox Aircraft API
-      - AeroDataBox Airport API
-      - AeroDataBox Statistical API
-      - AeroDataBox Flight Alert API
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - AeroDataBox Flight API
-      - AeroDataBox Aircraft API
-      - AeroDataBox Airport API
-      - AeroDataBox Statistical API
-      - AeroDataBox Flight Alert API
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - AeroDataBox Flight API
-      - AeroDataBox Aircraft API
-      - AeroDataBox Airport API
-      - AeroDataBox Statistical API
-      - AeroDataBox Flight Alert API
+    limit: see marketplace tier
+    notes: Tier-defined monthly quota; overages either error or bill at the listed overage rate.
 policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
-maintainers:
-  - FN: API Evangelist
-    url: http://apievangelist.com
-    email: info@apievangelist.com
+  - name: Marketplace-enforced
+    description: Limits and quotas are enforced by the API marketplace gateway (RapidAPI /
+      api.market), not by AeroDataBox directly.
+  - name: Backoff
+    description: Honor Retry-After when present; use exponential backoff with jitter on 429.
+  - name: Tier upgrade
+    description: To raise limits, upgrade tier on the marketplace listing.
