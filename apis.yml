@@ -186,7 +186,7 @@ common:
     type: NaftikoCapability
     title: Flight Tracking
   - url: json-ld/aerodatabox-context.jsonld
-    type: JSON-LD
+    type: JSONLD
   - type: Integrations
     data:
       - name: RapidAPI
