@@ -1,0 +1,631 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: AeroDataBox API - Aviation and Flight API — Flight API
+  description: 'AeroDataBox API - Aviation and Flight API — Flight API. 8 operations. Lead operation: AeroDataBox FIDS (airport
+    Departures and Arrivals) - by Relative Time / by Current Time / TIER 2. Self-contained Naftiko capability covering one
+    Aerodatabox business surface.'
+  tags:
+  - Aerodatabox
+  - Flight API
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AERODATABOX_API_KEY: AERODATABOX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: aerodatabox-flight-api
+    baseUri: https://prod.api.market/api/v1/aedbx/aerodatabox
+    description: AeroDataBox API - Aviation and Flight API — Flight API business capability. Self-contained, no shared references.
+    resources:
+    - name: flights-airports-codeType-code
+      path: /flights/airports/{codeType}/{code}
+      operations:
+      - name: getairportflightsrelative
+        method: GET
+        description: AeroDataBox FIDS (airport Departures and Arrivals) - by Relative Time / by Current Time / TIER 2
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: codeType
+          in: path
+          type: string
+          description: Type of code to search airport by (`iata` or `icao`)
+        - name: code
+          in: path
+          type: string
+          description: "If `codeType` is:\r"
+          required: true
+        - name: offsetMinutes
+          in: query
+          type: integer
+          description: 'Beginning of the search range expressed in minutes relative to the current time at the airport (default:
+            `-120`)'
+        - name: durationMinutes
+          in: query
+          type: integer
+          description: 'Length (duration) of the search range expressed in minutes (default: `720`)'
+        - name: direction
+          in: query
+          type: string
+          description: 'Direction of flights: Arrival, Departure or Both (default)'
+        - name: withLeg
+          in: query
+          type: boolean
+          description: If set to true, the result will include movement information from airport opposite in this flight leg
+            (airport of origin for arriving flight or airport of desti
+        - name: withCancelled
+          in: query
+          type: boolean
+          description: "If set to true, result will include cancelled, divered, likely cancelled (CanceledUncertain) flights.\r"
+        - name: withCodeshared
+          in: query
+          type: boolean
+          description: "If set to true, the result will include flights with all code-shared statuses.\r"
+        - name: withCargo
+          in: query
+          type: boolean
+          description: If set to true, the result will include cargo flights (subject to availability).
+        - name: withPrivate
+          in: query
+          type: boolean
+          description: If set to true, the result will include private flights (subject to availability).
+        - name: withLocation
+          in: query
+          type: boolean
+          description: "If set to true, each currently active flight within the result will be populated \r"
+    - name: flights-airports-codeType-code-fromLocal-toLocal
+      path: /flights/airports/{codeType}/{code}/{fromLocal}/{toLocal}
+      operations:
+      - name: getairportflights
+        method: GET
+        description: AeroDataBox FIDS (airport Departures and Arrivals) - by Local Time Range / TIER 2
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: codeType
+          in: path
+          type: string
+          description: Type of code to search airport by (`iata` or `icao`)
+        - name: code
+          in: path
+          type: string
+          description: "If `codeType` is:\r"
+          required: true
+        - name: fromLocal
+          in: path
+          type: string
+          description: 'Beginning of the search range (local time, format: YYYY-MM-DDTHH:mm)'
+          required: true
+        - name: toLocal
+          in: path
+          type: string
+          description: 'End of the search range (local time, format: YYYY-MM-DDTHH:mm). Must be more than beginning of the
+            search range by no more than 12 hours.'
+          required: true
+        - name: direction
+          in: query
+          type: string
+          description: 'Direction of flights: Arrival, Departure or Both (default)'
+        - name: withLeg
+          in: query
+          type: boolean
+          description: If set to true, the result will include movement information from airport opposite in this flight leg
+            (airport of origin for arriving flight or airport of desti
+        - name: withCancelled
+          in: query
+          type: boolean
+          description: "If set to true, result will include cancelled, divered, likely cancelled (CanceledUncertain) flights.\r"
+        - name: withCodeshared
+          in: query
+          type: boolean
+          description: "If set to true, the result will include flights with all code-shared statuses.\r"
+        - name: withCargo
+          in: query
+          type: boolean
+          description: If set to true, the result will include cargo flights (subject to availability).
+        - name: withPrivate
+          in: query
+          type: boolean
+          description: If set to true, the result will include private flights (subject to availability).
+        - name: withLocation
+          in: query
+          type: boolean
+          description: "If set to true, each currently active flight within the result will be populated \r"
+    - name: flights-search-term
+      path: /flights/search/term
+      operations:
+      - name: searchflightsbyterm
+        method: GET
+        description: AeroDataBox Search Flight Numbers by Term / TIER 2
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: q
+          in: query
+          type: string
+          description: Search query (min. 2 non whitespace characters length)
+          required: true
+        - name: limit
+          in: query
+          type: integer
+          description: Maximum number of items to be returned (max. 100, defaut = 10)
+    - name: flights-searchBy-searchParam
+      path: /flights/{searchBy}/{searchParam}
+      operations:
+      - name: getflightflightnearest
+        method: GET
+        description: AeroDataBox Flight Status (single Day) / TIER 2
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: searchBy
+          in: path
+          type: string
+          description: Criteria to search flight by
+        - name: searchParam
+          in: path
+          type: string
+          description: "Value of the search criteria. If `searchBy` is: \r"
+          required: true
+        - name: dateLocalRole
+          in: query
+          type: string
+          description: '* If set to `Both` (default, recommended for best results) then the dateLocal parameter shall be considered
+            as both departure and arrival date. If a flight depa'
+        - name: withAircraftImage
+          in: query
+          type: boolean
+          description: "Should include aircraft image (default: false).\r"
+        - name: withLocation
+          in: query
+          type: boolean
+          description: 'Should include real-time positional data, e.g.: location, speed, altitude, etc., if available (default:
+            false).'
+        - name: withFlightPlan
+          in: query
+          type: boolean
+          description: "Should include the flight plan filed with the ATC for the flight (default: false).\r"
+    - name: flights-searchBy-searchParam-dates
+      path: /flights/{searchBy}/{searchParam}/dates
+      operations:
+      - name: getflightdatesflightdatesall
+        method: GET
+        description: AeroDataBox Flight Departure Dates / TIER 2
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: searchBy
+          in: path
+          type: string
+          description: Criteria to search flight by
+        - name: searchParam
+          in: path
+          type: string
+          description: "Value of the search criteria. If **searchBy** is: \r"
+          required: true
+    - name: flights-searchBy-searchParam-dates-fromLocal-toLocal
+      path: /flights/{searchBy}/{searchParam}/dates/{fromLocal}/{toLocal}
+      operations:
+      - name: getflightdatesflightdatesinrange
+        method: GET
+        description: AeroDataBox Flight Departure Dates / TIER 2
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: searchBy
+          in: path
+          type: string
+          description: Criteria to search flight by
+        - name: searchParam
+          in: path
+          type: string
+          description: "Value of the search criteria. If **searchBy** is: \r"
+          required: true
+        - name: fromLocal
+          in: path
+          type: string
+          description: 'Beginning of the search range (local time, format: YYYY-MM-DD)'
+          required: true
+        - name: toLocal
+          in: path
+          type: string
+          description: 'End of the search range (local time, format: YYYY-MM-DD)'
+          required: true
+    - name: flights-searchBy-searchParam-dateFromLocal-dateToLocal
+      path: /flights/{searchBy}/{searchParam}/{dateFromLocal}/{dateToLocal}
+      operations:
+      - name: getflighthistoryflighthistory
+        method: GET
+        description: AeroDataBox Flight History and Schedule (range of Days) / TIER 3
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: searchBy
+          in: path
+          type: string
+          description: Criteria to search flight by
+        - name: searchParam
+          in: path
+          type: string
+          description: "Value of the search criteria. If `searchBy` is: \r"
+          required: true
+        - name: dateFromLocal
+          in: path
+          type: string
+          description: 'Beginning of the range of local dates of departure or arrival (in format: YYYY-MM-DD, e.g.: 2019-08-29).
+            Maximum/minimum allowable value is determined by the cu'
+          required: true
+        - name: dateToLocal
+          in: path
+          type: string
+          description: 'End of the range of local dates of departure or arrival (in format: YYYY-MM-DD, e.g.: 2019-08-29).
+            Maximum/minimum allowable value is determined by the current '
+          required: true
+        - name: dateLocalRole
+          in: query
+          type: string
+          description: '* If set to `Both` (default, recommended for best results) then the dateFromLocal and dateToLocal
+            parameters shall be considered as both departure and arrival d'
+    - name: flights-searchBy-searchParam-dateLocal
+      path: /flights/{searchBy}/{searchParam}/{dateLocal}
+      operations:
+      - name: getflightflightonspecificdate
+        method: GET
+        description: AeroDataBox Flight Status (single Day) / TIER 2
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: searchBy
+          in: path
+          type: string
+          description: Criteria to search flight by
+        - name: searchParam
+          in: path
+          type: string
+          description: "Value of the search criteria. If `searchBy` is: \r"
+          required: true
+        - name: dateLocal
+          in: path
+          type: string
+          description: 'Local date of departure or arrival (in format: YYYY-MM-DD, e.g.: 2019-08-29). Maximum/minimum allowable
+            date is determined by the current data coverage limitati'
+          required: true
+        - name: dateLocalRole
+          in: query
+          type: string
+          description: '* If set to `Both` (default, recommended for best results) then the dateLocal parameter shall be considered
+            as both departure and arrival date. If a flight depa'
+        - name: withAircraftImage
+          in: query
+          type: boolean
+          description: "Should include aircraft image (default: false).\r"
+        - name: withLocation
+          in: query
+          type: boolean
+          description: 'Should include real-time positional data, e.g.: location, speed, altitude, etc., if available (default:
+            false).'
+        - name: withFlightPlan
+          in: query
+          type: boolean
+          description: "Should include the flight plan filed with the ATC for the flight (default: false).\r"
+  exposes:
+  - type: rest
+    namespace: aerodatabox-flight-api-rest
+    port: 8080
+    description: REST adapter for AeroDataBox API - Aviation and Flight API — Flight API. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/flights/airports/{codetype}/{code}
+      name: flights-airports-codetype-code
+      description: REST surface for flights-airports-codeType-code.
+      operations:
+      - method: GET
+        name: getairportflightsrelative
+        description: AeroDataBox FIDS (airport Departures and Arrivals) - by Relative Time / by Current Time / TIER 2
+        call: aerodatabox-flight-api.getairportflightsrelative
+        with:
+          codeType: rest.codeType
+          code: rest.code
+          offsetMinutes: rest.offsetMinutes
+          durationMinutes: rest.durationMinutes
+          direction: rest.direction
+          withLeg: rest.withLeg
+          withCancelled: rest.withCancelled
+          withCodeshared: rest.withCodeshared
+          withCargo: rest.withCargo
+          withPrivate: rest.withPrivate
+          withLocation: rest.withLocation
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/flights/airports/{codetype}/{code}/{fromlocal}/{tolocal}
+      name: flights-airports-codetype-code-fromlocal-tolocal
+      description: REST surface for flights-airports-codeType-code-fromLocal-toLocal.
+      operations:
+      - method: GET
+        name: getairportflights
+        description: AeroDataBox FIDS (airport Departures and Arrivals) - by Local Time Range / TIER 2
+        call: aerodatabox-flight-api.getairportflights
+        with:
+          codeType: rest.codeType
+          code: rest.code
+          fromLocal: rest.fromLocal
+          toLocal: rest.toLocal
+          direction: rest.direction
+          withLeg: rest.withLeg
+          withCancelled: rest.withCancelled
+          withCodeshared: rest.withCodeshared
+          withCargo: rest.withCargo
+          withPrivate: rest.withPrivate
+          withLocation: rest.withLocation
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/flights/search/term
+      name: flights-search-term
+      description: REST surface for flights-search-term.
+      operations:
+      - method: GET
+        name: searchflightsbyterm
+        description: AeroDataBox Search Flight Numbers by Term / TIER 2
+        call: aerodatabox-flight-api.searchflightsbyterm
+        with:
+          q: rest.q
+          limit: rest.limit
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/flights/{searchby}/{searchparam}
+      name: flights-searchby-searchparam
+      description: REST surface for flights-searchBy-searchParam.
+      operations:
+      - method: GET
+        name: getflightflightnearest
+        description: AeroDataBox Flight Status (single Day) / TIER 2
+        call: aerodatabox-flight-api.getflightflightnearest
+        with:
+          searchBy: rest.searchBy
+          searchParam: rest.searchParam
+          dateLocalRole: rest.dateLocalRole
+          withAircraftImage: rest.withAircraftImage
+          withLocation: rest.withLocation
+          withFlightPlan: rest.withFlightPlan
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/flights/{searchby}/{searchparam}/dates
+      name: flights-searchby-searchparam-dates
+      description: REST surface for flights-searchBy-searchParam-dates.
+      operations:
+      - method: GET
+        name: getflightdatesflightdatesall
+        description: AeroDataBox Flight Departure Dates / TIER 2
+        call: aerodatabox-flight-api.getflightdatesflightdatesall
+        with:
+          searchBy: rest.searchBy
+          searchParam: rest.searchParam
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/flights/{searchby}/{searchparam}/dates/{fromlocal}/{tolocal}
+      name: flights-searchby-searchparam-dates-fromlocal-tolocal
+      description: REST surface for flights-searchBy-searchParam-dates-fromLocal-toLocal.
+      operations:
+      - method: GET
+        name: getflightdatesflightdatesinrange
+        description: AeroDataBox Flight Departure Dates / TIER 2
+        call: aerodatabox-flight-api.getflightdatesflightdatesinrange
+        with:
+          searchBy: rest.searchBy
+          searchParam: rest.searchParam
+          fromLocal: rest.fromLocal
+          toLocal: rest.toLocal
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/flights/{searchby}/{searchparam}/{datefromlocal}/{datetolocal}
+      name: flights-searchby-searchparam-datefromlocal-datetolocal
+      description: REST surface for flights-searchBy-searchParam-dateFromLocal-dateToLocal.
+      operations:
+      - method: GET
+        name: getflighthistoryflighthistory
+        description: AeroDataBox Flight History and Schedule (range of Days) / TIER 3
+        call: aerodatabox-flight-api.getflighthistoryflighthistory
+        with:
+          searchBy: rest.searchBy
+          searchParam: rest.searchParam
+          dateFromLocal: rest.dateFromLocal
+          dateToLocal: rest.dateToLocal
+          dateLocalRole: rest.dateLocalRole
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/flights/{searchby}/{searchparam}/{datelocal}
+      name: flights-searchby-searchparam-datelocal
+      description: REST surface for flights-searchBy-searchParam-dateLocal.
+      operations:
+      - method: GET
+        name: getflightflightonspecificdate
+        description: AeroDataBox Flight Status (single Day) / TIER 2
+        call: aerodatabox-flight-api.getflightflightonspecificdate
+        with:
+          searchBy: rest.searchBy
+          searchParam: rest.searchParam
+          dateLocal: rest.dateLocal
+          dateLocalRole: rest.dateLocalRole
+          withAircraftImage: rest.withAircraftImage
+          withLocation: rest.withLocation
+          withFlightPlan: rest.withFlightPlan
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: aerodatabox-flight-api-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for AeroDataBox API - Aviation and Flight API — Flight API. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: aerodatabox-fids-airport-departures-and
+      description: AeroDataBox FIDS (airport Departures and Arrivals) - by Relative Time / by Current Time / TIER 2
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: aerodatabox-flight-api.getairportflightsrelative
+      with:
+        codeType: tools.codeType
+        code: tools.code
+        offsetMinutes: tools.offsetMinutes
+        durationMinutes: tools.durationMinutes
+        direction: tools.direction
+        withLeg: tools.withLeg
+        withCancelled: tools.withCancelled
+        withCodeshared: tools.withCodeshared
+        withCargo: tools.withCargo
+        withPrivate: tools.withPrivate
+        withLocation: tools.withLocation
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: aerodatabox-fids-airport-departures-and-2
+      description: AeroDataBox FIDS (airport Departures and Arrivals) - by Local Time Range / TIER 2
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: aerodatabox-flight-api.getairportflights
+      with:
+        codeType: tools.codeType
+        code: tools.code
+        fromLocal: tools.fromLocal
+        toLocal: tools.toLocal
+        direction: tools.direction
+        withLeg: tools.withLeg
+        withCancelled: tools.withCancelled
+        withCodeshared: tools.withCodeshared
+        withCargo: tools.withCargo
+        withPrivate: tools.withPrivate
+        withLocation: tools.withLocation
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: aerodatabox-search-flight-numbers-term
+      description: AeroDataBox Search Flight Numbers by Term / TIER 2
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: aerodatabox-flight-api.searchflightsbyterm
+      with:
+        q: tools.q
+        limit: tools.limit
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: aerodatabox-flight-status-single-day
+      description: AeroDataBox Flight Status (single Day) / TIER 2
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: aerodatabox-flight-api.getflightflightnearest
+      with:
+        searchBy: tools.searchBy
+        searchParam: tools.searchParam
+        dateLocalRole: tools.dateLocalRole
+        withAircraftImage: tools.withAircraftImage
+        withLocation: tools.withLocation
+        withFlightPlan: tools.withFlightPlan
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: aerodatabox-flight-departure-dates-tier
+      description: AeroDataBox Flight Departure Dates / TIER 2
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: aerodatabox-flight-api.getflightdatesflightdatesall
+      with:
+        searchBy: tools.searchBy
+        searchParam: tools.searchParam
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: aerodatabox-flight-departure-dates-tier-2
+      description: AeroDataBox Flight Departure Dates / TIER 2
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: aerodatabox-flight-api.getflightdatesflightdatesinrange
+      with:
+        searchBy: tools.searchBy
+        searchParam: tools.searchParam
+        fromLocal: tools.fromLocal
+        toLocal: tools.toLocal
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: aerodatabox-flight-history-and-schedule
+      description: AeroDataBox Flight History and Schedule (range of Days) / TIER 3
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: aerodatabox-flight-api.getflighthistoryflighthistory
+      with:
+        searchBy: tools.searchBy
+        searchParam: tools.searchParam
+        dateFromLocal: tools.dateFromLocal
+        dateToLocal: tools.dateToLocal
+        dateLocalRole: tools.dateLocalRole
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: aerodatabox-flight-status-single-day-2
+      description: AeroDataBox Flight Status (single Day) / TIER 2
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: aerodatabox-flight-api.getflightflightonspecificdate
+      with:
+        searchBy: tools.searchBy
+        searchParam: tools.searchParam
+        dateLocal: tools.dateLocal
+        dateLocalRole: tools.dateLocalRole
+        withAircraftImage: tools.withAircraftImage
+        withLocation: tools.withLocation
+        withFlightPlan: tools.withFlightPlan
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,422 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: AeroDataBox API - Aviation and Flight API — Statistical API
+  description: 'AeroDataBox API - Aviation and Flight API — Statistical API. 8 operations. Lead operation: AeroDataBox Global
+    Delays (current or Historical Moment) / TIER 3. Self-contained Naftiko capability covering one Aerodatabox business surface.'
+  tags:
+  - Aerodatabox
+  - Statistical API
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AERODATABOX_API_KEY: AERODATABOX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: aerodatabox-statistical-api
+    baseUri: https://prod.api.market/api/v1/aedbx/aerodatabox
+    description: AeroDataBox API - Aviation and Flight API — Statistical API business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: airports-delays
+      path: /airports/delays
+      operations:
+      - name: getglobaldelaysglobaldelayscurent
+        method: GET
+        description: AeroDataBox Global Delays (current or Historical Moment) / TIER 3
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: airports-delays-dateUtc
+      path: /airports/delays/{dateUtc}
+      operations:
+      - name: getglobaldelaysglobaldelaysatspecificdate
+        method: GET
+        description: AeroDataBox Global Delays (current or Historical Moment) / TIER 3
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: dateUtc
+          in: path
+          type: string
+          description: "The moment of time for / from which delay data is requested (UTC time, format: YYYY-MM-DDTHH:mm).\r"
+          required: true
+    - name: airports-codeType-code-delays
+      path: /airports/{codeType}/{code}/delays
+      operations:
+      - name: getairportdelaydelayscurrent
+        method: GET
+        description: AeroDataBox Airport Delays (current or Historical Moment) / TIER 3
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: codeType
+          in: path
+          type: string
+          description: Type of code to search airport by (`iata` or `icao`)
+        - name: code
+          in: path
+          type: string
+          description: "If `codeType` is:\r"
+          required: true
+    - name: airports-codeType-code-delays-dateFromLocal-dateToLocal
+      path: /airports/{codeType}/{code}/delays/{dateFromLocal}/{dateToLocal}
+      operations:
+      - name: getairportdelays
+        method: GET
+        description: AeroDataBox Airport Delays (historical Period) / TIER 3
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: codeType
+          in: path
+          type: string
+          description: Type of code to search airport by (`iata` or `icao`)
+        - name: code
+          in: path
+          type: string
+          description: "If `codeType` is:\r"
+          required: true
+        - name: dateFromLocal
+          in: path
+          type: string
+          description: 'The beginning of the period of time for which delay data is requested (local time, format: YYYY-MM-DDTHH:mm).'
+          required: true
+        - name: dateToLocal
+          in: path
+          type: string
+          description: 'The end of the period of time for which delay data is requested (local time, format: YYYY-MM-DDTHH:mm).'
+          required: true
+    - name: airports-codeType-code-delays-dateLocal
+      path: /airports/{codeType}/{code}/delays/{dateLocal}
+      operations:
+      - name: getairportdelaydelayshistorical
+        method: GET
+        description: AeroDataBox Airport Delays (current or Historical Moment) / TIER 3
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: codeType
+          in: path
+          type: string
+          description: Type of code to search airport by (`iata` or `icao`)
+        - name: code
+          in: path
+          type: string
+          description: "If `codeType` is:\r"
+          required: true
+        - name: dateLocal
+          in: path
+          type: string
+          description: "The moment of time for / from which delay data is requested (local time, format: YYYY-MM-DDTHH:mm).\
+            \ \r"
+          required: true
+    - name: airports-codeType-code-stats-routes-daily
+      path: /airports/{codeType}/{code}/stats/routes/daily
+      operations:
+      - name: getroutedailystatisticsroutesdailycurrent
+        method: GET
+        description: AeroDataBox Airport Routes and Daily Flight Destinations / TIER 3
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: codeType
+          in: path
+          type: string
+          description: Type of code to search airport by (`iata` or `icao`)
+        - name: code
+          in: path
+          type: string
+          description: "If `codeType` is:\r"
+          required: true
+    - name: airports-codeType-code-stats-routes-daily-dateLocal
+      path: /airports/{codeType}/{code}/stats/routes/daily/{dateLocal}
+      operations:
+      - name: getroutedailystatisticsroutesdailatspecificdate
+        method: GET
+        description: AeroDataBox Airport Routes and Daily Flight Destinations / TIER 3
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: codeType
+          in: path
+          type: string
+          description: Type of code to search airport by (`iata` or `icao`)
+        - name: code
+          in: path
+          type: string
+          description: "If `codeType` is:\r"
+          required: true
+        - name: dateLocal
+          in: path
+          type: string
+          description: "Local date at the airport (default = null).\r"
+          required: true
+    - name: flights-number-delays
+      path: /flights/{number}/delays
+      operations:
+      - name: getflightdelays
+        method: GET
+        description: AeroDataBox Flight Delay Statistics by Flight Number / TIER 3
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: number
+          in: path
+          type: string
+          description: Flight number (with or without spaces, IATA or ICAO, any case formats are acceptable, e.g. KL1395,
+            Klm 1395)
+          required: true
+  exposes:
+  - type: rest
+    namespace: aerodatabox-statistical-api-rest
+    port: 8080
+    description: REST adapter for AeroDataBox API - Aviation and Flight API — Statistical API. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/airports/delays
+      name: airports-delays
+      description: REST surface for airports-delays.
+      operations:
+      - method: GET
+        name: getglobaldelaysglobaldelayscurent
+        description: AeroDataBox Global Delays (current or Historical Moment) / TIER 3
+        call: aerodatabox-statistical-api.getglobaldelaysglobaldelayscurent
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/airports/delays/{dateutc}
+      name: airports-delays-dateutc
+      description: REST surface for airports-delays-dateUtc.
+      operations:
+      - method: GET
+        name: getglobaldelaysglobaldelaysatspecificdate
+        description: AeroDataBox Global Delays (current or Historical Moment) / TIER 3
+        call: aerodatabox-statistical-api.getglobaldelaysglobaldelaysatspecificdate
+        with:
+          dateUtc: rest.dateUtc
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/airports/{codetype}/{code}/delays
+      name: airports-codetype-code-delays
+      description: REST surface for airports-codeType-code-delays.
+      operations:
+      - method: GET
+        name: getairportdelaydelayscurrent
+        description: AeroDataBox Airport Delays (current or Historical Moment) / TIER 3
+        call: aerodatabox-statistical-api.getairportdelaydelayscurrent
+        with:
+          codeType: rest.codeType
+          code: rest.code
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/airports/{codetype}/{code}/delays/{datefromlocal}/{datetolocal}
+      name: airports-codetype-code-delays-datefromlocal-datetolocal
+      description: REST surface for airports-codeType-code-delays-dateFromLocal-dateToLocal.
+      operations:
+      - method: GET
+        name: getairportdelays
+        description: AeroDataBox Airport Delays (historical Period) / TIER 3
+        call: aerodatabox-statistical-api.getairportdelays
+        with:
+          codeType: rest.codeType
+          code: rest.code
+          dateFromLocal: rest.dateFromLocal
+          dateToLocal: rest.dateToLocal
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/airports/{codetype}/{code}/delays/{datelocal}
+      name: airports-codetype-code-delays-datelocal
+      description: REST surface for airports-codeType-code-delays-dateLocal.
+      operations:
+      - method: GET
+        name: getairportdelaydelayshistorical
+        description: AeroDataBox Airport Delays (current or Historical Moment) / TIER 3
+        call: aerodatabox-statistical-api.getairportdelaydelayshistorical
+        with:
+          codeType: rest.codeType
+          code: rest.code
+          dateLocal: rest.dateLocal
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/airports/{codetype}/{code}/stats/routes/daily
+      name: airports-codetype-code-stats-routes-daily
+      description: REST surface for airports-codeType-code-stats-routes-daily.
+      operations:
+      - method: GET
+        name: getroutedailystatisticsroutesdailycurrent
+        description: AeroDataBox Airport Routes and Daily Flight Destinations / TIER 3
+        call: aerodatabox-statistical-api.getroutedailystatisticsroutesdailycurrent
+        with:
+          codeType: rest.codeType
+          code: rest.code
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/airports/{codetype}/{code}/stats/routes/daily/{datelocal}
+      name: airports-codetype-code-stats-routes-daily-datelocal
+      description: REST surface for airports-codeType-code-stats-routes-daily-dateLocal.
+      operations:
+      - method: GET
+        name: getroutedailystatisticsroutesdailatspecificdate
+        description: AeroDataBox Airport Routes and Daily Flight Destinations / TIER 3
+        call: aerodatabox-statistical-api.getroutedailystatisticsroutesdailatspecificdate
+        with:
+          codeType: rest.codeType
+          code: rest.code
+          dateLocal: rest.dateLocal
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/flights/{number}/delays
+      name: flights-number-delays
+      description: REST surface for flights-number-delays.
+      operations:
+      - method: GET
+        name: getflightdelays
+        description: AeroDataBox Flight Delay Statistics by Flight Number / TIER 3
+        call: aerodatabox-statistical-api.getflightdelays
+        with:
+          number: rest.number
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: aerodatabox-statistical-api-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for AeroDataBox API - Aviation and Flight API — Statistical API. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: aerodatabox-global-delays-current-historical
+      description: AeroDataBox Global Delays (current or Historical Moment) / TIER 3
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: aerodatabox-statistical-api.getglobaldelaysglobaldelayscurent
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: aerodatabox-global-delays-current-historical-2
+      description: AeroDataBox Global Delays (current or Historical Moment) / TIER 3
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: aerodatabox-statistical-api.getglobaldelaysglobaldelaysatspecificdate
+      with:
+        dateUtc: tools.dateUtc
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: aerodatabox-airport-delays-current-historical
+      description: AeroDataBox Airport Delays (current or Historical Moment) / TIER 3
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: aerodatabox-statistical-api.getairportdelaydelayscurrent
+      with:
+        codeType: tools.codeType
+        code: tools.code
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: aerodatabox-airport-delays-historical-period
+      description: AeroDataBox Airport Delays (historical Period) / TIER 3
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: aerodatabox-statistical-api.getairportdelays
+      with:
+        codeType: tools.codeType
+        code: tools.code
+        dateFromLocal: tools.dateFromLocal
+        dateToLocal: tools.dateToLocal
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: aerodatabox-airport-delays-current-historical-2
+      description: AeroDataBox Airport Delays (current or Historical Moment) / TIER 3
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: aerodatabox-statistical-api.getairportdelaydelayshistorical
+      with:
+        codeType: tools.codeType
+        code: tools.code
+        dateLocal: tools.dateLocal
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: aerodatabox-airport-routes-and-daily
+      description: AeroDataBox Airport Routes and Daily Flight Destinations / TIER 3
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: aerodatabox-statistical-api.getroutedailystatisticsroutesdailycurrent
+      with:
+        codeType: tools.codeType
+        code: tools.code
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: aerodatabox-airport-routes-and-daily-2
+      description: AeroDataBox Airport Routes and Daily Flight Destinations / TIER 3
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: aerodatabox-statistical-api.getroutedailystatisticsroutesdailatspecificdate
+      with:
+        codeType: tools.codeType
+        code: tools.code
+        dateLocal: tools.dateLocal
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: aerodatabox-flight-delay-statistics-flight
+      description: AeroDataBox Flight Delay Statistics by Flight Number / TIER 3
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: aerodatabox-statistical-api.getflightdelays
+      with:
+        number: tools.number
+      outputParameters:
+      - type: object
+        mapping: $.

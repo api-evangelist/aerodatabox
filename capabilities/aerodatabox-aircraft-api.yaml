@@ -1,0 +1,355 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: AeroDataBox API - Aviation and Flight API — Aircraft API
+  description: 'AeroDataBox API - Aviation and Flight API — Aircraft API. 6 operations. Lead operation: AeroDataBox Aircraft
+    Image by Tail-number / TIER 2. Self-contained Naftiko capability covering one Aerodatabox business surface.'
+  tags:
+  - Aerodatabox
+  - Aircraft API
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AERODATABOX_API_KEY: AERODATABOX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: aerodatabox-aircraft-api
+    baseUri: https://prod.api.market/api/v1/aedbx/aerodatabox
+    description: AeroDataBox API - Aviation and Flight API — Aircraft API business capability. Self-contained, no shared references.
+    resources:
+    - name: aircrafts-reg-reg-image-beta
+      path: /aircrafts/reg/{reg}/image/beta
+      operations:
+      - name: getaircraftimagebyregistration
+        method: GET
+        description: AeroDataBox Aircraft Image by Tail-number / TIER 2
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: reg
+          in: path
+          type: string
+          description: Tail-number of the aircraft (full, stripped and any case formats are acceptable).
+          required: true
+    - name: aircrafts-search-term
+      path: /aircrafts/search/term
+      operations:
+      - name: searchaircraftbyterm
+        method: GET
+        description: AeroDataBox Search Active Aircraft Tail Numbers by Term / TIER 2
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: q
+          in: query
+          type: string
+          description: Search term (min. 4 non whitespace characters length)
+          required: true
+        - name: limit
+          in: query
+          type: integer
+          description: Maximum number of items to be returned (max. 10, defaut = 5)
+    - name: aircrafts-searchBy-searchParam
+      path: /aircrafts/{searchBy}/{searchParam}
+      operations:
+      - name: getaircraft
+        method: GET
+        description: AeroDataBox Single Aircraft (by Tail-number, Mode-S or ID) / TIER 1
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: searchBy
+          in: path
+          type: string
+          description: Criteria to search aircraft by
+        - name: searchParam
+          in: path
+          type: string
+          description: "Value of the search criteria. If `searchBy` is: \r"
+          required: true
+        - name: withImage
+          in: query
+          type: boolean
+          description: 'Should include aircraft image (default: false).'
+        - name: withRegistrations
+          in: query
+          type: boolean
+          description: 'Should include the history of aircraft registrations (default: false).'
+    - name: aircrafts-searchBy-searchParam-all
+      path: /aircrafts/{searchBy}/{searchParam}/all
+      operations:
+      - name: getallaircraft
+        method: GET
+        description: AeroDataBox Aircraft by Tail-number, Mode-S or ID / TIER 1
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: searchBy
+          in: path
+          type: string
+          description: Criteria to search aircraft by
+        - name: searchParam
+          in: path
+          type: string
+          description: "Value of the search criteria. If `searchBy` is: \r"
+          required: true
+        - name: withImage
+          in: query
+          type: boolean
+          description: 'Should include aircraft image (default: false).'
+        - name: withRegistrations
+          in: query
+          type: boolean
+          description: 'Should include the history of aircraft registrations (default: false).'
+    - name: aircrafts-searchBy-searchParam-registrations
+      path: /aircrafts/{searchBy}/{searchParam}/registrations
+      operations:
+      - name: getaircraftregistrations
+        method: GET
+        description: AeroDataBox Single Aircraft Registration History (by Tail-number, Mode-S or ID) / TIER 1
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: searchBy
+          in: path
+          type: string
+          description: Criteria to search aircraft by
+        - name: searchParam
+          in: path
+          type: string
+          description: "Value of the search criteria. If `searchBy` is: \r"
+          required: true
+    - name: airlines-airlineCode-aircrafts
+      path: /airlines/{airlineCode}/aircrafts
+      operations:
+      - name: getairlinefleet
+        method: GET
+        description: AeroDataBox Airline Fleet / Aircraft List by Airline Code (BETA) / TIER 3
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: airlineCode
+          in: path
+          type: string
+          description: "3-character ICAO-code of the airliner (e.g., KLM, ACA); or\r"
+          required: true
+        - name: pageSize
+          in: query
+          type: integer
+          description: "The number of returned records will be capped at this value.\r"
+          required: true
+        - name: pageOffset
+          in: query
+          type: integer
+          description: The number of records to skip before listing a page of records. In conjunction with `pageSize` effectively
+            determines the page number (default  - 0).
+        - name: withRegistrations
+          in: query
+          type: boolean
+          description: 'Should include the history of aircraft registrations (default: false).'
+  exposes:
+  - type: rest
+    namespace: aerodatabox-aircraft-api-rest
+    port: 8080
+    description: REST adapter for AeroDataBox API - Aviation and Flight API — Aircraft API. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/aircrafts/reg/{reg}/image/beta
+      name: aircrafts-reg-reg-image-beta
+      description: REST surface for aircrafts-reg-reg-image-beta.
+      operations:
+      - method: GET
+        name: getaircraftimagebyregistration
+        description: AeroDataBox Aircraft Image by Tail-number / TIER 2
+        call: aerodatabox-aircraft-api.getaircraftimagebyregistration
+        with:
+          reg: rest.reg
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/aircrafts/search/term
+      name: aircrafts-search-term
+      description: REST surface for aircrafts-search-term.
+      operations:
+      - method: GET
+        name: searchaircraftbyterm
+        description: AeroDataBox Search Active Aircraft Tail Numbers by Term / TIER 2
+        call: aerodatabox-aircraft-api.searchaircraftbyterm
+        with:
+          q: rest.q
+          limit: rest.limit
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/aircrafts/{searchby}/{searchparam}
+      name: aircrafts-searchby-searchparam
+      description: REST surface for aircrafts-searchBy-searchParam.
+      operations:
+      - method: GET
+        name: getaircraft
+        description: AeroDataBox Single Aircraft (by Tail-number, Mode-S or ID) / TIER 1
+        call: aerodatabox-aircraft-api.getaircraft
+        with:
+          searchBy: rest.searchBy
+          searchParam: rest.searchParam
+          withImage: rest.withImage
+          withRegistrations: rest.withRegistrations
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/aircrafts/{searchby}/{searchparam}/all
+      name: aircrafts-searchby-searchparam-all
+      description: REST surface for aircrafts-searchBy-searchParam-all.
+      operations:
+      - method: GET
+        name: getallaircraft
+        description: AeroDataBox Aircraft by Tail-number, Mode-S or ID / TIER 1
+        call: aerodatabox-aircraft-api.getallaircraft
+        with:
+          searchBy: rest.searchBy
+          searchParam: rest.searchParam
+          withImage: rest.withImage
+          withRegistrations: rest.withRegistrations
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/aircrafts/{searchby}/{searchparam}/registrations
+      name: aircrafts-searchby-searchparam-registrations
+      description: REST surface for aircrafts-searchBy-searchParam-registrations.
+      operations:
+      - method: GET
+        name: getaircraftregistrations
+        description: AeroDataBox Single Aircraft Registration History (by Tail-number, Mode-S or ID) / TIER 1
+        call: aerodatabox-aircraft-api.getaircraftregistrations
+        with:
+          searchBy: rest.searchBy
+          searchParam: rest.searchParam
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/airlines/{airlinecode}/aircrafts
+      name: airlines-airlinecode-aircrafts
+      description: REST surface for airlines-airlineCode-aircrafts.
+      operations:
+      - method: GET
+        name: getairlinefleet
+        description: AeroDataBox Airline Fleet / Aircraft List by Airline Code (BETA) / TIER 3
+        call: aerodatabox-aircraft-api.getairlinefleet
+        with:
+          airlineCode: rest.airlineCode
+          pageSize: rest.pageSize
+          pageOffset: rest.pageOffset
+          withRegistrations: rest.withRegistrations
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: aerodatabox-aircraft-api-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for AeroDataBox API - Aviation and Flight API — Aircraft API. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: aerodatabox-aircraft-image-tail-number
+      description: AeroDataBox Aircraft Image by Tail-number / TIER 2
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: aerodatabox-aircraft-api.getaircraftimagebyregistration
+      with:
+        reg: tools.reg
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: aerodatabox-search-active-aircraft-tail
+      description: AeroDataBox Search Active Aircraft Tail Numbers by Term / TIER 2
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: aerodatabox-aircraft-api.searchaircraftbyterm
+      with:
+        q: tools.q
+        limit: tools.limit
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: aerodatabox-single-aircraft-tail-number
+      description: AeroDataBox Single Aircraft (by Tail-number, Mode-S or ID) / TIER 1
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: aerodatabox-aircraft-api.getaircraft
+      with:
+        searchBy: tools.searchBy
+        searchParam: tools.searchParam
+        withImage: tools.withImage
+        withRegistrations: tools.withRegistrations
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: aerodatabox-aircraft-tail-number-mode
+      description: AeroDataBox Aircraft by Tail-number, Mode-S or ID / TIER 1
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: aerodatabox-aircraft-api.getallaircraft
+      with:
+        searchBy: tools.searchBy
+        searchParam: tools.searchParam
+        withImage: tools.withImage
+        withRegistrations: tools.withRegistrations
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: aerodatabox-single-aircraft-registration-history
+      description: AeroDataBox Single Aircraft Registration History (by Tail-number, Mode-S or ID) / TIER 1
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: aerodatabox-aircraft-api.getaircraftregistrations
+      with:
+        searchBy: tools.searchBy
+        searchParam: tools.searchParam
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: aerodatabox-airline-fleet-aircraft-list
+      description: AeroDataBox Airline Fleet / Aircraft List by Airline Code (BETA) / TIER 3
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: aerodatabox-aircraft-api.getairlinefleet
+      with:
+        airlineCode: tools.airlineCode
+        pageSize: tools.pageSize
+        pageOffset: tools.pageOffset
+        withRegistrations: tools.withRegistrations
+      outputParameters:
+      - type: object
+        mapping: $.

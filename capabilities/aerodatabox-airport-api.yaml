@@ -1,0 +1,337 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: AeroDataBox API - Aviation and Flight API — Airport API
+  description: 'AeroDataBox API - Aviation and Flight API — Airport API. 5 operations. Lead operation: AeroDataBox Search
+    Airports by IP Address Geolocation / TIER 2. Self-contained Naftiko capability covering one Aerodatabox business surface.'
+  tags:
+  - Aerodatabox
+  - Airport API
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AERODATABOX_API_KEY: AERODATABOX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: aerodatabox-airport-api
+    baseUri: https://prod.api.market/api/v1/aedbx/aerodatabox
+    description: AeroDataBox API - Aviation and Flight API — Airport API business capability. Self-contained, no shared references.
+    resources:
+    - name: airports-search-ip
+      path: /airports/search/ip
+      operations:
+      - name: searchairportsbyipgeolocation
+        method: GET
+        description: AeroDataBox Search Airports by IP Address Geolocation / TIER 2
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: q
+          in: query
+          type: string
+          description: A valid public IP v4 address
+          required: true
+        - name: radiusKm
+          in: query
+          type: integer
+          description: Radius of search around specified location in kilometers (max. 1000 km)
+          required: true
+        - name: limit
+          in: query
+          type: integer
+          description: Maximum number of airports to be returned (max. 250)
+          required: true
+        - name: withFlightInfoOnly
+          in: query
+          type: boolean
+          description: If set to true, will only return airports which have flight data (scheduled or live) available. Default
+            = false.
+    - name: airports-search-location
+      path: /airports/search/location
+      operations:
+      - name: searchairportsbylocation
+        method: GET
+        description: AeroDataBox Search Airports by Location / TIER 2
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: lat
+          in: query
+          type: number
+          description: Latitude location coordinate in decimal format (between -90 and 90)
+          required: true
+        - name: lon
+          in: query
+          type: number
+          description: Longitude location coordinate in decimal format (between -180 and 180)
+          required: true
+        - name: radiusKm
+          in: query
+          type: integer
+          description: Radius of search around specified location in kilometers (max. 1000 km)
+          required: true
+        - name: limit
+          in: query
+          type: integer
+          description: Maximum number of airports to be returned (max. 250)
+          required: true
+        - name: withFlightInfoOnly
+          in: query
+          type: boolean
+          description: If set to true, will only return airports which have flight data (scheduled or live) available. Default
+            = false.
+    - name: airports-search-term
+      path: /airports/search/term
+      operations:
+      - name: searchairportbyterm
+        method: GET
+        description: AeroDataBox Search Airports by Free Text / TIER 2
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: q
+          in: query
+          type: string
+          description: Search query (min. 3 non whitespace characters length)
+          required: true
+        - name: limit
+          in: query
+          type: integer
+          description: Maximum number of airports to be returned (max. 250, defaut = 10)
+        - name: withFlightInfoOnly
+          in: query
+          type: boolean
+          description: If set to true, will only return airports which have flight data (scheduled or live) available. Default
+            = false.
+        - name: withSearchByCode
+          in: query
+          type: boolean
+          description: "If set to true, will attempt to interpret short words within the search query as IATA or ICAO code\r"
+    - name: airports-codeType-code
+      path: /airports/{codeType}/{code}
+      operations:
+      - name: getairport
+        method: GET
+        description: AeroDataBox Airport by Code / TIER 1
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: codeType
+          in: path
+          type: string
+          description: Type of code to search airport by (`iata` or `icao`)
+        - name: code
+          in: path
+          type: string
+          description: "If `codeType` is:\r"
+          required: true
+        - name: withRunways
+          in: query
+          type: boolean
+          description: Include runways data (default - false)
+        - name: withTime
+          in: query
+          type: boolean
+          description: Include current local time (default - false)
+    - name: airports-codeType-code-runways
+      path: /airports/{codeType}/{code}/runways
+      operations:
+      - name: getairportrunways
+        method: GET
+        description: AeroDataBox Airport Runways / TIER 1
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: codeType
+          in: path
+          type: string
+          description: Type of code to search airport by (`iata` or `icao`)
+        - name: code
+          in: path
+          type: string
+          description: "If `codeType` is:\r"
+          required: true
+  exposes:
+  - type: rest
+    namespace: aerodatabox-airport-api-rest
+    port: 8080
+    description: REST adapter for AeroDataBox API - Aviation and Flight API — Airport API. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/airports/search/ip
+      name: airports-search-ip
+      description: REST surface for airports-search-ip.
+      operations:
+      - method: GET
+        name: searchairportsbyipgeolocation
+        description: AeroDataBox Search Airports by IP Address Geolocation / TIER 2
+        call: aerodatabox-airport-api.searchairportsbyipgeolocation
+        with:
+          q: rest.q
+          radiusKm: rest.radiusKm
+          limit: rest.limit
+          withFlightInfoOnly: rest.withFlightInfoOnly
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/airports/search/location
+      name: airports-search-location
+      description: REST surface for airports-search-location.
+      operations:
+      - method: GET
+        name: searchairportsbylocation
+        description: AeroDataBox Search Airports by Location / TIER 2
+        call: aerodatabox-airport-api.searchairportsbylocation
+        with:
+          lat: rest.lat
+          lon: rest.lon
+          radiusKm: rest.radiusKm
+          limit: rest.limit
+          withFlightInfoOnly: rest.withFlightInfoOnly
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/airports/search/term
+      name: airports-search-term
+      description: REST surface for airports-search-term.
+      operations:
+      - method: GET
+        name: searchairportbyterm
+        description: AeroDataBox Search Airports by Free Text / TIER 2
+        call: aerodatabox-airport-api.searchairportbyterm
+        with:
+          q: rest.q
+          limit: rest.limit
+          withFlightInfoOnly: rest.withFlightInfoOnly
+          withSearchByCode: rest.withSearchByCode
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/airports/{codetype}/{code}
+      name: airports-codetype-code
+      description: REST surface for airports-codeType-code.
+      operations:
+      - method: GET
+        name: getairport
+        description: AeroDataBox Airport by Code / TIER 1
+        call: aerodatabox-airport-api.getairport
+        with:
+          codeType: rest.codeType
+          code: rest.code
+          withRunways: rest.withRunways
+          withTime: rest.withTime
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/airports/{codetype}/{code}/runways
+      name: airports-codetype-code-runways
+      description: REST surface for airports-codeType-code-runways.
+      operations:
+      - method: GET
+        name: getairportrunways
+        description: AeroDataBox Airport Runways / TIER 1
+        call: aerodatabox-airport-api.getairportrunways
+        with:
+          codeType: rest.codeType
+          code: rest.code
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: aerodatabox-airport-api-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for AeroDataBox API - Aviation and Flight API — Airport API. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: aerodatabox-search-airports-ip-address
+      description: AeroDataBox Search Airports by IP Address Geolocation / TIER 2
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: aerodatabox-airport-api.searchairportsbyipgeolocation
+      with:
+        q: tools.q
+        radiusKm: tools.radiusKm
+        limit: tools.limit
+        withFlightInfoOnly: tools.withFlightInfoOnly
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: aerodatabox-search-airports-location-tier
+      description: AeroDataBox Search Airports by Location / TIER 2
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: aerodatabox-airport-api.searchairportsbylocation
+      with:
+        lat: tools.lat
+        lon: tools.lon
+        radiusKm: tools.radiusKm
+        limit: tools.limit
+        withFlightInfoOnly: tools.withFlightInfoOnly
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: aerodatabox-search-airports-free-text
+      description: AeroDataBox Search Airports by Free Text / TIER 2
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: aerodatabox-airport-api.searchairportbyterm
+      with:
+        q: tools.q
+        limit: tools.limit
+        withFlightInfoOnly: tools.withFlightInfoOnly
+        withSearchByCode: tools.withSearchByCode
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: aerodatabox-airport-code-tier-1
+      description: AeroDataBox Airport by Code / TIER 1
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: aerodatabox-airport-api.getairport
+      with:
+        codeType: tools.codeType
+        code: tools.code
+        withRunways: tools.withRunways
+        withTime: tools.withTime
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: aerodatabox-airport-runways-tier-1
+      description: AeroDataBox Airport Runways / TIER 1
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: aerodatabox-airport-api.getairportrunways
+      with:
+        codeType: tools.codeType
+        code: tools.code
+      outputParameters:
+      - type: object
+        mapping: $.

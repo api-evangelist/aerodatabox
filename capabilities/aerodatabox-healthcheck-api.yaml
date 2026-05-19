@@ -1,0 +1,168 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: AeroDataBox API - Aviation and Flight API — Healthcheck API
+  description: 'AeroDataBox API - Aviation and Flight API — Healthcheck API. 3 operations. Lead operation: AeroDataBox Data
+    Feed Services Status by ICAO Code / FREE TIER. Self-contained Naftiko capability covering one Aerodatabox business surface.'
+  tags:
+  - Aerodatabox
+  - Healthcheck API
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AERODATABOX_API_KEY: AERODATABOX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: aerodatabox-healthcheck-api
+    baseUri: https://prod.api.market/api/v1/aedbx/aerodatabox
+    description: AeroDataBox API - Aviation and Flight API — Healthcheck API business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: health-services-airports-icao-feeds
+      path: /health/services/airports/{icao}/feeds
+      operations:
+      - name: getairportfeedstatus
+        method: GET
+        description: AeroDataBox Data Feed Services Status by ICAO Code / FREE TIER
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: icao
+          in: path
+          type: string
+          description: '4-digit ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.). Full, stripped and any case formats
+            are acceptable.'
+          required: true
+    - name: health-services-feeds-service
+      path: /health/services/feeds/{service}
+      operations:
+      - name: getfeedservicestatus
+        method: GET
+        description: AeroDataBox General Status of Data Feed Services / FREE TIER
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: service
+          in: path
+          type: string
+          description: Data feed service name
+        - name: withHttpCode
+          in: query
+          type: boolean
+          description: If true, reflect status of the service in the HTTP code of the response (if the service is down, HTTP
+            code will be 503).
+    - name: health-services-feeds-service-airports
+      path: /health/services/feeds/{service}/airports
+      operations:
+      - name: getfeedairports
+        method: GET
+        description: AeroDataBox Airports Supporting Data Feed Service / FREE TIER
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: service
+          in: path
+          type: string
+          description: Airport data feed service name
+  exposes:
+  - type: rest
+    namespace: aerodatabox-healthcheck-api-rest
+    port: 8080
+    description: REST adapter for AeroDataBox API - Aviation and Flight API — Healthcheck API. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/health/services/airports/{icao}/feeds
+      name: health-services-airports-icao-feeds
+      description: REST surface for health-services-airports-icao-feeds.
+      operations:
+      - method: GET
+        name: getairportfeedstatus
+        description: AeroDataBox Data Feed Services Status by ICAO Code / FREE TIER
+        call: aerodatabox-healthcheck-api.getairportfeedstatus
+        with:
+          icao: rest.icao
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/health/services/feeds/{service}
+      name: health-services-feeds-service
+      description: REST surface for health-services-feeds-service.
+      operations:
+      - method: GET
+        name: getfeedservicestatus
+        description: AeroDataBox General Status of Data Feed Services / FREE TIER
+        call: aerodatabox-healthcheck-api.getfeedservicestatus
+        with:
+          service: rest.service
+          withHttpCode: rest.withHttpCode
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/health/services/feeds/{service}/airports
+      name: health-services-feeds-service-airports
+      description: REST surface for health-services-feeds-service-airports.
+      operations:
+      - method: GET
+        name: getfeedairports
+        description: AeroDataBox Airports Supporting Data Feed Service / FREE TIER
+        call: aerodatabox-healthcheck-api.getfeedairports
+        with:
+          service: rest.service
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: aerodatabox-healthcheck-api-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for AeroDataBox API - Aviation and Flight API — Healthcheck API. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: aerodatabox-data-feed-services-status
+      description: AeroDataBox Data Feed Services Status by ICAO Code / FREE TIER
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: aerodatabox-healthcheck-api.getairportfeedstatus
+      with:
+        icao: tools.icao
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: aerodatabox-general-status-data-feed
+      description: AeroDataBox General Status of Data Feed Services / FREE TIER
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: aerodatabox-healthcheck-api.getfeedservicestatus
+      with:
+        service: tools.service
+        withHttpCode: tools.withHttpCode
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: aerodatabox-airports-supporting-data-feed
+      description: AeroDataBox Airports Supporting Data Feed Service / FREE TIER
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: aerodatabox-healthcheck-api.getfeedairports
+      with:
+        service: tools.service
+      outputParameters:
+      - type: object
+        mapping: $.
