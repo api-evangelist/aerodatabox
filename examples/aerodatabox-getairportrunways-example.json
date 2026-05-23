@@ -1,0 +1,49 @@
+{
+  "operationId": "GetAirportRunways",
+  "method": "GET",
+  "path": "/airports/{codeType}/{code}/runways",
+  "summary": "AeroDataBox Airport Runways / TIER 1",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "GetAirportRunways200Example",
+      "example": [
+        "example_value"
+      ]
+    },
+    {
+      "status": "400",
+      "contentType": "application/json",
+      "name": "GetAirportRunways400Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "401",
+      "contentType": "application/json",
+      "name": "GetAirportRunways401Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "451",
+      "contentType": "application/json",
+      "name": "GetAirportRunways451Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "500",
+      "contentType": "application/json",
+      "name": "GetAirportRunways500Example",
+      "example": {
+        "message": "example_value"
+      }
+    }
+  ]
+}

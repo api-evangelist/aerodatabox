@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AirportFeedServiceStatusContract",
+  "title": "AirportFeedServiceStatusContract",
+  "required": [
+    "adsbUpdatesFeed",
+    "flightSchedulesFeed",
+    "generalAvailability",
+    "liveFlightUpdatesFeed"
+  ],
+  "type": "object",
+  "properties": {
+    "flightSchedulesFeed": {
+      "$ref": "#/components/schemas/FeedServiceStatusContract"
+    },
+    "liveFlightUpdatesFeed": {
+      "$ref": "#/components/schemas/FeedServiceStatusContract"
+    },
+    "adsbUpdatesFeed": {
+      "$ref": "#/components/schemas/FeedServiceStatusContract"
+    },
+    "generalAvailability": {
+      "$ref": "#/components/schemas/FlightDataGeneralAvailabilityContract"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Airport data feed services status.\r\nRead https://aerodatabox.com/data-coverage for context."
+}

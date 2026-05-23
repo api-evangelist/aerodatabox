@@ -1,0 +1,52 @@
+{
+  "operationId": "GetAirportFeedStatus",
+  "method": "GET",
+  "path": "/health/services/airports/{icao}/feeds",
+  "summary": "AeroDataBox Data Feed Services Status by ICAO Code / FREE TIER",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "GetAirportFeedStatus200Example",
+      "example": {
+        "flightSchedulesFeed": "example_value",
+        "liveFlightUpdatesFeed": "example_value",
+        "adsbUpdatesFeed": "example_value",
+        "generalAvailability": "example_value"
+      }
+    },
+    {
+      "status": "400",
+      "contentType": "application/json",
+      "name": "GetAirportFeedStatus400Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "401",
+      "contentType": "application/json",
+      "name": "GetAirportFeedStatus401Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "451",
+      "contentType": "application/json",
+      "name": "GetAirportFeedStatus451Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "500",
+      "contentType": "application/json",
+      "name": "GetAirportFeedStatus500Example",
+      "example": {
+        "message": "example_value"
+      }
+    }
+  ]
+}

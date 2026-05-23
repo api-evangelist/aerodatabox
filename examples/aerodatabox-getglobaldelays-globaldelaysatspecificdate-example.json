@@ -1,0 +1,53 @@
+{
+  "operationId": "GetGlobalDelays_GlobalDelaysAtSpecificDate",
+  "method": "GET",
+  "path": "/airports/delays/{dateUtc}",
+  "summary": "AeroDataBox Global Delays (current or Historical Moment) / TIER 3",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "GetGlobalDelays_GlobalDelaysAtSpecificDate200Example",
+      "example": {
+        "airportIcao": "KLAX",
+        "from": "example_value",
+        "to": "example_value",
+        "departuresDelayInformation": "example_value",
+        "arrivalsDelayInformation": "example_value"
+      }
+    },
+    {
+      "status": "400",
+      "contentType": "application/json",
+      "name": "GetGlobalDelays_GlobalDelaysAtSpecificDate400Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "401",
+      "contentType": "application/json",
+      "name": "GetGlobalDelays_GlobalDelaysAtSpecificDate401Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "451",
+      "contentType": "application/json",
+      "name": "GetGlobalDelays_GlobalDelaysAtSpecificDate451Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "500",
+      "contentType": "application/json",
+      "name": "GetGlobalDelays_GlobalDelaysAtSpecificDate500Example",
+      "example": {
+        "message": "example_value"
+      }
+    }
+  ]
+}

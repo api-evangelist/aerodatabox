@@ -1,0 +1,1057 @@
+{
+  "provider": "AeroDataBox",
+  "providerId": "aerodatabox",
+  "kind": "json-structure",
+  "description": "Structural overview of the AeroDataBox API surface; extracted from openapi/.",
+  "schemaCount": 77,
+  "operationCount": 42,
+  "schemas": [
+    {
+      "name": "AircraftContract",
+      "type": "object",
+      "propertyCount": 26,
+      "required": [
+        "active",
+        "id",
+        "isFreighter",
+        "numRegistrations",
+        "reg",
+        "verified"
+      ]
+    },
+    {
+      "name": "AircraftContractPagedCollectionContract",
+      "type": "object",
+      "propertyCount": 6,
+      "required": [
+        "count",
+        "hasNextPage",
+        "items",
+        "pageOffset",
+        "pageSize",
+        "totalCount"
+      ]
+    },
+    {
+      "name": "AircraftRegistrationContract",
+      "type": "object",
+      "propertyCount": 5,
+      "required": [
+        "active",
+        "reg"
+      ]
+    },
+    {
+      "name": "AircraftSearchByEnum",
+      "type": "string",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "AirportCodesByEnum",
+      "type": "string",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "AirportContract",
+      "type": "object",
+      "propertyCount": 14,
+      "required": [
+        "continent",
+        "country",
+        "elevation",
+        "fullName",
+        "location",
+        "timeZone",
+        "urls"
+      ]
+    },
+    {
+      "name": "AirportDelayContract",
+      "type": "object",
+      "propertyCount": 5,
+      "required": [
+        "airportIcao",
+        "arrivalsDelayInformation",
+        "departuresDelayInformation",
+        "from",
+        "to"
+      ]
+    },
+    {
+      "name": "AirportDistanceTimeContract",
+      "type": "object",
+      "propertyCount": 4,
+      "required": [
+        "approxFlightTime",
+        "from",
+        "greatCircleDistance",
+        "to"
+      ]
+    },
+    {
+      "name": "AirportFeedServiceStatusContract",
+      "type": "object",
+      "propertyCount": 4,
+      "required": [
+        "adsbUpdatesFeed",
+        "flightSchedulesFeed",
+        "generalAvailability",
+        "liveFlightUpdatesFeed"
+      ]
+    },
+    {
+      "name": "AirportFidsContract",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "AirportFlightContract",
+      "type": "object",
+      "propertyCount": 11,
+      "required": [
+        "codeshareStatus",
+        "isCargo",
+        "number",
+        "status"
+      ]
+    },
+    {
+      "name": "AirportLocalTimeContract",
+      "type": "object",
+      "propertyCount": 2,
+      "required": [
+        "time",
+        "timeZoneId"
+      ]
+    },
+    {
+      "name": "AirportUrlsContract",
+      "type": "object",
+      "propertyCount": 6,
+      "required": []
+    },
+    {
+      "name": "Angle",
+      "type": "object",
+      "propertyCount": 2,
+      "required": [
+        "deg",
+        "rad"
+      ]
+    },
+    {
+      "name": "Azimuth",
+      "type": "object",
+      "propertyCount": 2,
+      "required": [
+        "deg",
+        "rad"
+      ]
+    },
+    {
+      "name": "CodeshareStatus",
+      "type": "string",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "ContinentContract",
+      "type": "object",
+      "propertyCount": 2,
+      "required": [
+        "code"
+      ]
+    },
+    {
+      "name": "CountryContract",
+      "type": "object",
+      "propertyCount": 2,
+      "required": [
+        "code"
+      ]
+    },
+    {
+      "name": "CreateWebHookSubscription",
+      "type": "object",
+      "propertyCount": 2,
+      "required": [
+        "url"
+      ]
+    },
+    {
+      "name": "DailyRouteStatContract",
+      "type": "object",
+      "propertyCount": 1,
+      "required": [
+        "routes"
+      ]
+    },
+    {
+      "name": "DailyRouteStatRecordContract",
+      "type": "object",
+      "propertyCount": 3,
+      "required": [
+        "averageDailyFlights",
+        "destination",
+        "operators"
+      ]
+    },
+    {
+      "name": "DateTimeContract",
+      "type": "object",
+      "propertyCount": 2,
+      "required": [
+        "local",
+        "utc"
+      ]
+    },
+    {
+      "name": "DayTime",
+      "type": "string",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "DelayBracketContract",
+      "type": "object",
+      "propertyCount": 4,
+      "required": [
+        "num"
+      ]
+    },
+    {
+      "name": "Distance",
+      "type": "object",
+      "propertyCount": 5,
+      "required": [
+        "feet",
+        "km",
+        "meter",
+        "mile",
+        "nm"
+      ]
+    },
+    {
+      "name": "DistanceFlightPlanUnitContract",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "EngineType",
+      "type": "string",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "ErrorContract",
+      "type": "object",
+      "propertyCount": 1,
+      "required": [
+        "message"
+      ]
+    },
+    {
+      "name": "FaaLaddAircraftStatusContract",
+      "type": "object",
+      "propertyCount": 4,
+      "required": [
+        "id",
+        "isBlocked"
+      ]
+    },
+    {
+      "name": "FeedServiceEnum",
+      "type": "string",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "FeedServiceStatus",
+      "type": "string",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "FeedServiceStatusContract",
+      "type": "object",
+      "propertyCount": 4,
+      "required": [
+        "service",
+        "status"
+      ]
+    },
+    {
+      "name": "FlightAircraftContract",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "FlightAirlineContract",
+      "type": "object",
+      "propertyCount": 3,
+      "required": [
+        "name"
+      ]
+    },
+    {
+      "name": "FlightAirportMovementContract",
+      "type": "object",
+      "propertyCount": 11,
+      "required": [
+        "airport",
+        "quality"
+      ]
+    },
+    {
+      "name": "FlightAirportMovementQualityEnum",
+      "type": "string",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "FlightBatchDelayContract",
+      "type": "object",
+      "propertyCount": 5,
+      "required": [
+        "numCancelled",
+        "numQualifiedTotal",
+        "numTotal"
+      ]
+    },
+    {
+      "name": "FlightContract",
+      "type": "object",
+      "propertyCount": 13,
+      "required": [
+        "arrival",
+        "codeshareStatus",
+        "departure",
+        "isCargo",
+        "lastUpdatedUtc",
+        "number",
+        "status"
+      ]
+    },
+    {
+      "name": "FlightDataGeneralAvailabilityContract",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "FlightDelayContract",
+      "type": "object",
+      "propertyCount": 9,
+      "required": [
+        "airportIcao",
+        "class",
+        "delayPercentiles",
+        "fromUtc",
+        "medianDelay",
+        "numConsideredFlights",
+        "numFlightsDelayedBrackets",
+        "toUtc"
+      ]
+    },
+    {
+      "name": "FlightDirection",
+      "type": "string",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "FlightLegDelayContract",
+      "type": "object",
+      "propertyCount": 3,
+      "required": [
+        "number"
+      ]
+    },
+    {
+      "name": "FlightLocationContract",
+      "type": "object",
+      "propertyCount": 9,
+      "required": [
+        "altitude",
+        "groundSpeed",
+        "lat",
+        "lon",
+        "pressure",
+        "pressureAltitude",
+        "reportedAtUtc",
+        "trueTrack"
+      ]
+    },
+    {
+      "name": "FlightNotificationContract",
+      "type": "object",
+      "propertyCount": 3,
+      "required": [
+        "flights",
+        "subscription"
+      ]
+    },
+    {
+      "name": "FlightNotificationItemContract",
+      "type": "object",
+      "propertyCount": 15,
+      "required": [
+        "arrival",
+        "codeshareStatus",
+        "departure",
+        "isCargo",
+        "lastUpdatedUtc",
+        "number",
+        "status"
+      ]
+    },
+    {
+      "name": "FlightPlanContract",
+      "type": "object",
+      "propertyCount": 8,
+      "required": [
+        "lastUpdatedUtc",
+        "route"
+      ]
+    },
+    {
+      "name": "FlightPlanStatus",
+      "type": "string",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "FlightRules",
+      "type": "string",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "FlightSearchByEnum",
+      "type": "string",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "FlightSearchItemContract",
+      "type": "object",
+      "propertyCount": 1,
+      "required": [
+        "number"
+      ]
+    },
+    {
+      "name": "FlightStatus",
+      "type": "string",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "FlightType",
+      "type": "string",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "GeoCoordinatesContract",
+      "type": "object",
+      "propertyCount": 2,
+      "required": [
+        "lat",
+        "lon"
+      ]
+    },
+    {
+      "name": "GeoCoordinatesContractListingAirportContractSearchResultCollectionContract",
+      "type": "object",
+      "propertyCount": 3,
+      "required": [
+        "count",
+        "items",
+        "searchBy"
+      ]
+    },
+    {
+      "name": "LicenseType",
+      "type": "string",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "ListingAirportContract",
+      "type": "object",
+      "propertyCount": 9,
+      "required": [
+        "name"
+      ]
+    },
+    {
+      "name": "ModelFlightTimeEnum",
+      "type": "string",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "PercentileBracketContract",
+      "type": "object",
+      "propertyCount": 2,
+      "required": [
+        "delay",
+        "percentile"
+      ]
+    },
+    {
+      "name": "Pressure",
+      "type": "object",
+      "propertyCount": 3,
+      "required": [
+        "hPa",
+        "inHg",
+        "mmHg"
+      ]
+    },
+    {
+      "name": "ResourceContract",
+      "type": "object",
+      "propertyCount": 7,
+      "required": [
+        "license",
+        "url"
+      ]
+    },
+    {
+      "name": "RunwayContract",
+      "type": "object",
+      "propertyCount": 9,
+      "required": [
+        "isClosed",
+        "name",
+        "surface",
+        "trueHdg"
+      ]
+    },
+    {
+      "name": "SolarStateContract",
+      "type": "object",
+      "propertyCount": 13,
+      "required": [
+        "dayTime",
+        "location",
+        "sunAzimuth",
+        "sunElevation"
+      ]
+    },
+    {
+      "name": "Speed",
+      "type": "object",
+      "propertyCount": 4,
+      "required": [
+        "kmPerHour",
+        "kt",
+        "meterPerSecond",
+        "miPerHour"
+      ]
+    },
+    {
+      "name": "SpeedFlightPlanUnitContract",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "StatisticClass",
+      "type": "string",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "StringAircraftContractSearchResultCollectionContract",
+      "type": "object",
+      "propertyCount": 3,
+      "required": [
+        "count",
+        "items",
+        "searchBy"
+      ]
+    },
+    {
+      "name": "StringCollectionContract",
+      "type": "object",
+      "propertyCount": 2,
+      "required": [
+        "count",
+        "items"
+      ]
+    },
+    {
+      "name": "StringFlightSearchItemContractSearchResultCollectionContract",
+      "type": "object",
+      "propertyCount": 3,
+      "required": [
+        "count",
+        "items",
+        "searchBy"
+      ]
+    },
+    {
+      "name": "StringListingAirportContractSearchResultCollectionContract",
+      "type": "object",
+      "propertyCount": 3,
+      "required": [
+        "count",
+        "items",
+        "searchBy"
+      ]
+    },
+    {
+      "name": "SubscriberContract",
+      "type": "object",
+      "propertyCount": 2,
+      "required": [
+        "id",
+        "type"
+      ]
+    },
+    {
+      "name": "SubscriptionBalanceContract",
+      "type": "object",
+      "propertyCount": 3,
+      "required": [
+        "creditsRemaining",
+        "lastDeductedUtc",
+        "lastRefilledUtc"
+      ]
+    },
+    {
+      "name": "SubscriptionBillingType",
+      "type": "string",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "SubscriptionContract",
+      "type": "object",
+      "propertyCount": 9,
+      "required": [
+        "createdOnUtc",
+        "id",
+        "isActive",
+        "subject",
+        "subscriber"
+      ]
+    },
+    {
+      "name": "SubscriptionSubjectContract",
+      "type": "object",
+      "propertyCount": 2,
+      "required": [
+        "type"
+      ]
+    },
+    {
+      "name": "SubscriptionSubjectType",
+      "type": "string",
+      "propertyCount": 0,
+      "required": []
+    },
+    {
+      "name": "SubscriptionsBalanceRefillRequestContract",
+      "type": "object",
+      "propertyCount": 1,
+      "required": [
+        "credits"
+      ]
+    },
+    {
+      "name": "SurfaceType",
+      "type": "string",
+      "propertyCount": 0,
+      "required": []
+    }
+  ],
+  "operations": [
+    {
+      "method": "GET",
+      "path": "/aircrafts/{searchBy}/{searchParam}",
+      "operationId": "GetAircraft",
+      "summary": "AeroDataBox Single Aircraft (by Tail-number, Mode-S or ID) / TIER 1",
+      "tags": [
+        "Aircraft API"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/aircrafts/{searchBy}/{searchParam}/registrations",
+      "operationId": "GetAircraftRegistrations",
+      "summary": "AeroDataBox Single Aircraft Registration History (by Tail-number, Mode-S or ID) / TIER 1",
+      "tags": [
+        "Aircraft API"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/aircrafts/{searchBy}/{searchParam}/all",
+      "operationId": "GetAllAircraft",
+      "summary": "AeroDataBox Aircraft by Tail-number, Mode-S or ID / TIER 1",
+      "tags": [
+        "Aircraft API"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/airlines/{airlineCode}/aircrafts",
+      "operationId": "GetAirlineFleet",
+      "summary": "AeroDataBox Airline Fleet / Aircraft List by Airline Code (BETA) / TIER 3",
+      "tags": [
+        "Aircraft API"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/aircrafts/reg/{reg}/image/beta",
+      "operationId": "GetAircraftImageByRegistration",
+      "summary": "AeroDataBox Aircraft Image by Tail-number / TIER 2",
+      "tags": [
+        "Aircraft API"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/aircrafts/search/term",
+      "operationId": "SearchAircraftByTerm",
+      "summary": "AeroDataBox Search Active Aircraft Tail Numbers by Term / TIER 2",
+      "tags": [
+        "Aircraft API"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/airports/{codeType}/{code}",
+      "operationId": "GetAirport",
+      "summary": "AeroDataBox Airport by Code / TIER 1",
+      "tags": [
+        "Airport API"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/airports/{codeType}/{code}/runways",
+      "operationId": "GetAirportRunways",
+      "summary": "AeroDataBox Airport Runways / TIER 1",
+      "tags": [
+        "Airport API"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/airports/search/location",
+      "operationId": "SearchAirportsByLocation",
+      "summary": "AeroDataBox Search Airports by Location / TIER 2",
+      "tags": [
+        "Airport API"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/airports/search/ip",
+      "operationId": "SearchAirportsByIpGeoLocation",
+      "summary": "AeroDataBox Search Airports by IP Address Geolocation / TIER 2",
+      "tags": [
+        "Airport API"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/airports/search/term",
+      "operationId": "SearchAirportByTerm",
+      "summary": "AeroDataBox Search Airports by Free Text / TIER 2",
+      "tags": [
+        "Airport API"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/subscriptions/webhook/{subjectType}/{subjectId}",
+      "operationId": "SubscribeWebhook",
+      "summary": "AeroDataBox Create Web-hook Subscription / TIER 4",
+      "tags": [
+        "Flight Alert API"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/subscriptions/webhook/{subscriptionId}",
+      "operationId": "GetWebhook",
+      "summary": "AeroDataBox Get Web-hook Subscription / FREE TIER",
+      "tags": [
+        "Flight Alert API"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/subscriptions/webhook/{subscriptionId}",
+      "operationId": "UnsubscribeWebhook",
+      "summary": "AeroDataBox Remove Web-hook Subscription / FREE TIER",
+      "tags": [
+        "Flight Alert API"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/subscriptions/webhook",
+      "operationId": "GetWebhookList",
+      "summary": "AeroDataBox List Web-hook Subscriptions / FREE TIER",
+      "tags": [
+        "Flight Alert API"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/subscriptions/webhook/{subscriptionId}/refresh",
+      "operationId": "RefreshWebhook",
+      "summary": "AeroDataBox Refresh Web-hook Subscription (DEPRECATED) / TIER 4",
+      "tags": [
+        "Flight Alert API"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/subscriptions/balance",
+      "operationId": "GetBalance",
+      "summary": "AeroDataBox Get Web-hook Subscription Balance / FREE TIER",
+      "tags": [
+        "Flight Alert API"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/subscriptions/balance/refill",
+      "operationId": "RefillBalance",
+      "summary": "AeroDataBox Refill Web-hook Subscription Balance / TIER 1",
+      "tags": [
+        "Flight Alert API"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/flights/{searchBy}/{searchParam}",
+      "operationId": "GetFlight_FlightNearest",
+      "summary": "AeroDataBox Flight Status (single Day) / TIER 2",
+      "tags": [
+        "Flight API"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/flights/{searchBy}/{searchParam}/{dateLocal}",
+      "operationId": "GetFlight_FlightOnSpecificDate",
+      "summary": "AeroDataBox Flight Status (single Day) / TIER 2",
+      "tags": [
+        "Flight API"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/flights/{searchBy}/{searchParam}/{dateFromLocal}/{dateToLocal}",
+      "operationId": "GetFlightHistory_FlightHistory",
+      "summary": "AeroDataBox Flight History and Schedule (range of Days) / TIER 3",
+      "tags": [
+        "Flight API"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/flights/{searchBy}/{searchParam}/dates",
+      "operationId": "GetFlightDates_FlightDatesAll",
+      "summary": "AeroDataBox Flight Departure Dates / TIER 2",
+      "tags": [
+        "Flight API"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/flights/{searchBy}/{searchParam}/dates/{fromLocal}/{toLocal}",
+      "operationId": "GetFlightDates_FlightDatesInRange",
+      "summary": "AeroDataBox Flight Departure Dates / TIER 2",
+      "tags": [
+        "Flight API"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/flights/airports/{codeType}/{code}/{fromLocal}/{toLocal}",
+      "operationId": "GetAirportFlights",
+      "summary": "AeroDataBox FIDS (airport Departures and Arrivals) - by Local Time Range / TIER 2",
+      "tags": [
+        "Flight API"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/flights/airports/{codeType}/{code}",
+      "operationId": "GetAirportFlightsRelative",
+      "summary": "AeroDataBox FIDS (airport Departures and Arrivals) - by Relative Time / by Current Time / TIER 2",
+      "tags": [
+        "Flight API"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/flights/search/term",
+      "operationId": "SearchFlightsByTerm",
+      "summary": "AeroDataBox Search Flight Numbers by Term / TIER 2",
+      "tags": [
+        "Flight API"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/health/services/feeds/{service}",
+      "operationId": "GetFeedServiceStatus",
+      "summary": "AeroDataBox General Status of Data Feed Services / FREE TIER",
+      "tags": [
+        "Healthcheck API"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/health/services/airports/{icao}/feeds",
+      "operationId": "GetAirportFeedStatus",
+      "summary": "AeroDataBox Data Feed Services Status by ICAO Code / FREE TIER",
+      "tags": [
+        "Healthcheck API"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/health/services/feeds/{service}/airports",
+      "operationId": "GetFeedAirports",
+      "summary": "AeroDataBox Airports Supporting Data Feed Service / FREE TIER",
+      "tags": [
+        "Healthcheck API"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/industry/faa-ladd/{id}/status",
+      "operationId": "GetFaaLaddAircraftStatus",
+      "summary": "AeroDataBox FAA LADD Aircraft Status / TIER 3",
+      "tags": [
+        "Industry API"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/airports/{codeType}/{code}/time/local",
+      "operationId": "GetAirportLocalTime",
+      "summary": "AeroDataBox Current Local Time at the Airport / TIER 1",
+      "tags": [
+        "Miscellaneous API"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/airports/{codeType}/{code}/time/solar",
+      "operationId": "GetAirportSolarTime_SolarTimeCurrent",
+      "summary": "AeroDataBox Solar and Day Time at the Airport / TIER 1",
+      "tags": [
+        "Miscellaneous API"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/airports/{codeType}/{code}/time/solar/{dateLocal}",
+      "operationId": "GetAirportSolarTime_SolarTimeSpecificDate",
+      "summary": "AeroDataBox Solar and Day Time at the Airport / TIER 1",
+      "tags": [
+        "Miscellaneous API"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/airports/{codeType}/{codeFrom}/distance-time/{codeTo}",
+      "operationId": "GetAirportDistanceTime",
+      "summary": "AeroDataBox Distance and Flight Time Between Airports / TIER 2",
+      "tags": [
+        "Miscellaneous API"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/airports/{codeType}/{code}/delays",
+      "operationId": "GetAirportDelay_DelaysCurrent",
+      "summary": "AeroDataBox Airport Delays (current or Historical Moment) / TIER 3",
+      "tags": [
+        "Statistical API"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/airports/{codeType}/{code}/delays/{dateLocal}",
+      "operationId": "GetAirportDelay_DelaysHistorical",
+      "summary": "AeroDataBox Airport Delays (current or Historical Moment) / TIER 3",
+      "tags": [
+        "Statistical API"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/airports/{codeType}/{code}/delays/{dateFromLocal}/{dateToLocal}",
+      "operationId": "GetAirportDelays",
+      "summary": "AeroDataBox Airport Delays (historical Period) / TIER 3",
+      "tags": [
+        "Statistical API"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/airports/{codeType}/{code}/stats/routes/daily",
+      "operationId": "GetRouteDailyStatistics_RoutesDailyCurrent",
+      "summary": "AeroDataBox Airport Routes and Daily Flight Destinations / TIER 3",
+      "tags": [
+        "Statistical API"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/airports/{codeType}/{code}/stats/routes/daily/{dateLocal}",
+      "operationId": "GetRouteDailyStatistics_RoutesDailAtSpecificDate",
+      "summary": "AeroDataBox Airport Routes and Daily Flight Destinations / TIER 3",
+      "tags": [
+        "Statistical API"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/airports/delays",
+      "operationId": "GetGlobalDelays_GlobalDelaysCurent",
+      "summary": "AeroDataBox Global Delays (current or Historical Moment) / TIER 3",
+      "tags": [
+        "Statistical API"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/airports/delays/{dateUtc}",
+      "operationId": "GetGlobalDelays_GlobalDelaysAtSpecificDate",
+      "summary": "AeroDataBox Global Delays (current or Historical Moment) / TIER 3",
+      "tags": [
+        "Statistical API"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/flights/{number}/delays",
+      "operationId": "GetFlightDelays",
+      "summary": "AeroDataBox Flight Delay Statistics by Flight Number / TIER 3",
+      "tags": [
+        "Statistical API"
+      ]
+    }
+  ]
+}

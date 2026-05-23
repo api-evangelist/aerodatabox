@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/FlightSearchItemContract",
+  "title": "FlightSearchItemContract",
+  "required": [
+    "number"
+  ],
+  "type": "object",
+  "properties": {
+    "number": {
+      "minLength": 1,
+      "type": "string",
+      "description": "Found flight number."
+    }
+  },
+  "additionalProperties": false,
+  "description": "Flight record found in the search result."
+}

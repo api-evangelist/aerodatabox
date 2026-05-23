@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/DateTimeContract",
+  "title": "DateTimeContract",
+  "required": [
+    "local",
+    "utc"
+  ],
+  "type": "object",
+  "properties": {
+    "utc": {
+      "type": "string",
+      "description": "UTC-time",
+      "format": "date-time"
+    },
+    "local": {
+      "type": "string",
+      "description": "Local time",
+      "format": "date-time"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Descriptor date-time represented in both UTC and local timezones"
+}

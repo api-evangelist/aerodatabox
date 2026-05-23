@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SpeedFlightPlanUnitContract",
+  "title": "SpeedFlightPlanUnitContract",
+  "type": "object",
+  "properties": {
+    "requested": {
+      "$ref": "#/components/schemas/Speed"
+    },
+    "assigned": {
+      "$ref": "#/components/schemas/Speed"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Contract describing unit (altitude, airspeed, etc.) which can be assigned and / or requested\r\nin the context of the flight plan"
+}

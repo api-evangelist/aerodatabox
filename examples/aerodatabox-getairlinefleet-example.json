@@ -1,0 +1,56 @@
+{
+  "operationId": "GetAirlineFleet",
+  "method": "GET",
+  "path": "/airlines/{airlineCode}/aircrafts",
+  "summary": "AeroDataBox Airline Fleet / Aircraft List by Airline Code (BETA) / TIER 3",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "GetAirlineFleet200Example",
+      "example": {
+        "totalCount": 100,
+        "pageOffset": 100,
+        "pageSize": 100,
+        "hasNextPage": true,
+        "count": 100,
+        "items": [
+          "example_value"
+        ]
+      }
+    },
+    {
+      "status": "400",
+      "contentType": "application/json",
+      "name": "GetAirlineFleet400Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "401",
+      "contentType": "application/json",
+      "name": "GetAirlineFleet401Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "451",
+      "contentType": "application/json",
+      "name": "GetAirlineFleet451Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "500",
+      "contentType": "application/json",
+      "name": "GetAirlineFleet500Example",
+      "example": {
+        "message": "example_value"
+      }
+    }
+  ]
+}

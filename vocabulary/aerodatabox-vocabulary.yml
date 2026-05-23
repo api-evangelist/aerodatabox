@@ -1,0 +1,13 @@
+name: AeroDataBox Domain Vocabulary
+provider: AeroDataBox
+providerId: aerodatabox
+description: Tag-derived vocabulary for the AeroDataBox API surface; sourced from openapi/ tags.
+terms:
+- term: Aircraft API
+- term: Airport API
+- term: Flight Alert API
+- term: Flight API
+- term: Healthcheck API
+- term: Industry API
+- term: Miscellaneous API
+- term: Statistical API

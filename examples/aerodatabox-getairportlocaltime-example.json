@@ -1,0 +1,50 @@
+{
+  "operationId": "GetAirportLocalTime",
+  "method": "GET",
+  "path": "/airports/{codeType}/{code}/time/local",
+  "summary": "AeroDataBox Current Local Time at the Airport / TIER 1",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "GetAirportLocalTime200Example",
+      "example": {
+        "time": "example_value",
+        "timeZoneId": "abc123"
+      }
+    },
+    {
+      "status": "400",
+      "contentType": "application/json",
+      "name": "GetAirportLocalTime400Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "401",
+      "contentType": "application/json",
+      "name": "GetAirportLocalTime401Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "451",
+      "contentType": "application/json",
+      "name": "GetAirportLocalTime451Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "500",
+      "contentType": "application/json",
+      "name": "GetAirportLocalTime500Example",
+      "example": {
+        "message": "example_value"
+      }
+    }
+  ]
+}

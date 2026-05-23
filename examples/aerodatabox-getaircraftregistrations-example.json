@@ -1,0 +1,49 @@
+{
+  "operationId": "GetAircraftRegistrations",
+  "method": "GET",
+  "path": "/aircrafts/{searchBy}/{searchParam}/registrations",
+  "summary": "AeroDataBox Single Aircraft Registration History (by Tail-number, Mode-S or ID) / TIER 1",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "GetAircraftRegistrations200Example",
+      "example": [
+        "example_value"
+      ]
+    },
+    {
+      "status": "400",
+      "contentType": "application/json",
+      "name": "GetAircraftRegistrations400Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "401",
+      "contentType": "application/json",
+      "name": "GetAircraftRegistrations401Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "451",
+      "contentType": "application/json",
+      "name": "GetAircraftRegistrations451Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "500",
+      "contentType": "application/json",
+      "name": "GetAircraftRegistrations500Example",
+      "example": {
+        "message": "example_value"
+      }
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "operationId": "SearchAirportsByIpGeoLocation",
+  "method": "GET",
+  "path": "/airports/search/ip",
+  "summary": "AeroDataBox Search Airports by IP Address Geolocation / TIER 2",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "SearchAirportsByIpGeoLocation200Example",
+      "example": {
+        "searchBy": "example_value",
+        "count": 100,
+        "items": [
+          "example_value"
+        ]
+      }
+    },
+    {
+      "status": "400",
+      "contentType": "application/json",
+      "name": "SearchAirportsByIpGeoLocation400Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "401",
+      "contentType": "application/json",
+      "name": "SearchAirportsByIpGeoLocation401Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "451",
+      "contentType": "application/json",
+      "name": "SearchAirportsByIpGeoLocation451Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "500",
+      "contentType": "application/json",
+      "name": "SearchAirportsByIpGeoLocation500Example",
+      "example": {
+        "message": "example_value"
+      }
+    }
+  ]
+}

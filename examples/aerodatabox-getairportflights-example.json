@@ -1,0 +1,54 @@
+{
+  "operationId": "GetAirportFlights",
+  "method": "GET",
+  "path": "/flights/airports/{codeType}/{code}/{fromLocal}/{toLocal}",
+  "summary": "AeroDataBox FIDS (airport Departures and Arrivals) - by Local Time Range / TIER 2",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "GetAirportFlights200Example",
+      "example": {
+        "departures": [
+          "example_value"
+        ],
+        "arrivals": [
+          "example_value"
+        ]
+      }
+    },
+    {
+      "status": "400",
+      "contentType": "application/json",
+      "name": "GetAirportFlights400Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "401",
+      "contentType": "application/json",
+      "name": "GetAirportFlights401Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "451",
+      "contentType": "application/json",
+      "name": "GetAirportFlights451Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "500",
+      "contentType": "application/json",
+      "name": "GetAirportFlights500Example",
+      "example": {
+        "message": "example_value"
+      }
+    }
+  ]
+}

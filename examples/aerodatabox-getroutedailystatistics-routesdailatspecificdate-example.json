@@ -1,0 +1,51 @@
+{
+  "operationId": "GetRouteDailyStatistics_RoutesDailAtSpecificDate",
+  "method": "GET",
+  "path": "/airports/{codeType}/{code}/stats/routes/daily/{dateLocal}",
+  "summary": "AeroDataBox Airport Routes and Daily Flight Destinations / TIER 3",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "GetRouteDailyStatistics_RoutesDailAtSpecificDate200Example",
+      "example": {
+        "routes": [
+          "example_value"
+        ]
+      }
+    },
+    {
+      "status": "400",
+      "contentType": "application/json",
+      "name": "GetRouteDailyStatistics_RoutesDailAtSpecificDate400Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "401",
+      "contentType": "application/json",
+      "name": "GetRouteDailyStatistics_RoutesDailAtSpecificDate401Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "451",
+      "contentType": "application/json",
+      "name": "GetRouteDailyStatistics_RoutesDailAtSpecificDate451Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "500",
+      "contentType": "application/json",
+      "name": "GetRouteDailyStatistics_RoutesDailAtSpecificDate500Example",
+      "example": {
+        "message": "example_value"
+      }
+    }
+  ]
+}

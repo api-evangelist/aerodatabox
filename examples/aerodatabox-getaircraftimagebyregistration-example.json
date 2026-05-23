@@ -1,0 +1,57 @@
+{
+  "operationId": "GetAircraftImageByRegistration",
+  "method": "GET",
+  "path": "/aircrafts/reg/{reg}/image/beta",
+  "summary": "AeroDataBox Aircraft Image by Tail-number / TIER 2",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "GetAircraftImageByRegistration200Example",
+      "example": {
+        "url": "example_value",
+        "webUrl": "example_value",
+        "author": "example_value",
+        "title": "example_value",
+        "description": "example_value",
+        "license": "example_value",
+        "htmlAttributions": [
+          "example_value"
+        ]
+      }
+    },
+    {
+      "status": "400",
+      "contentType": "application/json",
+      "name": "GetAircraftImageByRegistration400Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "401",
+      "contentType": "application/json",
+      "name": "GetAircraftImageByRegistration401Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "451",
+      "contentType": "application/json",
+      "name": "GetAircraftImageByRegistration451Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "500",
+      "contentType": "application/json",
+      "name": "GetAircraftImageByRegistration500Example",
+      "example": {
+        "message": "example_value"
+      }
+    }
+  ]
+}

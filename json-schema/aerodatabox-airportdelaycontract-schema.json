@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AirportDelayContract",
+  "title": "AirportDelayContract",
+  "required": [
+    "airportIcao",
+    "arrivalsDelayInformation",
+    "departuresDelayInformation",
+    "from",
+    "to"
+  ],
+  "type": "object",
+  "properties": {
+    "airportIcao": {
+      "minLength": 1,
+      "type": "string",
+      "description": "Airport ICAO code"
+    },
+    "from": {
+      "$ref": "#/components/schemas/DateTimeContract"
+    },
+    "to": {
+      "$ref": "#/components/schemas/DateTimeContract"
+    },
+    "departuresDelayInformation": {
+      "$ref": "#/components/schemas/FlightBatchDelayContract"
+    },
+    "arrivalsDelayInformation": {
+      "$ref": "#/components/schemas/FlightBatchDelayContract"
+    }
+  },
+  "additionalProperties": false
+}

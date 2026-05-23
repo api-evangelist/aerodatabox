@@ -1,0 +1,53 @@
+{
+  "operationId": "SearchFlightsByTerm",
+  "method": "GET",
+  "path": "/flights/search/term",
+  "summary": "AeroDataBox Search Flight Numbers by Term / TIER 2",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "SearchFlightsByTerm200Example",
+      "example": {
+        "searchBy": "example_value",
+        "count": 100,
+        "items": [
+          "example_value"
+        ]
+      }
+    },
+    {
+      "status": "400",
+      "contentType": "application/json",
+      "name": "SearchFlightsByTerm400Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "401",
+      "contentType": "application/json",
+      "name": "SearchFlightsByTerm401Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "451",
+      "contentType": "application/json",
+      "name": "SearchFlightsByTerm451Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "500",
+      "contentType": "application/json",
+      "name": "SearchFlightsByTerm500Example",
+      "example": {
+        "message": "example_value"
+      }
+    }
+  ]
+}

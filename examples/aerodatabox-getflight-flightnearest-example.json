@@ -1,0 +1,49 @@
+{
+  "operationId": "GetFlight_FlightNearest",
+  "method": "GET",
+  "path": "/flights/{searchBy}/{searchParam}",
+  "summary": "AeroDataBox Flight Status (single Day) / TIER 2",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "GetFlight_FlightNearest200Example",
+      "example": [
+        "example_value"
+      ]
+    },
+    {
+      "status": "400",
+      "contentType": "application/json",
+      "name": "GetFlight_FlightNearest400Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "401",
+      "contentType": "application/json",
+      "name": "GetFlight_FlightNearest401Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "451",
+      "contentType": "application/json",
+      "name": "GetFlight_FlightNearest451Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "500",
+      "contentType": "application/json",
+      "name": "GetFlight_FlightNearest500Example",
+      "example": {
+        "message": "example_value"
+      }
+    }
+  ]
+}

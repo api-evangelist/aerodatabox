@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/DistanceFlightPlanUnitContract",
+  "title": "DistanceFlightPlanUnitContract",
+  "type": "object",
+  "properties": {
+    "requested": {
+      "$ref": "#/components/schemas/Distance"
+    },
+    "assigned": {
+      "$ref": "#/components/schemas/Distance"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Contract describing unit (altitude, airspeed, etc.) which can be assigned and / or requested\r\nin the context of the flight plan"
+}

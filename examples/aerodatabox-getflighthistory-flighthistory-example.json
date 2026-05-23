@@ -1,0 +1,49 @@
+{
+  "operationId": "GetFlightHistory_FlightHistory",
+  "method": "GET",
+  "path": "/flights/{searchBy}/{searchParam}/{dateFromLocal}/{dateToLocal}",
+  "summary": "AeroDataBox Flight History and Schedule (range of Days) / TIER 3",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "GetFlightHistory_FlightHistory200Example",
+      "example": [
+        "example_value"
+      ]
+    },
+    {
+      "status": "400",
+      "contentType": "application/json",
+      "name": "GetFlightHistory_FlightHistory400Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "401",
+      "contentType": "application/json",
+      "name": "GetFlightHistory_FlightHistory401Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "451",
+      "contentType": "application/json",
+      "name": "GetFlightHistory_FlightHistory451Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "500",
+      "contentType": "application/json",
+      "name": "GetFlightHistory_FlightHistory500Example",
+      "example": {
+        "message": "example_value"
+      }
+    }
+  ]
+}

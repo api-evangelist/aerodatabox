@@ -1,0 +1,53 @@
+{
+  "operationId": "SearchAircraftByTerm",
+  "method": "GET",
+  "path": "/aircrafts/search/term",
+  "summary": "AeroDataBox Search Active Aircraft Tail Numbers by Term / TIER 2",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "SearchAircraftByTerm200Example",
+      "example": {
+        "searchBy": "example_value",
+        "count": 100,
+        "items": [
+          "example_value"
+        ]
+      }
+    },
+    {
+      "status": "400",
+      "contentType": "application/json",
+      "name": "SearchAircraftByTerm400Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "401",
+      "contentType": "application/json",
+      "name": "SearchAircraftByTerm401Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "451",
+      "contentType": "application/json",
+      "name": "SearchAircraftByTerm451Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "500",
+      "contentType": "application/json",
+      "name": "SearchAircraftByTerm500Example",
+      "example": {
+        "message": "example_value"
+      }
+    }
+  ]
+}

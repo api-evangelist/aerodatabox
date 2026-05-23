@@ -1,0 +1,59 @@
+{
+  "operationId": "GetWebhook",
+  "method": "GET",
+  "path": "/subscriptions/webhook/{subscriptionId}",
+  "summary": "AeroDataBox Get Web-hook Subscription / FREE TIER",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "GetWebhook200Example",
+      "example": {
+        "id": "abc123",
+        "isActive": true,
+        "billingType": "example_value",
+        "activateBeforeUtc": "2025-03-15T14:30:00Z",
+        "expiresOnUtc": "2025-03-15T14:30:00Z",
+        "createdOnUtc": "2025-03-15T14:30:00Z",
+        "subject": "example_value",
+        "subscriber": "example_value",
+        "notices": [
+          "example_value"
+        ]
+      }
+    },
+    {
+      "status": "400",
+      "contentType": "application/json",
+      "name": "GetWebhook400Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "401",
+      "contentType": "application/json",
+      "name": "GetWebhook401Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "451",
+      "contentType": "application/json",
+      "name": "GetWebhook451Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "500",
+      "contentType": "application/json",
+      "name": "GetWebhook500Example",
+      "example": {
+        "message": "example_value"
+      }
+    }
+  ]
+}

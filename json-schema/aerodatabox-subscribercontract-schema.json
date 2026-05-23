@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SubscriberContract",
+  "title": "SubscriberContract",
+  "required": [
+    "id",
+    "type"
+  ],
+  "type": "object",
+  "properties": {
+    "type": {
+      "minLength": 1,
+      "type": "string",
+      "description": "Type of subscriber. Completemented by SubscriberId."
+    },
+    "id": {
+      "minLength": 1,
+      "type": "string",
+      "description": "ID"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Describes subscriber (consumer of the subscription)"
+}

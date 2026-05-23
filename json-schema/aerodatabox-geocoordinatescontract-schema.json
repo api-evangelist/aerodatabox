@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/GeoCoordinatesContract",
+  "title": "GeoCoordinatesContract",
+  "required": [
+    "lat",
+    "lon"
+  ],
+  "type": "object",
+  "properties": {
+    "lat": {
+      "maximum": 90,
+      "minimum": -90,
+      "type": "number",
+      "description": "Latitude, in degrees",
+      "format": "float"
+    },
+    "lon": {
+      "maximum": 180,
+      "minimum": -180,
+      "type": "number",
+      "description": "Longitude, in degrees",
+      "format": "float"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Geographical coordinates data"
+}

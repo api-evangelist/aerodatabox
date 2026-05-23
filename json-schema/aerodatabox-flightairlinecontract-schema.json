@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/FlightAirlineContract",
+  "title": "FlightAirlineContract",
+  "required": [
+    "name"
+  ],
+  "type": "object",
+  "properties": {
+    "name": {
+      "minLength": 1,
+      "type": "string",
+      "description": "Airline name"
+    },
+    "iata": {
+      "type": "string",
+      "description": "IATA code of the airline",
+      "nullable": true
+    },
+    "icao": {
+      "type": "string",
+      "description": "ICAO code of the airline",
+      "nullable": true
+    }
+  },
+  "additionalProperties": false,
+  "description": "Flight's airline reference conract"
+}

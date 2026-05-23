@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AirportLocalTimeContract",
+  "title": "AirportLocalTimeContract",
+  "required": [
+    "time",
+    "timeZoneId"
+  ],
+  "type": "object",
+  "properties": {
+    "time": {
+      "$ref": "#/components/schemas/DateTimeContract"
+    },
+    "timeZoneId": {
+      "minLength": 1,
+      "type": "string",
+      "description": "Timezone ID of the airport (Olson format)"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Information about the local time at an airport"
+}

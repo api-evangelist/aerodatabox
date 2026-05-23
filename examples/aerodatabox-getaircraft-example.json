@@ -1,0 +1,76 @@
+{
+  "operationId": "GetAircraft",
+  "method": "GET",
+  "path": "/aircrafts/{searchBy}/{searchParam}",
+  "summary": "AeroDataBox Single Aircraft (by Tail-number, Mode-S or ID) / TIER 1",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "GetAircraft200Example",
+      "example": {
+        "id": 100,
+        "reg": "N12345",
+        "active": true,
+        "serial": "example_value",
+        "hexIcao": "KLAX",
+        "airlineName": "Los Angeles International",
+        "iataType": "LAX",
+        "iataCodeShort": "LAX",
+        "icaoCode": "KLAX",
+        "model": "example_value",
+        "modelCode": "CODE1",
+        "numSeats": 100,
+        "rolloutDate": "2025-03-15T14:30:00Z",
+        "firstFlightDate": "2025-03-15T14:30:00Z",
+        "deliveryDate": "2025-03-15T14:30:00Z",
+        "registrationDate": "2025-03-15T14:30:00Z",
+        "typeName": "Los Angeles International",
+        "numEngines": 100,
+        "engineType": "example_value",
+        "isFreighter": true,
+        "productionLine": "example_value",
+        "ageYears": 1.5,
+        "verified": true,
+        "image": "example_value",
+        "numRegistrations": 100,
+        "registrations": [
+          "N12345"
+        ]
+      }
+    },
+    {
+      "status": "400",
+      "contentType": "application/json",
+      "name": "GetAircraft400Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "401",
+      "contentType": "application/json",
+      "name": "GetAircraft401Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "451",
+      "contentType": "application/json",
+      "name": "GetAircraft451Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "500",
+      "contentType": "application/json",
+      "name": "GetAircraft500Example",
+      "example": {
+        "message": "example_value"
+      }
+    }
+  ]
+}

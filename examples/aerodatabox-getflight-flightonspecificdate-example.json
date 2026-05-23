@@ -1,0 +1,49 @@
+{
+  "operationId": "GetFlight_FlightOnSpecificDate",
+  "method": "GET",
+  "path": "/flights/{searchBy}/{searchParam}/{dateLocal}",
+  "summary": "AeroDataBox Flight Status (single Day) / TIER 2",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "GetFlight_FlightOnSpecificDate200Example",
+      "example": [
+        "example_value"
+      ]
+    },
+    {
+      "status": "400",
+      "contentType": "application/json",
+      "name": "GetFlight_FlightOnSpecificDate400Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "401",
+      "contentType": "application/json",
+      "name": "GetFlight_FlightOnSpecificDate401Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "451",
+      "contentType": "application/json",
+      "name": "GetFlight_FlightOnSpecificDate451Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "500",
+      "contentType": "application/json",
+      "name": "GetFlight_FlightOnSpecificDate500Example",
+      "example": {
+        "message": "example_value"
+      }
+    }
+  ]
+}

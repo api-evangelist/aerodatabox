@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/FlightPlanStatus",
+  "title": "FlightPlanStatus",
+  "enum": [
+    "Proposed",
+    "Active",
+    "Dropped",
+    "Cancelled",
+    "Completed"
+  ],
+  "type": "string"
+}

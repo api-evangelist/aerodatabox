@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SubscriptionSubjectType",
+  "title": "SubscriptionSubjectType",
+  "enum": [
+    "FlightByNumber",
+    "FlightByAirportIcao"
+  ],
+  "type": "string",
+  "description": "<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - FlightByNumber</b></li>\r\n<li><b>1 - FlightByAirportIcao</b></li>\r\n</ul>\r\n"
+}

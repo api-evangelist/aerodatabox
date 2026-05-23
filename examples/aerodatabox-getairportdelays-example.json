@@ -1,0 +1,49 @@
+{
+  "operationId": "GetAirportDelays",
+  "method": "GET",
+  "path": "/airports/{codeType}/{code}/delays/{dateFromLocal}/{dateToLocal}",
+  "summary": "AeroDataBox Airport Delays (historical Period) / TIER 3",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "GetAirportDelays200Example",
+      "example": [
+        "example_value"
+      ]
+    },
+    {
+      "status": "400",
+      "contentType": "application/json",
+      "name": "GetAirportDelays400Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "401",
+      "contentType": "application/json",
+      "name": "GetAirportDelays401Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "451",
+      "contentType": "application/json",
+      "name": "GetAirportDelays451Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "500",
+      "contentType": "application/json",
+      "name": "GetAirportDelays500Example",
+      "example": {
+        "message": "example_value"
+      }
+    }
+  ]
+}

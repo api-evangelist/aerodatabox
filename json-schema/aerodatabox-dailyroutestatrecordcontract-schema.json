@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/DailyRouteStatRecordContract",
+  "title": "DailyRouteStatRecordContract",
+  "required": [
+    "averageDailyFlights",
+    "destination",
+    "operators"
+  ],
+  "type": "object",
+  "properties": {
+    "destination": {
+      "$ref": "#/components/schemas/ListingAirportContract"
+    },
+    "averageDailyFlights": {
+      "type": "number",
+      "description": "Daily average of flights per destination",
+      "format": "float"
+    },
+    "operators": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/FlightAirlineContract"
+      },
+      "description": "Airlines operating on the route"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Statistical record of route daily statistics"
+}

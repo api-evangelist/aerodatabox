@@ -1,0 +1,63 @@
+{
+  "operationId": "GetFeedServiceStatus",
+  "method": "GET",
+  "path": "/health/services/feeds/{service}",
+  "summary": "AeroDataBox General Status of Data Feed Services / FREE TIER",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "GetFeedServiceStatus200Example",
+      "example": {
+        "service": "example_value",
+        "status": "Departed",
+        "minAvailableLocalDate": "2025-03-15T14:30:00Z",
+        "maxAvailableLocalDate": "2025-03-15T14:30:00Z"
+      }
+    },
+    {
+      "status": "400",
+      "contentType": "application/json",
+      "name": "GetFeedServiceStatus400Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "401",
+      "contentType": "application/json",
+      "name": "GetFeedServiceStatus401Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "451",
+      "contentType": "application/json",
+      "name": "GetFeedServiceStatus451Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "500",
+      "contentType": "application/json",
+      "name": "GetFeedServiceStatus500Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "503",
+      "contentType": "application/json",
+      "name": "GetFeedServiceStatus503Example",
+      "example": {
+        "service": "example_value",
+        "status": "Departed",
+        "minAvailableLocalDate": "2025-03-15T14:30:00Z",
+        "maxAvailableLocalDate": "2025-03-15T14:30:00Z"
+      }
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/DailyRouteStatContract",
+  "title": "DailyRouteStatContract",
+  "required": [
+    "routes"
+  ],
+  "type": "object",
+  "properties": {
+    "routes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/DailyRouteStatRecordContract"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "description": "Route daily statistics of the airport"
+}

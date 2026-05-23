@@ -1,0 +1,41 @@
+{
+  "operationId": "UnsubscribeWebhook",
+  "method": "DELETE",
+  "path": "/subscriptions/webhook/{subscriptionId}",
+  "summary": "AeroDataBox Remove Web-hook Subscription / FREE TIER",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "400",
+      "contentType": "application/json",
+      "name": "UnsubscribeWebhook400Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "401",
+      "contentType": "application/json",
+      "name": "UnsubscribeWebhook401Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "451",
+      "contentType": "application/json",
+      "name": "UnsubscribeWebhook451Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "500",
+      "contentType": "application/json",
+      "name": "UnsubscribeWebhook500Example",
+      "example": {
+        "message": "example_value"
+      }
+    }
+  ]
+}

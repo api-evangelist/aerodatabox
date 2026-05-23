@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/StatisticClass",
+  "title": "StatisticClass",
+  "enum": [
+    "Flight",
+    "FlightAndHour"
+  ],
+  "type": "string",
+  "description": "<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - Flight</b></li>\r\n<li><b>1 - FlightAndHour</b></li>\r\n</ul>\r\n"
+}

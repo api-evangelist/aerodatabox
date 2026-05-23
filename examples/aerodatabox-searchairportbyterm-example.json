@@ -1,0 +1,53 @@
+{
+  "operationId": "SearchAirportByTerm",
+  "method": "GET",
+  "path": "/airports/search/term",
+  "summary": "AeroDataBox Search Airports by Free Text / TIER 2",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "SearchAirportByTerm200Example",
+      "example": {
+        "searchBy": "example_value",
+        "count": 100,
+        "items": [
+          "example_value"
+        ]
+      }
+    },
+    {
+      "status": "400",
+      "contentType": "application/json",
+      "name": "SearchAirportByTerm400Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "401",
+      "contentType": "application/json",
+      "name": "SearchAirportByTerm401Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "451",
+      "contentType": "application/json",
+      "name": "SearchAirportByTerm451Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "500",
+      "contentType": "application/json",
+      "name": "SearchAirportByTerm500Example",
+      "example": {
+        "message": "example_value"
+      }
+    }
+  ]
+}

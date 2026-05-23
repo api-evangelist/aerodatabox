@@ -1,0 +1,51 @@
+{
+  "operationId": "RefillBalance",
+  "method": "POST",
+  "path": "/subscriptions/balance/refill",
+  "summary": "AeroDataBox Refill Web-hook Subscription Balance / TIER 1",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "RefillBalance200Example",
+      "example": {
+        "creditsRemaining": 100,
+        "lastRefilledUtc": "2025-03-15T14:30:00Z",
+        "lastDeductedUtc": "2025-03-15T14:30:00Z"
+      }
+    },
+    {
+      "status": "400",
+      "contentType": "application/json",
+      "name": "RefillBalance400Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "401",
+      "contentType": "application/json",
+      "name": "RefillBalance401Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "451",
+      "contentType": "application/json",
+      "name": "RefillBalance451Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "500",
+      "contentType": "application/json",
+      "name": "RefillBalance500Example",
+      "example": {
+        "message": "example_value"
+      }
+    }
+  ]
+}

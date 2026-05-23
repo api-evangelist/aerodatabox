@@ -1,0 +1,49 @@
+{
+  "operationId": "GetFlightDates_FlightDatesInRange",
+  "method": "GET",
+  "path": "/flights/{searchBy}/{searchParam}/dates/{fromLocal}/{toLocal}",
+  "summary": "AeroDataBox Flight Departure Dates / TIER 2",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "GetFlightDates_FlightDatesInRange200Example",
+      "example": [
+        "example_value"
+      ]
+    },
+    {
+      "status": "400",
+      "contentType": "application/json",
+      "name": "GetFlightDates_FlightDatesInRange400Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "401",
+      "contentType": "application/json",
+      "name": "GetFlightDates_FlightDatesInRange401Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "451",
+      "contentType": "application/json",
+      "name": "GetFlightDates_FlightDatesInRange451Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "500",
+      "contentType": "application/json",
+      "name": "GetFlightDates_FlightDatesInRange500Example",
+      "example": {
+        "message": "example_value"
+      }
+    }
+  ]
+}

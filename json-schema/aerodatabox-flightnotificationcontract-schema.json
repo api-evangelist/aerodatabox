@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/FlightNotificationContract",
+  "title": "FlightNotificationContract",
+  "required": [
+    "flights",
+    "subscription"
+  ],
+  "type": "object",
+  "properties": {
+    "flights": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/FlightNotificationItemContract"
+      },
+      "description": "Modified/created flight notification"
+    },
+    "subscription": {
+      "$ref": "#/components/schemas/SubscriptionContract"
+    },
+    "balance": {
+      "$ref": "#/components/schemas/SubscriptionBalanceContract"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Flight notification contract"
+}

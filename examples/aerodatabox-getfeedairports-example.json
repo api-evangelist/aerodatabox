@@ -1,0 +1,52 @@
+{
+  "operationId": "GetFeedAirports",
+  "method": "GET",
+  "path": "/health/services/feeds/{service}/airports",
+  "summary": "AeroDataBox Airports Supporting Data Feed Service / FREE TIER",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "GetFeedAirports200Example",
+      "example": {
+        "count": 100,
+        "items": [
+          "example_value"
+        ]
+      }
+    },
+    {
+      "status": "400",
+      "contentType": "application/json",
+      "name": "GetFeedAirports400Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "401",
+      "contentType": "application/json",
+      "name": "GetFeedAirports401Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "451",
+      "contentType": "application/json",
+      "name": "GetFeedAirports451Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "500",
+      "contentType": "application/json",
+      "name": "GetFeedAirports500Example",
+      "example": {
+        "message": "example_value"
+      }
+    }
+  ]
+}

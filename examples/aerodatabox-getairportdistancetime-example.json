@@ -1,0 +1,52 @@
+{
+  "operationId": "GetAirportDistanceTime",
+  "method": "GET",
+  "path": "/airports/{codeType}/{codeFrom}/distance-time/{codeTo}",
+  "summary": "AeroDataBox Distance and Flight Time Between Airports / TIER 2",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "GetAirportDistanceTime200Example",
+      "example": {
+        "from": "example_value",
+        "to": "example_value",
+        "greatCircleDistance": "example_value",
+        "approxFlightTime": "example_value"
+      }
+    },
+    {
+      "status": "400",
+      "contentType": "application/json",
+      "name": "GetAirportDistanceTime400Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "401",
+      "contentType": "application/json",
+      "name": "GetAirportDistanceTime401Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "451",
+      "contentType": "application/json",
+      "name": "GetAirportDistanceTime451Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "500",
+      "contentType": "application/json",
+      "name": "GetAirportDistanceTime500Example",
+      "example": {
+        "message": "example_value"
+      }
+    }
+  ]
+}

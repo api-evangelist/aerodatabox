@@ -1,0 +1,51 @@
+{
+  "operationId": "GetBalance",
+  "method": "GET",
+  "path": "/subscriptions/balance",
+  "summary": "AeroDataBox Get Web-hook Subscription Balance / FREE TIER",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "GetBalance200Example",
+      "example": {
+        "creditsRemaining": 100,
+        "lastRefilledUtc": "2025-03-15T14:30:00Z",
+        "lastDeductedUtc": "2025-03-15T14:30:00Z"
+      }
+    },
+    {
+      "status": "400",
+      "contentType": "application/json",
+      "name": "GetBalance400Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "401",
+      "contentType": "application/json",
+      "name": "GetBalance401Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "451",
+      "contentType": "application/json",
+      "name": "GetBalance451Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "500",
+      "contentType": "application/json",
+      "name": "GetBalance500Example",
+      "example": {
+        "message": "example_value"
+      }
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "operationId": "GetFlightDelays",
+  "method": "GET",
+  "path": "/flights/{number}/delays",
+  "summary": "AeroDataBox Flight Delay Statistics by Flight Number / TIER 3",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "GetFlightDelays200Example",
+      "example": {
+        "number": "example_value",
+        "origins": [
+          "example_value"
+        ],
+        "destinations": [
+          "example_value"
+        ]
+      }
+    },
+    {
+      "status": "400",
+      "contentType": "application/json",
+      "name": "GetFlightDelays400Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "401",
+      "contentType": "application/json",
+      "name": "GetFlightDelays401Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "451",
+      "contentType": "application/json",
+      "name": "GetFlightDelays451Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "500",
+      "contentType": "application/json",
+      "name": "GetFlightDelays500Example",
+      "example": {
+        "message": "example_value"
+      }
+    }
+  ]
+}

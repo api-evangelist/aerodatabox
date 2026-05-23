@@ -1,0 +1,52 @@
+{
+  "operationId": "GetFaaLaddAircraftStatus",
+  "method": "GET",
+  "path": "/industry/faa-ladd/{id}/status",
+  "summary": "AeroDataBox FAA LADD Aircraft Status / TIER 3",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "GetFaaLaddAircraftStatus200Example",
+      "example": {
+        "id": "abc123",
+        "isBlocked": true,
+        "blockedSince": "2025-03-15T14:30:00Z",
+        "lastBlockedOn": "2025-03-15T14:30:00Z"
+      }
+    },
+    {
+      "status": "400",
+      "contentType": "application/json",
+      "name": "GetFaaLaddAircraftStatus400Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "401",
+      "contentType": "application/json",
+      "name": "GetFaaLaddAircraftStatus401Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "451",
+      "contentType": "application/json",
+      "name": "GetFaaLaddAircraftStatus451Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "500",
+      "contentType": "application/json",
+      "name": "GetFaaLaddAircraftStatus500Example",
+      "example": {
+        "message": "example_value"
+      }
+    }
+  ]
+}

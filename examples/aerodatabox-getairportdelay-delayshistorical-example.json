@@ -1,0 +1,53 @@
+{
+  "operationId": "GetAirportDelay_DelaysHistorical",
+  "method": "GET",
+  "path": "/airports/{codeType}/{code}/delays/{dateLocal}",
+  "summary": "AeroDataBox Airport Delays (current or Historical Moment) / TIER 3",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "GetAirportDelay_DelaysHistorical200Example",
+      "example": {
+        "airportIcao": "KLAX",
+        "from": "example_value",
+        "to": "example_value",
+        "departuresDelayInformation": "example_value",
+        "arrivalsDelayInformation": "example_value"
+      }
+    },
+    {
+      "status": "400",
+      "contentType": "application/json",
+      "name": "GetAirportDelay_DelaysHistorical400Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "401",
+      "contentType": "application/json",
+      "name": "GetAirportDelay_DelaysHistorical401Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "451",
+      "contentType": "application/json",
+      "name": "GetAirportDelay_DelaysHistorical451Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "500",
+      "contentType": "application/json",
+      "name": "GetAirportDelay_DelaysHistorical500Example",
+      "example": {
+        "message": "example_value"
+      }
+    }
+  ]
+}

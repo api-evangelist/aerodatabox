@@ -1,0 +1,63 @@
+{
+  "operationId": "GetAirportSolarTime_SolarTimeCurrent",
+  "method": "GET",
+  "path": "/airports/{codeType}/{code}/time/solar",
+  "summary": "AeroDataBox Solar and Day Time at the Airport / TIER 1",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "GetAirportSolarTime_SolarTimeCurrent200Example",
+      "example": {
+        "location": "example_value",
+        "sunElevation": "example_value",
+        "sunAzimuth": "example_value",
+        "dayTime": [
+          "example_value"
+        ],
+        "dawnAstronomical": "example_value",
+        "dawnNautical": "example_value",
+        "dawnCivil": "example_value",
+        "sunrise": "example_value",
+        "noonTrue": "example_value",
+        "sunset": "example_value",
+        "duskCivil": "example_value",
+        "duskNautical": "example_value",
+        "duskAstronomical": "example_value"
+      }
+    },
+    {
+      "status": "400",
+      "contentType": "application/json",
+      "name": "GetAirportSolarTime_SolarTimeCurrent400Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "401",
+      "contentType": "application/json",
+      "name": "GetAirportSolarTime_SolarTimeCurrent401Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "451",
+      "contentType": "application/json",
+      "name": "GetAirportSolarTime_SolarTimeCurrent451Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "500",
+      "contentType": "application/json",
+      "name": "GetAirportSolarTime_SolarTimeCurrent500Example",
+      "example": {
+        "message": "example_value"
+      }
+    }
+  ]
+}

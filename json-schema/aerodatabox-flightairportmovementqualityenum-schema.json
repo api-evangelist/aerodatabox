@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/FlightAirportMovementQualityEnum",
+  "title": "FlightAirportMovementQualityEnum",
+  "enum": [
+    "Basic",
+    "Live",
+    "Approximate"
+  ],
+  "type": "string",
+  "description": "Quality characteristics of the information provided within flight FlightAirportMovementContract<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - Basic</b></li>\r\n<li><b>1 - Live</b></li>\r\n<li><b>2 - Approximate</b></li>\r\n</ul>\r\n"
+}

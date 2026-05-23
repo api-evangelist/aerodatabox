@@ -1,0 +1,54 @@
+{
+  "operationId": "GetAirportFlightsRelative",
+  "method": "GET",
+  "path": "/flights/airports/{codeType}/{code}",
+  "summary": "AeroDataBox FIDS (airport Departures and Arrivals) - by Relative Time / by Current Time / TIER 2",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "GetAirportFlightsRelative200Example",
+      "example": {
+        "departures": [
+          "example_value"
+        ],
+        "arrivals": [
+          "example_value"
+        ]
+      }
+    },
+    {
+      "status": "400",
+      "contentType": "application/json",
+      "name": "GetAirportFlightsRelative400Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "401",
+      "contentType": "application/json",
+      "name": "GetAirportFlightsRelative401Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "451",
+      "contentType": "application/json",
+      "name": "GetAirportFlightsRelative451Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "500",
+      "contentType": "application/json",
+      "name": "GetAirportFlightsRelative500Example",
+      "example": {
+        "message": "example_value"
+      }
+    }
+  ]
+}

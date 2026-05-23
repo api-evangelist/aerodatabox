@@ -1,0 +1,59 @@
+{
+  "operationId": "RefreshWebhook",
+  "method": "PATCH",
+  "path": "/subscriptions/webhook/{subscriptionId}/refresh",
+  "summary": "AeroDataBox Refresh Web-hook Subscription (DEPRECATED) / TIER 4",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "RefreshWebhook200Example",
+      "example": {
+        "id": "abc123",
+        "isActive": true,
+        "billingType": "example_value",
+        "activateBeforeUtc": "2025-03-15T14:30:00Z",
+        "expiresOnUtc": "2025-03-15T14:30:00Z",
+        "createdOnUtc": "2025-03-15T14:30:00Z",
+        "subject": "example_value",
+        "subscriber": "example_value",
+        "notices": [
+          "example_value"
+        ]
+      }
+    },
+    {
+      "status": "400",
+      "contentType": "application/json",
+      "name": "RefreshWebhook400Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "401",
+      "contentType": "application/json",
+      "name": "RefreshWebhook401Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "451",
+      "contentType": "application/json",
+      "name": "RefreshWebhook451Example",
+      "example": {
+        "message": "example_value"
+      }
+    },
+    {
+      "status": "500",
+      "contentType": "application/json",
+      "name": "RefreshWebhook500Example",
+      "example": {
+        "message": "example_value"
+      }
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SubscriptionSubjectContract",
+  "title": "SubscriptionSubjectContract",
+  "required": [
+    "type"
+  ],
+  "type": "object",
+  "properties": {
+    "type": {
+      "$ref": "#/components/schemas/SubscriptionSubjectType"
+    },
+    "id": {
+      "type": "string",
+      "description": "Subject ID of a subscription. Complements SubjectType.\r\n\r\nE.g. SubjectType = \"FlightNumber\" and SubjectId = \"DL 47\" means that this\r\nsubscription is for all updates of flight with number DL47.",
+      "nullable": true
+    }
+  },
+  "additionalProperties": false,
+  "description": "Describes subscription subject"
+}

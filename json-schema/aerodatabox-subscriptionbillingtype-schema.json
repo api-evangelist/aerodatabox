@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SubscriptionBillingType",
+  "title": "SubscriptionBillingType",
+  "enum": [
+    "LifetimeBased",
+    "CreditBased"
+  ],
+  "type": "string",
+  "description": "Flight alert subscription billing type<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - LifetimeBased</b>: Subscription billed upon creation based on the life-time with set expiration date-time (BEING DEPRECATED)</li>\r\n<li><b>1 - CreditBased</b>: Subscription with no expiration date, billed based on the amount of notifications sent</li>\r\n</ul>\r\n"
+}
