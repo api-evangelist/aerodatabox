@@ -7,7 +7,7 @@ tags:
   - Aerospace
   - Flight Data
   - Airport Data
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 created: '2025-02-24'
 modified: '2026-05-19'
 description: >-
@@ -30,7 +30,7 @@ apis:
       - FIDS
       - Real-Time
       - Aviation
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     baseURL: https://prod.api.market/api/v1/aedbx/aerodatabox
     humanURL: https://doc.aerodatabox.com/
     description: >-
@@ -50,7 +50,7 @@ apis:
       - Fleet
       - Airlines
       - Aviation
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     baseURL: https://prod.api.market/api/v1/aedbx/aerodatabox
     humanURL: https://doc.aerodatabox.com/
     description: >-
@@ -69,7 +69,7 @@ apis:
       - Runways
       - Location Search
       - Aviation
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     baseURL: https://prod.api.market/api/v1/aedbx/aerodatabox
     humanURL: https://doc.aerodatabox.com/
     description: >-
@@ -88,7 +88,7 @@ apis:
       - Routes
       - Historical Data
       - Aviation
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     baseURL: https://prod.api.market/api/v1/aedbx/aerodatabox
     humanURL: https://doc.aerodatabox.com/
     description: >-
@@ -107,7 +107,7 @@ apis:
       - Subscriptions
       - Real-Time
       - Aviation
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     baseURL: https://prod.api.market/api/v1/aedbx/aerodatabox
     humanURL: https://doc.aerodatabox.com/
     description: >-
