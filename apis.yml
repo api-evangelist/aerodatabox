@@ -119,6 +119,8 @@ apis:
       - url: openapi/aerodatabox-openapi.yml
         type: OpenAPI
 common:
+  - type: DomainSecurity
+    url: security/aerodatabox-domain-security.yml
   - url: https://doc.aerodatabox.com/
     type: Documentation
   - url: https://www.aerodatabox.com/
