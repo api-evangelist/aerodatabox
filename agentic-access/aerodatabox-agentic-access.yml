@@ -1,0 +1,460 @@
+generated: '2026-07-15'
+method: generated
+source: openapi/aerodatabox-openapi.yml
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 42
+  by_action_class:
+    connected: 38
+    acting: 4
+  by_consequence:
+    read: 38
+    write: 4
+  human_in_the_loop_required: 0
+operations:
+- path: /aircrafts/{searchBy}/{searchParam}
+  method: get
+  operationId: GetAircraft
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /aircrafts/{searchBy}/{searchParam}/registrations
+  method: get
+  operationId: GetAircraftRegistrations
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /aircrafts/{searchBy}/{searchParam}/all
+  method: get
+  operationId: GetAllAircraft
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /airlines/{airlineCode}/aircrafts
+  method: get
+  operationId: GetAirlineFleet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /aircrafts/reg/{reg}/image/beta
+  method: get
+  operationId: GetAircraftImageByRegistration
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /aircrafts/search/term
+  method: get
+  operationId: SearchAircraftByTerm
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /airports/{codeType}/{code}
+  method: get
+  operationId: GetAirport
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /airports/{codeType}/{code}/runways
+  method: get
+  operationId: GetAirportRunways
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /airports/search/location
+  method: get
+  operationId: SearchAirportsByLocation
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /airports/search/ip
+  method: get
+  operationId: SearchAirportsByIpGeoLocation
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /airports/search/term
+  method: get
+  operationId: SearchAirportByTerm
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /subscriptions/webhook/{subjectType}/{subjectId}
+  method: post
+  operationId: SubscribeWebhook
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /subscriptions/webhook/{subscriptionId}
+  method: get
+  operationId: GetWebhook
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /subscriptions/webhook/{subscriptionId}
+  method: delete
+  operationId: UnsubscribeWebhook
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /subscriptions/webhook
+  method: get
+  operationId: GetWebhookList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /subscriptions/webhook/{subscriptionId}/refresh
+  method: patch
+  operationId: RefreshWebhook
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /subscriptions/balance
+  method: get
+  operationId: GetBalance
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /subscriptions/balance/refill
+  method: post
+  operationId: RefillBalance
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /flights/{searchBy}/{searchParam}
+  method: get
+  operationId: GetFlight_FlightNearest
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /flights/{searchBy}/{searchParam}/{dateLocal}
+  method: get
+  operationId: GetFlight_FlightOnSpecificDate
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /flights/{searchBy}/{searchParam}/{dateFromLocal}/{dateToLocal}
+  method: get
+  operationId: GetFlightHistory_FlightHistory
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /flights/{searchBy}/{searchParam}/dates
+  method: get
+  operationId: GetFlightDates_FlightDatesAll
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /flights/{searchBy}/{searchParam}/dates/{fromLocal}/{toLocal}
+  method: get
+  operationId: GetFlightDates_FlightDatesInRange
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /flights/airports/{codeType}/{code}/{fromLocal}/{toLocal}
+  method: get
+  operationId: GetAirportFlights
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /flights/airports/{codeType}/{code}
+  method: get
+  operationId: GetAirportFlightsRelative
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /flights/search/term
+  method: get
+  operationId: SearchFlightsByTerm
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /health/services/feeds/{service}
+  method: get
+  operationId: GetFeedServiceStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /health/services/airports/{icao}/feeds
+  method: get
+  operationId: GetAirportFeedStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /health/services/feeds/{service}/airports
+  method: get
+  operationId: GetFeedAirports
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /industry/faa-ladd/{id}/status
+  method: get
+  operationId: GetFaaLaddAircraftStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /airports/{codeType}/{code}/time/local
+  method: get
+  operationId: GetAirportLocalTime
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /airports/{codeType}/{code}/time/solar
+  method: get
+  operationId: GetAirportSolarTime_SolarTimeCurrent
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /airports/{codeType}/{code}/time/solar/{dateLocal}
+  method: get
+  operationId: GetAirportSolarTime_SolarTimeSpecificDate
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /airports/{codeType}/{codeFrom}/distance-time/{codeTo}
+  method: get
+  operationId: GetAirportDistanceTime
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /airports/{codeType}/{code}/delays
+  method: get
+  operationId: GetAirportDelay_DelaysCurrent
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /airports/{codeType}/{code}/delays/{dateLocal}
+  method: get
+  operationId: GetAirportDelay_DelaysHistorical
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /airports/{codeType}/{code}/delays/{dateFromLocal}/{dateToLocal}
+  method: get
+  operationId: GetAirportDelays
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /airports/{codeType}/{code}/stats/routes/daily
+  method: get
+  operationId: GetRouteDailyStatistics_RoutesDailyCurrent
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /airports/{codeType}/{code}/stats/routes/daily/{dateLocal}
+  method: get
+  operationId: GetRouteDailyStatistics_RoutesDailAtSpecificDate
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /airports/delays
+  method: get
+  operationId: GetGlobalDelays_GlobalDelaysCurent
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /airports/delays/{dateUtc}
+  method: get
+  operationId: GetGlobalDelays_GlobalDelaysAtSpecificDate
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /flights/{number}/delays
+  method: get
+  operationId: GetFlightDelays
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
