@@ -1,0 +1,1787 @@
+openapi: 3.0.4
+info:
+  title: AeroDataBox API - Aviation and Flight Aircraft API Flight API API
+  description: Affordable aviation & flight data API tailored for small and medium businesses, teams and individual developers.
+  termsOfService: https://aerodatabox.com/terms/
+  contact:
+    url: https://aerodatabox.com/contact/
+  version: 1.14.0.0
+servers:
+- url: https://prod.api.market/api/v1/aedbx/aerodatabox
+security: {}
+tags:
+- name: Flight API
+paths:
+  /flights/{searchBy}/{searchParam}:
+    parameters:
+    - description: API.market API Key
+      in: header
+      name: x-api-market-key
+      value: Please Login/Signup to get an API Key
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+      - Flight API
+      summary: AeroDataBox Flight Status (single Day) / TIER 2
+      description: "**What is the status of a specific flight?**\r\n**What is the historical status or schedule of a specific flight on a specific date in past or in future?**\r\n\r\nThis endpoint returns data about a specific flight  live flight status (if the flight is within the coverage and not in distant future), \r\nor flight schedule data otherwise.\r\n\r\nIf `dateLocal` is specified, gets data about flight(s) departing or arriving on the day specified (local time).\r\nOtherwise, gets data about the status of flight(s) operating on the nearest date (either in past or in future).\r\n\r\nA flight can be searched by:\r\n* flight number it's being operated under; or\r\n* ATC-callsign it's being operated under; or\r\n* tail-number of the aircraft it's being operated by; or\r\n* Mode-S 24-bit ICAO Transponder address of the aircraft it's being operated by.\r\n\r\nFlight data may include airport of arrival and departure, scheduled and actual times, flight status, type of aircraft, \r\ntail-number and aircraft image.\r\n\r\nSome flights may have partial data. The data may be absent for either arrival \r\nor departure airport or may not include live updates of time and status. Check quality markers inside the response to \r\ndetermine which data is available.\r\n\r\nNormally, information with live status updates and estimated/actual arrival/departure times is only available \r\nfor airports tracked live or with ADS-B by our system. Otherwise flight information will be with scheduled info only \r\nor absent. \r\n\r\nTo check if an airport is currently tracked and on which level, \r\nuse `/health/services/airports/{icao}/feeds` endpoint. You can also use `/health/services/feeds/{service}/airports` to get \r\nthe list of covered airports. \r\n\r\nRead more about coverage and flight data limitations here: https://www.aerodatabox.com/data-coverage."
+      operationId: GetFlight_FlightNearest
+      parameters:
+      - name: searchBy
+        in: path
+        description: Criteria to search flight by
+        schema:
+          $ref: '#/components/schemas/FlightSearchByEnum'
+      - name: searchParam
+        in: path
+        description: "Value of the search criteria. If `searchBy` is: \r\n* `number`, then this field shoud be Flight number (with or without spaces, IATA or ICAO, any case formats are acceptable, e.g. KL1395, Klm 1395)\r\n* `callsign`, then this field should be ATC call-sign of the flight (with or without spaces, any case formats are acceptable, e.g.AFL1482, nca 008X);\r\n* `reg`, then this field should be Aircraft tail-number (with or without spaces or dashes, any case formats are acceptable, e.g.PH-BXO, DeMhJ);\r\n* `icao24`, then this field should be Aircraft ICAO 24-bit Mode-S address specified in hexadecimal format (e.g. 484161, 483EFD)."
+        required: true
+        schema:
+          maxLength: 10
+          type: string
+      - name: dateLocalRole
+        in: query
+        description: "* If set to `Both` (default, recommended for best results) then the dateLocal parameter shall be considered as both departure and arrival date. If a flight departs OR arrives on that date (in the local timezone of the origin or destination, respectively), it will be returned.\r\n* If set to `Departure` then the dateLocal parameter shall be considered as departure date only. Only the flights departing on that date (in the local timezone of origin) will be returned.\r\n* If set to `Arrival` then the dateLocal parameter shall be considered as arrival date only. Only the flights arriving on that date (in the local timezone of destination) will be returned."
+        schema:
+          $ref: '#/components/schemas/FlightDirection'
+      - name: withAircraftImage
+        in: query
+        description: "Should include aircraft image (default: false).\r\n\r\nAircraft images are being searched in external sources by certain criteria without any manual intervention. \r\nTherefore, false matches may be returned. Only images with licenses approved for commercial use are returned. \r\nPlease be advised that you may be required to mention author attribution before using the image."
+        schema:
+          type: boolean
+          default: false
+      - name: withLocation
+        in: query
+        description: 'Should include real-time positional data, e.g.: location, speed, altitude, etc., if available (default: false).'
+        schema:
+          type: boolean
+          default: false
+      - name: withFlightPlan
+        in: query
+        description: "Should include the flight plan filed with the ATC for the flight (default: false).\r\n\r\n* NOTE 1: Generally availabe to flights departing from, arriving to or crossing the mainland U.S. airspace.\r\n* NOTE 2: Only available on Basic and Ultra, Ultra-2 and Mega pricing plans.\r\n* NOTE 3: If set to true and the flight plan is found for one or more flights returned, **the request will be billed as 2 requests** against your API quota (except on Mega plan)."
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FlightContract'
+              examples:
+                GetFlight_FlightNearest200Example:
+                  summary: Default GetFlight_FlightNearest 200 response
+                  x-microcks-default: true
+                  value:
+                  - example_value
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FlightContract'
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetFlight_FlightNearest400Example:
+                  summary: Default GetFlight_FlightNearest 400 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetFlight_FlightNearest401Example:
+                  summary: Default GetFlight_FlightNearest 401 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '451':
+          description: Unavailable For Legal Reasons
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetFlight_FlightNearest451Example:
+                  summary: Default GetFlight_FlightNearest 451 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetFlight_FlightNearest500Example:
+                  summary: Default GetFlight_FlightNearest 500 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '503':
+          description: Service Unavailable
+      x-badges:
+      - name: TIER 2
+        position: before
+        color: '#aab6f8'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /flights/{searchBy}/{searchParam}/{dateLocal}:
+    parameters:
+    - description: API.market API Key
+      in: header
+      name: x-api-market-key
+      value: Please Login/Signup to get an API Key
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+      - Flight API
+      summary: AeroDataBox Flight Status (single Day) / TIER 2
+      description: "**What is the status of a specific flight?**\r\n**What is the historical status or schedule of a specific flight on a specific date in past or in future?**\r\n\r\nThis endpoint returns data about a specific flight  live flight status (if the flight is within the coverage and not in distant future), \r\nor flight schedule data otherwise.\r\n\r\nIf `dateLocal` is specified, gets data about flight(s) departing or arriving on the day specified (local time).\r\nOtherwise, gets data about the status of flight(s) operating on the nearest date (either in past or in future).\r\n\r\nA flight can be searched by:\r\n* flight number it's being operated under; or\r\n* ATC-callsign it's being operated under; or\r\n* tail-number of the aircraft it's being operated by; or\r\n* Mode-S 24-bit ICAO Transponder address of the aircraft it's being operated by.\r\n\r\nFlight data may include airport of arrival and departure, scheduled and actual times, flight status, type of aircraft, \r\ntail-number and aircraft image.\r\n\r\nSome flights may have partial data. The data may be absent for either arrival \r\nor departure airport or may not include live updates of time and status. Check quality markers inside the response to \r\ndetermine which data is available.\r\n\r\nNormally, information with live status updates and estimated/actual arrival/departure times is only available \r\nfor airports tracked live or with ADS-B by our system. Otherwise flight information will be with scheduled info only \r\nor absent. \r\n\r\nTo check if an airport is currently tracked and on which level, \r\nuse `/health/services/airports/{icao}/feeds` endpoint. You can also use `/health/services/feeds/{service}/airports` to get \r\nthe list of covered airports. \r\n\r\nRead more about coverage and flight data limitations here: https://www.aerodatabox.com/data-coverage."
+      operationId: GetFlight_FlightOnSpecificDate
+      parameters:
+      - name: searchBy
+        in: path
+        description: Criteria to search flight by
+        schema:
+          $ref: '#/components/schemas/FlightSearchByEnum'
+      - name: searchParam
+        in: path
+        description: "Value of the search criteria. If `searchBy` is: \r\n* `number`, then this field shoud be Flight number (with or without spaces, IATA or ICAO, any case formats are acceptable, e.g. KL1395, Klm 1395)\r\n* `callsign`, then this field should be ATC call-sign of the flight (with or without spaces, any case formats are acceptable, e.g.AFL1482, nca 008X);\r\n* `reg`, then this field should be Aircraft tail-number (with or without spaces or dashes, any case formats are acceptable, e.g.PH-BXO, DeMhJ);\r\n* `icao24`, then this field should be Aircraft ICAO 24-bit Mode-S address specified in hexadecimal format (e.g. 484161, 483EFD)."
+        required: true
+        schema:
+          maxLength: 10
+          type: string
+      - name: dateLocal
+        in: path
+        description: 'Local date of departure or arrival (in format: YYYY-MM-DD, e.g.: 2019-08-29). Maximum/minimum allowable date is determined by the current data coverage limitations and your pricing plan.'
+        required: true
+        schema:
+          pattern: \d{4}-\d{2}-\d{2}(T\d{2}:\d{2})?
+          type: string
+          format: date-time
+      - name: dateLocalRole
+        in: query
+        description: "* If set to `Both` (default, recommended for best results) then the dateLocal parameter shall be considered as both departure and arrival date. If a flight departs OR arrives on that date (in the local timezone of the origin or destination, respectively), it will be returned.\r\n* If set to `Departure` then the dateLocal parameter shall be considered as departure date only. Only the flights departing on that date (in the local timezone of origin) will be returned.\r\n* If set to `Arrival` then the dateLocal parameter shall be considered as arrival date only. Only the flights arriving on that date (in the local timezone of destination) will be returned."
+        schema:
+          $ref: '#/components/schemas/FlightDirection'
+      - name: withAircraftImage
+        in: query
+        description: "Should include aircraft image (default: false).\r\n\r\nAircraft images are being searched in external sources by certain criteria without any manual intervention. \r\nTherefore, false matches may be returned. Only images with licenses approved for commercial use are returned. \r\nPlease be advised that you may be required to mention author attribution before using the image."
+        schema:
+          type: boolean
+          default: false
+      - name: withLocation
+        in: query
+        description: 'Should include real-time positional data, e.g.: location, speed, altitude, etc., if available (default: false).'
+        schema:
+          type: boolean
+          default: false
+      - name: withFlightPlan
+        in: query
+        description: "Should include the flight plan filed with the ATC for the flight (default: false).\r\n\r\n* NOTE 1: Generally availabe to flights departing from, arriving to or crossing the mainland U.S. airspace.\r\n* NOTE 2: Only available on Basic and Ultra, Ultra-2 and Mega pricing plans.\r\n* NOTE 3: If set to true and the flight plan is found for one or more flights returned, **the request will be billed as 2 requests** against your API quota (except on Mega plan)."
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FlightContract'
+              examples:
+                GetFlight_FlightOnSpecificDate200Example:
+                  summary: Default GetFlight_FlightOnSpecificDate 200 response
+                  x-microcks-default: true
+                  value:
+                  - example_value
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FlightContract'
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetFlight_FlightOnSpecificDate400Example:
+                  summary: Default GetFlight_FlightOnSpecificDate 400 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetFlight_FlightOnSpecificDate401Example:
+                  summary: Default GetFlight_FlightOnSpecificDate 401 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '451':
+          description: Unavailable For Legal Reasons
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetFlight_FlightOnSpecificDate451Example:
+                  summary: Default GetFlight_FlightOnSpecificDate 451 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetFlight_FlightOnSpecificDate500Example:
+                  summary: Default GetFlight_FlightOnSpecificDate 500 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '503':
+          description: Service Unavailable
+      x-badges:
+      - name: TIER 2
+        position: before
+        color: '#aab6f8'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /flights/{searchBy}/{searchParam}/{dateFromLocal}/{dateToLocal}:
+    parameters:
+    - description: API.market API Key
+      in: header
+      name: x-api-market-key
+      value: Please Login/Signup to get an API Key
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+      - Flight API
+      summary: AeroDataBox Flight History and Schedule (range of Days) / TIER 3
+      description: "**What is the history or schedule of a specific flight within a specific range of dates in past or in future?**\r\n\r\nThis endpoint is the similar to the `Flight status` endpoint. \r\nThe only difference is that instead of returning the flight data on a single date, it returns the data over a range of dates, thus\r\nallowing to get insights on the flight history or schedule within the specified range.\r\n\r\nAll limitations and considerations applicable to `Flight status` endpoint are applicable to this endpoint as well."
+      operationId: GetFlightHistory_FlightHistory
+      parameters:
+      - name: searchBy
+        in: path
+        description: Criteria to search flight by
+        schema:
+          $ref: '#/components/schemas/FlightSearchByEnum'
+      - name: searchParam
+        in: path
+        description: "Value of the search criteria. If `searchBy` is: \r\n* `number`, then this field shoud be Flight number (with or without spaces, IATA or ICAO, any case formats are acceptable, e.g. KL1395, Klm 1395)\r\n* `callsign`, then this field should be ATC call-sign of the flight (with or without spaces, any case formats are acceptable, e.g.AFL1482, nca 008X);\r\n* `reg`, then this field should be Aircraft tail-number (with or without spaces or dashes, any case formats are acceptable, e.g.PH-BXO, DeMhJ);\r\n* `icao24`, then this field should be Aircraft ICAO 24-bit Mode-S address specified in hexadecimal format (e.g. 484161, 483EFD)."
+        required: true
+        schema:
+          maxLength: 10
+          type: string
+      - name: dateFromLocal
+        in: path
+        description: 'Beginning of the range of local dates of departure or arrival (in format: YYYY-MM-DD, e.g.: 2019-08-29). Maximum/minimum allowable value is determined by the current data coverage limitations and your pricing plan.'
+        required: true
+        schema:
+          pattern: \d{4}-\d{2}-\d{2}(T\d{2}:\d{2})?
+          type: string
+          format: date-time
+      - name: dateToLocal
+        in: path
+        description: 'End of the range of local dates of departure or arrival (in format: YYYY-MM-DD, e.g.: 2019-08-29). Maximum/minimum allowable value is determined by the current data coverage limitations and your pricing plan. This date must be bigger than the dateFromLocal. The maximum difference between this date and dateFromLocal is limited and is determined by your pricing plan (ranging from 7 to 30 days as per moment of writing).'
+        required: true
+        schema:
+          pattern: \d{4}-\d{2}-\d{2}(T\d{2}:\d{2})?
+          type: string
+          format: date-time
+      - name: dateLocalRole
+        in: query
+        description: "* If set to `Both` (default, recommended for best results) then the dateFromLocal and dateToLocal parameters shall be considered as both departure and arrival dates. If a flight departs OR arrives on dates within the specified range (in the local timezone of the origin or destination, respectively), it will be returned.\r\n* If set to `Departure` then the dateFromLocal and dateToLocal  parameters shall be considered as departure dates only. Only the flights departing on dates within the specified rang(in the local timezone of origin) will be returned.\r\n* If set to `Arrival` then the dateFromLocal and dateToLocal  parameters shall be considered as arrival dates only. Only the flights arriving on dates within the specified rangd (in the local timezone of destination) will be returned."
+        schema:
+          $ref: '#/components/schemas/FlightDirection'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FlightContract'
+              examples:
+                GetFlightHistory_FlightHistory200Example:
+                  summary: Default GetFlightHistory_FlightHistory 200 response
+                  x-microcks-default: true
+                  value:
+                  - example_value
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FlightContract'
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetFlightHistory_FlightHistory400Example:
+                  summary: Default GetFlightHistory_FlightHistory 400 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetFlightHistory_FlightHistory401Example:
+                  summary: Default GetFlightHistory_FlightHistory 401 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '451':
+          description: Unavailable For Legal Reasons
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetFlightHistory_FlightHistory451Example:
+                  summary: Default GetFlightHistory_FlightHistory 451 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetFlightHistory_FlightHistory500Example:
+                  summary: Default GetFlightHistory_FlightHistory 500 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '503':
+          description: Service Unavailable
+      x-badges:
+      - name: TIER 3
+        position: before
+        color: '#ffb694'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /flights/{searchBy}/{searchParam}/dates:
+    parameters:
+    - description: API.market API Key
+      in: header
+      name: x-api-market-key
+      value: Please Login/Signup to get an API Key
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+      - Flight API
+      summary: AeroDataBox Flight Departure Dates / TIER 2
+      description: "**On which days the flight operates?** or **What is the flight schedule?**\r\n\r\nFlight can be searched by:\r\n* flight number it's being operated under; or\r\n* ATC-callsign it's being operated under; or\r\n* tail-number of the aircraft it's being operated by; or\r\n* Mode-S 24-bit ICAO Transponder address of the aircraft it's being operated by.\r\n\r\n*Returns:* Array of local departure dates in (YYYY-MM-DD) format for flights operated under speified call-sign and within the time range specified."
+      operationId: GetFlightDates_FlightDatesAll
+      parameters:
+      - name: searchBy
+        in: path
+        description: Criteria to search flight by
+        schema:
+          $ref: '#/components/schemas/FlightSearchByEnum'
+      - name: searchParam
+        in: path
+        description: "Value of the search criteria. If **searchBy** is: \r\n* `number`, then this field shoud be Flight number (with or without spaces, IATA or ICAO, any case formats are acceptable, e.g. KL1395, Klm 1395)\r\n* `callsign`, then this field should be ATC call-sign of the flight (with or without spaces, any case formats are acceptable, e.g.AFL1482, nca 008X);\r\n* `reg`: then this field should be Aircraft tail-number (with or without spaces or dashes, any case formats are acceptable, e.g.PH-BXO, DeMhJ);\r\n* `icao24`, then this field should be Aircraft ICAO 24-bit Mode-S address specified in hexadecimal format (e.g. 484161, 483EFD)."
+        required: true
+        schema:
+          maxLength: 10
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+              examples:
+                GetFlightDates_FlightDatesAll200Example:
+                  summary: Default GetFlightDates_FlightDatesAll 200 response
+                  x-microcks-default: true
+                  value:
+                  - example_value
+            application/xml:
+              schema:
+                type: array
+                items:
+                  type: string
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetFlightDates_FlightDatesAll400Example:
+                  summary: Default GetFlightDates_FlightDatesAll 400 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetFlightDates_FlightDatesAll401Example:
+                  summary: Default GetFlightDates_FlightDatesAll 401 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '451':
+          description: Unavailable For Legal Reasons
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetFlightDates_FlightDatesAll451Example:
+                  summary: Default GetFlightDates_FlightDatesAll 451 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetFlightDates_FlightDatesAll500Example:
+                  summary: Default GetFlightDates_FlightDatesAll 500 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '503':
+          description: Service Unavailable
+      x-badges:
+      - name: TIER 2
+        position: before
+        color: '#aab6f8'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /flights/{searchBy}/{searchParam}/dates/{fromLocal}/{toLocal}:
+    parameters:
+    - description: API.market API Key
+      in: header
+      name: x-api-market-key
+      value: Please Login/Signup to get an API Key
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+      - Flight API
+      summary: AeroDataBox Flight Departure Dates / TIER 2
+      description: "**On which days the flight operates?** or **What is the flight schedule?**\r\n\r\nFlight can be searched by:\r\n* flight number it's being operated under; or\r\n* ATC-callsign it's being operated under; or\r\n* tail-number of the aircraft it's being operated by; or\r\n* Mode-S 24-bit ICAO Transponder address of the aircraft it's being operated by.\r\n\r\n*Returns:* Array of local departure dates in (YYYY-MM-DD) format for flights operated under speified call-sign and within the time range specified."
+      operationId: GetFlightDates_FlightDatesInRange
+      parameters:
+      - name: searchBy
+        in: path
+        description: Criteria to search flight by
+        schema:
+          $ref: '#/components/schemas/FlightSearchByEnum'
+      - name: searchParam
+        in: path
+        description: "Value of the search criteria. If **searchBy** is: \r\n* `number`, then this field shoud be Flight number (with or without spaces, IATA or ICAO, any case formats are acceptable, e.g. KL1395, Klm 1395)\r\n* `callsign`, then this field should be ATC call-sign of the flight (with or without spaces, any case formats are acceptable, e.g.AFL1482, nca 008X);\r\n* `reg`: then this field should be Aircraft tail-number (with or without spaces or dashes, any case formats are acceptable, e.g.PH-BXO, DeMhJ);\r\n* `icao24`, then this field should be Aircraft ICAO 24-bit Mode-S address specified in hexadecimal format (e.g. 484161, 483EFD)."
+        required: true
+        schema:
+          maxLength: 10
+          type: string
+      - name: fromLocal
+        in: path
+        description: 'Beginning of the search range (local time, format: YYYY-MM-DD)'
+        required: true
+        schema:
+          pattern: \d{4}-\d{2}-\d{2}(T\d{2}:\d{2})?
+          type: string
+          format: date-time
+      - name: toLocal
+        in: path
+        description: 'End of the search range (local time, format: YYYY-MM-DD)'
+        required: true
+        schema:
+          pattern: \d{4}-\d{2}-\d{2}(T\d{2}:\d{2})?
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+              examples:
+                GetFlightDates_FlightDatesInRange200Example:
+                  summary: Default GetFlightDates_FlightDatesInRange 200 response
+                  x-microcks-default: true
+                  value:
+                  - example_value
+            application/xml:
+              schema:
+                type: array
+                items:
+                  type: string
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetFlightDates_FlightDatesInRange400Example:
+                  summary: Default GetFlightDates_FlightDatesInRange 400 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetFlightDates_FlightDatesInRange401Example:
+                  summary: Default GetFlightDates_FlightDatesInRange 401 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '451':
+          description: Unavailable For Legal Reasons
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetFlightDates_FlightDatesInRange451Example:
+                  summary: Default GetFlightDates_FlightDatesInRange 451 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetFlightDates_FlightDatesInRange500Example:
+                  summary: Default GetFlightDates_FlightDatesInRange 500 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '503':
+          description: Service Unavailable
+      x-badges:
+      - name: TIER 2
+        position: before
+        color: '#aab6f8'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /flights/airports/{codeType}/{code}/{fromLocal}/{toLocal}:
+    parameters:
+    - description: API.market API Key
+      in: header
+      name: x-api-market-key
+      value: Please Login/Signup to get an API Key
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+      - Flight API
+      summary: AeroDataBox FIDS (airport Departures and Arrivals) - by Local Time Range / TIER 2
+      description: "**What are current departures or arrivals at the airport?** or **What is the flight schedule at the airport?** or **What is flight history at the airport?**\r\n\r\nFlights may contain live updates with corresponding information related to the actual progress of the flight \r\n(including actual/estimated arrival/departure times). In this case this endpoint serves as a FIDS endpoint. \r\nPresense of live updates is subject to data coverage: not all airports have this coverage in our system.\r\n\r\nOtherwise flight information will be limited to scheduled only and will not be updated real-time. Much more airports\r\nhave this type of coverage. To check if airport is tracked and on which level, use */health/services/airports/{icao}/feeds* endpoint. \r\nYou can also use */health/services/feeds/{service}/airports* to get the list of supported airports for this\r\nor that layer of coverage. To learn more about the data coverage, refer to *https://www.aerodatabox.com/data-coverage*.\r\n\r\n*Returns*: the list of arriving and/or departing flights scheduled and/or planned and/or commenced within a specified \r\ntime range for a specified airport."
+      operationId: GetAirportFlights
+      parameters:
+      - name: codeType
+        in: path
+        description: Type of code to search airport by (`iata` or `icao`)
+        schema:
+          $ref: '#/components/schemas/AirportCodesByEnum'
+      - name: code
+        in: path
+        description: "If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+        required: true
+        schema:
+          maxLength: 4
+          minLength: 3
+          type: string
+      - name: fromLocal
+        in: path
+        description: 'Beginning of the search range (local time, format: YYYY-MM-DDTHH:mm)'
+        required: true
+        schema:
+          pattern: \d{4}-\d{2}-\d{2}(T\d{2}:\d{2})?
+          type: string
+          format: date-time
+      - name: toLocal
+        in: path
+        description: 'End of the search range (local time, format: YYYY-MM-DDTHH:mm). Must be more than beginning of the search range by no more than 12 hours.'
+        required: true
+        schema:
+          pattern: \d{4}-\d{2}-\d{2}(T\d{2}:\d{2})?
+          type: string
+          format: date-time
+      - name: direction
+        in: query
+        description: 'Direction of flights: Arrival, Departure or Both (default)'
+        schema:
+          $ref: '#/components/schemas/FlightDirection'
+      - name: withLeg
+        in: query
+        description: "If set to true, the result will include movement information from airport opposite in this flight leg (airport of origin for arriving flight or airport of destination for departing flight).\r\nIn this case, Movement property will be replaced with Departure and Arrival properties for each flight.\r\nDefault: false."
+        schema:
+          type: boolean
+          default: false
+      - name: withCancelled
+        in: query
+        description: "If set to true, result will include cancelled, divered, likely cancelled (CanceledUncertain) flights.\r\nDefault: true."
+        schema:
+          type: boolean
+          default: true
+      - name: withCodeshared
+        in: query
+        description: "If set to true, the result will include flights with all code-shared statuses.\r\nOtherwise, code-sharing flights will be exclued. For airports, where no information about code-share statuses\r\nof flights are supplied (all flights are CodeshareStatus=Unknown), complex filtering will be applied \r\nto determine which flights are likely to be operational (caution: false results are possible)."
+        schema:
+          type: boolean
+          default: true
+      - name: withCargo
+        in: query
+        description: If set to true, the result will include cargo flights (subject to availability).
+        schema:
+          type: boolean
+          default: true
+      - name: withPrivate
+        in: query
+        description: If set to true, the result will include private flights (subject to availability).
+        schema:
+          type: boolean
+          default: true
+      - name: withLocation
+        in: query
+        description: "If set to true, each currently active flight within the result will be populated \r\nwith its present real-time location, altitude, speed and track (subject to availability)."
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AirportFidsContract'
+              examples:
+                GetAirportFlights200Example:
+                  summary: Default GetAirportFlights 200 response
+                  x-microcks-default: true
+                  value:
+                    departures:
+                    - example_value
+                    arrivals:
+                    - example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/AirportFidsContract'
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetAirportFlights400Example:
+                  summary: Default GetAirportFlights 400 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetAirportFlights401Example:
+                  summary: Default GetAirportFlights 401 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '451':
+          description: Unavailable For Legal Reasons
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetAirportFlights451Example:
+                  summary: Default GetAirportFlights 451 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetAirportFlights500Example:
+                  summary: Default GetAirportFlights 500 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '503':
+          description: Service Unavailable
+      x-badges:
+      - name: TIER 2
+        position: before
+        color: '#aab6f8'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /flights/airports/{codeType}/{code}:
+    parameters:
+    - description: API.market API Key
+      in: header
+      name: x-api-market-key
+      value: Please Login/Signup to get an API Key
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+      - Flight API
+      summary: AeroDataBox FIDS (airport Departures and Arrivals) - by Relative Time / by Current Time / TIER 2
+      description: "**What are current departures or arrivals at the airport?** or **What is the flight schedule at the airport?** or **What is flight history at the airport?**\r\n\r\nFlights may contain live updates with corresponding information related to the actual progress of the flight \r\n(including actual/estimated arrival/departure times). In this case this endpoint serves as a FIDS endpoint. \r\nPresense of live updates is subject to data coverage: not all airports have this coverage in our system.\r\n\r\nOtherwise flight information will be limited to scheduled only and will not be updated real-time. Much more airports\r\nhave this type of coverage. To check if airport is tracked and on which level, use */health/services/airports/{icao}/feeds* endpoint. \r\nYou can also use */health/services/feeds/{service}/airports* to get the list of supported airports for this\r\nor that layer of coverage. To learn more about the data coverage, refer to *https://www.aerodatabox.com/data-coverage*.\r\n\r\n*Returns*: the list of arriving and/or departing flights scheduled and/or planned and/or commenced within a time range specified \r\nrelatively to the current local time at the airport."
+      operationId: GetAirportFlightsRelative
+      parameters:
+      - name: codeType
+        in: path
+        description: Type of code to search airport by (`iata` or `icao`)
+        schema:
+          $ref: '#/components/schemas/AirportCodesByEnum'
+      - name: code
+        in: path
+        description: "If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+        required: true
+        schema:
+          maxLength: 4
+          minLength: 3
+          type: string
+      - name: offsetMinutes
+        in: query
+        description: 'Beginning of the search range expressed in minutes relative to the current time at the airport (default: `-120`)'
+        schema:
+          type: integer
+          format: int64
+          default: -120
+      - name: durationMinutes
+        in: query
+        description: 'Length (duration) of the search range expressed in minutes (default: `720`)'
+        schema:
+          type: integer
+          format: int64
+          default: 720
+      - name: direction
+        in: query
+        description: 'Direction of flights: Arrival, Departure or Both (default)'
+        schema:
+          $ref: '#/components/schemas/FlightDirection'
+      - name: withLeg
+        in: query
+        description: "If set to true, the result will include movement information from airport opposite in this flight leg (airport of origin for arriving flight or airport of destination for departing flight).\r\nIn this case, Movement property will be replaced with Departure and Arrival properties for each flight.\r\nDefault: false."
+        schema:
+          type: boolean
+          default: false
+      - name: withCancelled
+        in: query
+        description: "If set to true, result will include cancelled, divered, likely cancelled (CanceledUncertain) flights.\r\nDefault: true."
+        schema:
+          type: boolean
+          default: true
+      - name: withCodeshared
+        in: query
+        description: "If set to true, the result will include flights with all code-shared statuses.\r\nOtherwise, code-sharing flights will be exclued. For airports, where no information about code-share statuses\r\nof flights are supplied (all flights are CodeshareStatus=Unknown), complex filtering will be applied \r\nto determine which flights are likely to be operational (caution: false results are possible)."
+        schema:
+          type: boolean
+          default: true
+      - name: withCargo
+        in: query
+        description: If set to true, the result will include cargo flights (subject to availability).
+        schema:
+          type: boolean
+          default: true
+      - name: withPrivate
+        in: query
+        description: If set to true, the result will include private flights (subject to availability).
+        schema:
+          type: boolean
+          default: true
+      - name: withLocation
+        in: query
+        description: "If set to true, each currently active flight within the result will be populated \r\nwith its present real-time location, altitude, speed and track (subject to availability)."
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AirportFidsContract'
+              examples:
+                GetAirportFlightsRelative200Example:
+                  summary: Default GetAirportFlightsRelative 200 response
+                  x-microcks-default: true
+                  value:
+                    departures:
+                    - example_value
+                    arrivals:
+                    - example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/AirportFidsContract'
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetAirportFlightsRelative400Example:
+                  summary: Default GetAirportFlightsRelative 400 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetAirportFlightsRelative401Example:
+                  summary: Default GetAirportFlightsRelative 401 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '451':
+          description: Unavailable For Legal Reasons
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetAirportFlightsRelative451Example:
+                  summary: Default GetAirportFlightsRelative 451 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetAirportFlightsRelative500Example:
+                  summary: Default GetAirportFlightsRelative 500 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '503':
+          description: Service Unavailable
+      x-badges:
+      - name: TIER 2
+        position: before
+        color: '#aab6f8'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /flights/search/term:
+    parameters:
+    - description: API.market API Key
+      in: header
+      name: x-api-market-key
+      value: Please Login/Signup to get an API Key
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+      - Flight API
+      summary: AeroDataBox Search Flight Numbers by Term / TIER 2
+      description: '*Returns:* Distinct list of available flight numbers which start with the search query.'
+      operationId: SearchFlightsByTerm
+      parameters:
+      - name: q
+        in: query
+        description: Search query (min. 2 non whitespace characters length)
+        required: true
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Maximum number of items to be returned (max. 100, defaut = 10)
+        schema:
+          type: integer
+          format: int32
+          default: 10
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StringFlightSearchItemContractSearchResultCollectionContract'
+              examples:
+                SearchFlightsByTerm200Example:
+                  summary: Default SearchFlightsByTerm 200 response
+                  x-microcks-default: true
+                  value:
+                    searchBy: example_value
+                    count: 100
+                    items:
+                    - example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/StringFlightSearchItemContractSearchResultCollectionContract'
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                SearchFlightsByTerm400Example:
+                  summary: Default SearchFlightsByTerm 400 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                SearchFlightsByTerm401Example:
+                  summary: Default SearchFlightsByTerm 401 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '451':
+          description: Unavailable For Legal Reasons
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                SearchFlightsByTerm451Example:
+                  summary: Default SearchFlightsByTerm 451 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                SearchFlightsByTerm500Example:
+                  summary: Default SearchFlightsByTerm 500 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '503':
+          description: Service Unavailable
+      x-badges:
+      - name: TIER 2
+        position: before
+        color: '#aab6f8'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    DistanceFlightPlanUnitContract:
+      type: object
+      properties:
+        requested:
+          $ref: '#/components/schemas/Distance'
+        assigned:
+          $ref: '#/components/schemas/Distance'
+      additionalProperties: false
+      description: "Contract describing unit (altitude, airspeed, etc.) which can be assigned and / or requested\r\nin the context of the flight plan"
+    ErrorContract:
+      required:
+      - message
+      type: object
+      properties:
+        message:
+          minLength: 1
+          type: string
+          description: Error message
+      additionalProperties: false
+      description: Error response
+    AirportFidsContract:
+      type: object
+      properties:
+        departures:
+          type: array
+          items:
+            $ref: '#/components/schemas/AirportFlightContract'
+          description: Departing flights
+          nullable: true
+        arrivals:
+          type: array
+          items:
+            $ref: '#/components/schemas/AirportFlightContract'
+          description: Arriving flights
+          nullable: true
+      additionalProperties: false
+      description: Airport schedule contract
+    LicenseType:
+      enum:
+      - AllRightsReserved
+      - AttributionNoncommercialShareAlikeCC
+      - AttributionNoncommercialCC
+      - AttributionNoncommercialNoDerivativesCC
+      - AttributionCC
+      - AttributionShareAlikeCC
+      - AttributionNoDerivativesCC
+      - NoKnownCopyrightRestrictions
+      - UnitedStatesGovernmentWork
+      - PublicDomainDedicationCC0
+      - PublicDomainMark
+      type: string
+      description: "<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - AllRightsReserved</b>: All Rights Reserved.</li>\r\n<li><b>1 - AttributionNoncommercialShareAlikeCC</b>: Creative Commons: Attribution Non-Commercial, Share-alike License.</li>\r\n<li><b>2 - AttributionNoncommercialCC</b>: Creative Commons: Attribution Non-Commercial License.</li>\r\n<li><b>3 - AttributionNoncommercialNoDerivativesCC</b>: Creative Commons: Attribution Non-Commercial, No Derivatives License.</li>\r\n<li><b>4 - AttributionCC</b>: Creative Commons: Attribution License.</li>\r\n<li><b>5 - AttributionShareAlikeCC</b>: Creative Commons: Attribution Share-alike License.</li>\r\n<li><b>6 - AttributionNoDerivativesCC</b>: Creative Commons: Attribution No Derivatives License.</li>\r\n<li><b>7 - NoKnownCopyrightRestrictions</b>: No Known Copyright Resitrctions (Flickr Commons).</li>\r\n<li><b>8 - UnitedStatesGovernmentWork</b>: United States Government Work</li>\r\n<li><b>9 - PublicDomainDedicationCC0</b>: Public Domain Dedication, CC0</li>\r\n<li><b>10 - PublicDomainMark</b>: Public Domain Mark</li>\r\n</ul>\r\n"
+    CodeshareStatus:
+      enum:
+      - Unknown
+      - IsOperator
+      - IsCodeshared
+      type: string
+      description: "Flight code-share status<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - Unknown</b>: Code-sharing information is unavailable for this flight. Flight might be operated both by airline owning the flight number as well as by another airliner.</li>\r\n<li><b>1 - IsOperator</b>: Flight is operated by an airline owning the flight number (the same code)</li>\r\n<li><b>2 - IsCodeshared</b>: Flight is code-shared (operated by an airline other than airline owning the flight number)</li>\r\n</ul>\r\n"
+    ListingAirportContract:
+      required:
+      - name
+      type: object
+      properties:
+        icao:
+          type: string
+          description: ICAO code of the airport
+          nullable: true
+        iata:
+          type: string
+          description: IATA code of the airport
+          nullable: true
+        localCode:
+          type: string
+          description: Code of the airport within the local or national codification system
+          nullable: true
+        name:
+          minLength: 1
+          type: string
+          description: Name of the airport
+        shortName:
+          type: string
+          description: Shortened name of the airport
+          nullable: true
+        municipalityName:
+          type: string
+          description: Name of the municipality this airport belongs to
+          nullable: true
+        location:
+          $ref: '#/components/schemas/GeoCoordinatesContract'
+        countryCode:
+          type: string
+          description: Two-letter country code of the airport
+          nullable: true
+        timeZone:
+          type: string
+          description: Time zone of the airport in Olson format (e.g. "Europe/Amsterdam")
+          nullable: true
+      additionalProperties: false
+      description: Flight's airport reference contract
+    FlightDirection:
+      enum:
+      - Arrival
+      - Departure
+      - Both
+      type: string
+      description: "Direction of flight<p>Possible values:</p>\r\n<ul>\r\n<li><b>1 - Arrival</b></li>\r\n<li><b>2 - Departure</b></li>\r\n<li><b>3 - Both</b></li>\r\n</ul>\r\n"
+    FlightStatus:
+      enum:
+      - Unknown
+      - Expected
+      - EnRoute
+      - CheckIn
+      - Boarding
+      - GateClosed
+      - Departed
+      - Delayed
+      - Approaching
+      - Arrived
+      - Canceled
+      - Diverted
+      - CanceledUncertain
+      type: string
+      description: "Flight progress status<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - Unknown</b>: Status is not available for this flight</li>\r\n<li><b>1 - Expected</b>: Expected</li>\r\n<li><b>2 - EnRoute</b>: En route</li>\r\n<li><b>3 - CheckIn</b>: Check-in is open</li>\r\n<li><b>4 - Boarding</b>: Boarding in progress / Last call</li>\r\n<li><b>5 - GateClosed</b>: Gate closed</li>\r\n<li><b>6 - Departed</b>: Departed</li>\r\n<li><b>7 - Delayed</b>: Delayed</li>\r\n<li><b>8 - Approaching</b>: On approach to destination</li>\r\n<li><b>9 - Arrived</b>: Arrived</li>\r\n<li><b>10 - Canceled</b>: Cancelled</li>\r\n<li><b>11 - Diverted</b>: Diverted to another destination</li>\r\n<li><b>12 - CanceledUncertain</b>: Status of the flight is uncertain, may be cancelled</li>\r\n</ul>\r\n"
+    DateTimeContract:
+      required:
+      - local
+      - utc
+      type: object
+      properties:
+        utc:
+          type: string
+          description: UTC-time
+          format: date-time
+        local:
+          type: string
+          description: Local time
+          format: date-time
+      additionalProperties: false
+      description: Descriptor date-time represented in both UTC and local timezones
+    FlightAircraftContract:
+      type: object
+      properties:
+        reg:
+          type: string
+          description: Tail-number of the aircraft
+          nullable: true
+        modeS:
+          type: string
+          description: ICAO 24 bit Mode-S hexadecimal transponder address
+          nullable: true
+        model:
+          type: string
+          description: Aircraft name and model
+          nullable: true
+        image:
+          $ref: '#/components/schemas/ResourceContract'
+      additionalProperties: false
+      description: Flight's aircraft reference contract
+    FlightLocationContract:
+      required:
+      - altitude
+      - groundSpeed
+      - lat
+      - lon
+      - pressure
+      - pressureAltitude
+      - reportedAtUtc
+      - trueTrack
+      type: object
+      properties:
+        pressureAltitude:
+          $ref: '#/components/schemas/Distance'
+        altitude:
+          $ref: '#/components/schemas/Distance'
+        pressure:
+          $ref: '#/components/schemas/Pressure'
+        groundSpeed:
+          $ref: '#/components/schemas/Speed'
+        trueTrack:
+          $ref: '#/components/schemas/Azimuth'
+        vsiFpm:
+          type: integer
+          description: "Vertical speed, in feet per minute\r\nNot set if unknown or zero."
+          format: int32
+          nullable: true
+        reportedAtUtc:
+          type: string
+          description: Time (UTC) of when this positional data was reported
+          format: date-time
+        lat:
+          maximum: 90
+          minimum: -90
+          type: number
+          description: Latitude, in degrees
+          format: float
+        lon:
+          maximum: 180
+          minimum: -180
+          type: number
+          description: Longitude, in degrees
+          format: float
+      additionalProperties: false
+      description: 'Positional information about flight: location, altitude, speed and track'
+    FlightSearchItemContract:
+      required:
+      - number
+      type: object
+      properties:
+        number:
+          minLength: 1
+          type: string
+          description: Found flight number.
+      additionalProperties: false
+      description: Flight record found in the search result.
+    ResourceContract:
+      required:
+      - license
+      - url
+      type: object
+      properties:
+        url:
+          minLength: 1
+          type: string
+          description: URL of the resource
+        webUrl:
+          type: string
+          description: URL of web-page containing the resource
+          nullable: true
+        author:
+          type: string
+          description: Author name of the resource
+          nullable: true
+        title:
+          type: string
+          description: Title of the resource
+          nullable: true
+        description:
+          type: string
+          description: Description of the resource
+          nullable: true
+        license:
+          $ref: '#/components/schemas/LicenseType'
+        htmlAttributions:
+          type: array
+          items:
+            type: string
+          description: "Attributions maintaining copyright, ownership and other legal information adjusted for displaying\r\nas HTML. Each element represent one line."
+          nullable: true
+      additionalProperties: false
+      description: Single media resource data
+    Speed:
+      required:
+      - kmPerHour
+      - kt
+      - meterPerSecond
+      - miPerHour
+      type: object
+      properties:
+        kt:
+          type: number
+          description: Speed in knots
+          format: double
+        kmPerHour:
+          type: number
+          description: Speed in km per hour
+          format: double
+        miPerHour:
+          type: number
+          description: Speed in miles per hour
+          format: double
+        meterPerSecond:
+          type: number
+          description: Speed in meters per second
+          format: double
+      additionalProperties: false
+    FlightContract:
+      required:
+      - arrival
+      - codeshareStatus
+      - departure
+      - isCargo
+      - lastUpdatedUtc
+      - number
+      - status
+      type: object
+      properties:
+        greatCircleDistance:
+          $ref: '#/components/schemas/Distance'
+        departure:
+          $ref: '#/components/schemas/FlightAirportMovementContract'
+        arrival:
+          $ref: '#/components/schemas/FlightAirportMovementContract'
+        flightPlan:
+          $ref: '#/components/schemas/FlightPlanContract'
+        lastUpdatedUtc:
+          type: string
+          description: Time (UTC) of the latest update of flight information (excluding Location)
+          format: date-time
+        number:
+          minLength: 1
+          type: string
+          description: Flight Number
+        callSign:
+          type: string
+          description: ATC call-sign of the flight
+          nullable: true
+        status:
+          $ref: '#/components/schemas/FlightStatus'
+        codeshareStatus:
+          $ref: '#/components/schemas/CodeshareStatus'
+        isCargo:
+          type: boolean
+          description: Is cargo flight
+        aircraft:
+          $ref: '#/components/schemas/FlightAircraftContract'
+        airline:
+          $ref: '#/components/schemas/FlightAirlineContract'
+        location:
+          $ref: '#/components/schemas/FlightLocationContract'
+      additionalProperties: false
+      description: Individiual flight contract
+    FlightAirlineContract:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          minLength: 1
+          type: string
+          description: Airline name
+        iata:
+          type: string
+          description: IATA code of the airline
+          nullable: true
+        icao:
+          type: string
+          description: ICAO code of the airline
+          nullable: true
+      additionalProperties: false
+      description: Flight's airline reference conract
+    FlightAirportMovementQualityEnum:
+      enum:
+      - Basic
+      - Live
+      - Approximate
+      type: string
+      description: "Quality characteristics of the information provided within flight FlightAirportMovementContract<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - Basic</b></li>\r\n<li><b>1 - Live</b></li>\r\n<li><b>2 - Approximate</b></li>\r\n</ul>\r\n"
+    FlightPlanContract:
+      required:
+      - lastUpdatedUtc
+      - route
+      type: object
+      properties:
+        flightRules:
+          $ref: '#/components/schemas/FlightRules'
+        flightType:
+          $ref: '#/components/schemas/FlightType'
+        revisionNo:
+          type: integer
+          description: No. of revision of the flight plan
+          format: int32
+          nullable: true
+        status:
+          $ref: '#/components/schemas/FlightPlanStatus'
+        route:
+          minLength: 1
+          type: string
+          description: Route information for the flight as filed in the flight plan
+        altitude:
+          $ref: '#/components/schemas/DistanceFlightPlanUnitContract'
+        airspeed:
+          $ref: '#/components/schemas/SpeedFlightPlanUnitContract'
+        lastUpdatedUtc:
+          type: string
+          description: Time (UTC) of the latest known update to the flight plan
+          format: date-time
+      additionalProperties: false
+      description: Flight plan contract
+    Pressure:
+      required:
+      - hPa
+      - inHg
+      - mmHg
+      type: object
+      properties:
+        hPa:
+          type: number
+          description: Pressure in hectopascals
+          format: double
+        inHg:
+          type: number
+          description: Pressure in inches mercury
+          format: double
+        mmHg:
+          type: number
+          description: Pressure in millimeters mercury
+          format: double
+      additionalProperties: false
+    FlightPlanStatus:
+      enum:
+      - Proposed
+      - Active
+      - Dropped
+      - Cancelled
+      - Completed
+      type: string
+    FlightSearchByEnum:
+      enum:
+      - Number
+      - Reg
+      - CallSign
+      - Icao24
+      type: string
+      description: "Criteria to search flight by<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - Number</b>: Search by flight number</li>\r\n<li><b>1 - Reg</b>: Search by aircraft registration</li>\r\n<li><b>2 - CallSign</b>: Search by ATC call-sign</li>\r\n<li><b>3 - Icao24</b>: Search by 24-bit ICAO Mode-S Transponder code</li>\r\n</ul>\r\n"
+    FlightAirportMovementContract:
+      required:
+      - airport
+      - quality
+      type: object
+      properties:
+        airport:
+          $ref: '#/components/schemas/ListingAirportContract'
+        scheduledTime:
+          $ref: '#/components/schemas/DateTimeContract'
+        revisedTime:
+          $ref: '#/components/schemas/DateTimeContract'
+        predictedTime:
+          $ref: '#/components/schemas/DateTimeContract'
+        runwayTime:
+          $ref: '#/components/schemas/DateTimeContract'
+        terminal:
+          type: string
+          description: Terminal of the flight
+          nullable: true
+        checkInDesk:
+          type: string
+          description: Check-in desk(s) for the flight (only for departing flights)
+          nullable: true
+        gate:
+          type: string
+          description: Gate of (un)boarding for the flight
+          nullable: true
+        baggageBelt:
+          type: string
+          description: Baggage belt(s) for the flight (only for arriving flights)
+          nullable: true
+        runway:
+          type: string
+          description: Name of a runway of landing (for arriving flights) or take-off (for departing flights), if known.
+          nullable: true
+        quality:
+          type: array
+          items:
+            $ref: '#/components/schemas/FlightAirportMovementQualityEnum'
+          description: "Array of quality characteristics of the data. Check this to know which information\r\nyou can expect within this contract (basic, live and/or approximate data)."
+      additionalProperties: false
+      description: Flight arrival or departure information
+    FlightType:
+      enum:
+      - Other
+      - General
+      - Scheduled
+      - NonScheduled
+      - Military
+      type: string
+    Azimuth:
+      required:
+      - deg
+      - rad
+      type: object
+      properties:
+        deg:
+          maximum: 360
+          minimum: 0
+          type: number
+          description: Angle in degrees (between `0` and `360`)
+          format: double
+        rad:
+          maximum: 6.283185307179586
+          minimum: 0
+          type: number
+          description: Angle in radians (`0` and `2 * Pi`)
+          format: double
+      additionalProperties: false
+    AirportCodesByEnum:
+      enum:
+      - Icao
+      - Iata
+      type: string
+      description: "Search by airport code type<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - Icao</b>: ICAO-code</li>\r\n<li><b>1 - Iata</b>: IATA-code</li>\r\n</ul>\r\n"
+    AirportFlightContract:
+      required:
+      - codeshareStatus
+      - isCargo
+      - number
+      - status
+      type: object
+      properties:
+        movement:
+          $ref: '#/components/schemas/FlightAirportMovementContract'
+        departure:
+          $ref: '#/components/schemas/FlightAirportMovementContract'
+        arrival:
+          $ref: '#/components/schemas/FlightAirportMovementContract'
+        number:
+          minLength: 1
+          type: string
+          description: Flight Number
+        callSign:
+          type: string
+          description: ATC call-sign of the flight
+          nullable: true
+        status:
+          $ref: '#/components/schemas/FlightStatus'
+        codeshareStatus:
+          $ref: '#/components/schemas/CodeshareStatus'
+        isCargo:
+          type: boolean
+          description: Is cargo flight
+        aircraft:
+          $ref: '#/components/schemas/FlightAircraftContract'
+        airline:
+          $ref: '#/components/schemas/FlightAirlineContract'
+        location:
+          $ref: '#/components/schemas/FlightLocationContract'
+      additionalProperties: false
+      description: Flight data contract represented in airport schedule
+    FlightRules:
+      enum:
+      - IFR
+      - VFR
+      type: string
+    GeoCoordinatesContract:
+      required:
+      - lat
+      - lon
+      type: object
+      properties:
+        lat:
+          maximum: 90
+          minimum: -90
+          type: number
+          description: Latitude, in degrees
+          format: float
+        lon:
+          maximum: 180
+          minimum: -180
+          type: number
+          description: Longitude, in degrees
+          format: float
+      additionalProperties: false
+      description: Geographical coordinates data
+    StringFlightSearchItemContractSearchResultCollectionContract:
+      required:
+      - count
+      - items
+      - searchBy
+      type: object
+      properties:
+        searchBy:
+          minLength: 1
+          type: string
+          description: "Search parameter used to find the result. \r\nPlease note, it may be different from the actual input provided!"
+        count:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+          description: The number of items in the collection
+          format: int32
+          readOnly: true
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/FlightSearchItemContract'
+          description: The collection of items
+      additionalProperties: false
+    SpeedFlightPlanUnitContract:
+      type: object
+      properties:
+        requested:
+          $ref: '#/components/schemas/Speed'
+        assigned:
+          $ref: '#/components/schemas/Speed'
+      additionalProperties: false
+      description: "Contract describing unit (altitude, airspeed, etc.) which can be assigned and / or requested\r\nin the context of the flight plan"
+    Distance:
+      required:
+      - feet
+      - km
+      - meter
+      - mile
+      - nm
+      type: object
+      properties:
+        meter:
+          type: number
+          description: Distance in meters
+          format: double
+        km:
+          type: number
+          description: Distance in kilometers
+          format: double
+        mile:
+          type: number
+          description: Distance in statute miles
+          format: double
+        nm:
+          type: number
+          description: Distance in nautical miles
+          format: double
+        feet:
+          type: number
+          description: Distance in feet
+          format: double
+      additionalProperties: false

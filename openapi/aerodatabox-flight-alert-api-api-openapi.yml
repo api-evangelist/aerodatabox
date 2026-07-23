@@ -1,0 +1,1490 @@
+openapi: 3.0.4
+info:
+  title: AeroDataBox API - Aviation and Flight Aircraft API Flight Alert API API
+  description: Affordable aviation & flight data API tailored for small and medium businesses, teams and individual developers.
+  termsOfService: https://aerodatabox.com/terms/
+  contact:
+    url: https://aerodatabox.com/contact/
+  version: 1.14.0.0
+servers:
+- url: https://prod.api.market/api/v1/aedbx/aerodatabox
+security: {}
+tags:
+- name: Flight Alert API
+paths:
+  /subscriptions/webhook/{subjectType}/{subjectId}:
+    parameters:
+    - description: API.market API Key
+      in: header
+      name: x-api-market-key
+      value: Please Login/Signup to get an API Key
+      required: true
+      schema:
+        type: string
+    post:
+      tags:
+      - Flight Alert API
+      summary: AeroDataBox Create Web-hook Subscription / TIER 4
+      description: "*This endpoitns is a part of Flight alert PUSH API currently powered by webhooks.  \r\nIf you are running your own web service, you can subscribe to flights by number or airport code. \r\nAfter that, your HTTP endpoint will be called (notified) whenever the flight information gets \r\nupdated.*\r\n\r\nCreates a web-hook subscription on a subject (e.g., flight alerts by number or by airport code).\r\nReturns information about created subscription. Subscription ID contained in it\r\ncan be used to refresh or remove it.\r\n\r\nEvery time a subject gets updated, a HTTP request will be sent to\r\nthe URL specified in `url` parameter. Request will be of a POST type \r\nand contain JSON-formatted `FlightNotificationContract` object containing subscription\r\nand flights information in  the body (see example response for status code 199\r\nof this endpoint documentation).\r\n\r\nAll flight alerts / notifications are delivered in best-effort manner. They might be missing\r\nor delayed. If there was an error delivering a notification for any reason, for example, your\r\nendpoint was not available, returned non-2xx status code, or did not respond within timeout period,\r\nthere will be 2 more retries after 5 and 15 minutes (**this behavior is changing, see below**).\r\n\r\nIf subscribed to a specific flight or to flights operated in a specific airport:\r\n* Ensure that the flight is within the live updates / ADS-B data coverage. There is no sense in subscribing to a flight which operates in airports having poor or  no live updates or ADS-B coverage: there simply will be no updates. To check if an airport is tracked and on which level, use `/health/services/airports/{icao}/feeds` endpoint. You can also use `/health/services/feeds/{service}/airports` to get the list of covered airports. Read more about coverage here: https://www.aerodatabox.com/data-coverage.\r\n* Notifications will cover updates for flights commencing from 6 hours ago up to 72 hours in future.\r\n* Among these, notifications will contain only those flight items which were actually updated this time.\r\n\r\n** ! WARNING OF THE UPCOMING BREAKING CHANGES ! **\r\n\r\nWE ARE CHANGING HOW WEB-HOOK SUBSCRIPTION BILLING AND NOTIFICATION RETRY IS HANDLED. \r\n\r\nIf you're already using Flight Alert API you need to adjust your code to prevent service interruption.\r\n\r\n**CURRENT BEHAVIOR (BEING PHASED OUT):**\r\n\r\n* Web-hook subscriptions created using this endpoint have a life-time of 7 days. Expiration date-time is provided in the response to this endpoint. \r\n* After that expiration date the subscription will be removed automatically. If you want to prevent expiration and extend the subscription, use `PATCH /webhook/{subscriptionId}/refresh` endpoint to refresh the subscription. You may also remove the subscription manually using DELETE `webhook/{subscriptionId}`.\r\n* As long as a web-hook subscription is active, you will receive notifications if there are any.\r\n* You are billed for every call when you create or refresh a subscription as per Tier 4 API quota.\r\n* You are **not** billed for the amount of notifications generated or delivered to you.\r\n* You may **not** be refunded for unused time on your subscription if you remove it manually before expiration or if there were no notifications.\r\n* Each failed notification delivery attempt is retried 2 times by default, regardless of the reason of failure.\r\n\r\n**UPCOMING BEHAVIOR:**\r\n\r\n* Web-hook subscriptions no longer expire, unless you remove them manually.\r\n* This endpoint is moved to the Free Tier and both creating and refreshing subscriptions will be free of charge.\r\n* Every API consumer will now have a dedicated flight alert credit balance separate from the API quota. \r\n* Credits are deducted from your balance each time an alert notification is sent to your webhook. The cost is 1 credit per flight item in the notification. If a notification contains 1 flight, it costs 1 credit. If a notification contains 5 flights (common with airport subscriptions), it costs 5 credits.\r\n* Use caution when subscribing to an airport with a lot of traffic, as it may drain your balance quickly.\r\n* As soon as your balance reaches zero, all your web-hook subscriptions will pause and no notifications will be sent until you refill your balance.The balance is shared among all web-hook subscriptions created by you.\r\n* To refill the balance, refer to `POST /subscriptions/balance/refill` API endpoint.\r\n* To check the balance, refer to `GET /subscriptions/balance` endpoint.\r\n* `PATCH /webhook/{subscriptionId}/refresh` is now deprecated will be removed after the transition period. Pricing Tier 4 will be discontinued too.\r\n* Each failed notification delivery attempt is not retried by default, unless you explicitly set amount of retries when creating the subscription using `maxDeliveryRetries` parameter in the request body.\r\n* Each retry attempt costs the same amount of credits as the original notification delivery attempt.\r\n\r\n**WHEN THE CHANGE WILL HAPPEN?**\r\n\r\n* Transition period will end on **the 4th of April, 2026**. Both systems will co-exist during the transition period until then. After that date only the credit-based billing system will remain operational. \r\n\r\n**MIGRATION GUIDE / LEARN MORE**\r\n\r\nRead our guide at https://aerodatabox.com/flight-alert-api-2026/"
+      operationId: SubscribeWebhook
+      parameters:
+      - name: subjectType
+        in: path
+        description: Subject type
+        schema:
+          $ref: '#/components/schemas/SubscriptionSubjectType'
+      - name: subjectId
+        in: path
+        description: "Subject ID. If `subjectType` is: \r\n* `FlightByNumber`, then this field must be a flight number (with or without spaces, IATA or ICAO, any case formats are acceptable, e.g. KL1395, Klm 1395);\r\n* `FlightByAirportIcao`, then this field must be a 4-character ICAO-code of the airport where flights are operated (e.g.: EHAM, KLAX, UUEE, etc.);"
+        required: true
+        schema:
+          type: string
+      - name: useCredits
+        in: query
+        description: "THIS IS A TEMPORARY MIGRATION PARAMETER FOR EASIER TRANSITION. \r\nDefault value: false.\r\nSet to true to create a web-hook subscription under the new, credit-based billing model.In this case, the call will be free of charge despite Tier 4.\r\nAfter transition this parameter will be ignored as all subscriptions will be created as credit-based and you will be able to remove it."
+        schema:
+          type: boolean
+          default: false
+      requestBody:
+        description: Command containing parameters for web-hook subscription creation
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWebHookSubscription'
+      responses:
+        '199':
+          description: Information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlightNotificationContract'
+              examples:
+                SubscribeWebhook199Example:
+                  summary: Default SubscribeWebhook 199 response
+                  x-microcks-default: true
+                  value:
+                    flights:
+                    - example_value
+                    subscription: example_value
+                    balance: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/FlightNotificationContract'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionContract'
+              examples:
+                SubscribeWebhook200Example:
+                  summary: Default SubscribeWebhook 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    isActive: true
+                    billingType: example_value
+                    activateBeforeUtc: '2025-03-15T14:30:00Z'
+                    expiresOnUtc: '2025-03-15T14:30:00Z'
+                    createdOnUtc: '2025-03-15T14:30:00Z'
+                    subject: example_value
+                    subscriber: example_value
+                    notices:
+                    - example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/SubscriptionContract'
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                SubscribeWebhook400Example:
+                  summary: Default SubscribeWebhook 400 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                SubscribeWebhook401Example:
+                  summary: Default SubscribeWebhook 401 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '451':
+          description: Unavailable For Legal Reasons
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                SubscribeWebhook451Example:
+                  summary: Default SubscribeWebhook 451 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                SubscribeWebhook500Example:
+                  summary: Default SubscribeWebhook 500 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '503':
+          description: Service Unavailable
+      x-badges:
+      - name: TIER 4
+        position: before
+        color: '#8a8eb2'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /subscriptions/webhook/{subscriptionId}:
+    parameters:
+    - description: API.market API Key
+      in: header
+      name: x-api-market-key
+      value: Please Login/Signup to get an API Key
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+      - Flight Alert API
+      summary: AeroDataBox Get Web-hook Subscription / FREE TIER
+      description: "*This endpoint is a part of Flight alert PUSH API currently powered by webhooks.  \r\nIf you are running your own web service, you can subscribe to flights by number or airport code. \r\nAfter that, your HTTP endpoint will be called (notified) whenever the flight information gets \r\nupdated.*\r\n\r\nGets information about an existing active web-hook subscription."
+      operationId: GetWebhook
+      parameters:
+      - name: subscriptionId
+        in: path
+        description: Subscription ID
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionContract'
+              examples:
+                GetWebhook200Example:
+                  summary: Default GetWebhook 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    isActive: true
+                    billingType: example_value
+                    activateBeforeUtc: '2025-03-15T14:30:00Z'
+                    expiresOnUtc: '2025-03-15T14:30:00Z'
+                    createdOnUtc: '2025-03-15T14:30:00Z'
+                    subject: example_value
+                    subscriber: example_value
+                    notices:
+                    - example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/SubscriptionContract'
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetWebhook400Example:
+                  summary: Default GetWebhook 400 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetWebhook401Example:
+                  summary: Default GetWebhook 401 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '451':
+          description: Unavailable For Legal Reasons
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetWebhook451Example:
+                  summary: Default GetWebhook 451 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetWebhook500Example:
+                  summary: Default GetWebhook 500 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '503':
+          description: Service Unavailable
+      x-badges:
+      - name: FREE TIER
+        position: before
+        color: '#ccc'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      tags:
+      - Flight Alert API
+      summary: AeroDataBox Remove Web-hook Subscription / FREE TIER
+      description: "*This endpoitns is a part of Flight alert PUSH API currently powered by webhooks.  \r\nIf you are running your own web service, you can subscribe to flights by number or airport code. \r\nAfter that, your HTTP endpoint will be called (notified) whenever the flight information gets \r\nupdated.*\r\n\r\nRemoves the subscription"
+      operationId: UnsubscribeWebhook
+      parameters:
+      - name: subscriptionId
+        in: path
+        description: Subscription ID
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                UnsubscribeWebhook400Example:
+                  summary: Default UnsubscribeWebhook 400 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                UnsubscribeWebhook401Example:
+                  summary: Default UnsubscribeWebhook 401 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '451':
+          description: Unavailable For Legal Reasons
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                UnsubscribeWebhook451Example:
+                  summary: Default UnsubscribeWebhook 451 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                UnsubscribeWebhook500Example:
+                  summary: Default UnsubscribeWebhook 500 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '503':
+          description: Service Unavailable
+      x-badges:
+      - name: FREE TIER
+        position: before
+        color: '#ccc'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /subscriptions/webhook:
+    parameters:
+    - description: API.market API Key
+      in: header
+      name: x-api-market-key
+      value: Please Login/Signup to get an API Key
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+      - Flight Alert API
+      summary: AeroDataBox List Web-hook Subscriptions / FREE TIER
+      description: "*This endpoitns is a part of Flight alert PUSH API currently powered by webhooks.  \r\nIf you are running your own web service, you can subscribe to flights by number or airport code. \r\nAfter that, your HTTP endpoint will be called (notified) whenever the flight information gets \r\nupdated.*\r\n\r\nGet the list of existing active web-hook subscriptions"
+      operationId: GetWebhookList
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SubscriptionContract'
+              examples:
+                GetWebhookList200Example:
+                  summary: Default GetWebhookList 200 response
+                  x-microcks-default: true
+                  value:
+                  - example_value
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SubscriptionContract'
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetWebhookList400Example:
+                  summary: Default GetWebhookList 400 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetWebhookList401Example:
+                  summary: Default GetWebhookList 401 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '451':
+          description: Unavailable For Legal Reasons
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetWebhookList451Example:
+                  summary: Default GetWebhookList 451 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetWebhookList500Example:
+                  summary: Default GetWebhookList 500 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '503':
+          description: Service Unavailable
+      x-badges:
+      - name: FREE TIER
+        position: before
+        color: '#ccc'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /subscriptions/webhook/{subscriptionId}/refresh:
+    parameters:
+    - description: API.market API Key
+      in: header
+      name: x-api-market-key
+      value: Please Login/Signup to get an API Key
+      required: true
+      schema:
+        type: string
+    patch:
+      tags:
+      - Flight Alert API
+      summary: AeroDataBox Refresh Web-hook Subscription (DEPRECATED) / TIER 4
+      description: " *This endpoitns is a part of Flight alert PUSH API currently powered by webhooks.  \r\n If you are running your own web service, you can subscribe to flights by number or airport code. \r\n After that, your HTTP endpoint will be called (notified) whenever the flight information gets \r\n updated.*\r\n \r\n Refreshes an existing web-hook subscription\r\n \r\n If the subscription had an expiration date-time set when created, this endpoint \r\n will extend it by the same period of time as the one it was originally created with. \r\n E.g., if subscription was originally created for 7 days, this endpoint will\r\n add extra 7 days to the expiration date-time. Note, that web-hook subscriptions\r\n cannot be extended beyond the sliding window of 60 days from the current date-time. \r\n \r\n If the subscription had no expiration date-time set, nothing occurs.\r\n \r\n **! WARNING OF THE UPCOMING BREAKING CHANGES !**\r\n \r\n DUE TO TRANSITIONING TO A NEW CREDIT-BASED BILLING MODEL FOR WEB-HOOK SUBSCRIPTIONS, \r\n\tTHIS ENDPOINT WILL BE DEPRECATED AND REMOVED LATER ON.\r\n\r\n **MIGRATION GUIDE / LEARN MORE**\r\n \r\n Read our guide at https://aerodatabox.com/flight-alert-api-2026/"
+      operationId: RefreshWebhook
+      parameters:
+      - name: subscriptionId
+        in: path
+        description: Subscription ID
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: useCredits
+        in: query
+        description: "THIS IS A TEMPORARY MIGRATION PARAMETER FOR EASIER TRANSITION. \r\nDefault value: false.\r\nSet to true to refresh an existing web-hook subscription under the new, credit-based billing model. In this case, the call will be free of charge despite Tier 4."
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionContract'
+              examples:
+                RefreshWebhook200Example:
+                  summary: Default RefreshWebhook 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    isActive: true
+                    billingType: example_value
+                    activateBeforeUtc: '2025-03-15T14:30:00Z'
+                    expiresOnUtc: '2025-03-15T14:30:00Z'
+                    createdOnUtc: '2025-03-15T14:30:00Z'
+                    subject: example_value
+                    subscriber: example_value
+                    notices:
+                    - example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/SubscriptionContract'
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                RefreshWebhook400Example:
+                  summary: Default RefreshWebhook 400 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                RefreshWebhook401Example:
+                  summary: Default RefreshWebhook 401 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '451':
+          description: Unavailable For Legal Reasons
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                RefreshWebhook451Example:
+                  summary: Default RefreshWebhook 451 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                RefreshWebhook500Example:
+                  summary: Default RefreshWebhook 500 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '503':
+          description: Service Unavailable
+      deprecated: true
+      x-badges:
+      - name: TIER 4
+        position: before
+        color: '#8a8eb2'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /subscriptions/balance:
+    parameters:
+    - description: API.market API Key
+      in: header
+      name: x-api-market-key
+      value: Please Login/Signup to get an API Key
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+      - Flight Alert API
+      summary: AeroDataBox Get Web-hook Subscription Balance / FREE TIER
+      description: "The current web-hook subscription balance information.\r\nThis is separate from your API marketplace quota and is used solely for billing of web-hook subscriptions.\r\nFor more details about how flight alert API billing works, refer to our guide at https://aerodatabox.com/flight-alert-api-2026/"
+      operationId: GetBalance
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionBalanceContract'
+              examples:
+                GetBalance200Example:
+                  summary: Default GetBalance 200 response
+                  x-microcks-default: true
+                  value:
+                    creditsRemaining: 100
+                    lastRefilledUtc: '2025-03-15T14:30:00Z'
+                    lastDeductedUtc: '2025-03-15T14:30:00Z'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/SubscriptionBalanceContract'
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetBalance400Example:
+                  summary: Default GetBalance 400 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetBalance401Example:
+                  summary: Default GetBalance 401 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '451':
+          description: Unavailable For Legal Reasons
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetBalance451Example:
+                  summary: Default GetBalance 451 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetBalance500Example:
+                  summary: Default GetBalance 500 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '503':
+          description: Service Unavailable
+      x-badges:
+      - name: FREE TIER
+        position: before
+        color: '#ccc'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /subscriptions/balance/refill:
+    parameters:
+    - description: API.market API Key
+      in: header
+      name: x-api-market-key
+      value: Please Login/Signup to get an API Key
+      required: true
+      schema:
+        type: string
+    post:
+      tags:
+      - Flight Alert API
+      summary: AeroDataBox Refill Web-hook Subscription Balance / TIER 1
+      description: "Performs refill operation on the web-hook subscription balance by the specified amount of credits.\r\nThis balance is separate from your API marketplace quota and is used solely for billing of web-hook subscriptions.\r\n\r\nIn the request body, you specify how many credits you want to add. This is a variable-rate endpoint and the amount of API units \r\ndeducted from your API quota depends on the amount of flight alerts credits requested.\r\nThe conversion rate is: 1 credit = 1 API unit.\r\n\r\nAdditional limits apply with regard to how many credits you can request per single refill operation and how many credits\r\nyou can have in your balance at any given time. These limits depend on your pricing plan (https://aerodatabox.com/pricing).\r\n\r\nFor more details about how flight alert API billing works, refer to our guide at https://aerodatabox.com/flight-alert-api-2026/"
+      operationId: RefillBalance
+      requestBody:
+        description: The details of the balance refill operation, including the amount of credits to add.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubscriptionsBalanceRefillRequestContract'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionBalanceContract'
+              examples:
+                RefillBalance200Example:
+                  summary: Default RefillBalance 200 response
+                  x-microcks-default: true
+                  value:
+                    creditsRemaining: 100
+                    lastRefilledUtc: '2025-03-15T14:30:00Z'
+                    lastDeductedUtc: '2025-03-15T14:30:00Z'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/SubscriptionBalanceContract'
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                RefillBalance400Example:
+                  summary: Default RefillBalance 400 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                RefillBalance401Example:
+                  summary: Default RefillBalance 401 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '451':
+          description: Unavailable For Legal Reasons
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                RefillBalance451Example:
+                  summary: Default RefillBalance 451 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                RefillBalance500Example:
+                  summary: Default RefillBalance 500 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '503':
+          description: Service Unavailable
+      x-badges:
+      - name: TIER 1
+        position: before
+        color: '#beffe6'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    DistanceFlightPlanUnitContract:
+      type: object
+      properties:
+        requested:
+          $ref: '#/components/schemas/Distance'
+        assigned:
+          $ref: '#/components/schemas/Distance'
+      additionalProperties: false
+      description: "Contract describing unit (altitude, airspeed, etc.) which can be assigned and / or requested\r\nin the context of the flight plan"
+    ErrorContract:
+      required:
+      - message
+      type: object
+      properties:
+        message:
+          minLength: 1
+          type: string
+          description: Error message
+      additionalProperties: false
+      description: Error response
+    SubscriptionBillingType:
+      enum:
+      - LifetimeBased
+      - CreditBased
+      type: string
+      description: "Flight alert subscription billing type<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - LifetimeBased</b>: Subscription billed upon creation based on the life-time with set expiration date-time (BEING DEPRECATED)</li>\r\n<li><b>1 - CreditBased</b>: Subscription with no expiration date, billed based on the amount of notifications sent</li>\r\n</ul>\r\n"
+    FlightNotificationContract:
+      required:
+      - flights
+      - subscription
+      type: object
+      properties:
+        flights:
+          type: array
+          items:
+            $ref: '#/components/schemas/FlightNotificationItemContract'
+          description: Modified/created flight notification
+        subscription:
+          $ref: '#/components/schemas/SubscriptionContract'
+        balance:
+          $ref: '#/components/schemas/SubscriptionBalanceContract'
+      additionalProperties: false
+      description: Flight notification contract
+    LicenseType:
+      enum:
+      - AllRightsReserved
+      - AttributionNoncommercialShareAlikeCC
+      - AttributionNoncommercialCC
+      - AttributionNoncommercialNoDerivativesCC
+      - AttributionCC
+      - AttributionShareAlikeCC
+      - AttributionNoDerivativesCC
+      - NoKnownCopyrightRestrictions
+      - UnitedStatesGovernmentWork
+      - PublicDomainDedicationCC0
+      - PublicDomainMark
+      type: string
+      description: "<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - AllRightsReserved</b>: All Rights Reserved.</li>\r\n<li><b>1 - AttributionNoncommercialShareAlikeCC</b>: Creative Commons: Attribution Non-Commercial, Share-alike License.</li>\r\n<li><b>2 - AttributionNoncommercialCC</b>: Creative Commons: Attribution Non-Commercial License.</li>\r\n<li><b>3 - AttributionNoncommercialNoDerivativesCC</b>: Creative Commons: Attribution Non-Commercial, No Derivatives License.</li>\r\n<li><b>4 - AttributionCC</b>: Creative Commons: Attribution License.</li>\r\n<li><b>5 - AttributionShareAlikeCC</b>: Creative Commons: Attribution Share-alike License.</li>\r\n<li><b>6 - AttributionNoDerivativesCC</b>: Creative Commons: Attribution No Derivatives License.</li>\r\n<li><b>7 - NoKnownCopyrightRestrictions</b>: No Known Copyright Resitrctions (Flickr Commons).</li>\r\n<li><b>8 - UnitedStatesGovernmentWork</b>: United States Government Work</li>\r\n<li><b>9 - PublicDomainDedicationCC0</b>: Public Domain Dedication, CC0</li>\r\n<li><b>10 - PublicDomainMark</b>: Public Domain Mark</li>\r\n</ul>\r\n"
+    CodeshareStatus:
+      enum:
+      - Unknown
+      - IsOperator
+      - IsCodeshared
+      type: string
+      description: "Flight code-share status<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - Unknown</b>: Code-sharing information is unavailable for this flight. Flight might be operated both by airline owning the flight number as well as by another airliner.</li>\r\n<li><b>1 - IsOperator</b>: Flight is operated by an airline owning the flight number (the same code)</li>\r\n<li><b>2 - IsCodeshared</b>: Flight is code-shared (operated by an airline other than airline owning the flight number)</li>\r\n</ul>\r\n"
+    ListingAirportContract:
+      required:
+      - name
+      type: object
+      properties:
+        icao:
+          type: string
+          description: ICAO code of the airport
+          nullable: true
+        iata:
+          type: string
+          description: IATA code of the airport
+          nullable: true
+        localCode:
+          type: string
+          description: Code of the airport within the local or national codification system
+          nullable: true
+        name:
+          minLength: 1
+          type: string
+          description: Name of the airport
+        shortName:
+          type: string
+          description: Shortened name of the airport
+          nullable: true
+        municipalityName:
+          type: string
+          description: Name of the municipality this airport belongs to
+          nullable: true
+        location:
+          $ref: '#/components/schemas/GeoCoordinatesContract'
+        countryCode:
+          type: string
+          description: Two-letter country code of the airport
+          nullable: true
+        timeZone:
+          type: string
+          description: Time zone of the airport in Olson format (e.g. "Europe/Amsterdam")
+          nullable: true
+      additionalProperties: false
+      description: Flight's airport reference contract
+    FlightStatus:
+      enum:
+      - Unknown
+      - Expected
+      - EnRoute
+      - CheckIn
+      - Boarding
+      - GateClosed
+      - Departed
+      - Delayed
+      - Approaching
+      - Arrived
+      - Canceled
+      - Diverted
+      - CanceledUncertain
+      type: string
+      description: "Flight progress status<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - Unknown</b>: Status is not available for this flight</li>\r\n<li><b>1 - Expected</b>: Expected</li>\r\n<li><b>2 - EnRoute</b>: En route</li>\r\n<li><b>3 - CheckIn</b>: Check-in is open</li>\r\n<li><b>4 - Boarding</b>: Boarding in progress / Last call</li>\r\n<li><b>5 - GateClosed</b>: Gate closed</li>\r\n<li><b>6 - Departed</b>: Departed</li>\r\n<li><b>7 - Delayed</b>: Delayed</li>\r\n<li><b>8 - Approaching</b>: On approach to destination</li>\r\n<li><b>9 - Arrived</b>: Arrived</li>\r\n<li><b>10 - Canceled</b>: Cancelled</li>\r\n<li><b>11 - Diverted</b>: Diverted to another destination</li>\r\n<li><b>12 - CanceledUncertain</b>: Status of the flight is uncertain, may be cancelled</li>\r\n</ul>\r\n"
+    DateTimeContract:
+      required:
+      - local
+      - utc
+      type: object
+      properties:
+        utc:
+          type: string
+          description: UTC-time
+          format: date-time
+        local:
+          type: string
+          description: Local time
+          format: date-time
+      additionalProperties: false
+      description: Descriptor date-time represented in both UTC and local timezones
+    FlightAircraftContract:
+      type: object
+      properties:
+        reg:
+          type: string
+          description: Tail-number of the aircraft
+          nullable: true
+        modeS:
+          type: string
+          description: ICAO 24 bit Mode-S hexadecimal transponder address
+          nullable: true
+        model:
+          type: string
+          description: Aircraft name and model
+          nullable: true
+        image:
+          $ref: '#/components/schemas/ResourceContract'
+      additionalProperties: false
+      description: Flight's aircraft reference contract
+    FlightLocationContract:
+      required:
+      - altitude
+      - groundSpeed
+      - lat
+      - lon
+      - pressure
+      - pressureAltitude
+      - reportedAtUtc
+      - trueTrack
+      type: object
+      properties:
+        pressureAltitude:
+          $ref: '#/components/schemas/Distance'
+        altitude:
+          $ref: '#/components/schemas/Distance'
+        pressure:
+          $ref: '#/components/schemas/Pressure'
+        groundSpeed:
+          $ref: '#/components/schemas/Speed'
+        trueTrack:
+          $ref: '#/components/schemas/Azimuth'
+        vsiFpm:
+          type: integer
+          description: "Vertical speed, in feet per minute\r\nNot set if unknown or zero."
+          format: int32
+          nullable: true
+        reportedAtUtc:
+          type: string
+          description: Time (UTC) of when this positional data was reported
+          format: date-time
+        lat:
+          maximum: 90
+          minimum: -90
+          type: number
+          description: Latitude, in degrees
+          format: float
+        lon:
+          maximum: 180
+          minimum: -180
+          type: number
+          description: Longitude, in degrees
+          format: float
+      additionalProperties: false
+      description: 'Positional information about flight: location, altitude, speed and track'
+    FlightNotificationItemContract:
+      required:
+      - arrival
+      - codeshareStatus
+      - departure
+      - isCargo
+      - lastUpdatedUtc
+      - number
+      - status
+      type: object
+      properties:
+        notificationSummary:
+          type: string
+          description: Human-readable summary of the flight status update
+          nullable: true
+        notificationRemark:
+          type: string
+          description: Human-readable remark to the flight status update
+          nullable: true
+        greatCircleDistance:
+          $ref: '#/components/schemas/Distance'
+        departure:
+          $ref: '#/components/schemas/FlightAirportMovementContract'
+        arrival:
+          $ref: '#/components/schemas/FlightAirportMovementContract'
+        flightPlan:
+          $ref: '#/components/schemas/FlightPlanContract'
+        lastUpdatedUtc:
+          type: string
+          description: Time (UTC) of the latest update of flight information (excluding Location)
+          format: date-time
+        number:
+          minLength: 1
+          type: string
+          description: Flight Number
+        callSign:
+          type: string
+          description: ATC call-sign of the flight
+          nullable: true
+        status:
+          $ref: '#/components/schemas/FlightStatus'
+        codeshareStatus:
+          $ref: '#/components/schemas/CodeshareStatus'
+        isCargo:
+          type: boolean
+          description: Is cargo flight
+        aircraft:
+          $ref: '#/components/schemas/FlightAircraftContract'
+        airline:
+          $ref: '#/components/schemas/FlightAirlineContract'
+        location:
+          $ref: '#/components/schemas/FlightLocationContract'
+      additionalProperties: false
+      description: Flight notification message contract
+    SubscriptionBalanceContract:
+      required:
+      - creditsRemaining
+      - lastDeductedUtc
+      - lastRefilledUtc
+      type: object
+      properties:
+        creditsRemaining:
+          type: integer
+          description: Alert credits remaining for the account.
+          format: int64
+        lastRefilledUtc:
+          type: string
+          description: The datetime when the balance was last re-filled, in UTC.
+          format: date-time
+        lastDeductedUtc:
+          type: string
+          description: "The datetime when the balance was last deducated, in UTC.\r\nDeduction typically occurs when an alert notification was dispatched\r\nfor one of the alert subscriptions associated with the user account."
+          format: date-time
+      additionalProperties: false
+      description: "Represents the balance for all alert subscriptions associated with the user acount, including remaining credits and timestamps\r\nfor the most recent refill and deduction operations."
+    SubscriberContract:
+      required:
+      - id
+      - type
+      type: object
+      properties:
+        type:
+          minLength: 1
+          type: string
+          description: Type of subscriber. Completemented by SubscriberId.
+        id:
+          minLength: 1
+          type: string
+          description: ID
+      additionalProperties: false
+      description: Describes subscriber (consumer of the subscription)
+    ResourceContract:
+      required:
+      - license
+      - url
+      type: object
+      properties:
+        url:
+          minLength: 1
+          type: string
+          description: URL of the resource
+        webUrl:
+          type: string
+          description: URL of web-page containing the resource
+          nullable: true
+        author:
+          type: string
+          description: Author name of the resource
+          nullable: true
+        title:
+          type: string
+          description: Title of the resource
+          nullable: true
+        description:
+          type: string
+          description: Description of the resource
+          nullable: true
+        license:
+          $ref: '#/components/schemas/LicenseType'
+        htmlAttributions:
+          type: array
+          items:
+            type: string
+          description: "Attributions maintaining copyright, ownership and other legal information adjusted for displaying\r\nas HTML. Each element represent one line."
+          nullable: true
+      additionalProperties: false
+      description: Single media resource data
+    Speed:
+      required:
+      - kmPerHour
+      - kt
+      - meterPerSecond
+      - miPerHour
+      type: object
+      properties:
+        kt:
+          type: number
+          description: Speed in knots
+          format: double
+        kmPerHour:
+          type: number
+          description: Speed in km per hour
+          format: double
+        miPerHour:
+          type: number
+          description: Speed in miles per hour
+          format: double
+        meterPerSecond:
+          type: number
+          description: Speed in meters per second
+          format: double
+      additionalProperties: false
+    SubscriptionContract:
+      required:
+      - createdOnUtc
+      - id
+      - isActive
+      - subject
+      - subscriber
+      type: object
+      properties:
+        id:
+          type: string
+          description: "Identifier of a subscription. \r\nUse this ID to control the subscription in future (e.g. update or delete)."
+          format: uuid
+        isActive:
+          type: boolean
+          description: Specifies if the subscription is active
+        billingType:
+          $ref: '#/components/schemas/SubscriptionBillingType'
+        activateBeforeUtc:
+          type: string
+          description: "Time (UTC) before which subscription must be activated (may be applicable to \r\nsome non-active newly created subscriptions)"
+          format: date-time
+          nullable: true
+        expiresOnUtc:
+          type: string
+          description: "Time (UTC) when subscription expires and will be removed.\r\n\r\nIf not specified, subscription never expires."
+          format: date-time
+          nullable: true
+        createdOnUtc:
+          type: string
+          description: Time (UTC) when subscription was created
+          format: date-time
+        subject:
+          $ref: '#/components/schemas/SubscriptionSubjectContract'
+        subscriber:
+          $ref: '#/components/schemas/SubscriberContract'
+        notices:
+          type: array
+          items:
+            type: string
+          description: Additional messages
+          nullable: true
+      additionalProperties: false
+      description: Describes subscription
+    FlightAirlineContract:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          minLength: 1
+          type: string
+          description: Airline name
+        iata:
+          type: string
+          description: IATA code of the airline
+          nullable: true
+        icao:
+          type: string
+          description: ICAO code of the airline
+          nullable: true
+      additionalProperties: false
+      description: Flight's airline reference conract
+    FlightAirportMovementQualityEnum:
+      enum:
+      - Basic
+      - Live
+      - Approximate
+      type: string
+      description: "Quality characteristics of the information provided within flight FlightAirportMovementContract<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - Basic</b></li>\r\n<li><b>1 - Live</b></li>\r\n<li><b>2 - Approximate</b></li>\r\n</ul>\r\n"
+    FlightPlanContract:
+      required:
+      - lastUpdatedUtc
+      - route
+      type: object
+      properties:
+        flightRules:
+          $ref: '#/components/schemas/FlightRules'
+        flightType:
+          $ref: '#/components/schemas/FlightType'
+        revisionNo:
+          type: integer
+          description: No. of revision of the flight plan
+          format: int32
+          nullable: true
+        status:
+          $ref: '#/components/schemas/FlightPlanStatus'
+        route:
+          minLength: 1
+          type: string
+          description: Route information for the flight as filed in the flight plan
+        altitude:
+          $ref: '#/components/schemas/DistanceFlightPlanUnitContract'
+        airspeed:
+          $ref: '#/components/schemas/SpeedFlightPlanUnitContract'
+        lastUpdatedUtc:
+          type: string
+          description: Time (UTC) of the latest known update to the flight plan
+          format: date-time
+      additionalProperties: false
+      description: Flight plan contract
+    Pressure:
+      required:
+      - hPa
+      - inHg
+      - mmHg
+      type: object
+      properties:
+        hPa:
+          type: number
+          description: Pressure in hectopascals
+          format: double
+        inHg:
+          type: number
+          description: Pressure in inches mercury
+          format: double
+        mmHg:
+          type: number
+          description: Pressure in millimeters mercury
+          format: double
+      additionalProperties: false
+    FlightPlanStatus:
+      enum:
+      - Proposed
+      - Active
+      - Dropped
+      - Cancelled
+      - Completed
+      type: string
+    FlightAirportMovementContract:
+      required:
+      - airport
+      - quality
+      type: object
+      properties:
+        airport:
+          $ref: '#/components/schemas/ListingAirportContract'
+        scheduledTime:
+          $ref: '#/components/schemas/DateTimeContract'
+        revisedTime:
+          $ref: '#/components/schemas/DateTimeContract'
+        predictedTime:
+          $ref: '#/components/schemas/DateTimeContract'
+        runwayTime:
+          $ref: '#/components/schemas/DateTimeContract'
+        terminal:
+          type: string
+          description: Terminal of the flight
+          nullable: true
+        checkInDesk:
+          type: string
+          description: Check-in desk(s) for the flight (only for departing flights)
+          nullable: true
+        gate:
+          type: string
+          description: Gate of (un)boarding for the flight
+          nullable: true
+        baggageBelt:
+          type: string
+          description: Baggage belt(s) for the flight (only for arriving flights)
+          nullable: true
+        runway:
+          type: string
+          description: Name of a runway of landing (for arriving flights) or take-off (for departing flights), if known.
+          nullable: true
+        quality:
+          type: array
+          items:
+            $ref: '#/components/schemas/FlightAirportMovementQualityEnum'
+          description: "Array of quality characteristics of the data. Check this to know which information\r\nyou can expect within this contract (basic, live and/or approximate data)."
+      additionalProperties: false
+      description: Flight arrival or departure information
+    SubscriptionsBalanceRefillRequestContract:
+      required:
+      - credits
+      type: object
+      properties:
+        credits:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+          description: Number of credits to add to the notification subscription balance.
+          format: int32
+      additionalProperties: false
+      description: Represents a contract for refilling flight alert credits on a subscription.
+    CreateWebHookSubscription:
+      required:
+      - url
+      type: object
+      properties:
+        url:
+          minLength: 1
+          type: string
+          description: "Destination HTTP-endpoint where notifications will be sent to. Requirements:\r\n* must be a valid public HTTP(S) URL not requiring additional authorization;\r\n* must use standard or alternative HTTP or HTTPS ports (80, 443, 8008, 8080) or any dynamic port greater or equal to 49152;\r\n* must be able to accept HTTP POST request with JSON-formatted body (application/json);\r\n* must respond with one of successful HTTP status codes (2XX) within 10 seconds;\r\n* the endpoint owner must be aware of and consent to receiving notifications at it.\r\n\r\nIf endpoint is unavailable, responds with error status code or does not respond within timeout,\r\nnotification delivery retry may be attempted according to subscription settings."
+        maxDeliveryRetries:
+          maximum: 2
+          minimum: 0
+          type: integer
+          description: "Maximum number of times a delivery attempt is retried after initial delivery attempt failure.\r\n\r\nCurrent default value is:\r\n\r\n\t* `2` for the old, lifetime-based web-hook subscriptions (will be phased out after the 4th of April, 2026);\r\n\t* `0` for the new, credit-based web-hook subscriptions (will be the default value for any web-hook subscription after the 4th of April, 2026)."
+          format: int32
+          nullable: true
+      additionalProperties: false
+      description: Command to create web-hook subscription
+    SubscriptionSubjectType:
+      enum:
+      - FlightByNumber
+      - FlightByAirportIcao
+      type: string
+      description: "<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - FlightByNumber</b></li>\r\n<li><b>1 - FlightByAirportIcao</b></li>\r\n</ul>\r\n"
+    FlightType:
+      enum:
+      - Other
+      - General
+      - Scheduled
+      - NonScheduled
+      - Military
+      type: string
+    Azimuth:
+      required:
+      - deg
+      - rad
+      type: object
+      properties:
+        deg:
+          maximum: 360
+          minimum: 0
+          type: number
+          description: Angle in degrees (between `0` and `360`)
+          format: double
+        rad:
+          maximum: 6.283185307179586
+          minimum: 0
+          type: number
+          description: Angle in radians (`0` and `2 * Pi`)
+          format: double
+      additionalProperties: false
+    FlightRules:
+      enum:
+      - IFR
+      - VFR
+      type: string
+    GeoCoordinatesContract:
+      required:
+      - lat
+      - lon
+      type: object
+      properties:
+        lat:
+          maximum: 90
+          minimum: -90
+          type: number
+          description: Latitude, in degrees
+          format: float
+        lon:
+          maximum: 180
+          minimum: -180
+          type: number
+          description: Longitude, in degrees
+          format: float
+      additionalProperties: false
+      description: Geographical coordinates data
+    SpeedFlightPlanUnitContract:
+      type: object
+      properties:
+        requested:
+          $ref: '#/components/schemas/Speed'
+        assigned:
+          $ref: '#/components/schemas/Speed'
+      additionalProperties: false
+      description: "Contract describing unit (altitude, airspeed, etc.) which can be assigned and / or requested\r\nin the context of the flight plan"
+    Distance:
+      required:
+      - feet
+      - km
+      - meter
+      - mile
+      - nm
+      type: object
+      properties:
+        meter:
+          type: number
+          description: Distance in meters
+          format: double
+        km:
+          type: number
+          description: Distance in kilometers
+          format: double
+        mile:
+          type: number
+          description: Distance in statute miles
+          format: double
+        nm:
+          type: number
+          description: Distance in nautical miles
+          format: double
+        feet:
+          type: number
+          description: Distance in feet
+          format: double
+      additionalProperties: false
+    SubscriptionSubjectContract:
+      required:
+      - type
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/SubscriptionSubjectType'
+        id:
+          type: string
+          description: "Subject ID of a subscription. Complements SubjectType.\r\n\r\nE.g. SubjectType = \"FlightNumber\" and SubjectId = \"DL 47\" means that this\r\nsubscription is for all updates of flight with number DL47."
+          nullable: true
+      additionalProperties: false
+      description: Describes subscription subject

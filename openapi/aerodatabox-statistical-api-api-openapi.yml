@@ -1,0 +1,1298 @@
+openapi: 3.0.4
+info:
+  title: AeroDataBox API - Aviation and Flight Aircraft API Statistical API API
+  description: Affordable aviation & flight data API tailored for small and medium businesses, teams and individual developers.
+  termsOfService: https://aerodatabox.com/terms/
+  contact:
+    url: https://aerodatabox.com/contact/
+  version: 1.14.0.0
+servers:
+- url: https://prod.api.market/api/v1/aedbx/aerodatabox
+security: {}
+tags:
+- name: Statistical API
+paths:
+  /airports/{codeType}/{code}/delays:
+    parameters:
+    - description: API.market API Key
+      in: header
+      name: x-api-market-key
+      value: Please Login/Signup to get an API Key
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+      - Statistical API
+      summary: AeroDataBox Airport Delays (current or Historical Moment) / TIER 3
+      description: "**What is the current or historical average delay in the airport?** or **What is the delay index of the airport right now or at a moment in past?**\r\n\r\nPlease read more about airport delays on here: https://aerodatabox.com/api-airport-delays/\r\n\r\n*Returns*: Statistical delay information about delays (median delay, delay index, cancelled flights) of arrivals and departures for the requested airport, represented by:\r\n* a single `AirportDelayContract` item displaying the delay information based on flight movements within the 2 hours prior to the current moment, if no `dateLocal` is specified;\r\n* a single `AirportDelayContract` item displaying the delay information based on flight movements within the 2 hours prior to the moment requested in `dateLocal`, if `dateLocal` is specified;"
+      operationId: GetAirportDelay_DelaysCurrent
+      parameters:
+      - name: codeType
+        in: path
+        description: Type of code to search airport by (`iata` or `icao`)
+        schema:
+          $ref: '#/components/schemas/AirportCodesByEnum'
+      - name: code
+        in: path
+        description: "If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+        required: true
+        schema:
+          maxLength: 4
+          minLength: 3
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AirportDelayContract'
+              examples:
+                GetAirportDelay_DelaysCurrent200Example:
+                  summary: Default GetAirportDelay_DelaysCurrent 200 response
+                  x-microcks-default: true
+                  value:
+                    airportIcao: KLAX
+                    from: example_value
+                    to: example_value
+                    departuresDelayInformation: example_value
+                    arrivalsDelayInformation: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/AirportDelayContract'
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetAirportDelay_DelaysCurrent400Example:
+                  summary: Default GetAirportDelay_DelaysCurrent 400 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetAirportDelay_DelaysCurrent401Example:
+                  summary: Default GetAirportDelay_DelaysCurrent 401 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '451':
+          description: Unavailable For Legal Reasons
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetAirportDelay_DelaysCurrent451Example:
+                  summary: Default GetAirportDelay_DelaysCurrent 451 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetAirportDelay_DelaysCurrent500Example:
+                  summary: Default GetAirportDelay_DelaysCurrent 500 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '503':
+          description: Service Unavailable
+      x-badges:
+      - name: TIER 3
+        position: before
+        color: '#ffb694'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /airports/{codeType}/{code}/delays/{dateLocal}:
+    parameters:
+    - description: API.market API Key
+      in: header
+      name: x-api-market-key
+      value: Please Login/Signup to get an API Key
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+      - Statistical API
+      summary: AeroDataBox Airport Delays (current or Historical Moment) / TIER 3
+      description: "**What is the current or historical average delay in the airport?** or **What is the delay index of the airport right now or at a moment in past?**\r\n\r\nPlease read more about airport delays on here: https://aerodatabox.com/api-airport-delays/\r\n\r\n*Returns*: Statistical delay information about delays (median delay, delay index, cancelled flights) of arrivals and departures for the requested airport, represented by:\r\n* a single `AirportDelayContract` item displaying the delay information based on flight movements within the 2 hours prior to the current moment, if no `dateLocal` is specified;\r\n* a single `AirportDelayContract` item displaying the delay information based on flight movements within the 2 hours prior to the moment requested in `dateLocal`, if `dateLocal` is specified;"
+      operationId: GetAirportDelay_DelaysHistorical
+      parameters:
+      - name: codeType
+        in: path
+        description: Type of code to search airport by (`iata` or `icao`)
+        schema:
+          $ref: '#/components/schemas/AirportCodesByEnum'
+      - name: code
+        in: path
+        description: "If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+        required: true
+        schema:
+          maxLength: 4
+          minLength: 3
+          type: string
+      - name: dateLocal
+        in: path
+        description: "The moment of time for / from which delay data is requested (local time, format: YYYY-MM-DDTHH:mm). \r\nDefault - current time."
+        required: true
+        schema:
+          pattern: \d{4}-\d{2}-\d{2}(T\d{2}:\d{2})?
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AirportDelayContract'
+              examples:
+                GetAirportDelay_DelaysHistorical200Example:
+                  summary: Default GetAirportDelay_DelaysHistorical 200 response
+                  x-microcks-default: true
+                  value:
+                    airportIcao: KLAX
+                    from: example_value
+                    to: example_value
+                    departuresDelayInformation: example_value
+                    arrivalsDelayInformation: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/AirportDelayContract'
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetAirportDelay_DelaysHistorical400Example:
+                  summary: Default GetAirportDelay_DelaysHistorical 400 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetAirportDelay_DelaysHistorical401Example:
+                  summary: Default GetAirportDelay_DelaysHistorical 401 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '451':
+          description: Unavailable For Legal Reasons
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetAirportDelay_DelaysHistorical451Example:
+                  summary: Default GetAirportDelay_DelaysHistorical 451 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetAirportDelay_DelaysHistorical500Example:
+                  summary: Default GetAirportDelay_DelaysHistorical 500 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '503':
+          description: Service Unavailable
+      x-badges:
+      - name: TIER 3
+        position: before
+        color: '#ffb694'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /airports/{codeType}/{code}/delays/{dateFromLocal}/{dateToLocal}:
+    parameters:
+    - description: API.market API Key
+      in: header
+      name: x-api-market-key
+      value: Please Login/Signup to get an API Key
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+      - Statistical API
+      summary: AeroDataBox Airport Delays (historical Period) / TIER 3
+      description: "**What were the delays within a specific period of time?** or **How the delays changed  within a specific period of time?**\r\n\r\nPlease read more about airport delays on here: https://aerodatabox.com/api-airport-delays/\r\n\r\n*Returns*: Statistical delay information about delays (median delay, delay index, cancelled flights) of arrivals and departures for the requested airport, represented by a collection of `AiportDelayContract` items displaying the delay information at multiple moments within the period between `dateLocal` and `dateToLocal`."
+      operationId: GetAirportDelays
+      parameters:
+      - name: codeType
+        in: path
+        description: Type of code to search airport by (`iata` or `icao`)
+        schema:
+          $ref: '#/components/schemas/AirportCodesByEnum'
+      - name: code
+        in: path
+        description: "If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+        required: true
+        schema:
+          maxLength: 4
+          minLength: 3
+          type: string
+      - name: dateFromLocal
+        in: path
+        description: 'The beginning of the period of time for which delay data is requested (local time, format: YYYY-MM-DDTHH:mm).'
+        required: true
+        schema:
+          pattern: \d{4}-\d{2}-\d{2}(T\d{2}:\d{2})?
+          type: string
+          format: date-time
+      - name: dateToLocal
+        in: path
+        description: 'The end of the period of time for which delay data is requested (local time, format: YYYY-MM-DDTHH:mm).'
+        required: true
+        schema:
+          pattern: \d{4}-\d{2}-\d{2}(T\d{2}:\d{2})?
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AirportDelayContract'
+              examples:
+                GetAirportDelays200Example:
+                  summary: Default GetAirportDelays 200 response
+                  x-microcks-default: true
+                  value:
+                  - example_value
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AirportDelayContract'
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetAirportDelays400Example:
+                  summary: Default GetAirportDelays 400 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetAirportDelays401Example:
+                  summary: Default GetAirportDelays 401 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '451':
+          description: Unavailable For Legal Reasons
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetAirportDelays451Example:
+                  summary: Default GetAirportDelays 451 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetAirportDelays500Example:
+                  summary: Default GetAirportDelays 500 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '503':
+          description: Service Unavailable
+      x-badges:
+      - name: TIER 3
+        position: before
+        color: '#ffb694'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /airports/{codeType}/{code}/stats/routes/daily:
+    parameters:
+    - description: API.market API Key
+      in: header
+      name: x-api-market-key
+      value: Please Login/Signup to get an API Key
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+      - Statistical API
+      summary: AeroDataBox Airport Routes and Daily Flight Destinations / TIER 3
+      description: "**What are the most popular routes from an airport?** or **Where I can fly from an airport?** or \r\n**How many daily flights to different destinations from an airport?**\r\n\r\nThe data will only be available for airports which have at least schedules information available. \r\nIf the airport is also covered with live or ADS-B coverage, the quality will improve greatly as it will\r\nbe based on real data rather than on static scheduled data. To check if an airport is tracked and on which level, \r\nuse `/health/services/airports/{icao}/feeds` endpoint. You can also use `/health/services/feeds/{service}/airports` to get \r\nthe list of covered airports. \r\n\r\nAt the moment airports having both ICAO and IATA code and flight schedules are present available only.\r\n\r\n*Returns:* List of routes and daily flights amount departing from an airport."
+      operationId: GetRouteDailyStatistics_RoutesDailyCurrent
+      parameters:
+      - name: codeType
+        in: path
+        description: Type of code to search airport by (`iata` or `icao`)
+        schema:
+          $ref: '#/components/schemas/AirportCodesByEnum'
+      - name: code
+        in: path
+        description: "If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+        required: true
+        schema:
+          maxLength: 4
+          minLength: 3
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DailyRouteStatContract'
+              examples:
+                GetRouteDailyStatistics_RoutesDailyCurrent200Example:
+                  summary: Default GetRouteDailyStatistics_RoutesDailyCurrent 200 response
+                  x-microcks-default: true
+                  value:
+                    routes:
+                    - example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/DailyRouteStatContract'
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetRouteDailyStatistics_RoutesDailyCurrent400Example:
+                  summary: Default GetRouteDailyStatistics_RoutesDailyCurrent 400 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetRouteDailyStatistics_RoutesDailyCurrent401Example:
+                  summary: Default GetRouteDailyStatistics_RoutesDailyCurrent 401 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '451':
+          description: Unavailable For Legal Reasons
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetRouteDailyStatistics_RoutesDailyCurrent451Example:
+                  summary: Default GetRouteDailyStatistics_RoutesDailyCurrent 451 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetRouteDailyStatistics_RoutesDailyCurrent500Example:
+                  summary: Default GetRouteDailyStatistics_RoutesDailyCurrent 500 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '503':
+          description: Service Unavailable
+      x-badges:
+      - name: TIER 3
+        position: before
+        color: '#ffb694'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /airports/{codeType}/{code}/stats/routes/daily/{dateLocal}:
+    parameters:
+    - description: API.market API Key
+      in: header
+      name: x-api-market-key
+      value: Please Login/Signup to get an API Key
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+      - Statistical API
+      summary: AeroDataBox Airport Routes and Daily Flight Destinations / TIER 3
+      description: "**What are the most popular routes from an airport?** or **Where I can fly from an airport?** or \r\n**How many daily flights to different destinations from an airport?**\r\n\r\nThe data will only be available for airports which have at least schedules information available. \r\nIf the airport is also covered with live or ADS-B coverage, the quality will improve greatly as it will\r\nbe based on real data rather than on static scheduled data. To check if an airport is tracked and on which level, \r\nuse `/health/services/airports/{icao}/feeds` endpoint. You can also use `/health/services/feeds/{service}/airports` to get \r\nthe list of covered airports. \r\n\r\nAt the moment airports having both ICAO and IATA code and flight schedules are present available only.\r\n\r\n*Returns:* List of routes and daily flights amount departing from an airport."
+      operationId: GetRouteDailyStatistics_RoutesDailAtSpecificDate
+      parameters:
+      - name: codeType
+        in: path
+        description: Type of code to search airport by (`iata` or `icao`)
+        schema:
+          $ref: '#/components/schemas/AirportCodesByEnum'
+      - name: code
+        in: path
+        description: "If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+        required: true
+        schema:
+          maxLength: 4
+          minLength: 3
+          type: string
+      - name: dateLocal
+        in: path
+        description: "Local date at the airport (default = null).\r\nIf specified, returns statistics based on 7 days prior to the date specified.\r\nOtherwise, returns statistics based on 7 days prior to the current local date at the airport."
+        required: true
+        schema:
+          pattern: \d{4}-\d{2}-\d{2}(T\d{2}:\d{2})?
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DailyRouteStatContract'
+              examples:
+                GetRouteDailyStatistics_RoutesDailAtSpecificDate200Example:
+                  summary: Default GetRouteDailyStatistics_RoutesDailAtSpecificDate 200 response
+                  x-microcks-default: true
+                  value:
+                    routes:
+                    - example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/DailyRouteStatContract'
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetRouteDailyStatistics_RoutesDailAtSpecificDate400Example:
+                  summary: Default GetRouteDailyStatistics_RoutesDailAtSpecificDate 400 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetRouteDailyStatistics_RoutesDailAtSpecificDate401Example:
+                  summary: Default GetRouteDailyStatistics_RoutesDailAtSpecificDate 401 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '451':
+          description: Unavailable For Legal Reasons
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetRouteDailyStatistics_RoutesDailAtSpecificDate451Example:
+                  summary: Default GetRouteDailyStatistics_RoutesDailAtSpecificDate 451 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetRouteDailyStatistics_RoutesDailAtSpecificDate500Example:
+                  summary: Default GetRouteDailyStatistics_RoutesDailAtSpecificDate 500 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '503':
+          description: Service Unavailable
+      x-badges:
+      - name: TIER 3
+        position: before
+        color: '#ffb694'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /airports/delays:
+    parameters:
+    - description: API.market API Key
+      in: header
+      name: x-api-market-key
+      value: Please Login/Signup to get an API Key
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+      - Statistical API
+      summary: AeroDataBox Global Delays (current or Historical Moment) / TIER 3
+      description: "**What is the current or historical delay situation in all airports?** or **What is the delay index of all airports globally right now or at a moment in past?**\r\n\r\nPlease read more about airport delays on here: https://aerodatabox.com/api-airport-delays/\r\n\r\n*Returns*: Statistical delay information about delays (median delay, delay index, cancelled flights) of arrivals and departures for all known airports, represented by a collection of items sorted by \r\nthe average of arrival and departure index, descending order (from worst to best). Only qualifying and recent enough delay statistics records are returned."
+      operationId: GetGlobalDelays_GlobalDelaysCurent
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AirportDelayContract'
+              examples:
+                GetGlobalDelays_GlobalDelaysCurent200Example:
+                  summary: Default GetGlobalDelays_GlobalDelaysCurent 200 response
+                  x-microcks-default: true
+                  value:
+                    airportIcao: KLAX
+                    from: example_value
+                    to: example_value
+                    departuresDelayInformation: example_value
+                    arrivalsDelayInformation: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/AirportDelayContract'
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetGlobalDelays_GlobalDelaysCurent400Example:
+                  summary: Default GetGlobalDelays_GlobalDelaysCurent 400 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetGlobalDelays_GlobalDelaysCurent401Example:
+                  summary: Default GetGlobalDelays_GlobalDelaysCurent 401 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '451':
+          description: Unavailable For Legal Reasons
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetGlobalDelays_GlobalDelaysCurent451Example:
+                  summary: Default GetGlobalDelays_GlobalDelaysCurent 451 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetGlobalDelays_GlobalDelaysCurent500Example:
+                  summary: Default GetGlobalDelays_GlobalDelaysCurent 500 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '503':
+          description: Service Unavailable
+      x-badges:
+      - name: TIER 3
+        position: before
+        color: '#ffb694'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /airports/delays/{dateUtc}:
+    parameters:
+    - description: API.market API Key
+      in: header
+      name: x-api-market-key
+      value: Please Login/Signup to get an API Key
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+      - Statistical API
+      summary: AeroDataBox Global Delays (current or Historical Moment) / TIER 3
+      description: "**What is the current or historical delay situation in all airports?** or **What is the delay index of all airports globally right now or at a moment in past?**\r\n\r\nPlease read more about airport delays on here: https://aerodatabox.com/api-airport-delays/\r\n\r\n*Returns*: Statistical delay information about delays (median delay, delay index, cancelled flights) of arrivals and departures for all known airports, represented by a collection of items sorted by \r\nthe average of arrival and departure index, descending order (from worst to best). Only qualifying and recent enough delay statistics records are returned."
+      operationId: GetGlobalDelays_GlobalDelaysAtSpecificDate
+      parameters:
+      - name: dateUtc
+        in: path
+        description: "The moment of time for / from which delay data is requested (UTC time, format: YYYY-MM-DDTHH:mm).\r\nDefault - current time."
+        required: true
+        schema:
+          pattern: \d{4}-\d{2}-\d{2}(T\d{2}:\d{2})?
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AirportDelayContract'
+              examples:
+                GetGlobalDelays_GlobalDelaysAtSpecificDate200Example:
+                  summary: Default GetGlobalDelays_GlobalDelaysAtSpecificDate 200 response
+                  x-microcks-default: true
+                  value:
+                    airportIcao: KLAX
+                    from: example_value
+                    to: example_value
+                    departuresDelayInformation: example_value
+                    arrivalsDelayInformation: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/AirportDelayContract'
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetGlobalDelays_GlobalDelaysAtSpecificDate400Example:
+                  summary: Default GetGlobalDelays_GlobalDelaysAtSpecificDate 400 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetGlobalDelays_GlobalDelaysAtSpecificDate401Example:
+                  summary: Default GetGlobalDelays_GlobalDelaysAtSpecificDate 401 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '451':
+          description: Unavailable For Legal Reasons
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetGlobalDelays_GlobalDelaysAtSpecificDate451Example:
+                  summary: Default GetGlobalDelays_GlobalDelaysAtSpecificDate 451 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetGlobalDelays_GlobalDelaysAtSpecificDate500Example:
+                  summary: Default GetGlobalDelays_GlobalDelaysAtSpecificDate 500 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '503':
+          description: Service Unavailable
+      x-badges:
+      - name: TIER 3
+        position: before
+        color: '#ffb694'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /flights/{number}/delays:
+    parameters:
+    - description: API.market API Key
+      in: header
+      name: x-api-market-key
+      value: Please Login/Signup to get an API Key
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+      - Statistical API
+      summary: AeroDataBox Flight Delay Statistics by Flight Number / TIER 3
+      description: "**By how much the flight is delayed in average?**\r\n\r\nInformation is only available for flights which were tracked with live updates at least at origin or at destination within the last 90 days.\r\n\r\n*Returns:* delay statistics for the flight with specified number."
+      operationId: GetFlightDelays
+      parameters:
+      - name: number
+        in: path
+        description: Flight number (with or without spaces, IATA or ICAO, any case formats are acceptable, e.g. KL1395, Klm 1395)
+        required: true
+        schema:
+          maxLength: 8
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlightLegDelayContract'
+              examples:
+                GetFlightDelays200Example:
+                  summary: Default GetFlightDelays 200 response
+                  x-microcks-default: true
+                  value:
+                    number: example_value
+                    origins:
+                    - example_value
+                    destinations:
+                    - example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/FlightLegDelayContract'
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetFlightDelays400Example:
+                  summary: Default GetFlightDelays 400 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetFlightDelays401Example:
+                  summary: Default GetFlightDelays 401 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '451':
+          description: Unavailable For Legal Reasons
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetFlightDelays451Example:
+                  summary: Default GetFlightDelays 451 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetFlightDelays500Example:
+                  summary: Default GetFlightDelays 500 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '503':
+          description: Service Unavailable
+      x-badges:
+      - name: TIER 3
+        position: before
+        color: '#ffb694'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    FlightLegDelayContract:
+      required:
+      - number
+      type: object
+      properties:
+        number:
+          minLength: 1
+          type: string
+          description: Flight number
+        origins:
+          type: array
+          items:
+            $ref: '#/components/schemas/FlightDelayContract'
+          description: Delay statistics of flight on departure at origins
+          nullable: true
+        destinations:
+          type: array
+          items:
+            $ref: '#/components/schemas/FlightDelayContract'
+          description: Delay statistics of flight on arrival at destinations
+          nullable: true
+      additionalProperties: false
+      description: Delay statistics of a flight leg
+    ErrorContract:
+      required:
+      - message
+      type: object
+      properties:
+        message:
+          minLength: 1
+          type: string
+          description: Error message
+      additionalProperties: false
+      description: Error response
+    AirportCodesByEnum:
+      enum:
+      - Icao
+      - Iata
+      type: string
+      description: "Search by airport code type<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - Icao</b>: ICAO-code</li>\r\n<li><b>1 - Iata</b>: IATA-code</li>\r\n</ul>\r\n"
+    DelayBracketContract:
+      required:
+      - num
+      type: object
+      properties:
+        delayedFrom:
+          type: string
+          description: "The beginning of the delay range (format: [-]hh:mm:ss).\r\nE.g. in the expresssion \"delayed from 30 to 60 minutes\" stands for \"from 30 minutes\".\r\nValue can be negative (therefore, means early occurence).\r\n\r\nMust be preset if \"DelayedTo\" is not specified."
+          format: date-span
+          nullable: true
+        delayedTo:
+          type: string
+          description: "The end of the delay range (format: [-]hh:mm:ss).\r\nE.g. in the expresssion \"delayed from 30 to 60 minutes\" stands for \"to 60 minutes\".\r\nValue can be negative (therefore, means early occurence).\r\n\r\nMust be preset if \"DelayedFrom\" is not specified."
+          format: date-span
+          nullable: true
+        num:
+          type: integer
+          description: Count of records subject to a specified delay range
+          format: int32
+        percentage:
+          type: number
+          description: "Percentage of records subject to a specified delay range.\r\n\r\nOnly available when this delay bracket is provided as a part\r\nof a statistical information of a bigger context and the \"total\"\r\ncount of records is known."
+          format: float
+          nullable: true
+      additionalProperties: false
+      description: Delay bracket contract describing how many records are subject to a specific delay range
+    ListingAirportContract:
+      required:
+      - name
+      type: object
+      properties:
+        icao:
+          type: string
+          description: ICAO code of the airport
+          nullable: true
+        iata:
+          type: string
+          description: IATA code of the airport
+          nullable: true
+        localCode:
+          type: string
+          description: Code of the airport within the local or national codification system
+          nullable: true
+        name:
+          minLength: 1
+          type: string
+          description: Name of the airport
+        shortName:
+          type: string
+          description: Shortened name of the airport
+          nullable: true
+        municipalityName:
+          type: string
+          description: Name of the municipality this airport belongs to
+          nullable: true
+        location:
+          $ref: '#/components/schemas/GeoCoordinatesContract'
+        countryCode:
+          type: string
+          description: Two-letter country code of the airport
+          nullable: true
+        timeZone:
+          type: string
+          description: Time zone of the airport in Olson format (e.g. "Europe/Amsterdam")
+          nullable: true
+      additionalProperties: false
+      description: Flight's airport reference contract
+    StatisticClass:
+      enum:
+      - Flight
+      - FlightAndHour
+      type: string
+      description: "<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - Flight</b></li>\r\n<li><b>1 - FlightAndHour</b></li>\r\n</ul>\r\n"
+    PercentileBracketContract:
+      required:
+      - delay
+      - percentile
+      type: object
+      properties:
+        percentile:
+          maximum: 95
+          minimum: 5
+          type: integer
+          description: Percentile of the distribution
+          format: int32
+        delay:
+          type: string
+          description: 'Delay of the flight for the specific percentile (format: [-]hh:mm:ss).'
+          format: date-span
+      additionalProperties: false
+      description: Percentile bracket contract describing the flight delay for a specific percentile of the distribution
+    AirportDelayContract:
+      required:
+      - airportIcao
+      - arrivalsDelayInformation
+      - departuresDelayInformation
+      - from
+      - to
+      type: object
+      properties:
+        airportIcao:
+          minLength: 1
+          type: string
+          description: Airport ICAO code
+        from:
+          $ref: '#/components/schemas/DateTimeContract'
+        to:
+          $ref: '#/components/schemas/DateTimeContract'
+        departuresDelayInformation:
+          $ref: '#/components/schemas/FlightBatchDelayContract'
+        arrivalsDelayInformation:
+          $ref: '#/components/schemas/FlightBatchDelayContract'
+      additionalProperties: false
+    GeoCoordinatesContract:
+      required:
+      - lat
+      - lon
+      type: object
+      properties:
+        lat:
+          maximum: 90
+          minimum: -90
+          type: number
+          description: Latitude, in degrees
+          format: float
+        lon:
+          maximum: 180
+          minimum: -180
+          type: number
+          description: Longitude, in degrees
+          format: float
+      additionalProperties: false
+      description: Geographical coordinates data
+    DailyRouteStatRecordContract:
+      required:
+      - averageDailyFlights
+      - destination
+      - operators
+      type: object
+      properties:
+        destination:
+          $ref: '#/components/schemas/ListingAirportContract'
+        averageDailyFlights:
+          type: number
+          description: Daily average of flights per destination
+          format: float
+        operators:
+          type: array
+          items:
+            $ref: '#/components/schemas/FlightAirlineContract'
+          description: Airlines operating on the route
+      additionalProperties: false
+      description: Statistical record of route daily statistics
+    FlightAirlineContract:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          minLength: 1
+          type: string
+          description: Airline name
+        iata:
+          type: string
+          description: IATA code of the airline
+          nullable: true
+        icao:
+          type: string
+          description: ICAO code of the airline
+          nullable: true
+      additionalProperties: false
+      description: Flight's airline reference conract
+    DailyRouteStatContract:
+      required:
+      - routes
+      type: object
+      properties:
+        routes:
+          type: array
+          items:
+            $ref: '#/components/schemas/DailyRouteStatRecordContract'
+      additionalProperties: false
+      description: Route daily statistics of the airport
+    DateTimeContract:
+      required:
+      - local
+      - utc
+      type: object
+      properties:
+        utc:
+          type: string
+          description: UTC-time
+          format: date-time
+        local:
+          type: string
+          description: Local time
+          format: date-time
+      additionalProperties: false
+      description: Descriptor date-time represented in both UTC and local timezones
+    FlightDelayContract:
+      required:
+      - airportIcao
+      - class
+      - delayPercentiles
+      - fromUtc
+      - medianDelay
+      - numConsideredFlights
+      - numFlightsDelayedBrackets
+      - toUtc
+      type: object
+      properties:
+        airportIcao:
+          minLength: 1
+          type: string
+          description: ICAO code of the airport at which statistics is observed
+        class:
+          $ref: '#/components/schemas/StatisticClass'
+        scheduledHourUtc:
+          type: integer
+          description: "Hour on which flight is scheduled (represented in UTC).\r\n\r\nIf provided, it separates the statistics for the same flight departing/arriving at different time of day\r\non different days within the observed period."
+          format: int32
+          nullable: true
+        medianDelay:
+          type: string
+          description: "Median historic delay of the flight (format: [-]hh:mm:ss).\r\nValue can be negative (therefore, means early occurence)."
+          format: date-span
+        delayPercentiles:
+          type: array
+          items:
+            $ref: '#/components/schemas/PercentileBracketContract'
+          description: "Distribution of historic delays of the flight in percentiles from 5 percentile to 95 percentile in steps of 5 percentile, \r\nallowing for a more detailed analysis of delay patterns beyond simple averages or medians."
+        numConsideredFlights:
+          type: integer
+          description: "The number of flight movements taken into account to calculate this\r\nstatistics."
+          format: int32
+        numFlightsDelayedBrackets:
+          type: array
+          items:
+            $ref: '#/components/schemas/DelayBracketContract'
+          description: "Brackets containing information more detailed information about\r\nhow many flights were delayed/early per specific delay range brackets\r\n(e.g. late from 15 to 30 minutes, from 30 to 60, etc.)"
+        fromUtc:
+          type: string
+          description: The beginning of the time range within which flght delay information is calculated (represented in UTC time)
+          format: date-time
+        toUtc:
+          type: string
+          description: The end of the time range within which flght delay information is calculated (represented in UTC time)
+          format: date-time
+      additionalProperties: false
+      description: Delay statistics for a flight movement
+    FlightBatchDelayContract:
+      required:
+      - numCancelled
+      - numQualifiedTotal
+      - numTotal
+      type: object
+      properties:
+        numTotal:
+          type: integer
+          description: Total number of flights in the the batch (including cancelled)
+          format: int32
+        numQualifiedTotal:
+          type: integer
+          description: "Total number of flights in the batch, which were used to to calculate the\r\ndelay information (including cancelled). Should equal to or less than `NumTotal`.\r\n\r\nThe closer the value of this property to the value of `NumTotal`, the higher the\r\nreliability of delay information"
+          format: int32
+        numCancelled:
+          type: integer
+          description: Total amount of flights in the batch
+          format: int32
+        medianDelay:
+          type: string
+          description: "Median delay of flights in the batch (format: [-]hh:mm:ss).\r\nValue can be negative (therefore, means early occurence)."
+          format: date-span
+          nullable: true
+        delayIndex:
+          type: number
+          description: Normalized value on scale from 0.0 to 5.0 which corresponds with current amount of delays and cancellations in a given batch of flights (the less - the better).
+          format: float
+          nullable: true
+      additionalProperties: false
+      description: Delay information about a batch of flights

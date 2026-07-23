@@ -1,0 +1,1086 @@
+openapi: 3.0.4
+info:
+  title: AeroDataBox API - Aviation and Flight Aircraft API API
+  description: Affordable aviation & flight data API tailored for small and medium businesses, teams and individual developers.
+  termsOfService: https://aerodatabox.com/terms/
+  contact:
+    url: https://aerodatabox.com/contact/
+  version: 1.14.0.0
+servers:
+- url: https://prod.api.market/api/v1/aedbx/aerodatabox
+security: {}
+tags:
+- name: Aircraft API
+paths:
+  /aircrafts/{searchBy}/{searchParam}:
+    parameters:
+    - description: API.market API Key
+      in: header
+      name: x-api-market-key
+      value: Please Login/Signup to get an API Key
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+      - Aircraft API
+      summary: AeroDataBox Single Aircraft (by Tail-number, Mode-S or ID) / TIER 1
+      description: '*Returns:* Single aircraft, *best* matching specified search criteria, if found. Please note that all found aircraft will be impersonated with registration information matching the requested tail number or Mode-S even though an aircraft might be flying under a different registration right now.'
+      operationId: GetAircraft
+      parameters:
+      - name: searchBy
+        in: path
+        description: Criteria to search aircraft by
+        schema:
+          $ref: '#/components/schemas/AircraftSearchByEnum'
+      - name: searchParam
+        in: path
+        description: "Value of the search criteria. If `searchBy` is: \r\n* `id`: then this field should be an ID of an aircraft (as specified in the database of this API);\r\n* `reg`: then this field should be a tail-number of an aircraft (with or without spaces or dashes, any case formats are acceptable, e.g.PH-BXO, DeMhJ), multiple matches are possible - see below;\r\n* `icao24`, then this field should be a ICAO 24-bit Mode-S address of an aircraft specified in hexadecimal format (e.g. 484161, 483EFD), multiple matches are possible - see below.\r\n\r\n*If multiple matches are possible:*\r\n\r\nThere cannot be more than one aircraft actively flying with the same tail-number or ICAO 24-bit Mode-S address at any moment of time. \r\nHowever, historically aircraft tail-numbers or addresses may be used multiple times by different aircraft.\r\nThis endpoint is supposed to return a **single** aircraft data. In case if multiple aircraft satisfy the search criteria, the best match will be chosen as follows:\r\n* If an active aircraft is found according to the requested critera, it is returned.\r\n* Otherwise, an aircraft that used requested tail-number/address the most recently is returned. \r\n* If usage time may not be determined, the aircraft stored in the database the most recently is returned."
+        required: true
+        schema:
+          maxLength: 10
+          type: string
+      - name: withImage
+        in: query
+        description: 'Should include aircraft image (default: false).'
+        schema:
+          type: boolean
+          default: false
+      - name: withRegistrations
+        in: query
+        description: 'Should include the history of aircraft registrations (default: false).'
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AircraftContract'
+              examples:
+                GetAircraft200Example:
+                  summary: Default GetAircraft 200 response
+                  x-microcks-default: true
+                  value:
+                    id: 100
+                    reg: N12345
+                    active: true
+                    serial: example_value
+                    hexIcao: KLAX
+                    airlineName: Los Angeles International
+                    iataType: LAX
+                    iataCodeShort: LAX
+                    icaoCode: KLAX
+                    model: example_value
+                    modelCode: CODE1
+                    numSeats: 100
+                    rolloutDate: '2025-03-15T14:30:00Z'
+                    firstFlightDate: '2025-03-15T14:30:00Z'
+                    deliveryDate: '2025-03-15T14:30:00Z'
+                    registrationDate: '2025-03-15T14:30:00Z'
+                    typeName: Los Angeles International
+                    numEngines: 100
+                    engineType: example_value
+                    isFreighter: true
+                    productionLine: example_value
+                    ageYears: 1.5
+                    verified: true
+                    image: example_value
+                    numRegistrations: 100
+                    registrations:
+                    - N12345
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/AircraftContract'
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetAircraft400Example:
+                  summary: Default GetAircraft 400 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetAircraft401Example:
+                  summary: Default GetAircraft 401 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '451':
+          description: Unavailable For Legal Reasons
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetAircraft451Example:
+                  summary: Default GetAircraft 451 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetAircraft500Example:
+                  summary: Default GetAircraft 500 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '503':
+          description: Service Unavailable
+      x-badges:
+      - name: TIER 1
+        position: before
+        color: '#beffe6'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /aircrafts/{searchBy}/{searchParam}/registrations:
+    parameters:
+    - description: API.market API Key
+      in: header
+      name: x-api-market-key
+      value: Please Login/Signup to get an API Key
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+      - Aircraft API
+      summary: AeroDataBox Single Aircraft Registration History (by Tail-number, Mode-S or ID) / TIER 1
+      description: '*Returns:* A list of all known registrations of a single aircraft, *best* matching specified search criteria, if found'
+      operationId: GetAircraftRegistrations
+      parameters:
+      - name: searchBy
+        in: path
+        description: Criteria to search aircraft by
+        schema:
+          $ref: '#/components/schemas/AircraftSearchByEnum'
+      - name: searchParam
+        in: path
+        description: "Value of the search criteria. If `searchBy` is: \r\n* `id`, then this field should be an ID of an aircraft (as specified in the database of this API);\r\n* `reg`, then this field should be a tail-number of an aircraft (with or without spaces or dashes, any case formats are acceptable, e.g.PH-BXO, DeMhJ), multiple matches are possible - see below;\r\n* `icao24`, then this field should be a ICAO 24-bit Mode-S address of an aircraft specified in hexadecimal format (e.g. 484161, 483EFD), multiple matches are possible - see below.\r\n\r\n*If multiple matches are possible:* see similar remark to `Single aircraft` endpoint."
+        required: true
+        schema:
+          maxLength: 10
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AircraftRegistrationContract'
+              examples:
+                GetAircraftRegistrations200Example:
+                  summary: Default GetAircraftRegistrations 200 response
+                  x-microcks-default: true
+                  value:
+                  - example_value
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AircraftRegistrationContract'
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetAircraftRegistrations400Example:
+                  summary: Default GetAircraftRegistrations 400 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetAircraftRegistrations401Example:
+                  summary: Default GetAircraftRegistrations 401 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '451':
+          description: Unavailable For Legal Reasons
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetAircraftRegistrations451Example:
+                  summary: Default GetAircraftRegistrations 451 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetAircraftRegistrations500Example:
+                  summary: Default GetAircraftRegistrations 500 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '503':
+          description: Service Unavailable
+      x-badges:
+      - name: TIER 1
+        position: before
+        color: '#beffe6'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /aircrafts/{searchBy}/{searchParam}/all:
+    parameters:
+    - description: API.market API Key
+      in: header
+      name: x-api-market-key
+      value: Please Login/Signup to get an API Key
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+      - Aircraft API
+      summary: AeroDataBox Aircraft by Tail-number, Mode-S or ID / TIER 1
+      description: '*Returns:* A list of all aircraft ever matched the requested criteria. Please note that all found aircraft will be impersonated with registration information matching the requested tail number or Mode-S even though an aircraft might be flying under a different registration right now.'
+      operationId: GetAllAircraft
+      parameters:
+      - name: searchBy
+        in: path
+        description: Criteria to search aircraft by
+        schema:
+          $ref: '#/components/schemas/AircraftSearchByEnum'
+      - name: searchParam
+        in: path
+        description: "Value of the search criteria. If `searchBy` is: \r\n* `id`, then this field should be an ID of an aircraft (as specified in the database of this API);\r\n* `reg`, then this field should be a tail-number of an aircraft (with or without spaces or dashes, any case formats are acceptable, e.g.PH-BXO, DeMhJ);\r\n* `icao24`, then this field should be a ICAO 24-bit Mode-S address of an aircraft specified in hexadecimal format (e.g. 484161, 483EFD)."
+        required: true
+        schema:
+          maxLength: 10
+          type: string
+      - name: withImage
+        in: query
+        description: 'Should include aircraft image (default: false).'
+        schema:
+          type: boolean
+          default: false
+      - name: withRegistrations
+        in: query
+        description: 'Should include the history of aircraft registrations (default: false).'
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AircraftContract'
+              examples:
+                GetAllAircraft200Example:
+                  summary: Default GetAllAircraft 200 response
+                  x-microcks-default: true
+                  value:
+                  - example_value
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AircraftContract'
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetAllAircraft400Example:
+                  summary: Default GetAllAircraft 400 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetAllAircraft401Example:
+                  summary: Default GetAllAircraft 401 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '451':
+          description: Unavailable For Legal Reasons
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetAllAircraft451Example:
+                  summary: Default GetAllAircraft 451 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetAllAircraft500Example:
+                  summary: Default GetAllAircraft 500 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '503':
+          description: Service Unavailable
+      x-badges:
+      - name: TIER 1
+        position: before
+        color: '#beffe6'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /airlines/{airlineCode}/aircrafts:
+    parameters:
+    - description: API.market API Key
+      in: header
+      name: x-api-market-key
+      value: Please Login/Signup to get an API Key
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+      - Aircraft API
+      summary: AeroDataBox Airline Fleet / Aircraft List by Airline Code (BETA) / TIER 3
+      description: "*Returns:* A paged list of aircraft in the fleet of the specified airline. \r\n\r\nThat will include *active* aircraft currently flying in an *active* airline, verfified through more than one source.\r\nUnconfirmed sightings of an aircraft will not qualify said aircraft to be listed in the fleet."
+      operationId: GetAirlineFleet
+      parameters:
+      - name: airlineCode
+        in: path
+        description: "3-character ICAO-code of the airliner (e.g., KLM, ACA); or\r\n2-character IATA-code of the airline (e.g., KL, AC).\r\n            \r\nPlease note that more than one active airline may have the same IATA code, therefore IATA codes are not recommended for this endpoint."
+        required: true
+        schema:
+          maxLength: 3
+          minLength: 2
+          type: string
+      - name: pageSize
+        in: query
+        description: "The number of returned records will be capped at this value.\r\nMust be a positive value and not exceed the limit stipulated by your pricing plan."
+        required: true
+        schema:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+          format: int32
+      - name: pageOffset
+        in: query
+        description: The number of records to skip before listing a page of records. In conjunction with `pageSize` effectively determines the page number (default  - 0).
+        schema:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+          format: int32
+          default: 0
+      - name: withRegistrations
+        in: query
+        description: 'Should include the history of aircraft registrations (default: false).'
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AircraftContractPagedCollectionContract'
+              examples:
+                GetAirlineFleet200Example:
+                  summary: Default GetAirlineFleet 200 response
+                  x-microcks-default: true
+                  value:
+                    totalCount: 100
+                    pageOffset: 100
+                    pageSize: 100
+                    hasNextPage: true
+                    count: 100
+                    items:
+                    - example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/AircraftContractPagedCollectionContract'
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetAirlineFleet400Example:
+                  summary: Default GetAirlineFleet 400 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetAirlineFleet401Example:
+                  summary: Default GetAirlineFleet 401 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '451':
+          description: Unavailable For Legal Reasons
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetAirlineFleet451Example:
+                  summary: Default GetAirlineFleet 451 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetAirlineFleet500Example:
+                  summary: Default GetAirlineFleet 500 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '503':
+          description: Service Unavailable
+      x-badges:
+      - name: TIER 3
+        position: before
+        color: '#ffb694'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /aircrafts/reg/{reg}/image/beta:
+    parameters:
+    - description: API.market API Key
+      in: header
+      name: x-api-market-key
+      value: Please Login/Signup to get an API Key
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+      - Aircraft API
+      summary: AeroDataBox Aircraft Image by Tail-number / TIER 2
+      description: "**What is the aircraft photo?**\r\n\r\nAircraft images are being searched in external sources by certain criteria without any manual intervention. \r\nTherefore, false matches may be returned. Only images with licenses approved for commercial use are returned. Please be advised that you may be required to mention author attribution before using the image.\r\n\r\n*Returns:* Image data with medium-sized direct image URL and licence approved for commercial use\r\nis returned."
+      operationId: GetAircraftImageByRegistration
+      parameters:
+      - name: reg
+        in: path
+        description: Tail-number of the aircraft (full, stripped and any case formats are acceptable).
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceContract'
+              examples:
+                GetAircraftImageByRegistration200Example:
+                  summary: Default GetAircraftImageByRegistration 200 response
+                  x-microcks-default: true
+                  value:
+                    url: example_value
+                    webUrl: example_value
+                    author: example_value
+                    title: example_value
+                    description: example_value
+                    license: example_value
+                    htmlAttributions:
+                    - example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ResourceContract'
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetAircraftImageByRegistration400Example:
+                  summary: Default GetAircraftImageByRegistration 400 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetAircraftImageByRegistration401Example:
+                  summary: Default GetAircraftImageByRegistration 401 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '451':
+          description: Unavailable For Legal Reasons
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetAircraftImageByRegistration451Example:
+                  summary: Default GetAircraftImageByRegistration 451 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetAircraftImageByRegistration500Example:
+                  summary: Default GetAircraftImageByRegistration 500 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '503':
+          description: Service Unavailable
+      x-badges:
+      - name: TIER 2
+        position: before
+        color: '#aab6f8'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /aircrafts/search/term:
+    parameters:
+    - description: API.market API Key
+      in: header
+      name: x-api-market-key
+      value: Please Login/Signup to get an API Key
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+      - Aircraft API
+      summary: AeroDataBox Search Active Aircraft Tail Numbers by Term / TIER 2
+      description: '*Returns:* List of active aircraft registrations with tail numbers starting from the term.'
+      operationId: SearchAircraftByTerm
+      parameters:
+      - name: q
+        in: query
+        description: Search term (min. 4 non whitespace characters length)
+        required: true
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Maximum number of items to be returned (max. 10, defaut = 5)
+        schema:
+          type: integer
+          format: int32
+          default: 5
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StringAircraftContractSearchResultCollectionContract'
+              examples:
+                SearchAircraftByTerm200Example:
+                  summary: Default SearchAircraftByTerm 200 response
+                  x-microcks-default: true
+                  value:
+                    searchBy: example_value
+                    count: 100
+                    items:
+                    - example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/StringAircraftContractSearchResultCollectionContract'
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                SearchAircraftByTerm400Example:
+                  summary: Default SearchAircraftByTerm 400 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                SearchAircraftByTerm401Example:
+                  summary: Default SearchAircraftByTerm 401 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '451':
+          description: Unavailable For Legal Reasons
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                SearchAircraftByTerm451Example:
+                  summary: Default SearchAircraftByTerm 451 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                SearchAircraftByTerm500Example:
+                  summary: Default SearchAircraftByTerm 500 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '503':
+          description: Service Unavailable
+      x-badges:
+      - name: TIER 2
+        position: before
+        color: '#aab6f8'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    AircraftContractPagedCollectionContract:
+      required:
+      - count
+      - hasNextPage
+      - items
+      - pageOffset
+      - pageSize
+      - totalCount
+      type: object
+      properties:
+        totalCount:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+          description: The total number of items across all pages
+          format: int32
+        pageOffset:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+          description: "The offset of the current page of the collection \r\n(number of items skipped before this page)"
+          format: int32
+        pageSize:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+          description: "Maximum number of items on the current page of the collection\r\n(`Count` cannot be more than this value)"
+          format: int32
+        hasNextPage:
+          type: boolean
+          description: This value is true when collection has more pages
+          readOnly: true
+        count:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+          description: The number of items in the collection
+          format: int32
+          readOnly: true
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/AircraftContract'
+          description: The collection of items
+      additionalProperties: false
+    AircraftRegistrationContract:
+      required:
+      - active
+      - reg
+      type: object
+      properties:
+        reg:
+          minLength: 1
+          type: string
+          description: Tail-number of the aircraft
+        active:
+          type: boolean
+          description: Indicator if aircraft is operational under this registration
+        hexIcao:
+          type: string
+          description: ICAO 24 bit Mode-S hexadecimal transponder address
+          nullable: true
+        airlineName:
+          type: string
+          description: Name of the airline operating the aircraft
+          nullable: true
+        registrationDate:
+          type: string
+          description: Date of assigning current registration
+          format: date-time
+          nullable: true
+      additionalProperties: false
+      description: Aircraft registration data
+    StringAircraftContractSearchResultCollectionContract:
+      required:
+      - count
+      - items
+      - searchBy
+      type: object
+      properties:
+        searchBy:
+          minLength: 1
+          type: string
+          description: "Search parameter used to find the result. \r\nPlease note, it may be different from the actual input provided!"
+        count:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+          description: The number of items in the collection
+          format: int32
+          readOnly: true
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/AircraftContract'
+          description: The collection of items
+      additionalProperties: false
+    ErrorContract:
+      required:
+      - message
+      type: object
+      properties:
+        message:
+          minLength: 1
+          type: string
+          description: Error message
+      additionalProperties: false
+      description: Error response
+    LicenseType:
+      enum:
+      - AllRightsReserved
+      - AttributionNoncommercialShareAlikeCC
+      - AttributionNoncommercialCC
+      - AttributionNoncommercialNoDerivativesCC
+      - AttributionCC
+      - AttributionShareAlikeCC
+      - AttributionNoDerivativesCC
+      - NoKnownCopyrightRestrictions
+      - UnitedStatesGovernmentWork
+      - PublicDomainDedicationCC0
+      - PublicDomainMark
+      type: string
+      description: "<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - AllRightsReserved</b>: All Rights Reserved.</li>\r\n<li><b>1 - AttributionNoncommercialShareAlikeCC</b>: Creative Commons: Attribution Non-Commercial, Share-alike License.</li>\r\n<li><b>2 - AttributionNoncommercialCC</b>: Creative Commons: Attribution Non-Commercial License.</li>\r\n<li><b>3 - AttributionNoncommercialNoDerivativesCC</b>: Creative Commons: Attribution Non-Commercial, No Derivatives License.</li>\r\n<li><b>4 - AttributionCC</b>: Creative Commons: Attribution License.</li>\r\n<li><b>5 - AttributionShareAlikeCC</b>: Creative Commons: Attribution Share-alike License.</li>\r\n<li><b>6 - AttributionNoDerivativesCC</b>: Creative Commons: Attribution No Derivatives License.</li>\r\n<li><b>7 - NoKnownCopyrightRestrictions</b>: No Known Copyright Resitrctions (Flickr Commons).</li>\r\n<li><b>8 - UnitedStatesGovernmentWork</b>: United States Government Work</li>\r\n<li><b>9 - PublicDomainDedicationCC0</b>: Public Domain Dedication, CC0</li>\r\n<li><b>10 - PublicDomainMark</b>: Public Domain Mark</li>\r\n</ul>\r\n"
+    ResourceContract:
+      required:
+      - license
+      - url
+      type: object
+      properties:
+        url:
+          minLength: 1
+          type: string
+          description: URL of the resource
+        webUrl:
+          type: string
+          description: URL of web-page containing the resource
+          nullable: true
+        author:
+          type: string
+          description: Author name of the resource
+          nullable: true
+        title:
+          type: string
+          description: Title of the resource
+          nullable: true
+        description:
+          type: string
+          description: Description of the resource
+          nullable: true
+        license:
+          $ref: '#/components/schemas/LicenseType'
+        htmlAttributions:
+          type: array
+          items:
+            type: string
+          description: "Attributions maintaining copyright, ownership and other legal information adjusted for displaying\r\nas HTML. Each element represent one line."
+          nullable: true
+      additionalProperties: false
+      description: Single media resource data
+    EngineType:
+      enum:
+      - Unknown
+      - Jet
+      - Turboprop
+      - Piston
+      type: string
+      description: "<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - Unknown</b></li>\r\n<li><b>1 - Jet</b></li>\r\n<li><b>2 - Turboprop</b></li>\r\n<li><b>3 - Piston</b></li>\r\n</ul>\r\n"
+    AircraftSearchByEnum:
+      enum:
+      - Id
+      - Reg
+      - Icao24
+      type: string
+      description: "Criteria to search aircraft by<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - Id</b>: ID of the aircraft (as stored in this API)</li>\r\n<li><b>1 - Reg</b>: Search by aircraft tail-number</li>\r\n<li><b>2 - Icao24</b>: Search by 24-bit ICAO Mode-S Transponder code</li>\r\n</ul>\r\n"
+    AircraftContract:
+      required:
+      - active
+      - id
+      - isFreighter
+      - numRegistrations
+      - reg
+      - verified
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique ID of the aircraft record in our database
+          format: int64
+        reg:
+          minLength: 1
+          type: string
+          description: Tail-number of the aircraft
+        active:
+          type: boolean
+          description: Indicator if aircraft is operational under this registration
+        serial:
+          type: string
+          description: Serial number
+          nullable: true
+        hexIcao:
+          type: string
+          description: ICAO 24 bit Mode-S hexadecimal transponder address
+          nullable: true
+        airlineName:
+          type: string
+          description: Name of the airline operating the aircraft
+          nullable: true
+        iataType:
+          type: string
+          description: IATA-type of the aircraft
+          nullable: true
+        iataCodeShort:
+          type: string
+          description: Short variant of IATA-code of the aircraft
+          nullable: true
+        icaoCode:
+          type: string
+          description: ICAO-code of the aircraft
+          nullable: true
+        model:
+          type: string
+          description: Model of the aircraft
+          nullable: true
+        modelCode:
+          type: string
+          description: Model code of the aircraft
+          nullable: true
+        numSeats:
+          type: integer
+          description: Number of passenger seats
+          format: int32
+          nullable: true
+        rolloutDate:
+          type: string
+          description: Date of roll-out (UTC)
+          format: date-time
+          nullable: true
+        firstFlightDate:
+          type: string
+          description: First flight date
+          format: date-time
+          nullable: true
+        deliveryDate:
+          type: string
+          description: Date of delivery to the owner
+          format: date-time
+          nullable: true
+        registrationDate:
+          type: string
+          description: Date of assigning current registration
+          format: date-time
+          nullable: true
+        typeName:
+          type: string
+          description: Type name
+          nullable: true
+        numEngines:
+          type: integer
+          description: Number of engines
+          format: int32
+          nullable: true
+        engineType:
+          $ref: '#/components/schemas/EngineType'
+        isFreighter:
+          type: boolean
+          description: Marker if aircraft is cargo or not
+        productionLine:
+          type: string
+          description: Production line
+          nullable: true
+        ageYears:
+          type: number
+          description: Age of the aircraft in year
+          format: float
+          nullable: true
+        verified:
+          type: boolean
+        image:
+          $ref: '#/components/schemas/ResourceContract'
+        numRegistrations:
+          type: integer
+          description: "An aircraft may have a history of past registrations with other airlines or operators.\r\nThis field represents a total number of registration records known in our database."
+          format: int32
+        registrations:
+          type: array
+          items:
+            $ref: '#/components/schemas/AircraftRegistrationContract'
+          description: A history of all registrations with other airlines or operators (if provided by the endpoint).
+          nullable: true
+      additionalProperties: false
+      description: Single aircraft data

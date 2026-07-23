@@ -1,0 +1,476 @@
+openapi: 3.0.4
+info:
+  title: AeroDataBox API - Aviation and Flight Aircraft API Healthcheck API API
+  description: Affordable aviation & flight data API tailored for small and medium businesses, teams and individual developers.
+  termsOfService: https://aerodatabox.com/terms/
+  contact:
+    url: https://aerodatabox.com/contact/
+  version: 1.14.0.0
+servers:
+- url: https://prod.api.market/api/v1/aedbx/aerodatabox
+security: {}
+tags:
+- name: Healthcheck API
+paths:
+  /health/services/feeds/{service}:
+    parameters:
+    - description: API.market API Key
+      in: header
+      name: x-api-market-key
+      value: Please Login/Signup to get an API Key
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+      - Healthcheck API
+      summary: AeroDataBox General Status of Data Feed Services / FREE TIER
+      description: "**Which is the general health of the data feed service?**\r\n \r\n*Returns:* Status of the service in general, regardless of the airports"
+      operationId: GetFeedServiceStatus
+      parameters:
+      - name: service
+        in: path
+        description: Data feed service name
+        schema:
+          $ref: '#/components/schemas/FeedServiceEnum'
+      - name: withHttpCode
+        in: query
+        description: If true, reflect status of the service in the HTTP code of the response (if the service is down, HTTP code will be 503).
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeedServiceStatusContract'
+              examples:
+                GetFeedServiceStatus200Example:
+                  summary: Default GetFeedServiceStatus 200 response
+                  x-microcks-default: true
+                  value:
+                    service: example_value
+                    status: Departed
+                    minAvailableLocalDate: '2025-03-15T14:30:00Z'
+                    maxAvailableLocalDate: '2025-03-15T14:30:00Z'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/FeedServiceStatusContract'
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetFeedServiceStatus400Example:
+                  summary: Default GetFeedServiceStatus 400 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetFeedServiceStatus401Example:
+                  summary: Default GetFeedServiceStatus 401 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '451':
+          description: Unavailable For Legal Reasons
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetFeedServiceStatus451Example:
+                  summary: Default GetFeedServiceStatus 451 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetFeedServiceStatus500Example:
+                  summary: Default GetFeedServiceStatus 500 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeedServiceStatusContract'
+              examples:
+                GetFeedServiceStatus503Example:
+                  summary: Default GetFeedServiceStatus 503 response
+                  x-microcks-default: true
+                  value:
+                    service: example_value
+                    status: Departed
+                    minAvailableLocalDate: '2025-03-15T14:30:00Z'
+                    maxAvailableLocalDate: '2025-03-15T14:30:00Z'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/FeedServiceStatusContract'
+      x-badges:
+      - name: FREE TIER
+        position: before
+        color: '#ccc'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /health/services/airports/{icao}/feeds:
+    parameters:
+    - description: API.market API Key
+      in: header
+      name: x-api-market-key
+      value: Please Login/Signup to get an API Key
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+      - Healthcheck API
+      summary: AeroDataBox Data Feed Services Status by ICAO Code / FREE TIER
+      description: "**What is the status of data updates for the airport?**\r\n\r\nAt the moment airports having both ICAO and IATA code are present in database only.\r\n\r\n*Returns:* Current status of airport data feed services (live flight updates, flight schedules, etc.) for requested airport."
+      operationId: GetAirportFeedStatus
+      parameters:
+      - name: icao
+        in: path
+        description: '4-digit ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.). Full, stripped and any case formats are acceptable.'
+        required: true
+        schema:
+          maxLength: 4
+          minLength: 4
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AirportFeedServiceStatusContract'
+              examples:
+                GetAirportFeedStatus200Example:
+                  summary: Default GetAirportFeedStatus 200 response
+                  x-microcks-default: true
+                  value:
+                    flightSchedulesFeed: example_value
+                    liveFlightUpdatesFeed: example_value
+                    adsbUpdatesFeed: example_value
+                    generalAvailability: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/AirportFeedServiceStatusContract'
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetAirportFeedStatus400Example:
+                  summary: Default GetAirportFeedStatus 400 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetAirportFeedStatus401Example:
+                  summary: Default GetAirportFeedStatus 401 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '451':
+          description: Unavailable For Legal Reasons
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetAirportFeedStatus451Example:
+                  summary: Default GetAirportFeedStatus 451 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetAirportFeedStatus500Example:
+                  summary: Default GetAirportFeedStatus 500 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '503':
+          description: Service Unavailable
+      x-badges:
+      - name: FREE TIER
+        position: before
+        color: '#ccc'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /health/services/feeds/{service}/airports:
+    parameters:
+    - description: API.market API Key
+      in: header
+      name: x-api-market-key
+      value: Please Login/Signup to get an API Key
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+      - Healthcheck API
+      summary: AeroDataBox Airports Supporting Data Feed Service / FREE TIER
+      description: "**Which airports support flight schedules?** or **Which airports support live flight updates?**\r\n\r\n At the moment airports having both ICAO and IATA code are present in database only.\r\n \r\n*Returns:* Collection ICAO codes of airports supporting specified airport data feed service."
+      operationId: GetFeedAirports
+      parameters:
+      - name: service
+        in: path
+        description: Airport data feed service name
+        schema:
+          $ref: '#/components/schemas/FeedServiceEnum'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StringCollectionContract'
+              examples:
+                GetFeedAirports200Example:
+                  summary: Default GetFeedAirports 200 response
+                  x-microcks-default: true
+                  value:
+                    count: 100
+                    items:
+                    - example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/StringCollectionContract'
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetFeedAirports400Example:
+                  summary: Default GetFeedAirports 400 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetFeedAirports401Example:
+                  summary: Default GetFeedAirports 401 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '451':
+          description: Unavailable For Legal Reasons
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetFeedAirports451Example:
+                  summary: Default GetFeedAirports 451 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetFeedAirports500Example:
+                  summary: Default GetFeedAirports 500 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '503':
+          description: Service Unavailable
+      x-badges:
+      - name: FREE TIER
+        position: before
+        color: '#ccc'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    FeedServiceStatus:
+      enum:
+      - Down
+      - Degraded
+      - OKPartial
+      - OK
+      - Unknown
+      - Unavailable
+      type: string
+      description: "Descriptor of feed service status<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - Down</b>: Service is provided, but is currently down</li>\r\n<li><b>1 - Degraded</b>: Service is up and running, but performance is degraded: delays and disruptions are likely</li>\r\n<li><b>2 - OKPartial</b>: Service is up and running normally, but updates vailable for not all or only few flights</li>\r\n<li><b>3 - OK</b>: Service is up and running normally</li>\r\n<li><b>-2 - Unknown</b>: Status of service is unknown</li>\r\n<li><b>-1 - Unavailable</b>: Service is not provided</li>\r\n</ul>\r\n"
+    ErrorContract:
+      required:
+      - message
+      type: object
+      properties:
+        message:
+          minLength: 1
+          type: string
+          description: Error message
+      additionalProperties: false
+      description: Error response
+    FeedServiceStatusContract:
+      required:
+      - service
+      - status
+      type: object
+      properties:
+        service:
+          $ref: '#/components/schemas/FeedServiceEnum'
+        status:
+          $ref: '#/components/schemas/FeedServiceStatus'
+        minAvailableLocalDate:
+          type: string
+          description: Date of the oldest flight stored (based on scheduled local times)
+          format: date-time
+          nullable: true
+          deprecated: true
+        maxAvailableLocalDate:
+          type: string
+          description: Date of the most recent flight stored (based on scheduled local times)
+          format: date-time
+          nullable: true
+          deprecated: true
+      additionalProperties: false
+      description: "Feed service status contract.\r\nRead https://aerodatabox.com/data-coverage for context."
+    StringCollectionContract:
+      required:
+      - count
+      - items
+      type: object
+      properties:
+        count:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+          description: The number of items in the collection
+          format: int32
+          readOnly: true
+        items:
+          type: array
+          items:
+            type: string
+          description: The collection of items
+      additionalProperties: false
+    FlightDataGeneralAvailabilityContract:
+      type: object
+      properties:
+        minAvailableLocalDate:
+          type: string
+          description: "Date of the oldest flight stored (based on scheduled local times)\r\nIf not specified, no flight data available"
+          format: date-time
+          nullable: true
+        maxAvailableLocalDate:
+          type: string
+          description: "Date of the most recent flight stored (based on scheduled local times)\r\nIf not specified, no flight data available"
+          format: date-time
+          nullable: true
+      additionalProperties: false
+    AirportFeedServiceStatusContract:
+      required:
+      - adsbUpdatesFeed
+      - flightSchedulesFeed
+      - generalAvailability
+      - liveFlightUpdatesFeed
+      type: object
+      properties:
+        flightSchedulesFeed:
+          $ref: '#/components/schemas/FeedServiceStatusContract'
+        liveFlightUpdatesFeed:
+          $ref: '#/components/schemas/FeedServiceStatusContract'
+        adsbUpdatesFeed:
+          $ref: '#/components/schemas/FeedServiceStatusContract'
+        generalAvailability:
+          $ref: '#/components/schemas/FlightDataGeneralAvailabilityContract'
+      additionalProperties: false
+      description: "Airport data feed services status.\r\nRead https://aerodatabox.com/data-coverage for context."
+    FeedServiceEnum:
+      enum:
+      - FlightSchedules
+      - FlightLiveUpdates
+      - AdsbUpdates
+      type: string
+      description: "Airport feed service defininitions<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - FlightSchedules</b>: Flight schedules data feed for this airport (static schedules data without actual updates)</li>\r\n<li><b>1 - FlightLiveUpdates</b>: Actual flight status and time updates for this airport</li>\r\n<li><b>2 - AdsbUpdates</b>: Flight updates derived from ADS-B data for this airport: runway, actual/estimated time on the runway, call-sign, ModeS 24-bit ICAO code, aircraft registration</li>\r\n</ul>\r\n"

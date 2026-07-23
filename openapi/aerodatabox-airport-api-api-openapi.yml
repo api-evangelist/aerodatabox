@@ -1,0 +1,1031 @@
+openapi: 3.0.4
+info:
+  title: AeroDataBox API - Aviation and Flight Aircraft API Airport API API
+  description: Affordable aviation & flight data API tailored for small and medium businesses, teams and individual developers.
+  termsOfService: https://aerodatabox.com/terms/
+  contact:
+    url: https://aerodatabox.com/contact/
+  version: 1.14.0.0
+servers:
+- url: https://prod.api.market/api/v1/aedbx/aerodatabox
+security: {}
+tags:
+- name: Airport API
+paths:
+  /airports/{codeType}/{code}:
+    parameters:
+    - description: API.market API Key
+      in: header
+      name: x-api-market-key
+      value: Please Login/Signup to get an API Key
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+      - Airport API
+      summary: AeroDataBox Airport by Code / TIER 1
+      description: "At the moment airports having both ICAO and IATA code are present in database only.\r\n\r\n*Returns*: Single airport data, if found."
+      operationId: GetAirport
+      parameters:
+      - name: codeType
+        in: path
+        description: Type of code to search airport by (`iata` or `icao`)
+        schema:
+          $ref: '#/components/schemas/AirportCodesByEnum'
+      - name: code
+        in: path
+        description: "If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+        required: true
+        schema:
+          maxLength: 4
+          minLength: 3
+          type: string
+      - name: withRunways
+        in: query
+        description: Include runways data (default - false)
+        schema:
+          type: boolean
+          default: false
+      - name: withTime
+        in: query
+        description: Include current local time (default - false)
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AirportContract'
+              examples:
+                GetAirport200Example:
+                  summary: Default GetAirport 200 response
+                  x-microcks-default: true
+                  value:
+                    icao: KLAX
+                    iata: LAX
+                    localCode: CODE1
+                    shortName: Los Angeles International
+                    fullName: Los Angeles International
+                    municipalityName: Los Angeles International
+                    location: example_value
+                    elevation: example_value
+                    country: example_value
+                    continent: example_value
+                    timeZone: example_value
+                    urls: example_value
+                    runways:
+                    - example_value
+                    currentTime: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/AirportContract'
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetAirport400Example:
+                  summary: Default GetAirport 400 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetAirport401Example:
+                  summary: Default GetAirport 401 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '451':
+          description: Unavailable For Legal Reasons
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetAirport451Example:
+                  summary: Default GetAirport 451 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetAirport500Example:
+                  summary: Default GetAirport 500 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '503':
+          description: Service Unavailable
+      x-badges:
+      - name: TIER 1
+        position: before
+        color: '#beffe6'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /airports/{codeType}/{code}/runways:
+    parameters:
+    - description: API.market API Key
+      in: header
+      name: x-api-market-key
+      value: Please Login/Signup to get an API Key
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+      - Airport API
+      summary: AeroDataBox Airport Runways / TIER 1
+      description: "**Which runways does this airport have?**\r\n\r\nAt the moment airports having both ICAO and IATA code are present in database only.\r\n\r\n*Returns*: Collection of runway data items."
+      operationId: GetAirportRunways
+      parameters:
+      - name: codeType
+        in: path
+        description: Type of code to search airport by (`iata` or `icao`)
+        schema:
+          $ref: '#/components/schemas/AirportCodesByEnum'
+      - name: code
+        in: path
+        description: "If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+        required: true
+        schema:
+          maxLength: 4
+          minLength: 3
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RunwayContract'
+              examples:
+                GetAirportRunways200Example:
+                  summary: Default GetAirportRunways 200 response
+                  x-microcks-default: true
+                  value:
+                  - example_value
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RunwayContract'
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetAirportRunways400Example:
+                  summary: Default GetAirportRunways 400 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetAirportRunways401Example:
+                  summary: Default GetAirportRunways 401 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '451':
+          description: Unavailable For Legal Reasons
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetAirportRunways451Example:
+                  summary: Default GetAirportRunways 451 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetAirportRunways500Example:
+                  summary: Default GetAirportRunways 500 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '503':
+          description: Service Unavailable
+      x-badges:
+      - name: TIER 1
+        position: before
+        color: '#beffe6'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /airports/search/location:
+    parameters:
+    - description: API.market API Key
+      in: header
+      name: x-api-market-key
+      value: Please Login/Signup to get an API Key
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+      - Airport API
+      summary: AeroDataBox Search Airports by Location / TIER 2
+      description: "**What are the airports closest to the location?**\r\n\r\nAt the moment airports having both ICAO and IATA code and flight schedules are present available only.\r\n\r\n*Returns:* A list of airports found within the specified radius around the specified location."
+      operationId: SearchAirportsByLocation
+      parameters:
+      - name: lat
+        in: query
+        description: Latitude location coordinate in decimal format (between -90 and 90)
+        required: true
+        schema:
+          type: number
+          format: float
+      - name: lon
+        in: query
+        description: Longitude location coordinate in decimal format (between -180 and 180)
+        required: true
+        schema:
+          type: number
+          format: float
+      - name: radiusKm
+        in: query
+        description: Radius of search around specified location in kilometers (max. 1000 km)
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: limit
+        in: query
+        description: Maximum number of airports to be returned (max. 250)
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: withFlightInfoOnly
+        in: query
+        description: If set to true, will only return airports which have flight data (scheduled or live) available. Default = false.
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeoCoordinatesContractListingAirportContractSearchResultCollectionContract'
+              examples:
+                SearchAirportsByLocation200Example:
+                  summary: Default SearchAirportsByLocation 200 response
+                  x-microcks-default: true
+                  value:
+                    searchBy: example_value
+                    count: 100
+                    items:
+                    - example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/GeoCoordinatesContractListingAirportContractSearchResultCollectionContract'
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                SearchAirportsByLocation400Example:
+                  summary: Default SearchAirportsByLocation 400 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                SearchAirportsByLocation401Example:
+                  summary: Default SearchAirportsByLocation 401 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '451':
+          description: Unavailable For Legal Reasons
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                SearchAirportsByLocation451Example:
+                  summary: Default SearchAirportsByLocation 451 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                SearchAirportsByLocation500Example:
+                  summary: Default SearchAirportsByLocation 500 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '503':
+          description: Service Unavailable
+      x-badges:
+      - name: TIER 2
+        position: before
+        color: '#aab6f8'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /airports/search/ip:
+    parameters:
+    - description: API.market API Key
+      in: header
+      name: x-api-market-key
+      value: Please Login/Signup to get an API Key
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+      - Airport API
+      summary: AeroDataBox Search Airports by IP Address Geolocation / TIER 2
+      description: "**What are the airports closest to the customer, based on their IP address?**\r\n**What are the airports closest to the location determined (geo-located) by a IP address?**\r\n\r\nThis endpoint determines the location by the IP address provided and then returns the list of the nearest airports\r\nin the same way as `Search airports by location` endpoint does. \r\n\r\nPlease note:\r\n* IP geo-location is not a precise method and it determines an approximate location only.\r\n* At the moment airports having both ICAO and IATA code and flight schedules are present available only.\r\n\r\n*Returns:* A list of airports found within the specified radius around the location approximated (geo-located) from the specified IP address."
+      operationId: SearchAirportsByIpGeoLocation
+      parameters:
+      - name: q
+        in: query
+        description: A valid public IP v4 address
+        required: true
+        schema:
+          type: string
+      - name: radiusKm
+        in: query
+        description: Radius of search around specified location in kilometers (max. 1000 km)
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: limit
+        in: query
+        description: Maximum number of airports to be returned (max. 250)
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: withFlightInfoOnly
+        in: query
+        description: If set to true, will only return airports which have flight data (scheduled or live) available. Default = false.
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeoCoordinatesContractListingAirportContractSearchResultCollectionContract'
+              examples:
+                SearchAirportsByIpGeoLocation200Example:
+                  summary: Default SearchAirportsByIpGeoLocation 200 response
+                  x-microcks-default: true
+                  value:
+                    searchBy: example_value
+                    count: 100
+                    items:
+                    - example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/GeoCoordinatesContractListingAirportContractSearchResultCollectionContract'
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                SearchAirportsByIpGeoLocation400Example:
+                  summary: Default SearchAirportsByIpGeoLocation 400 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                SearchAirportsByIpGeoLocation401Example:
+                  summary: Default SearchAirportsByIpGeoLocation 401 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '451':
+          description: Unavailable For Legal Reasons
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                SearchAirportsByIpGeoLocation451Example:
+                  summary: Default SearchAirportsByIpGeoLocation 451 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                SearchAirportsByIpGeoLocation500Example:
+                  summary: Default SearchAirportsByIpGeoLocation 500 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '503':
+          description: Service Unavailable
+      x-badges:
+      - name: TIER 2
+        position: before
+        color: '#aab6f8'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /airports/search/term:
+    parameters:
+    - description: API.market API Key
+      in: header
+      name: x-api-market-key
+      value: Please Login/Signup to get an API Key
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+      - Airport API
+      summary: AeroDataBox Search Airports by Free Text / TIER 2
+      description: "At the moment airports having both ICAO and IATA code and flight schedules are present available only.\r\n\r\n*Returns:* List of airports with names and city names (and IATA/ICAO code, if enabled) matching the search term."
+      operationId: SearchAirportByTerm
+      parameters:
+      - name: q
+        in: query
+        description: Search query (min. 3 non whitespace characters length)
+        required: true
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Maximum number of airports to be returned (max. 250, defaut = 10)
+        schema:
+          type: integer
+          format: int32
+          default: 10
+      - name: withFlightInfoOnly
+        in: query
+        description: If set to true, will only return airports which have flight data (scheduled or live) available. Default = false.
+        schema:
+          type: boolean
+          default: false
+      - name: withSearchByCode
+        in: query
+        description: "If set to true, will attempt to interpret short words within the search query as IATA or ICAO code\r\nand prioritize exact matches by these codes (they will appear higher than others). \r\nOtherwise, the search by code will be completely excluded (only the name of an airport or its city will be searched). \r\nDefault = true."
+        schema:
+          type: boolean
+          default: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StringListingAirportContractSearchResultCollectionContract'
+              examples:
+                SearchAirportByTerm200Example:
+                  summary: Default SearchAirportByTerm 200 response
+                  x-microcks-default: true
+                  value:
+                    searchBy: example_value
+                    count: 100
+                    items:
+                    - example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/StringListingAirportContractSearchResultCollectionContract'
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                SearchAirportByTerm400Example:
+                  summary: Default SearchAirportByTerm 400 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                SearchAirportByTerm401Example:
+                  summary: Default SearchAirportByTerm 401 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '451':
+          description: Unavailable For Legal Reasons
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                SearchAirportByTerm451Example:
+                  summary: Default SearchAirportByTerm 451 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                SearchAirportByTerm500Example:
+                  summary: Default SearchAirportByTerm 500 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '503':
+          description: Service Unavailable
+      x-badges:
+      - name: TIER 2
+        position: before
+        color: '#aab6f8'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    ErrorContract:
+      required:
+      - message
+      type: object
+      properties:
+        message:
+          minLength: 1
+          type: string
+          description: Error message
+      additionalProperties: false
+      description: Error response
+    AirportCodesByEnum:
+      enum:
+      - Icao
+      - Iata
+      type: string
+      description: "Search by airport code type<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - Icao</b>: ICAO-code</li>\r\n<li><b>1 - Iata</b>: IATA-code</li>\r\n</ul>\r\n"
+    AirportLocalTimeContract:
+      required:
+      - time
+      - timeZoneId
+      type: object
+      properties:
+        time:
+          $ref: '#/components/schemas/DateTimeContract'
+        timeZoneId:
+          minLength: 1
+          type: string
+          description: Timezone ID of the airport (Olson format)
+      additionalProperties: false
+      description: Information about the local time at an airport
+    ListingAirportContract:
+      required:
+      - name
+      type: object
+      properties:
+        icao:
+          type: string
+          description: ICAO code of the airport
+          nullable: true
+        iata:
+          type: string
+          description: IATA code of the airport
+          nullable: true
+        localCode:
+          type: string
+          description: Code of the airport within the local or national codification system
+          nullable: true
+        name:
+          minLength: 1
+          type: string
+          description: Name of the airport
+        shortName:
+          type: string
+          description: Shortened name of the airport
+          nullable: true
+        municipalityName:
+          type: string
+          description: Name of the municipality this airport belongs to
+          nullable: true
+        location:
+          $ref: '#/components/schemas/GeoCoordinatesContract'
+        countryCode:
+          type: string
+          description: Two-letter country code of the airport
+          nullable: true
+        timeZone:
+          type: string
+          description: Time zone of the airport in Olson format (e.g. "Europe/Amsterdam")
+          nullable: true
+      additionalProperties: false
+      description: Flight's airport reference contract
+    StringListingAirportContractSearchResultCollectionContract:
+      required:
+      - count
+      - items
+      - searchBy
+      type: object
+      properties:
+        searchBy:
+          minLength: 1
+          type: string
+          description: "Search parameter used to find the result. \r\nPlease note, it may be different from the actual input provided!"
+        count:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+          description: The number of items in the collection
+          format: int32
+          readOnly: true
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ListingAirportContract'
+          description: The collection of items
+      additionalProperties: false
+    AirportUrlsContract:
+      type: object
+      properties:
+        webSite:
+          type: string
+          description: Main web-site of the airport
+          nullable: true
+        wikipedia:
+          type: string
+          description: Wikipedia page of the airport
+          nullable: true
+        twitter:
+          type: string
+          description: Twitter feed of the airport
+          nullable: true
+        liveAtc:
+          type: string
+          description: LiveAtc page of the airport
+          nullable: true
+        flightRadar:
+          type: string
+          description: FlightRadar page of the airport
+          nullable: true
+        googleMaps:
+          type: string
+          description: Google Maps URL of the airport
+          nullable: true
+      additionalProperties: false
+      description: Airport URLs contract
+    ContinentContract:
+      required:
+      - code
+      type: object
+      properties:
+        code:
+          minLength: 1
+          type: string
+          description: Code
+        name:
+          type: string
+          description: Name
+          nullable: true
+      additionalProperties: false
+      description: Continent data
+    GeoCoordinatesContract:
+      required:
+      - lat
+      - lon
+      type: object
+      properties:
+        lat:
+          maximum: 90
+          minimum: -90
+          type: number
+          description: Latitude, in degrees
+          format: float
+        lon:
+          maximum: 180
+          minimum: -180
+          type: number
+          description: Longitude, in degrees
+          format: float
+      additionalProperties: false
+      description: Geographical coordinates data
+    DateTimeContract:
+      required:
+      - local
+      - utc
+      type: object
+      properties:
+        utc:
+          type: string
+          description: UTC-time
+          format: date-time
+        local:
+          type: string
+          description: Local time
+          format: date-time
+      additionalProperties: false
+      description: Descriptor date-time represented in both UTC and local timezones
+    RunwayContract:
+      required:
+      - isClosed
+      - name
+      - surface
+      - trueHdg
+      type: object
+      properties:
+        name:
+          minLength: 1
+          type: string
+          description: 'Name of the runway. E.g.: 27L, 06, 36C, etc.'
+        trueHdg:
+          type: number
+          description: True heading of the runway in degrees
+          format: double
+        length:
+          $ref: '#/components/schemas/Distance'
+        width:
+          $ref: '#/components/schemas/Distance'
+        isClosed:
+          type: boolean
+          description: Marker, if runway is closed
+        location:
+          $ref: '#/components/schemas/GeoCoordinatesContract'
+        surface:
+          $ref: '#/components/schemas/SurfaceType'
+        displacedThreshold:
+          $ref: '#/components/schemas/Distance'
+        hasLighting:
+          type: boolean
+          description: Does runway has lights
+          nullable: true
+      additionalProperties: false
+      description: Single runway data
+    Distance:
+      required:
+      - feet
+      - km
+      - meter
+      - mile
+      - nm
+      type: object
+      properties:
+        meter:
+          type: number
+          description: Distance in meters
+          format: double
+        km:
+          type: number
+          description: Distance in kilometers
+          format: double
+        mile:
+          type: number
+          description: Distance in statute miles
+          format: double
+        nm:
+          type: number
+          description: Distance in nautical miles
+          format: double
+        feet:
+          type: number
+          description: Distance in feet
+          format: double
+      additionalProperties: false
+    SurfaceType:
+      enum:
+      - Unknown
+      - Asphalt
+      - Concrete
+      - Grass
+      - Dirt
+      - Gravel
+      - DryLakebed
+      - Water
+      - Snow
+      type: string
+      description: "<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - Unknown</b></li>\r\n<li><b>1 - Asphalt</b></li>\r\n<li><b>2 - Concrete</b></li>\r\n<li><b>3 - Grass</b></li>\r\n<li><b>4 - Dirt</b></li>\r\n<li><b>5 - Gravel</b></li>\r\n<li><b>6 - DryLakebed</b></li>\r\n<li><b>7 - Water</b></li>\r\n<li><b>8 - Snow</b></li>\r\n</ul>\r\n"
+    GeoCoordinatesContractListingAirportContractSearchResultCollectionContract:
+      required:
+      - count
+      - items
+      - searchBy
+      type: object
+      properties:
+        searchBy:
+          $ref: '#/components/schemas/GeoCoordinatesContract'
+        count:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+          description: The number of items in the collection
+          format: int32
+          readOnly: true
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ListingAirportContract'
+          description: The collection of items
+      additionalProperties: false
+    AirportContract:
+      required:
+      - continent
+      - country
+      - elevation
+      - fullName
+      - location
+      - timeZone
+      - urls
+      type: object
+      properties:
+        icao:
+          type: string
+          description: ICAO code of the airport
+          nullable: true
+        iata:
+          type: string
+          description: IATA code of the airport
+          nullable: true
+        localCode:
+          type: string
+          description: Code of the airport within the local or national coding system
+          nullable: true
+        shortName:
+          type: string
+          description: Shortened name of the airport
+          nullable: true
+        fullName:
+          minLength: 1
+          type: string
+          description: Full name of the airport (derived from own airport name and municipality name)
+        municipalityName:
+          type: string
+          description: Name of the municipality this airport belongs to
+          nullable: true
+        location:
+          $ref: '#/components/schemas/GeoCoordinatesContract'
+        elevation:
+          $ref: '#/components/schemas/Distance'
+        country:
+          $ref: '#/components/schemas/CountryContract'
+        continent:
+          $ref: '#/components/schemas/ContinentContract'
+        timeZone:
+          minLength: 1
+          type: string
+          description: Time zone of the airport in Olson format (e.g. "Europe/Amsterdam")
+        urls:
+          $ref: '#/components/schemas/AirportUrlsContract'
+        runways:
+          type: array
+          items:
+            $ref: '#/components/schemas/RunwayContract'
+          description: List of runway information, if requested
+          nullable: true
+        currentTime:
+          $ref: '#/components/schemas/AirportLocalTimeContract'
+      additionalProperties: false
+      description: Single airport data
+    CountryContract:
+      required:
+      - code
+      type: object
+      properties:
+        code:
+          minLength: 1
+          type: string
+          description: Code
+        name:
+          type: string
+          description: Name
+          nullable: true
+      additionalProperties: false
+      description: Country data

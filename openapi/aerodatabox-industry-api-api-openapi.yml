@@ -1,0 +1,165 @@
+openapi: 3.0.4
+info:
+  title: AeroDataBox API - Aviation and Flight Aircraft API Industry API API
+  description: Affordable aviation & flight data API tailored for small and medium businesses, teams and individual developers.
+  termsOfService: https://aerodatabox.com/terms/
+  contact:
+    url: https://aerodatabox.com/contact/
+  version: 1.14.0.0
+servers:
+- url: https://prod.api.market/api/v1/aedbx/aerodatabox
+security: {}
+tags:
+- name: Industry API
+paths:
+  /industry/faa-ladd/{id}/status:
+    parameters:
+    - description: API.market API Key
+      in: header
+      name: x-api-market-key
+      value: Please Login/Signup to get an API Key
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+      - Industry API
+      summary: AeroDataBox FAA LADD Aircraft Status / TIER 3
+      description: "*Returns:* The **current** status of the specified aircraft in the Limiting Aircraft Displayed program\r\nof the Federal Aviation Administration of the U.S. Department of Transportation (FAA LADD). \r\nThe industry list of blocked aircraft is synchrornized weekly with the FAA. \r\nMore information about FAA LADD: https://www.faa.gov/pilots/ladd\r\n\r\n**DISCLAIMER.** This endpoint is designed to provide easy access to verification against the FAA LADD industry list.\r\nEven though it is based on the official data distributed weekly by the FAA, this is **NOT the official source\r\nof the FAA LADD data**. For the official sources, always contact the FAA directly."
+      operationId: GetFaaLaddAircraftStatus
+      parameters:
+      - name: id
+        in: path
+        description: Callsign or aircraft tail number
+        required: true
+        schema:
+          maxLength: 15
+          minLength: 2
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FaaLaddAircraftStatusContract'
+              examples:
+                GetFaaLaddAircraftStatus200Example:
+                  summary: Default GetFaaLaddAircraftStatus 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    isBlocked: true
+                    blockedSince: '2025-03-15T14:30:00Z'
+                    lastBlockedOn: '2025-03-15T14:30:00Z'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/FaaLaddAircraftStatusContract'
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetFaaLaddAircraftStatus400Example:
+                  summary: Default GetFaaLaddAircraftStatus 400 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetFaaLaddAircraftStatus401Example:
+                  summary: Default GetFaaLaddAircraftStatus 401 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '451':
+          description: Unavailable For Legal Reasons
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetFaaLaddAircraftStatus451Example:
+                  summary: Default GetFaaLaddAircraftStatus 451 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+              examples:
+                GetFaaLaddAircraftStatus500Example:
+                  summary: Default GetFaaLaddAircraftStatus 500 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ErrorContract'
+        '503':
+          description: Service Unavailable
+      x-badges:
+      - name: TIER 3
+        position: before
+        color: '#ffb694'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    ErrorContract:
+      required:
+      - message
+      type: object
+      properties:
+        message:
+          minLength: 1
+          type: string
+          description: Error message
+      additionalProperties: false
+      description: Error response
+    FaaLaddAircraftStatusContract:
+      required:
+      - id
+      - isBlocked
+      type: object
+      properties:
+        id:
+          type: string
+          format: string
+        isBlocked:
+          type: boolean
+          description: Current status of the aircraft / flight in the FAA LADD industry list.
+        blockedSince:
+          type: string
+          description: "For blocked aircraft only: the date when the aircraft / flight was blocked.\r\nWill not be included for blocked dates at or prior to September 15, 2024."
+          format: date-time
+          nullable: true
+        lastBlockedOn:
+          type: string
+          description: "For unblocked aircraft only: the date when the aircraft / flight was last blocked.\r\nWill not be included for blocked dates at or prior to September 15, 2024 or \r\nfor the aircraft that were never blocked."
+          format: date-time
+          nullable: true
+      additionalProperties: false
+      description: "Status of the aircraft tail number or callsign in the FAA Limiting Aircraft Data Displayed (LADD) Program list.\r\nSee https://www.faa.gov/pilots/ladd for more details."
