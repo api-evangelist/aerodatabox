@@ -7,7 +7,19 @@ tags:
   - Aerospace
   - Flight Data
   - Airport Data
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Paid
+  confidence: medium
+  source:
+  - plans
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/aerodatabox.png
 created: '2025-02-24'
 modified: '2026-05-19'
 description: >-
@@ -22,102 +34,102 @@ maintainers:
     url: http://apievangelist.com
     email: info@apievangelist.com
 apis:
-  - aid: aerodatabox:aerodatabox-flight-api
-    name: AeroDataBox Flight API
-    tags:
-      - Flights
-      - Flight Status
-      - FIDS
-      - Real-Time
-      - Aviation
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    baseURL: https://prod.api.market/api/v1/aedbx/aerodatabox
-    humanURL: https://doc.aerodatabox.com/
-    description: >-
-      Provides real-time and historical flight status information including departure and arrival times, delays,
-      codeshares, and flight number lookups. Supports FIDS (Flight Information Display System) data for airports and
-      individual flight tracking by flight number, IATA/ICAO codes, and date ranges.
-    properties:
-      - url: https://doc.aerodatabox.com/
-        type: Documentation
-      - url: openapi/aerodatabox-openapi.yml
-        type: OpenAPI
-  - aid: aerodatabox:aerodatabox-aircraft-api
-    name: AeroDataBox Aircraft API
-    tags:
-      - Aircraft
-      - Tail Numbers
-      - Fleet
-      - Airlines
-      - Aviation
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    baseURL: https://prod.api.market/api/v1/aedbx/aerodatabox
-    humanURL: https://doc.aerodatabox.com/
-    description: >-
-      Search and retrieve aircraft information by tail number, registration, or ICAO24 hex code. Includes airline fleet
-      lookups, aircraft registration history, and aircraft images. Supports searches by term for active aircraft
-      registrations.
-    properties:
-      - url: https://doc.aerodatabox.com/
-        type: Documentation
-      - url: openapi/aerodatabox-openapi.yml
-        type: OpenAPI
-  - aid: aerodatabox:aerodatabox-airport-api
-    name: AeroDataBox Airport API
-    tags:
-      - Airports
-      - Runways
-      - Location Search
-      - Aviation
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    baseURL: https://prod.api.market/api/v1/aedbx/aerodatabox
-    humanURL: https://doc.aerodatabox.com/
-    description: >-
-      Retrieve airport information by IATA/ICAO code including runway data, local time, solar time, and distance
-      calculations between airports. Search airports by geographic location, IP address geolocation, or free-text term.
-    properties:
-      - url: https://doc.aerodatabox.com/
-        type: Documentation
-      - url: openapi/aerodatabox-openapi.yml
-        type: OpenAPI
-  - aid: aerodatabox:aerodatabox-statistical-api
-    name: AeroDataBox Statistical API
-    tags:
-      - Delays
-      - Statistics
-      - Routes
-      - Historical Data
-      - Aviation
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    baseURL: https://prod.api.market/api/v1/aedbx/aerodatabox
-    humanURL: https://doc.aerodatabox.com/
-    description: >-
-      Access current and historical airport delay statistics, global delay summaries, daily route statistics, and flight
-      delay data by flight number. Supports date range queries for trend analysis and performance benchmarking.
-    properties:
-      - url: https://doc.aerodatabox.com/
-        type: Documentation
-      - url: openapi/aerodatabox-openapi.yml
-        type: OpenAPI
-  - aid: aerodatabox:aerodatabox-flight-alert-api
-    name: AeroDataBox Flight Alert API
-    tags:
-      - Webhooks
-      - Alerts
-      - Subscriptions
-      - Real-Time
-      - Aviation
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    baseURL: https://prod.api.market/api/v1/aedbx/aerodatabox
-    humanURL: https://doc.aerodatabox.com/
-    description: >-
-      Create, manage, and monitor webhook subscriptions for real-time flight status alerts. Subscribe to flight events
-      by flight number or airport and receive push notifications to your endpoint when flight status changes occur.
-    properties:
-      - url: https://doc.aerodatabox.com/
-        type: Documentation
-      - url: openapi/aerodatabox-openapi.yml
-        type: OpenAPI
+- aid: aerodatabox:aerodatabox-aircraft-api-api
+  name: AeroDataBox Aircraft API API
+  description: The Aircraft API API from AeroDataBox — 6 operation(s) for aircraft api.
+  humanURL: https://doc.aerodatabox.com/
+  baseURL: https://prod.api.market/api/v1/aedbx/aerodatabox
+  tags:
+  - Aircraft API
+  properties:
+  - type: OpenAPI
+    url: openapi/aerodatabox-aircraft-api-api-openapi.yml
+  - type: Documentation
+    url: https://doc.aerodatabox.com/
+- aid: aerodatabox:aerodatabox-airport-api-api
+  name: AeroDataBox Airport API API
+  description: The Airport API API from AeroDataBox — 5 operation(s) for airport api.
+  humanURL: https://doc.aerodatabox.com/
+  baseURL: https://prod.api.market/api/v1/aedbx/aerodatabox
+  tags:
+  - Airport API
+  properties:
+  - type: OpenAPI
+    url: openapi/aerodatabox-airport-api-api-openapi.yml
+  - type: Documentation
+    url: https://doc.aerodatabox.com/
+- aid: aerodatabox:aerodatabox-flight-alert-api-api
+  name: AeroDataBox Flight Alert API API
+  description: The Flight Alert API API from AeroDataBox — 6 operation(s) for flight alert api.
+  humanURL: https://doc.aerodatabox.com/
+  baseURL: https://prod.api.market/api/v1/aedbx/aerodatabox
+  tags:
+  - Flight Alert API
+  properties:
+  - type: OpenAPI
+    url: openapi/aerodatabox-flight-alert-api-api-openapi.yml
+  - type: Documentation
+    url: https://doc.aerodatabox.com/
+- aid: aerodatabox:aerodatabox-flight-api-api
+  name: AeroDataBox Flight API API
+  description: The Flight API API from AeroDataBox — 8 operation(s) for flight api.
+  humanURL: https://doc.aerodatabox.com/
+  baseURL: https://prod.api.market/api/v1/aedbx/aerodatabox
+  tags:
+  - Flight API
+  properties:
+  - type: OpenAPI
+    url: openapi/aerodatabox-flight-api-api-openapi.yml
+  - type: Documentation
+    url: https://doc.aerodatabox.com/
+- aid: aerodatabox:aerodatabox-healthcheck-api-api
+  name: AeroDataBox Healthcheck API API
+  description: The Healthcheck API API from AeroDataBox — 3 operation(s) for healthcheck api.
+  humanURL: https://doc.aerodatabox.com/
+  baseURL: https://prod.api.market/api/v1/aedbx/aerodatabox
+  tags:
+  - Healthcheck API
+  properties:
+  - type: OpenAPI
+    url: openapi/aerodatabox-healthcheck-api-api-openapi.yml
+  - type: Documentation
+    url: https://doc.aerodatabox.com/
+- aid: aerodatabox:aerodatabox-industry-api-api
+  name: AeroDataBox Industry API API
+  description: The Industry API API from AeroDataBox — 1 operation(s) for industry api.
+  humanURL: https://doc.aerodatabox.com/
+  baseURL: https://prod.api.market/api/v1/aedbx/aerodatabox
+  tags:
+  - Industry API
+  properties:
+  - type: OpenAPI
+    url: openapi/aerodatabox-industry-api-api-openapi.yml
+  - type: Documentation
+    url: https://doc.aerodatabox.com/
+- aid: aerodatabox:aerodatabox-miscellaneous-api-api
+  name: AeroDataBox Miscellaneous API API
+  description: The Miscellaneous API API from AeroDataBox — 4 operation(s) for miscellaneous api.
+  humanURL: https://doc.aerodatabox.com/
+  baseURL: https://prod.api.market/api/v1/aedbx/aerodatabox
+  tags:
+  - Miscellaneous API
+  properties:
+  - type: OpenAPI
+    url: openapi/aerodatabox-miscellaneous-api-api-openapi.yml
+  - type: Documentation
+    url: https://doc.aerodatabox.com/
+- aid: aerodatabox:aerodatabox-statistical-api-api
+  name: AeroDataBox Statistical API API
+  description: The Statistical API API from AeroDataBox — 8 operation(s) for statistical api.
+  humanURL: https://doc.aerodatabox.com/
+  baseURL: https://prod.api.market/api/v1/aedbx/aerodatabox
+  tags:
+  - Statistical API
+  properties:
+  - type: OpenAPI
+    url: openapi/aerodatabox-statistical-api-api-openapi.yml
+  - type: Documentation
+    url: https://doc.aerodatabox.com/
 common:
   - type: AgenticAccess
     url: agentic-access/aerodatabox-agentic-access.yml
