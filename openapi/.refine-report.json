@@ -1,0 +1,28 @@
+{
+  "provider": "aerodatabox",
+  "sources": [
+    "aerodatabox-aircraft-api-api-openapi.yml",
+    "aerodatabox-airport-api-api-openapi.yml",
+    "aerodatabox-flight-alert-api-api-openapi.yml",
+    "aerodatabox-flight-api-api-openapi.yml",
+    "aerodatabox-healthcheck-api-api-openapi.yml",
+    "aerodatabox-industry-api-api-openapi.yml",
+    "aerodatabox-miscellaneous-api-api-openapi.yml",
+    "aerodatabox-statistical-api-api-openapi.yml"
+  ],
+  "outputs": [
+    "aerodatabox-aircraft-api-api-openapi.yml",
+    "aerodatabox-airport-api-api-openapi.yml",
+    "aerodatabox-flight-alert-api-api-openapi.yml",
+    "aerodatabox-flight-api-api-openapi.yml",
+    "aerodatabox-healthcheck-api-api-openapi.yml",
+    "aerodatabox-industry-api-api-openapi.yml",
+    "aerodatabox-miscellaneous-api-api-openapi.yml",
+    "aerodatabox-statistical-api-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
