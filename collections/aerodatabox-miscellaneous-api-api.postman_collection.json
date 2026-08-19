@@ -1,0 +1,2112 @@
+{
+  "item": [
+    {
+      "id": "c5fbf765-84dc-4f99-9e4c-503ee0c2608c",
+      "name": "Miscellaneous API",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7c07a545-035d-4bf5-bb4c-9340492338b0",
+          "name": "AeroDataBox Current Local Time at the Airport / TIER 1",
+          "request": {
+            "name": "AeroDataBox Current Local Time at the Airport / TIER 1",
+            "description": {
+              "content": "**What is the current local time at the airport?**\r\n\r\nAt the moment airports having both ICAO and IATA code are present in database only.\r\n\r\n*Returns:* Local time at the airport, if airport is found.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "airports",
+                ":codeType",
+                ":code",
+                "time",
+                "local"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "codeType",
+                  "description": "Type of code to search airport by (`iata` or `icao`)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "code",
+                  "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) API.market API Key",
+                "key": "x-api-market-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "42c2721c-9cce-4eb6-9ea2-99487c5db400",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":code",
+                    "time",
+                    "local"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"time\": \"example_value\",\n  \"timeZoneId\": \"abc123\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "af788aef-d810-4d2e-b1e3-0fef629bf115",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":code",
+                    "time",
+                    "local"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5dac8893-100a-4e21-b399-48d059f378cb",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":code",
+                    "time",
+                    "local"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d096be16-40eb-40ae-87b5-0c751615d66a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":code",
+                    "time",
+                    "local"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f987b28b-775e-48cb-9f80-cfbe4abb26e6",
+              "name": "Unavailable For Legal Reasons",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":code",
+                    "time",
+                    "local"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "code": 451,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "848ea10f-1678-4c64-a692-1ae33d564991",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":code",
+                    "time",
+                    "local"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3d499837-4575-4061-a63e-18354a2267c6",
+              "name": "Service Unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":code",
+                    "time",
+                    "local"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fb547d98-ee35-44c5-b420-9e4f7d768074",
+          "name": "AeroDataBox Solar and Day Time at the Airport / TIER 1",
+          "request": {
+            "name": "AeroDataBox Solar and Day Time at the Airport / TIER 1",
+            "description": {
+              "content": "**What is the sun position in the sky now at a specific time at the airport?** or\r\n**When does the sun rise and set at the airport today or on the other day at the airport?** or\r\n**Is it dark now or is it day at the airport?**\r\n\r\nAt the moment airports having both ICAO and IATA code are present in database only.\r\n\r\n*Returns:* If airport is found, returns various solar-related information: sun position in the sky,\r\ndaytime (day, night, twilight: civil, nautical, astronomical, golden/blue hours), \r\nsunrise and sunset times, etc.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "airports",
+                ":codeType",
+                ":code",
+                "time",
+                "solar"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "codeType",
+                  "description": "Type of code to search airport by (`iata` or `icao`)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "code",
+                  "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) API.market API Key",
+                "key": "x-api-market-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "46efdf2b-fede-4e3f-b74b-a010983140f9",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":code",
+                    "time",
+                    "solar"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"location\": \"example_value\",\n  \"sunElevation\": \"example_value\",\n  \"sunAzimuth\": \"example_value\",\n  \"dayTime\": [\n    \"example_value\"\n  ],\n  \"dawnAstronomical\": \"example_value\",\n  \"dawnNautical\": \"example_value\",\n  \"dawnCivil\": \"example_value\",\n  \"sunrise\": \"example_value\",\n  \"noonTrue\": \"example_value\",\n  \"sunset\": \"example_value\",\n  \"duskCivil\": \"example_value\",\n  \"duskNautical\": \"example_value\",\n  \"duskAstronomical\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ea30ff77-d97b-4bb9-9bb5-b97100498300",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":code",
+                    "time",
+                    "solar"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b5322f5b-7074-449f-99b0-0b5d366154af",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":code",
+                    "time",
+                    "solar"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5e5f7027-38e9-4043-bc04-ad8fc3ea984b",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":code",
+                    "time",
+                    "solar"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4e25ae79-a2ea-4260-9195-468cab7cfa98",
+              "name": "Unavailable For Legal Reasons",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":code",
+                    "time",
+                    "solar"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "code": 451,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c7e0956f-5151-4072-8398-79a4699b4508",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":code",
+                    "time",
+                    "solar"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3e18944f-4b44-4a29-bb40-d892c0ee22b7",
+              "name": "Service Unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":code",
+                    "time",
+                    "solar"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "54fa49a3-6003-4079-a4d1-1e07e53d6bf8",
+          "name": "AeroDataBox Solar and Day Time at the Airport / TIER 1",
+          "request": {
+            "name": "AeroDataBox Solar and Day Time at the Airport / TIER 1",
+            "description": {
+              "content": "**What is the sun position in the sky now at a specific time at the airport?** or\r\n**When does the sun rise and set at the airport today or on the other day at the airport?** or\r\n**Is it dark now or is it day at the airport?**\r\n\r\nAt the moment airports having both ICAO and IATA code are present in database only.\r\n\r\n*Returns:* If airport is found, returns various solar-related information: sun position in the sky,\r\ndaytime (day, night, twilight: civil, nautical, astronomical, golden/blue hours), \r\nsunrise and sunset times, etc.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "airports",
+                ":codeType",
+                ":code",
+                "time",
+                "solar",
+                ":dateLocal"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "codeType",
+                  "description": "Type of code to search airport by (`iata` or `icao`)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "code",
+                  "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<dateTime>",
+                  "key": "dateLocal",
+                  "description": "(Required) The moment of time which solar data is request for (local time, format: YYYY-MM-DDTHH:mm). \r\nDefault - current time."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) API.market API Key",
+                "key": "x-api-market-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d62e7d67-cd08-462f-a257-4aeff5d0dce6",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":code",
+                    "time",
+                    "solar",
+                    ":dateLocal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<dateTime>",
+                      "key": "dateLocal",
+                      "description": "(Required) The moment of time which solar data is request for (local time, format: YYYY-MM-DDTHH:mm). \r\nDefault - current time."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"location\": \"example_value\",\n  \"sunElevation\": \"example_value\",\n  \"sunAzimuth\": \"example_value\",\n  \"dayTime\": [\n    \"example_value\"\n  ],\n  \"dawnAstronomical\": \"example_value\",\n  \"dawnNautical\": \"example_value\",\n  \"dawnCivil\": \"example_value\",\n  \"sunrise\": \"example_value\",\n  \"noonTrue\": \"example_value\",\n  \"sunset\": \"example_value\",\n  \"duskCivil\": \"example_value\",\n  \"duskNautical\": \"example_value\",\n  \"duskAstronomical\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e64f687e-5c42-4f24-9f6b-282ac50b896b",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":code",
+                    "time",
+                    "solar",
+                    ":dateLocal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<dateTime>",
+                      "key": "dateLocal",
+                      "description": "(Required) The moment of time which solar data is request for (local time, format: YYYY-MM-DDTHH:mm). \r\nDefault - current time."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "45154813-f6ef-4591-a427-6621f26808ee",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":code",
+                    "time",
+                    "solar",
+                    ":dateLocal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<dateTime>",
+                      "key": "dateLocal",
+                      "description": "(Required) The moment of time which solar data is request for (local time, format: YYYY-MM-DDTHH:mm). \r\nDefault - current time."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "436a21d7-ad72-4f74-a282-fb52d142af1a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":code",
+                    "time",
+                    "solar",
+                    ":dateLocal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<dateTime>",
+                      "key": "dateLocal",
+                      "description": "(Required) The moment of time which solar data is request for (local time, format: YYYY-MM-DDTHH:mm). \r\nDefault - current time."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f1431d96-d15f-40e0-859e-1b5556d8d3a1",
+              "name": "Unavailable For Legal Reasons",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":code",
+                    "time",
+                    "solar",
+                    ":dateLocal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<dateTime>",
+                      "key": "dateLocal",
+                      "description": "(Required) The moment of time which solar data is request for (local time, format: YYYY-MM-DDTHH:mm). \r\nDefault - current time."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "code": 451,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b9c94a52-0980-4556-9545-d4eb6e016ec5",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":code",
+                    "time",
+                    "solar",
+                    ":dateLocal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<dateTime>",
+                      "key": "dateLocal",
+                      "description": "(Required) The moment of time which solar data is request for (local time, format: YYYY-MM-DDTHH:mm). \r\nDefault - current time."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "924eff85-f867-4424-ada7-aff6f8631317",
+              "name": "Service Unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":code",
+                    "time",
+                    "solar",
+                    ":dateLocal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<dateTime>",
+                      "key": "dateLocal",
+                      "description": "(Required) The moment of time which solar data is request for (local time, format: YYYY-MM-DDTHH:mm). \r\nDefault - current time."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e9a2b8ad-e698-4994-9249-bc5fe1e89b5d",
+          "name": "AeroDataBox Distance and Flight Time Between Airports / TIER 2",
+          "request": {
+            "name": "AeroDataBox Distance and Flight Time Between Airports / TIER 2",
+            "description": {
+              "content": "**What is the great circle distance between airports?** \r\n**What is approximate flight time between airports?**\r\n** What is the flight time between airports based on history of flights and/or aircraft type?** (machine-learning based)\r\n\r\nUse `flightTimeModel` = <a href=\"#model-ModelFlightTimeEnum\">ML01</a> to get more accurate results based on historical performance of flights on a specific route \r\nand aircraft type.\r\n\r\n*Returns:* Distance and approximate flight time between airports, if both airports found.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "airports",
+                ":codeType",
+                ":codeFrom",
+                "distance-time",
+                ":codeTo"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "aircraftName",
+                  "value": "<string>",
+                  "description": "Aircraft type name (free text). \r\nIf specified, the aircraft type will be attempted to be taken into account to provide more accurate result."
+                },
+                {
+                  "disabled": false,
+                  "key": "flightTimeModel",
+                  "value": "<string>",
+                  "description": "Model of calculation of the flight time. Default is <a href=\"#model-ModelFlightTimeEnum\"></a>\r\nMore advanced model(s) is available, including machine learning-based models.\r\nSee <a href=\"#model-ModelFlightTimeEnum\">ModelFlightTimeEnum</a> for details."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "codeType",
+                  "description": "Type of code to search airport by (`iata` or `icao`)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "codeFrom",
+                  "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the origin airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the origin  airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "codeTo",
+                  "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the destination airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the destination  airport (e.g.: AMS, SFO, LAX, etc.);\r\n* `local`, then the format of this field is subject to specific standards of relevant national or local airport codification systems.\r\n\r\nFull, stripped and any case formats are acceptable."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) API.market API Key",
+                "key": "x-api-market-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0f22917e-ef96-48e8-91f1-c154862a6b7f",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":codeFrom",
+                    "distance-time",
+                    ":codeTo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "aircraftName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "flightTimeModel",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeFrom",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the origin airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the origin  airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeTo",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the destination airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the destination  airport (e.g.: AMS, SFO, LAX, etc.);\r\n* `local`, then the format of this field is subject to specific standards of relevant national or local airport codification systems.\r\n\r\nFull, stripped and any case formats are acceptable."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"from\": \"example_value\",\n  \"to\": \"example_value\",\n  \"greatCircleDistance\": \"example_value\",\n  \"approxFlightTime\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "26fd5934-47c5-4ce4-8b9e-98c95291ffac",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":codeFrom",
+                    "distance-time",
+                    ":codeTo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "aircraftName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "flightTimeModel",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeFrom",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the origin airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the origin  airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeTo",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the destination airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the destination  airport (e.g.: AMS, SFO, LAX, etc.);\r\n* `local`, then the format of this field is subject to specific standards of relevant national or local airport codification systems.\r\n\r\nFull, stripped and any case formats are acceptable."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b73d7bce-4a07-4feb-a767-f1207c1b1c1d",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":codeFrom",
+                    "distance-time",
+                    ":codeTo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "aircraftName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "flightTimeModel",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeFrom",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the origin airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the origin  airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeTo",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the destination airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the destination  airport (e.g.: AMS, SFO, LAX, etc.);\r\n* `local`, then the format of this field is subject to specific standards of relevant national or local airport codification systems.\r\n\r\nFull, stripped and any case formats are acceptable."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f23389ae-67bd-453e-b918-0fffe2b94487",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":codeFrom",
+                    "distance-time",
+                    ":codeTo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "aircraftName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "flightTimeModel",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeFrom",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the origin airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the origin  airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeTo",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the destination airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the destination  airport (e.g.: AMS, SFO, LAX, etc.);\r\n* `local`, then the format of this field is subject to specific standards of relevant national or local airport codification systems.\r\n\r\nFull, stripped and any case formats are acceptable."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dfba7fc0-cbcb-4417-9dd4-1149d5ca610c",
+              "name": "Unavailable For Legal Reasons",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":codeFrom",
+                    "distance-time",
+                    ":codeTo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "aircraftName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "flightTimeModel",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeFrom",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the origin airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the origin  airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeTo",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the destination airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the destination  airport (e.g.: AMS, SFO, LAX, etc.);\r\n* `local`, then the format of this field is subject to specific standards of relevant national or local airport codification systems.\r\n\r\nFull, stripped and any case formats are acceptable."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "code": 451,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "82fed36c-7ad3-4a25-87ab-86954c4e7b33",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":codeFrom",
+                    "distance-time",
+                    ":codeTo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "aircraftName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "flightTimeModel",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeFrom",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the origin airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the origin  airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeTo",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the destination airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the destination  airport (e.g.: AMS, SFO, LAX, etc.);\r\n* `local`, then the format of this field is subject to specific standards of relevant national or local airport codification systems.\r\n\r\nFull, stripped and any case formats are acceptable."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d69bcc37-8288-4dbc-bccd-1f3d2a18ffbf",
+              "name": "Service Unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":codeFrom",
+                    "distance-time",
+                    ":codeTo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "aircraftName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "flightTimeModel",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeFrom",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the origin airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the origin  airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeTo",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the destination airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the destination  airport (e.g.: AMS, SFO, LAX, etc.);\r\n* `local`, then the format of this field is subject to specific standards of relevant national or local airport codification systems.\r\n\r\nFull, stripped and any case formats are acceptable."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://prod.api.market/api/v1/aedbx/aerodatabox",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "28593ade-e31e-457c-9c14-7d44feb148e9",
+    "name": "AeroDataBox API - Aviation and Flight Aircraft API Miscellaneous API API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Affordable aviation & flight data API tailored for small and medium businesses, teams and individual developers.",
+      "type": "text/plain"
+    }
+  }
+}

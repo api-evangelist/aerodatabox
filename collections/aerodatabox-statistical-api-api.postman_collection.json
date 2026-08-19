@@ -1,0 +1,3760 @@
+{
+  "item": [
+    {
+      "id": "fa796eb8-feb1-4b10-b61a-6bcf0315fd1c",
+      "name": "Statistical API",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5326e905-6d97-4a4f-8ef6-ac9498333b21",
+          "name": "AeroDataBox Airport Delays (current or Historical Moment) / TIER 3",
+          "request": {
+            "name": "AeroDataBox Airport Delays (current or Historical Moment) / TIER 3",
+            "description": {
+              "content": "**What is the current or historical average delay in the airport?** or **What is the delay index of the airport right now or at a moment in past?**\r\n\r\nPlease read more about airport delays on here: https://aerodatabox.com/api-airport-delays/\r\n\r\n*Returns*: Statistical delay information about delays (median delay, delay index, cancelled flights) of arrivals and departures for the requested airport, represented by:\r\n* a single `AirportDelayContract` item displaying the delay information based on flight movements within the 2 hours prior to the current moment, if no `dateLocal` is specified;\r\n* a single `AirportDelayContract` item displaying the delay information based on flight movements within the 2 hours prior to the moment requested in `dateLocal`, if `dateLocal` is specified;",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "airports",
+                ":codeType",
+                ":code",
+                "delays"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "codeType",
+                  "description": "Type of code to search airport by (`iata` or `icao`)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "code",
+                  "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) API.market API Key",
+                "key": "x-api-market-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3adebd0a-1c3a-4d4d-9b22-36cf74550ae4",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":code",
+                    "delays"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"airportIcao\": \"KLAX\",\n  \"from\": \"example_value\",\n  \"to\": \"example_value\",\n  \"departuresDelayInformation\": \"example_value\",\n  \"arrivalsDelayInformation\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "807f4b1d-4d5b-4040-b7db-597339024e0e",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":code",
+                    "delays"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "20f81602-0a69-40a9-92ae-304ec83c4f30",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":code",
+                    "delays"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f48acdc2-0ea9-4ed7-a28c-306dc7929ee6",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":code",
+                    "delays"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a44afabf-d5ad-41c4-8eef-0b7df4f944de",
+              "name": "Unavailable For Legal Reasons",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":code",
+                    "delays"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "code": 451,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b38d73e5-a621-4a14-ac09-3f672aec7c42",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":code",
+                    "delays"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c8daf60e-911f-45ea-ae04-6312af20a950",
+              "name": "Service Unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":code",
+                    "delays"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2d8f9894-c10b-426d-aa9f-018615bec64c",
+          "name": "AeroDataBox Airport Delays (current or Historical Moment) / TIER 3",
+          "request": {
+            "name": "AeroDataBox Airport Delays (current or Historical Moment) / TIER 3",
+            "description": {
+              "content": "**What is the current or historical average delay in the airport?** or **What is the delay index of the airport right now or at a moment in past?**\r\n\r\nPlease read more about airport delays on here: https://aerodatabox.com/api-airport-delays/\r\n\r\n*Returns*: Statistical delay information about delays (median delay, delay index, cancelled flights) of arrivals and departures for the requested airport, represented by:\r\n* a single `AirportDelayContract` item displaying the delay information based on flight movements within the 2 hours prior to the current moment, if no `dateLocal` is specified;\r\n* a single `AirportDelayContract` item displaying the delay information based on flight movements within the 2 hours prior to the moment requested in `dateLocal`, if `dateLocal` is specified;",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "airports",
+                ":codeType",
+                ":code",
+                "delays",
+                ":dateLocal"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "codeType",
+                  "description": "Type of code to search airport by (`iata` or `icao`)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "code",
+                  "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<dateTime>",
+                  "key": "dateLocal",
+                  "description": "(Required) The moment of time for / from which delay data is requested (local time, format: YYYY-MM-DDTHH:mm). \r\nDefault - current time."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) API.market API Key",
+                "key": "x-api-market-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "153c67f7-0495-4543-9d6a-deaefd5ea206",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":code",
+                    "delays",
+                    ":dateLocal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<dateTime>",
+                      "key": "dateLocal",
+                      "description": "(Required) The moment of time for / from which delay data is requested (local time, format: YYYY-MM-DDTHH:mm). \r\nDefault - current time."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"airportIcao\": \"KLAX\",\n  \"from\": \"example_value\",\n  \"to\": \"example_value\",\n  \"departuresDelayInformation\": \"example_value\",\n  \"arrivalsDelayInformation\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f4c676ad-5a59-4005-9ed0-c37aac9de54d",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":code",
+                    "delays",
+                    ":dateLocal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<dateTime>",
+                      "key": "dateLocal",
+                      "description": "(Required) The moment of time for / from which delay data is requested (local time, format: YYYY-MM-DDTHH:mm). \r\nDefault - current time."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "72f54e29-bb9a-46cd-936b-d517f75a7bb6",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":code",
+                    "delays",
+                    ":dateLocal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<dateTime>",
+                      "key": "dateLocal",
+                      "description": "(Required) The moment of time for / from which delay data is requested (local time, format: YYYY-MM-DDTHH:mm). \r\nDefault - current time."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fd3f50d9-83a5-45ff-b539-ab80b3d446ad",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":code",
+                    "delays",
+                    ":dateLocal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<dateTime>",
+                      "key": "dateLocal",
+                      "description": "(Required) The moment of time for / from which delay data is requested (local time, format: YYYY-MM-DDTHH:mm). \r\nDefault - current time."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "06f94666-6ea0-4238-91db-d9badfac6ea8",
+              "name": "Unavailable For Legal Reasons",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":code",
+                    "delays",
+                    ":dateLocal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<dateTime>",
+                      "key": "dateLocal",
+                      "description": "(Required) The moment of time for / from which delay data is requested (local time, format: YYYY-MM-DDTHH:mm). \r\nDefault - current time."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "code": 451,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4f0d9c63-b12d-443d-82fd-c0c610caee89",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":code",
+                    "delays",
+                    ":dateLocal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<dateTime>",
+                      "key": "dateLocal",
+                      "description": "(Required) The moment of time for / from which delay data is requested (local time, format: YYYY-MM-DDTHH:mm). \r\nDefault - current time."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "792663a4-d3f6-42c3-910e-f85e43fb0dfc",
+              "name": "Service Unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":code",
+                    "delays",
+                    ":dateLocal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<dateTime>",
+                      "key": "dateLocal",
+                      "description": "(Required) The moment of time for / from which delay data is requested (local time, format: YYYY-MM-DDTHH:mm). \r\nDefault - current time."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8dddd9ba-df2a-41ec-9e7e-ebe057e1cb0c",
+          "name": "AeroDataBox Airport Delays (historical Period) / TIER 3",
+          "request": {
+            "name": "AeroDataBox Airport Delays (historical Period) / TIER 3",
+            "description": {
+              "content": "**What were the delays within a specific period of time?** or **How the delays changed  within a specific period of time?**\r\n\r\nPlease read more about airport delays on here: https://aerodatabox.com/api-airport-delays/\r\n\r\n*Returns*: Statistical delay information about delays (median delay, delay index, cancelled flights) of arrivals and departures for the requested airport, represented by a collection of `AiportDelayContract` items displaying the delay information at multiple moments within the period between `dateLocal` and `dateToLocal`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "airports",
+                ":codeType",
+                ":code",
+                "delays",
+                ":dateFromLocal",
+                ":dateToLocal"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "codeType",
+                  "description": "Type of code to search airport by (`iata` or `icao`)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "code",
+                  "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<dateTime>",
+                  "key": "dateFromLocal",
+                  "description": "(Required) The beginning of the period of time for which delay data is requested (local time, format: YYYY-MM-DDTHH:mm)."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<dateTime>",
+                  "key": "dateToLocal",
+                  "description": "(Required) The end of the period of time for which delay data is requested (local time, format: YYYY-MM-DDTHH:mm)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) API.market API Key",
+                "key": "x-api-market-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "56b95cf0-f965-4aad-bb97-7f2d87c886b9",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":code",
+                    "delays",
+                    ":dateFromLocal",
+                    ":dateToLocal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<dateTime>",
+                      "key": "dateFromLocal",
+                      "description": "(Required) The beginning of the period of time for which delay data is requested (local time, format: YYYY-MM-DDTHH:mm)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<dateTime>",
+                      "key": "dateToLocal",
+                      "description": "(Required) The end of the period of time for which delay data is requested (local time, format: YYYY-MM-DDTHH:mm)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  \"example_value\"\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6fdec225-eb3c-42ea-b7c9-97c4e9e77517",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":code",
+                    "delays",
+                    ":dateFromLocal",
+                    ":dateToLocal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<dateTime>",
+                      "key": "dateFromLocal",
+                      "description": "(Required) The beginning of the period of time for which delay data is requested (local time, format: YYYY-MM-DDTHH:mm)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<dateTime>",
+                      "key": "dateToLocal",
+                      "description": "(Required) The end of the period of time for which delay data is requested (local time, format: YYYY-MM-DDTHH:mm)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "47b8b59c-2730-44e2-ae17-60e4c600d834",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":code",
+                    "delays",
+                    ":dateFromLocal",
+                    ":dateToLocal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<dateTime>",
+                      "key": "dateFromLocal",
+                      "description": "(Required) The beginning of the period of time for which delay data is requested (local time, format: YYYY-MM-DDTHH:mm)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<dateTime>",
+                      "key": "dateToLocal",
+                      "description": "(Required) The end of the period of time for which delay data is requested (local time, format: YYYY-MM-DDTHH:mm)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "60d492d7-35c4-48e8-a905-18ed0e433afe",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":code",
+                    "delays",
+                    ":dateFromLocal",
+                    ":dateToLocal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<dateTime>",
+                      "key": "dateFromLocal",
+                      "description": "(Required) The beginning of the period of time for which delay data is requested (local time, format: YYYY-MM-DDTHH:mm)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<dateTime>",
+                      "key": "dateToLocal",
+                      "description": "(Required) The end of the period of time for which delay data is requested (local time, format: YYYY-MM-DDTHH:mm)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5230a850-aa08-4654-85ee-cc823211f13d",
+              "name": "Unavailable For Legal Reasons",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":code",
+                    "delays",
+                    ":dateFromLocal",
+                    ":dateToLocal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<dateTime>",
+                      "key": "dateFromLocal",
+                      "description": "(Required) The beginning of the period of time for which delay data is requested (local time, format: YYYY-MM-DDTHH:mm)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<dateTime>",
+                      "key": "dateToLocal",
+                      "description": "(Required) The end of the period of time for which delay data is requested (local time, format: YYYY-MM-DDTHH:mm)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "code": 451,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3a3e0b98-90d9-45a8-8cf7-cd5bfe28fec2",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":code",
+                    "delays",
+                    ":dateFromLocal",
+                    ":dateToLocal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<dateTime>",
+                      "key": "dateFromLocal",
+                      "description": "(Required) The beginning of the period of time for which delay data is requested (local time, format: YYYY-MM-DDTHH:mm)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<dateTime>",
+                      "key": "dateToLocal",
+                      "description": "(Required) The end of the period of time for which delay data is requested (local time, format: YYYY-MM-DDTHH:mm)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4f6ba9df-404b-4063-a994-452b233e52c5",
+              "name": "Service Unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":code",
+                    "delays",
+                    ":dateFromLocal",
+                    ":dateToLocal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<dateTime>",
+                      "key": "dateFromLocal",
+                      "description": "(Required) The beginning of the period of time for which delay data is requested (local time, format: YYYY-MM-DDTHH:mm)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<dateTime>",
+                      "key": "dateToLocal",
+                      "description": "(Required) The end of the period of time for which delay data is requested (local time, format: YYYY-MM-DDTHH:mm)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "957f93c7-fe76-4898-8fca-8b7a02b4d7b3",
+          "name": "AeroDataBox Airport Routes and Daily Flight Destinations / TIER 3",
+          "request": {
+            "name": "AeroDataBox Airport Routes and Daily Flight Destinations / TIER 3",
+            "description": {
+              "content": "**What are the most popular routes from an airport?** or **Where I can fly from an airport?** or \r\n**How many daily flights to different destinations from an airport?**\r\n\r\nThe data will only be available for airports which have at least schedules information available. \r\nIf the airport is also covered with live or ADS-B coverage, the quality will improve greatly as it will\r\nbe based on real data rather than on static scheduled data. To check if an airport is tracked and on which level, \r\nuse `/health/services/airports/{icao}/feeds` endpoint. You can also use `/health/services/feeds/{service}/airports` to get \r\nthe list of covered airports. \r\n\r\nAt the moment airports having both ICAO and IATA code and flight schedules are present available only.\r\n\r\n*Returns:* List of routes and daily flights amount departing from an airport.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "airports",
+                ":codeType",
+                ":code",
+                "stats",
+                "routes",
+                "daily"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "codeType",
+                  "description": "Type of code to search airport by (`iata` or `icao`)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "code",
+                  "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) API.market API Key",
+                "key": "x-api-market-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "42d3ed19-c2b9-4d78-8415-9d8331956833",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":code",
+                    "stats",
+                    "routes",
+                    "daily"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"routes\": [\n    \"example_value\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "37f1f2ee-92c1-43af-985f-bf172d51f148",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":code",
+                    "stats",
+                    "routes",
+                    "daily"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4f63b01c-6ac5-4c47-93de-da2f6eb0e6c0",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":code",
+                    "stats",
+                    "routes",
+                    "daily"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7ad89ebe-fd82-4c67-a500-ebbc5f11eb86",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":code",
+                    "stats",
+                    "routes",
+                    "daily"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d75ecdd1-c175-49b5-bf28-8c7cf5ea6d80",
+              "name": "Unavailable For Legal Reasons",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":code",
+                    "stats",
+                    "routes",
+                    "daily"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "code": 451,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c86f990e-97c7-43ca-a14a-9e237f9c44b6",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":code",
+                    "stats",
+                    "routes",
+                    "daily"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "914b74b7-dc7d-49ce-96da-a99a56e3b7b7",
+              "name": "Service Unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":code",
+                    "stats",
+                    "routes",
+                    "daily"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ac54a622-c473-49d3-9b98-f84b1481392d",
+          "name": "AeroDataBox Airport Routes and Daily Flight Destinations / TIER 3",
+          "request": {
+            "name": "AeroDataBox Airport Routes and Daily Flight Destinations / TIER 3",
+            "description": {
+              "content": "**What are the most popular routes from an airport?** or **Where I can fly from an airport?** or \r\n**How many daily flights to different destinations from an airport?**\r\n\r\nThe data will only be available for airports which have at least schedules information available. \r\nIf the airport is also covered with live or ADS-B coverage, the quality will improve greatly as it will\r\nbe based on real data rather than on static scheduled data. To check if an airport is tracked and on which level, \r\nuse `/health/services/airports/{icao}/feeds` endpoint. You can also use `/health/services/feeds/{service}/airports` to get \r\nthe list of covered airports. \r\n\r\nAt the moment airports having both ICAO and IATA code and flight schedules are present available only.\r\n\r\n*Returns:* List of routes and daily flights amount departing from an airport.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "airports",
+                ":codeType",
+                ":code",
+                "stats",
+                "routes",
+                "daily",
+                ":dateLocal"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "codeType",
+                  "description": "Type of code to search airport by (`iata` or `icao`)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "code",
+                  "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<dateTime>",
+                  "key": "dateLocal",
+                  "description": "(Required) Local date at the airport (default = null).\r\nIf specified, returns statistics based on 7 days prior to the date specified.\r\nOtherwise, returns statistics based on 7 days prior to the current local date at the airport."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) API.market API Key",
+                "key": "x-api-market-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9bcb5e3d-2d6e-4593-b0d6-6748e91e37ea",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":code",
+                    "stats",
+                    "routes",
+                    "daily",
+                    ":dateLocal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<dateTime>",
+                      "key": "dateLocal",
+                      "description": "(Required) Local date at the airport (default = null).\r\nIf specified, returns statistics based on 7 days prior to the date specified.\r\nOtherwise, returns statistics based on 7 days prior to the current local date at the airport."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"routes\": [\n    \"example_value\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6bdfb06d-86c4-4b6d-ba24-a9079da63fa0",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":code",
+                    "stats",
+                    "routes",
+                    "daily",
+                    ":dateLocal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<dateTime>",
+                      "key": "dateLocal",
+                      "description": "(Required) Local date at the airport (default = null).\r\nIf specified, returns statistics based on 7 days prior to the date specified.\r\nOtherwise, returns statistics based on 7 days prior to the current local date at the airport."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d794271e-515c-4c72-8ba3-0b8496690982",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":code",
+                    "stats",
+                    "routes",
+                    "daily",
+                    ":dateLocal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<dateTime>",
+                      "key": "dateLocal",
+                      "description": "(Required) Local date at the airport (default = null).\r\nIf specified, returns statistics based on 7 days prior to the date specified.\r\nOtherwise, returns statistics based on 7 days prior to the current local date at the airport."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3112bc88-3d41-43b8-9767-89e5c858c1ed",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":code",
+                    "stats",
+                    "routes",
+                    "daily",
+                    ":dateLocal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<dateTime>",
+                      "key": "dateLocal",
+                      "description": "(Required) Local date at the airport (default = null).\r\nIf specified, returns statistics based on 7 days prior to the date specified.\r\nOtherwise, returns statistics based on 7 days prior to the current local date at the airport."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "59f4b69c-444a-4bcb-9272-218d6d170d35",
+              "name": "Unavailable For Legal Reasons",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":code",
+                    "stats",
+                    "routes",
+                    "daily",
+                    ":dateLocal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<dateTime>",
+                      "key": "dateLocal",
+                      "description": "(Required) Local date at the airport (default = null).\r\nIf specified, returns statistics based on 7 days prior to the date specified.\r\nOtherwise, returns statistics based on 7 days prior to the current local date at the airport."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "code": 451,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "492ac16d-b1e7-44a0-a5d1-8a40b66bc064",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":code",
+                    "stats",
+                    "routes",
+                    "daily",
+                    ":dateLocal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<dateTime>",
+                      "key": "dateLocal",
+                      "description": "(Required) Local date at the airport (default = null).\r\nIf specified, returns statistics based on 7 days prior to the date specified.\r\nOtherwise, returns statistics based on 7 days prior to the current local date at the airport."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cfd14595-ce7c-4280-9f2a-83ec76320b4d",
+              "name": "Service Unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    ":codeType",
+                    ":code",
+                    "stats",
+                    "routes",
+                    "daily",
+                    ":dateLocal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "codeType",
+                      "description": "Type of code to search airport by (`iata` or `icao`)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<dateTime>",
+                      "key": "dateLocal",
+                      "description": "(Required) Local date at the airport (default = null).\r\nIf specified, returns statistics based on 7 days prior to the date specified.\r\nOtherwise, returns statistics based on 7 days prior to the current local date at the airport."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f6076e02-a53b-41ea-a51d-5815bac42b48",
+          "name": "AeroDataBox Global Delays (current or Historical Moment) / TIER 3",
+          "request": {
+            "name": "AeroDataBox Global Delays (current or Historical Moment) / TIER 3",
+            "description": {
+              "content": "**What is the current or historical delay situation in all airports?** or **What is the delay index of all airports globally right now or at a moment in past?**\r\n\r\nPlease read more about airport delays on here: https://aerodatabox.com/api-airport-delays/\r\n\r\n*Returns*: Statistical delay information about delays (median delay, delay index, cancelled flights) of arrivals and departures for all known airports, represented by a collection of items sorted by \r\nthe average of arrival and departure index, descending order (from worst to best). Only qualifying and recent enough delay statistics records are returned.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "airports",
+                "delays"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) API.market API Key",
+                "key": "x-api-market-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bbe505d4-7c2d-40d7-80ad-82022751c374",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    "delays"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"airportIcao\": \"KLAX\",\n  \"from\": \"example_value\",\n  \"to\": \"example_value\",\n  \"departuresDelayInformation\": \"example_value\",\n  \"arrivalsDelayInformation\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "843d87f7-61ab-45d8-9a77-7341ace50aee",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    "delays"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9cf95884-a3de-498f-b1a6-725e647b576d",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    "delays"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6c80fe2b-2c58-499b-9d88-e02b023cd1ac",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    "delays"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "054bc6c9-c144-4313-b178-976c59255613",
+              "name": "Unavailable For Legal Reasons",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    "delays"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "code": 451,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1f7740ff-0a44-4740-975f-30d36bf28fef",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    "delays"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f26631fd-e5f0-4bae-acaa-700c5cff5e65",
+              "name": "Service Unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    "delays"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9de3a642-1070-4188-87ea-85efad9b527e",
+          "name": "AeroDataBox Global Delays (current or Historical Moment) / TIER 3",
+          "request": {
+            "name": "AeroDataBox Global Delays (current or Historical Moment) / TIER 3",
+            "description": {
+              "content": "**What is the current or historical delay situation in all airports?** or **What is the delay index of all airports globally right now or at a moment in past?**\r\n\r\nPlease read more about airport delays on here: https://aerodatabox.com/api-airport-delays/\r\n\r\n*Returns*: Statistical delay information about delays (median delay, delay index, cancelled flights) of arrivals and departures for all known airports, represented by a collection of items sorted by \r\nthe average of arrival and departure index, descending order (from worst to best). Only qualifying and recent enough delay statistics records are returned.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "airports",
+                "delays",
+                ":dateUtc"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<dateTime>",
+                  "key": "dateUtc",
+                  "description": "(Required) The moment of time for / from which delay data is requested (UTC time, format: YYYY-MM-DDTHH:mm).\r\nDefault - current time."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) API.market API Key",
+                "key": "x-api-market-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "19420b9e-cea5-4b5e-a1a7-14d0394f03d6",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    "delays",
+                    ":dateUtc"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<dateTime>",
+                      "key": "dateUtc",
+                      "description": "(Required) The moment of time for / from which delay data is requested (UTC time, format: YYYY-MM-DDTHH:mm).\r\nDefault - current time."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"airportIcao\": \"KLAX\",\n  \"from\": \"example_value\",\n  \"to\": \"example_value\",\n  \"departuresDelayInformation\": \"example_value\",\n  \"arrivalsDelayInformation\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c04658c6-5e53-4b9c-9b94-3925c60584fb",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    "delays",
+                    ":dateUtc"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<dateTime>",
+                      "key": "dateUtc",
+                      "description": "(Required) The moment of time for / from which delay data is requested (UTC time, format: YYYY-MM-DDTHH:mm).\r\nDefault - current time."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f765ae64-1dd2-451e-a622-16679ebfb187",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    "delays",
+                    ":dateUtc"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<dateTime>",
+                      "key": "dateUtc",
+                      "description": "(Required) The moment of time for / from which delay data is requested (UTC time, format: YYYY-MM-DDTHH:mm).\r\nDefault - current time."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ca92d96a-f8d8-4a69-8ca8-2ddfd3965866",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    "delays",
+                    ":dateUtc"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<dateTime>",
+                      "key": "dateUtc",
+                      "description": "(Required) The moment of time for / from which delay data is requested (UTC time, format: YYYY-MM-DDTHH:mm).\r\nDefault - current time."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ff5b6f68-7e40-467d-ba07-c437f5875d34",
+              "name": "Unavailable For Legal Reasons",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    "delays",
+                    ":dateUtc"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<dateTime>",
+                      "key": "dateUtc",
+                      "description": "(Required) The moment of time for / from which delay data is requested (UTC time, format: YYYY-MM-DDTHH:mm).\r\nDefault - current time."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "code": 451,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8647a3cb-5e27-4cf3-9072-60d9ecbb290c",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    "delays",
+                    ":dateUtc"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<dateTime>",
+                      "key": "dateUtc",
+                      "description": "(Required) The moment of time for / from which delay data is requested (UTC time, format: YYYY-MM-DDTHH:mm).\r\nDefault - current time."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "30d31cb9-2c84-47a8-a3b9-6c43e1d9319a",
+              "name": "Service Unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airports",
+                    "delays",
+                    ":dateUtc"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<dateTime>",
+                      "key": "dateUtc",
+                      "description": "(Required) The moment of time for / from which delay data is requested (UTC time, format: YYYY-MM-DDTHH:mm).\r\nDefault - current time."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "25356dea-7239-4039-978e-186e89e476f5",
+          "name": "AeroDataBox Flight Delay Statistics by Flight Number / TIER 3",
+          "request": {
+            "name": "AeroDataBox Flight Delay Statistics by Flight Number / TIER 3",
+            "description": {
+              "content": "**By how much the flight is delayed in average?**\r\n\r\nInformation is only available for flights which were tracked with live updates at least at origin or at destination within the last 90 days.\r\n\r\n*Returns:* delay statistics for the flight with specified number.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "flights",
+                ":number",
+                "delays"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "number",
+                  "description": "(Required) Flight number (with or without spaces, IATA or ICAO, any case formats are acceptable, e.g. KL1395, Klm 1395)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) API.market API Key",
+                "key": "x-api-market-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b8af7362-fde5-4d92-9c93-fa35e4991959",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "flights",
+                    ":number",
+                    "delays"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "number",
+                      "description": "(Required) Flight number (with or without spaces, IATA or ICAO, any case formats are acceptable, e.g. KL1395, Klm 1395)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"number\": \"example_value\",\n  \"origins\": [\n    \"example_value\"\n  ],\n  \"destinations\": [\n    \"example_value\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b6c0271b-6ba0-4da3-8de4-292d02774738",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "flights",
+                    ":number",
+                    "delays"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "number",
+                      "description": "(Required) Flight number (with or without spaces, IATA or ICAO, any case formats are acceptable, e.g. KL1395, Klm 1395)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4ae9468a-c1c1-4bfd-a2c8-2a94d9ee5710",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "flights",
+                    ":number",
+                    "delays"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "number",
+                      "description": "(Required) Flight number (with or without spaces, IATA or ICAO, any case formats are acceptable, e.g. KL1395, Klm 1395)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4f86f7be-1a64-4ddc-addb-1bcb3a62744f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "flights",
+                    ":number",
+                    "delays"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "number",
+                      "description": "(Required) Flight number (with or without spaces, IATA or ICAO, any case formats are acceptable, e.g. KL1395, Klm 1395)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "660df865-2d56-4302-82cb-c916f9b1df1a",
+              "name": "Unavailable For Legal Reasons",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "flights",
+                    ":number",
+                    "delays"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "number",
+                      "description": "(Required) Flight number (with or without spaces, IATA or ICAO, any case formats are acceptable, e.g. KL1395, Klm 1395)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "code": 451,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "41a69c4f-67f5-4cec-9f53-f5760e622e3c",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "flights",
+                    ":number",
+                    "delays"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "number",
+                      "description": "(Required) Flight number (with or without spaces, IATA or ICAO, any case formats are acceptable, e.g. KL1395, Klm 1395)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d04f5376-bb88-4177-9ea7-aff776316f8a",
+              "name": "Service Unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "flights",
+                    ":number",
+                    "delays"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "number",
+                      "description": "(Required) Flight number (with or without spaces, IATA or ICAO, any case formats are acceptable, e.g. KL1395, Klm 1395)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://prod.api.market/api/v1/aedbx/aerodatabox",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d59003e6-e5d5-4a80-9a49-4035789304cf",
+    "name": "AeroDataBox API - Aviation and Flight Aircraft API Statistical API API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Affordable aviation & flight data API tailored for small and medium businesses, teams and individual developers.",
+      "type": "text/plain"
+    }
+  }
+}

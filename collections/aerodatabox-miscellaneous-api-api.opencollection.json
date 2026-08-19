@@ -1,0 +1,166 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "AeroDataBox API - Aviation and Flight Aircraft API Miscellaneous API API",
+    "version": "1.14.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Miscellaneous API",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "AeroDataBox Current Local Time at the Airport / TIER 1",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://prod.api.market/api/v1/aedbx/aerodatabox/airports/:codeType/:code/time/local",
+            "headers": [
+              {
+                "name": "x-api-market-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "codeType",
+                "value": "",
+                "type": "path",
+                "description": "Type of code to search airport by (`iata` or `icao`)"
+              },
+              {
+                "name": "code",
+                "value": "",
+                "type": "path",
+                "description": "If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+              }
+            ]
+          },
+          "docs": "**What is the current local time at the airport?**\r\n\r\nAt the moment airports having both ICAO and IATA code are present in database only.\r\n\r\n*Returns:* Local time at the airport, if airport is found."
+        },
+        {
+          "info": {
+            "name": "AeroDataBox Solar and Day Time at the Airport / TIER 1",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://prod.api.market/api/v1/aedbx/aerodatabox/airports/:codeType/:code/time/solar",
+            "headers": [
+              {
+                "name": "x-api-market-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "codeType",
+                "value": "",
+                "type": "path",
+                "description": "Type of code to search airport by (`iata` or `icao`)"
+              },
+              {
+                "name": "code",
+                "value": "",
+                "type": "path",
+                "description": "If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+              }
+            ]
+          },
+          "docs": "**What is the sun position in the sky now at a specific time at the airport?** or\r\n**When does the sun rise and set at the airport today or on the other day at the airport?** or\r\n**Is it dark now or is it day at the airport?**\r\n\r\nAt the moment airports having both ICAO and IATA code are present in database only.\r\n\r\n*Returns:* If airport is found, returns various solar-related information: sun position in the sky,\r\ndaytime (day, night, twilight: civil, nautical, astronomical, golden/blue hours), "
+        },
+        {
+          "info": {
+            "name": "AeroDataBox Solar and Day Time at the Airport / TIER 1",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://prod.api.market/api/v1/aedbx/aerodatabox/airports/:codeType/:code/time/solar/:dateLocal",
+            "headers": [
+              {
+                "name": "x-api-market-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "codeType",
+                "value": "",
+                "type": "path",
+                "description": "Type of code to search airport by (`iata` or `icao`)"
+              },
+              {
+                "name": "code",
+                "value": "",
+                "type": "path",
+                "description": "If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+              },
+              {
+                "name": "dateLocal",
+                "value": "",
+                "type": "path",
+                "description": "The moment of time which solar data is request for (local time, format: YYYY-MM-DDTHH:mm). \r\nDefault - current time."
+              }
+            ]
+          },
+          "docs": "**What is the sun position in the sky now at a specific time at the airport?** or\r\n**When does the sun rise and set at the airport today or on the other day at the airport?** or\r\n**Is it dark now or is it day at the airport?**\r\n\r\nAt the moment airports having both ICAO and IATA code are present in database only.\r\n\r\n*Returns:* If airport is found, returns various solar-related information: sun position in the sky,\r\ndaytime (day, night, twilight: civil, nautical, astronomical, golden/blue hours), "
+        },
+        {
+          "info": {
+            "name": "AeroDataBox Distance and Flight Time Between Airports / TIER 2",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://prod.api.market/api/v1/aedbx/aerodatabox/airports/:codeType/:codeFrom/distance-time/:codeTo",
+            "headers": [
+              {
+                "name": "x-api-market-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "codeType",
+                "value": "",
+                "type": "path",
+                "description": "Type of code to search airport by (`iata` or `icao`)"
+              },
+              {
+                "name": "codeFrom",
+                "value": "",
+                "type": "path",
+                "description": "If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the origin airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the origin  airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+              },
+              {
+                "name": "codeTo",
+                "value": "",
+                "type": "path",
+                "description": "If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the destination airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the destination  airport (e.g.: AMS, SFO, LAX, etc.);\r\n* `local`, then the format of this field is subject to specific standards of relevant national or local airport codification systems.\r\n\r\nFull, stripped and any case formats are acceptable."
+              },
+              {
+                "name": "aircraftName",
+                "value": "",
+                "type": "query",
+                "description": "Aircraft type name (free text). \r\nIf specified, the aircraft type will be attempted to be taken into account to provide more accurate result."
+              },
+              {
+                "name": "flightTimeModel",
+                "value": "",
+                "type": "query",
+                "description": "Model of calculation of the flight time. Default is <a href=\"#model-ModelFlightTimeEnum\"></a>\r\nMore advanced model(s) is available, including machine learning-based models.\r\nSee <a href=\"#model-ModelFlightTimeEnum\">ModelFlightTimeEnum</a> for details."
+              }
+            ]
+          },
+          "docs": "**What is the great circle distance between airports?** \r\n**What is approximate flight time between airports?**\r\n** What is the flight time between airports based on history of flights and/or aircraft type?** (machine-learning based)\r\n\r\nUse `flightTimeModel` = <a href=\"#model-ModelFlightTimeEnum\">ML01</a> to get more accurate results based on historical performance of flights on a specific route \r\nand aircraft type.\r\n\r\n*Returns:* Distance and approximate flight time between airports, if both air"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,234 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "AeroDataBox API - Aviation and Flight Aircraft API API",
+    "version": "1.14.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Aircraft API",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "AeroDataBox Single Aircraft (by Tail-number, Mode-S or ID) / TIER 1",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://prod.api.market/api/v1/aedbx/aerodatabox/aircrafts/:searchBy/:searchParam",
+            "headers": [
+              {
+                "name": "x-api-market-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "searchBy",
+                "value": "",
+                "type": "path",
+                "description": "Criteria to search aircraft by"
+              },
+              {
+                "name": "searchParam",
+                "value": "",
+                "type": "path",
+                "description": "Value of the search criteria. If `searchBy` is: \r\n* `id`: then this field should be an ID of an aircraft (as specified in the database of this API);\r\n* `reg`: then this field should be a tail-number of an aircraft (with or without spaces or dashes, any case formats are acceptable, e.g.PH-BXO, DeMhJ), multiple matches are possible - see below;\r\n* `icao24`, then this field should be a ICAO 24-bit Mode-S address of an aircraft specified in hexadecimal format (e.g. 484161, 483EFD), multiple matches are possible - see below.\r\n\r\n*If multiple matches are possible:*\r\n\r\nThere cannot be more than one aircraft actively flying with the same tail-number or ICAO 24-bit Mode-S address at any moment of time. \r\nHowever, historically aircraft tail-numbers or addresses may be used multiple times by different aircraft.\r\nThis endpoint is supposed to return a **single** aircraft data. In case if multiple aircraft satisfy the search criteria, the best match will be chosen as follows:\r\n* If an active aircraft is found according to the requested critera, it is returned.\r\n* Otherwise, an aircraft that used requested tail-number/address the most recently is returned. \r\n* If usage time may not be determined, the aircraft stored in the database the most recently is returned."
+              },
+              {
+                "name": "withImage",
+                "value": "",
+                "type": "query",
+                "description": "Should include aircraft image (default: false)."
+              },
+              {
+                "name": "withRegistrations",
+                "value": "",
+                "type": "query",
+                "description": "Should include the history of aircraft registrations (default: false)."
+              }
+            ]
+          },
+          "docs": "*Returns:* Single aircraft, *best* matching specified search criteria, if found. Please note that all found aircraft will be impersonated with registration information matching the requested tail number or Mode-S even though an aircraft might be flying under a different registration right now."
+        },
+        {
+          "info": {
+            "name": "AeroDataBox Single Aircraft Registration History (by Tail-number, Mode-S or ID) / TIER 1",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://prod.api.market/api/v1/aedbx/aerodatabox/aircrafts/:searchBy/:searchParam/registrations",
+            "headers": [
+              {
+                "name": "x-api-market-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "searchBy",
+                "value": "",
+                "type": "path",
+                "description": "Criteria to search aircraft by"
+              },
+              {
+                "name": "searchParam",
+                "value": "",
+                "type": "path",
+                "description": "Value of the search criteria. If `searchBy` is: \r\n* `id`, then this field should be an ID of an aircraft (as specified in the database of this API);\r\n* `reg`, then this field should be a tail-number of an aircraft (with or without spaces or dashes, any case formats are acceptable, e.g.PH-BXO, DeMhJ), multiple matches are possible - see below;\r\n* `icao24`, then this field should be a ICAO 24-bit Mode-S address of an aircraft specified in hexadecimal format (e.g. 484161, 483EFD), multiple matches are possible - see below.\r\n\r\n*If multiple matches are possible:* see similar remark to `Single aircraft` endpoint."
+              }
+            ]
+          },
+          "docs": "*Returns:* A list of all known registrations of a single aircraft, *best* matching specified search criteria, if found"
+        },
+        {
+          "info": {
+            "name": "AeroDataBox Aircraft by Tail-number, Mode-S or ID / TIER 1",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://prod.api.market/api/v1/aedbx/aerodatabox/aircrafts/:searchBy/:searchParam/all",
+            "headers": [
+              {
+                "name": "x-api-market-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "searchBy",
+                "value": "",
+                "type": "path",
+                "description": "Criteria to search aircraft by"
+              },
+              {
+                "name": "searchParam",
+                "value": "",
+                "type": "path",
+                "description": "Value of the search criteria. If `searchBy` is: \r\n* `id`, then this field should be an ID of an aircraft (as specified in the database of this API);\r\n* `reg`, then this field should be a tail-number of an aircraft (with or without spaces or dashes, any case formats are acceptable, e.g.PH-BXO, DeMhJ);\r\n* `icao24`, then this field should be a ICAO 24-bit Mode-S address of an aircraft specified in hexadecimal format (e.g. 484161, 483EFD)."
+              },
+              {
+                "name": "withImage",
+                "value": "",
+                "type": "query",
+                "description": "Should include aircraft image (default: false)."
+              },
+              {
+                "name": "withRegistrations",
+                "value": "",
+                "type": "query",
+                "description": "Should include the history of aircraft registrations (default: false)."
+              }
+            ]
+          },
+          "docs": "*Returns:* A list of all aircraft ever matched the requested criteria. Please note that all found aircraft will be impersonated with registration information matching the requested tail number or Mode-S even though an aircraft might be flying under a different registration right now."
+        },
+        {
+          "info": {
+            "name": "AeroDataBox Airline Fleet / Aircraft List by Airline Code (BETA) / TIER 3",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://prod.api.market/api/v1/aedbx/aerodatabox/airlines/:airlineCode/aircrafts",
+            "headers": [
+              {
+                "name": "x-api-market-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "airlineCode",
+                "value": "",
+                "type": "path",
+                "description": "3-character ICAO-code of the airliner (e.g., KLM, ACA); or\r\n2-character IATA-code of the airline (e.g., KL, AC).\r\n            \r\nPlease note that more than one active airline may have the same IATA code, therefore IATA codes are not recommended for this endpoint."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The number of returned records will be capped at this value.\r\nMust be a positive value and not exceed the limit stipulated by your pricing plan."
+              },
+              {
+                "name": "pageOffset",
+                "value": "",
+                "type": "query",
+                "description": "The number of records to skip before listing a page of records. In conjunction with `pageSize` effectively determines the page number (default  - 0)."
+              },
+              {
+                "name": "withRegistrations",
+                "value": "",
+                "type": "query",
+                "description": "Should include the history of aircraft registrations (default: false)."
+              }
+            ]
+          },
+          "docs": "*Returns:* A paged list of aircraft in the fleet of the specified airline. \r\n\r\nThat will include *active* aircraft currently flying in an *active* airline, verfified through more than one source.\r\nUnconfirmed sightings of an aircraft will not qualify said aircraft to be listed in the fleet."
+        },
+        {
+          "info": {
+            "name": "AeroDataBox Aircraft Image by Tail-number / TIER 2",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://prod.api.market/api/v1/aedbx/aerodatabox/aircrafts/reg/:reg/image/beta",
+            "headers": [
+              {
+                "name": "x-api-market-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "reg",
+                "value": "",
+                "type": "path",
+                "description": "Tail-number of the aircraft (full, stripped and any case formats are acceptable)."
+              }
+            ]
+          },
+          "docs": "**What is the aircraft photo?**\r\n\r\nAircraft images are being searched in external sources by certain criteria without any manual intervention. \r\nTherefore, false matches may be returned. Only images with licenses approved for commercial use are returned. Please be advised that you may be required to mention author attribution before using the image.\r\n\r\n*Returns:* Image data with medium-sized direct image URL and licence approved for commercial use\r\nis returned."
+        },
+        {
+          "info": {
+            "name": "AeroDataBox Search Active Aircraft Tail Numbers by Term / TIER 2",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://prod.api.market/api/v1/aedbx/aerodatabox/aircrafts/search/term",
+            "headers": [
+              {
+                "name": "x-api-market-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Search term (min. 4 non whitespace characters length)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to be returned (max. 10, defaut = 5)"
+              }
+            ]
+          },
+          "docs": "*Returns:* List of active aircraft registrations with tail numbers starting from the term."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

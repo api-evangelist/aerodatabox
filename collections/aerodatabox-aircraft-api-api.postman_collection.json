@@ -1,0 +1,2900 @@
+{
+  "item": [
+    {
+      "id": "8dc75572-ac0d-40c9-8e0e-f87932bece1f",
+      "name": "Aircraft API",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d11e7dbf-008a-43ae-84b4-9b6c8639cc2a",
+          "name": "AeroDataBox Single Aircraft (by Tail-number, Mode-S or ID) / TIER 1",
+          "request": {
+            "name": "AeroDataBox Single Aircraft (by Tail-number, Mode-S or ID) / TIER 1",
+            "description": {
+              "content": "*Returns:* Single aircraft, *best* matching specified search criteria, if found. Please note that all found aircraft will be impersonated with registration information matching the requested tail number or Mode-S even though an aircraft might be flying under a different registration right now.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "aircrafts",
+                ":searchBy",
+                ":searchParam"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "withImage",
+                  "value": "false",
+                  "description": "Should include aircraft image (default: false)."
+                },
+                {
+                  "disabled": false,
+                  "key": "withRegistrations",
+                  "value": "false",
+                  "description": "Should include the history of aircraft registrations (default: false)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "searchBy",
+                  "description": "Criteria to search aircraft by"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "searchParam",
+                  "description": "(Required) Value of the search criteria. If `searchBy` is: \r\n* `id`: then this field should be an ID of an aircraft (as specified in the database of this API);\r\n* `reg`: then this field should be a tail-number of an aircraft (with or without spaces or dashes, any case formats are acceptable, e.g.PH-BXO, DeMhJ), multiple matches are possible - see below;\r\n* `icao24`, then this field should be a ICAO 24-bit Mode-S address of an aircraft specified in hexadecimal format (e.g. 484161, 483EFD), multiple matches are possible - see below.\r\n\r\n*If multiple matches are possible:*\r\n\r\nThere cannot be more than one aircraft actively flying with the same tail-number or ICAO 24-bit Mode-S address at any moment of time. \r\nHowever, historically aircraft tail-numbers or addresses may be used multiple times by different aircraft.\r\nThis endpoint is supposed to return a **single** aircraft data. In case if multiple aircraft satisfy the search criteria, the best match will be chosen as follows:\r\n* If an active aircraft is found according to the requested critera, it is returned.\r\n* Otherwise, an aircraft that used requested tail-number/address the most recently is returned. \r\n* If usage time may not be determined, the aircraft stored in the database the most recently is returned."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) API.market API Key",
+                "key": "x-api-market-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1ecbe02d-ecf9-483b-8623-36858561ea54",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "aircrafts",
+                    ":searchBy",
+                    ":searchParam"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "withImage",
+                      "value": "false"
+                    },
+                    {
+                      "key": "withRegistrations",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "searchBy",
+                      "description": "Criteria to search aircraft by"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "searchParam",
+                      "description": "(Required) Value of the search criteria. If `searchBy` is: \r\n* `id`: then this field should be an ID of an aircraft (as specified in the database of this API);\r\n* `reg`: then this field should be a tail-number of an aircraft (with or without spaces or dashes, any case formats are acceptable, e.g.PH-BXO, DeMhJ), multiple matches are possible - see below;\r\n* `icao24`, then this field should be a ICAO 24-bit Mode-S address of an aircraft specified in hexadecimal format (e.g. 484161, 483EFD), multiple matches are possible - see below.\r\n\r\n*If multiple matches are possible:*\r\n\r\nThere cannot be more than one aircraft actively flying with the same tail-number or ICAO 24-bit Mode-S address at any moment of time. \r\nHowever, historically aircraft tail-numbers or addresses may be used multiple times by different aircraft.\r\nThis endpoint is supposed to return a **single** aircraft data. In case if multiple aircraft satisfy the search criteria, the best match will be chosen as follows:\r\n* If an active aircraft is found according to the requested critera, it is returned.\r\n* Otherwise, an aircraft that used requested tail-number/address the most recently is returned. \r\n* If usage time may not be determined, the aircraft stored in the database the most recently is returned."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 100,\n  \"reg\": \"N12345\",\n  \"active\": true,\n  \"serial\": \"example_value\",\n  \"hexIcao\": \"KLAX\",\n  \"airlineName\": \"Los Angeles International\",\n  \"iataType\": \"LAX\",\n  \"iataCodeShort\": \"LAX\",\n  \"icaoCode\": \"KLAX\",\n  \"model\": \"example_value\",\n  \"modelCode\": \"CODE1\",\n  \"numSeats\": 100,\n  \"rolloutDate\": \"2025-03-15T14:30:00Z\",\n  \"firstFlightDate\": \"2025-03-15T14:30:00Z\",\n  \"deliveryDate\": \"2025-03-15T14:30:00Z\",\n  \"registrationDate\": \"2025-03-15T14:30:00Z\",\n  \"typeName\": \"Los Angeles International\",\n  \"numEngines\": 100,\n  \"engineType\": \"example_value\",\n  \"isFreighter\": true,\n  \"productionLine\": \"example_value\",\n  \"ageYears\": 1.5,\n  \"verified\": true,\n  \"image\": \"example_value\",\n  \"numRegistrations\": 100,\n  \"registrations\": [\n    \"N12345\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c70fef54-642a-4c11-abf2-6f0e170ebcba",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "aircrafts",
+                    ":searchBy",
+                    ":searchParam"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "withImage",
+                      "value": "false"
+                    },
+                    {
+                      "key": "withRegistrations",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "searchBy",
+                      "description": "Criteria to search aircraft by"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "searchParam",
+                      "description": "(Required) Value of the search criteria. If `searchBy` is: \r\n* `id`: then this field should be an ID of an aircraft (as specified in the database of this API);\r\n* `reg`: then this field should be a tail-number of an aircraft (with or without spaces or dashes, any case formats are acceptable, e.g.PH-BXO, DeMhJ), multiple matches are possible - see below;\r\n* `icao24`, then this field should be a ICAO 24-bit Mode-S address of an aircraft specified in hexadecimal format (e.g. 484161, 483EFD), multiple matches are possible - see below.\r\n\r\n*If multiple matches are possible:*\r\n\r\nThere cannot be more than one aircraft actively flying with the same tail-number or ICAO 24-bit Mode-S address at any moment of time. \r\nHowever, historically aircraft tail-numbers or addresses may be used multiple times by different aircraft.\r\nThis endpoint is supposed to return a **single** aircraft data. In case if multiple aircraft satisfy the search criteria, the best match will be chosen as follows:\r\n* If an active aircraft is found according to the requested critera, it is returned.\r\n* Otherwise, an aircraft that used requested tail-number/address the most recently is returned. \r\n* If usage time may not be determined, the aircraft stored in the database the most recently is returned."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0d28df53-44e4-475c-b074-c63074f479b1",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "aircrafts",
+                    ":searchBy",
+                    ":searchParam"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "withImage",
+                      "value": "false"
+                    },
+                    {
+                      "key": "withRegistrations",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "searchBy",
+                      "description": "Criteria to search aircraft by"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "searchParam",
+                      "description": "(Required) Value of the search criteria. If `searchBy` is: \r\n* `id`: then this field should be an ID of an aircraft (as specified in the database of this API);\r\n* `reg`: then this field should be a tail-number of an aircraft (with or without spaces or dashes, any case formats are acceptable, e.g.PH-BXO, DeMhJ), multiple matches are possible - see below;\r\n* `icao24`, then this field should be a ICAO 24-bit Mode-S address of an aircraft specified in hexadecimal format (e.g. 484161, 483EFD), multiple matches are possible - see below.\r\n\r\n*If multiple matches are possible:*\r\n\r\nThere cannot be more than one aircraft actively flying with the same tail-number or ICAO 24-bit Mode-S address at any moment of time. \r\nHowever, historically aircraft tail-numbers or addresses may be used multiple times by different aircraft.\r\nThis endpoint is supposed to return a **single** aircraft data. In case if multiple aircraft satisfy the search criteria, the best match will be chosen as follows:\r\n* If an active aircraft is found according to the requested critera, it is returned.\r\n* Otherwise, an aircraft that used requested tail-number/address the most recently is returned. \r\n* If usage time may not be determined, the aircraft stored in the database the most recently is returned."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "03cd17dc-cd71-4b7c-a2aa-89aa6589024a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "aircrafts",
+                    ":searchBy",
+                    ":searchParam"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "withImage",
+                      "value": "false"
+                    },
+                    {
+                      "key": "withRegistrations",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "searchBy",
+                      "description": "Criteria to search aircraft by"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "searchParam",
+                      "description": "(Required) Value of the search criteria. If `searchBy` is: \r\n* `id`: then this field should be an ID of an aircraft (as specified in the database of this API);\r\n* `reg`: then this field should be a tail-number of an aircraft (with or without spaces or dashes, any case formats are acceptable, e.g.PH-BXO, DeMhJ), multiple matches are possible - see below;\r\n* `icao24`, then this field should be a ICAO 24-bit Mode-S address of an aircraft specified in hexadecimal format (e.g. 484161, 483EFD), multiple matches are possible - see below.\r\n\r\n*If multiple matches are possible:*\r\n\r\nThere cannot be more than one aircraft actively flying with the same tail-number or ICAO 24-bit Mode-S address at any moment of time. \r\nHowever, historically aircraft tail-numbers or addresses may be used multiple times by different aircraft.\r\nThis endpoint is supposed to return a **single** aircraft data. In case if multiple aircraft satisfy the search criteria, the best match will be chosen as follows:\r\n* If an active aircraft is found according to the requested critera, it is returned.\r\n* Otherwise, an aircraft that used requested tail-number/address the most recently is returned. \r\n* If usage time may not be determined, the aircraft stored in the database the most recently is returned."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "86b8c07f-c559-4e62-bf55-693204ee3c51",
+              "name": "Unavailable For Legal Reasons",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "aircrafts",
+                    ":searchBy",
+                    ":searchParam"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "withImage",
+                      "value": "false"
+                    },
+                    {
+                      "key": "withRegistrations",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "searchBy",
+                      "description": "Criteria to search aircraft by"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "searchParam",
+                      "description": "(Required) Value of the search criteria. If `searchBy` is: \r\n* `id`: then this field should be an ID of an aircraft (as specified in the database of this API);\r\n* `reg`: then this field should be a tail-number of an aircraft (with or without spaces or dashes, any case formats are acceptable, e.g.PH-BXO, DeMhJ), multiple matches are possible - see below;\r\n* `icao24`, then this field should be a ICAO 24-bit Mode-S address of an aircraft specified in hexadecimal format (e.g. 484161, 483EFD), multiple matches are possible - see below.\r\n\r\n*If multiple matches are possible:*\r\n\r\nThere cannot be more than one aircraft actively flying with the same tail-number or ICAO 24-bit Mode-S address at any moment of time. \r\nHowever, historically aircraft tail-numbers or addresses may be used multiple times by different aircraft.\r\nThis endpoint is supposed to return a **single** aircraft data. In case if multiple aircraft satisfy the search criteria, the best match will be chosen as follows:\r\n* If an active aircraft is found according to the requested critera, it is returned.\r\n* Otherwise, an aircraft that used requested tail-number/address the most recently is returned. \r\n* If usage time may not be determined, the aircraft stored in the database the most recently is returned."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "code": 451,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3886d46b-3d67-4905-8077-f0cb99407807",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "aircrafts",
+                    ":searchBy",
+                    ":searchParam"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "withImage",
+                      "value": "false"
+                    },
+                    {
+                      "key": "withRegistrations",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "searchBy",
+                      "description": "Criteria to search aircraft by"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "searchParam",
+                      "description": "(Required) Value of the search criteria. If `searchBy` is: \r\n* `id`: then this field should be an ID of an aircraft (as specified in the database of this API);\r\n* `reg`: then this field should be a tail-number of an aircraft (with or without spaces or dashes, any case formats are acceptable, e.g.PH-BXO, DeMhJ), multiple matches are possible - see below;\r\n* `icao24`, then this field should be a ICAO 24-bit Mode-S address of an aircraft specified in hexadecimal format (e.g. 484161, 483EFD), multiple matches are possible - see below.\r\n\r\n*If multiple matches are possible:*\r\n\r\nThere cannot be more than one aircraft actively flying with the same tail-number or ICAO 24-bit Mode-S address at any moment of time. \r\nHowever, historically aircraft tail-numbers or addresses may be used multiple times by different aircraft.\r\nThis endpoint is supposed to return a **single** aircraft data. In case if multiple aircraft satisfy the search criteria, the best match will be chosen as follows:\r\n* If an active aircraft is found according to the requested critera, it is returned.\r\n* Otherwise, an aircraft that used requested tail-number/address the most recently is returned. \r\n* If usage time may not be determined, the aircraft stored in the database the most recently is returned."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fb202453-0da0-4416-b4d1-07960a90f6d3",
+              "name": "Service Unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "aircrafts",
+                    ":searchBy",
+                    ":searchParam"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "withImage",
+                      "value": "false"
+                    },
+                    {
+                      "key": "withRegistrations",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "searchBy",
+                      "description": "Criteria to search aircraft by"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "searchParam",
+                      "description": "(Required) Value of the search criteria. If `searchBy` is: \r\n* `id`: then this field should be an ID of an aircraft (as specified in the database of this API);\r\n* `reg`: then this field should be a tail-number of an aircraft (with or without spaces or dashes, any case formats are acceptable, e.g.PH-BXO, DeMhJ), multiple matches are possible - see below;\r\n* `icao24`, then this field should be a ICAO 24-bit Mode-S address of an aircraft specified in hexadecimal format (e.g. 484161, 483EFD), multiple matches are possible - see below.\r\n\r\n*If multiple matches are possible:*\r\n\r\nThere cannot be more than one aircraft actively flying with the same tail-number or ICAO 24-bit Mode-S address at any moment of time. \r\nHowever, historically aircraft tail-numbers or addresses may be used multiple times by different aircraft.\r\nThis endpoint is supposed to return a **single** aircraft data. In case if multiple aircraft satisfy the search criteria, the best match will be chosen as follows:\r\n* If an active aircraft is found according to the requested critera, it is returned.\r\n* Otherwise, an aircraft that used requested tail-number/address the most recently is returned. \r\n* If usage time may not be determined, the aircraft stored in the database the most recently is returned."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bed3a714-ade2-497a-9fc9-7da600873d79",
+          "name": "AeroDataBox Single Aircraft Registration History (by Tail-number, Mode-S or ID) / TIER 1",
+          "request": {
+            "name": "AeroDataBox Single Aircraft Registration History (by Tail-number, Mode-S or ID) / TIER 1",
+            "description": {
+              "content": "*Returns:* A list of all known registrations of a single aircraft, *best* matching specified search criteria, if found",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "aircrafts",
+                ":searchBy",
+                ":searchParam",
+                "registrations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "searchBy",
+                  "description": "Criteria to search aircraft by"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "searchParam",
+                  "description": "(Required) Value of the search criteria. If `searchBy` is: \r\n* `id`, then this field should be an ID of an aircraft (as specified in the database of this API);\r\n* `reg`, then this field should be a tail-number of an aircraft (with or without spaces or dashes, any case formats are acceptable, e.g.PH-BXO, DeMhJ), multiple matches are possible - see below;\r\n* `icao24`, then this field should be a ICAO 24-bit Mode-S address of an aircraft specified in hexadecimal format (e.g. 484161, 483EFD), multiple matches are possible - see below.\r\n\r\n*If multiple matches are possible:* see similar remark to `Single aircraft` endpoint."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) API.market API Key",
+                "key": "x-api-market-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d6aaff37-181e-4bab-988b-c0532203f3a1",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "aircrafts",
+                    ":searchBy",
+                    ":searchParam",
+                    "registrations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "searchBy",
+                      "description": "Criteria to search aircraft by"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "searchParam",
+                      "description": "(Required) Value of the search criteria. If `searchBy` is: \r\n* `id`, then this field should be an ID of an aircraft (as specified in the database of this API);\r\n* `reg`, then this field should be a tail-number of an aircraft (with or without spaces or dashes, any case formats are acceptable, e.g.PH-BXO, DeMhJ), multiple matches are possible - see below;\r\n* `icao24`, then this field should be a ICAO 24-bit Mode-S address of an aircraft specified in hexadecimal format (e.g. 484161, 483EFD), multiple matches are possible - see below.\r\n\r\n*If multiple matches are possible:* see similar remark to `Single aircraft` endpoint."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  \"example_value\"\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b8fc6933-e6c1-426b-8352-eaaf8c2f14c9",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "aircrafts",
+                    ":searchBy",
+                    ":searchParam",
+                    "registrations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "searchBy",
+                      "description": "Criteria to search aircraft by"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "searchParam",
+                      "description": "(Required) Value of the search criteria. If `searchBy` is: \r\n* `id`, then this field should be an ID of an aircraft (as specified in the database of this API);\r\n* `reg`, then this field should be a tail-number of an aircraft (with or without spaces or dashes, any case formats are acceptable, e.g.PH-BXO, DeMhJ), multiple matches are possible - see below;\r\n* `icao24`, then this field should be a ICAO 24-bit Mode-S address of an aircraft specified in hexadecimal format (e.g. 484161, 483EFD), multiple matches are possible - see below.\r\n\r\n*If multiple matches are possible:* see similar remark to `Single aircraft` endpoint."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "204739b9-a54a-469a-a21d-f90753bf7049",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "aircrafts",
+                    ":searchBy",
+                    ":searchParam",
+                    "registrations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "searchBy",
+                      "description": "Criteria to search aircraft by"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "searchParam",
+                      "description": "(Required) Value of the search criteria. If `searchBy` is: \r\n* `id`, then this field should be an ID of an aircraft (as specified in the database of this API);\r\n* `reg`, then this field should be a tail-number of an aircraft (with or without spaces or dashes, any case formats are acceptable, e.g.PH-BXO, DeMhJ), multiple matches are possible - see below;\r\n* `icao24`, then this field should be a ICAO 24-bit Mode-S address of an aircraft specified in hexadecimal format (e.g. 484161, 483EFD), multiple matches are possible - see below.\r\n\r\n*If multiple matches are possible:* see similar remark to `Single aircraft` endpoint."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "06a9bfb6-ee70-416a-844b-e5ecd53eaa58",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "aircrafts",
+                    ":searchBy",
+                    ":searchParam",
+                    "registrations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "searchBy",
+                      "description": "Criteria to search aircraft by"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "searchParam",
+                      "description": "(Required) Value of the search criteria. If `searchBy` is: \r\n* `id`, then this field should be an ID of an aircraft (as specified in the database of this API);\r\n* `reg`, then this field should be a tail-number of an aircraft (with or without spaces or dashes, any case formats are acceptable, e.g.PH-BXO, DeMhJ), multiple matches are possible - see below;\r\n* `icao24`, then this field should be a ICAO 24-bit Mode-S address of an aircraft specified in hexadecimal format (e.g. 484161, 483EFD), multiple matches are possible - see below.\r\n\r\n*If multiple matches are possible:* see similar remark to `Single aircraft` endpoint."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7c8e1153-e07b-4b06-94b9-c965b5aff671",
+              "name": "Unavailable For Legal Reasons",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "aircrafts",
+                    ":searchBy",
+                    ":searchParam",
+                    "registrations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "searchBy",
+                      "description": "Criteria to search aircraft by"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "searchParam",
+                      "description": "(Required) Value of the search criteria. If `searchBy` is: \r\n* `id`, then this field should be an ID of an aircraft (as specified in the database of this API);\r\n* `reg`, then this field should be a tail-number of an aircraft (with or without spaces or dashes, any case formats are acceptable, e.g.PH-BXO, DeMhJ), multiple matches are possible - see below;\r\n* `icao24`, then this field should be a ICAO 24-bit Mode-S address of an aircraft specified in hexadecimal format (e.g. 484161, 483EFD), multiple matches are possible - see below.\r\n\r\n*If multiple matches are possible:* see similar remark to `Single aircraft` endpoint."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "code": 451,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "363df19f-cf12-4b12-9e6c-6efa203dc649",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "aircrafts",
+                    ":searchBy",
+                    ":searchParam",
+                    "registrations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "searchBy",
+                      "description": "Criteria to search aircraft by"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "searchParam",
+                      "description": "(Required) Value of the search criteria. If `searchBy` is: \r\n* `id`, then this field should be an ID of an aircraft (as specified in the database of this API);\r\n* `reg`, then this field should be a tail-number of an aircraft (with or without spaces or dashes, any case formats are acceptable, e.g.PH-BXO, DeMhJ), multiple matches are possible - see below;\r\n* `icao24`, then this field should be a ICAO 24-bit Mode-S address of an aircraft specified in hexadecimal format (e.g. 484161, 483EFD), multiple matches are possible - see below.\r\n\r\n*If multiple matches are possible:* see similar remark to `Single aircraft` endpoint."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "45a0e715-86c2-46cb-a2fb-cec4aefa2262",
+              "name": "Service Unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "aircrafts",
+                    ":searchBy",
+                    ":searchParam",
+                    "registrations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "searchBy",
+                      "description": "Criteria to search aircraft by"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "searchParam",
+                      "description": "(Required) Value of the search criteria. If `searchBy` is: \r\n* `id`, then this field should be an ID of an aircraft (as specified in the database of this API);\r\n* `reg`, then this field should be a tail-number of an aircraft (with or without spaces or dashes, any case formats are acceptable, e.g.PH-BXO, DeMhJ), multiple matches are possible - see below;\r\n* `icao24`, then this field should be a ICAO 24-bit Mode-S address of an aircraft specified in hexadecimal format (e.g. 484161, 483EFD), multiple matches are possible - see below.\r\n\r\n*If multiple matches are possible:* see similar remark to `Single aircraft` endpoint."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8f06640b-d33e-4f1d-a0c0-d2654e01c847",
+          "name": "AeroDataBox Aircraft by Tail-number, Mode-S or ID / TIER 1",
+          "request": {
+            "name": "AeroDataBox Aircraft by Tail-number, Mode-S or ID / TIER 1",
+            "description": {
+              "content": "*Returns:* A list of all aircraft ever matched the requested criteria. Please note that all found aircraft will be impersonated with registration information matching the requested tail number or Mode-S even though an aircraft might be flying under a different registration right now.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "aircrafts",
+                ":searchBy",
+                ":searchParam",
+                "all"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "withImage",
+                  "value": "false",
+                  "description": "Should include aircraft image (default: false)."
+                },
+                {
+                  "disabled": false,
+                  "key": "withRegistrations",
+                  "value": "false",
+                  "description": "Should include the history of aircraft registrations (default: false)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "searchBy",
+                  "description": "Criteria to search aircraft by"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "searchParam",
+                  "description": "(Required) Value of the search criteria. If `searchBy` is: \r\n* `id`, then this field should be an ID of an aircraft (as specified in the database of this API);\r\n* `reg`, then this field should be a tail-number of an aircraft (with or without spaces or dashes, any case formats are acceptable, e.g.PH-BXO, DeMhJ);\r\n* `icao24`, then this field should be a ICAO 24-bit Mode-S address of an aircraft specified in hexadecimal format (e.g. 484161, 483EFD)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) API.market API Key",
+                "key": "x-api-market-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "74a50428-7d88-4ee1-8c93-03fe3416fa34",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "aircrafts",
+                    ":searchBy",
+                    ":searchParam",
+                    "all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "withImage",
+                      "value": "false"
+                    },
+                    {
+                      "key": "withRegistrations",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "searchBy",
+                      "description": "Criteria to search aircraft by"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "searchParam",
+                      "description": "(Required) Value of the search criteria. If `searchBy` is: \r\n* `id`, then this field should be an ID of an aircraft (as specified in the database of this API);\r\n* `reg`, then this field should be a tail-number of an aircraft (with or without spaces or dashes, any case formats are acceptable, e.g.PH-BXO, DeMhJ);\r\n* `icao24`, then this field should be a ICAO 24-bit Mode-S address of an aircraft specified in hexadecimal format (e.g. 484161, 483EFD)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  \"example_value\"\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "11880964-aae7-437e-8c80-67a072d9b3f0",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "aircrafts",
+                    ":searchBy",
+                    ":searchParam",
+                    "all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "withImage",
+                      "value": "false"
+                    },
+                    {
+                      "key": "withRegistrations",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "searchBy",
+                      "description": "Criteria to search aircraft by"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "searchParam",
+                      "description": "(Required) Value of the search criteria. If `searchBy` is: \r\n* `id`, then this field should be an ID of an aircraft (as specified in the database of this API);\r\n* `reg`, then this field should be a tail-number of an aircraft (with or without spaces or dashes, any case formats are acceptable, e.g.PH-BXO, DeMhJ);\r\n* `icao24`, then this field should be a ICAO 24-bit Mode-S address of an aircraft specified in hexadecimal format (e.g. 484161, 483EFD)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6ccd9144-fa40-40f9-8309-4213cb578dd1",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "aircrafts",
+                    ":searchBy",
+                    ":searchParam",
+                    "all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "withImage",
+                      "value": "false"
+                    },
+                    {
+                      "key": "withRegistrations",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "searchBy",
+                      "description": "Criteria to search aircraft by"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "searchParam",
+                      "description": "(Required) Value of the search criteria. If `searchBy` is: \r\n* `id`, then this field should be an ID of an aircraft (as specified in the database of this API);\r\n* `reg`, then this field should be a tail-number of an aircraft (with or without spaces or dashes, any case formats are acceptable, e.g.PH-BXO, DeMhJ);\r\n* `icao24`, then this field should be a ICAO 24-bit Mode-S address of an aircraft specified in hexadecimal format (e.g. 484161, 483EFD)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eaf9b8a7-5911-41b3-88b2-c6c8558ec87d",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "aircrafts",
+                    ":searchBy",
+                    ":searchParam",
+                    "all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "withImage",
+                      "value": "false"
+                    },
+                    {
+                      "key": "withRegistrations",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "searchBy",
+                      "description": "Criteria to search aircraft by"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "searchParam",
+                      "description": "(Required) Value of the search criteria. If `searchBy` is: \r\n* `id`, then this field should be an ID of an aircraft (as specified in the database of this API);\r\n* `reg`, then this field should be a tail-number of an aircraft (with or without spaces or dashes, any case formats are acceptable, e.g.PH-BXO, DeMhJ);\r\n* `icao24`, then this field should be a ICAO 24-bit Mode-S address of an aircraft specified in hexadecimal format (e.g. 484161, 483EFD)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c8f07290-6f5d-4742-ae57-fd1af2fc944d",
+              "name": "Unavailable For Legal Reasons",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "aircrafts",
+                    ":searchBy",
+                    ":searchParam",
+                    "all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "withImage",
+                      "value": "false"
+                    },
+                    {
+                      "key": "withRegistrations",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "searchBy",
+                      "description": "Criteria to search aircraft by"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "searchParam",
+                      "description": "(Required) Value of the search criteria. If `searchBy` is: \r\n* `id`, then this field should be an ID of an aircraft (as specified in the database of this API);\r\n* `reg`, then this field should be a tail-number of an aircraft (with or without spaces or dashes, any case formats are acceptable, e.g.PH-BXO, DeMhJ);\r\n* `icao24`, then this field should be a ICAO 24-bit Mode-S address of an aircraft specified in hexadecimal format (e.g. 484161, 483EFD)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "code": 451,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "00473215-9cb6-4443-a6ca-70a06aa1ab1c",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "aircrafts",
+                    ":searchBy",
+                    ":searchParam",
+                    "all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "withImage",
+                      "value": "false"
+                    },
+                    {
+                      "key": "withRegistrations",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "searchBy",
+                      "description": "Criteria to search aircraft by"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "searchParam",
+                      "description": "(Required) Value of the search criteria. If `searchBy` is: \r\n* `id`, then this field should be an ID of an aircraft (as specified in the database of this API);\r\n* `reg`, then this field should be a tail-number of an aircraft (with or without spaces or dashes, any case formats are acceptable, e.g.PH-BXO, DeMhJ);\r\n* `icao24`, then this field should be a ICAO 24-bit Mode-S address of an aircraft specified in hexadecimal format (e.g. 484161, 483EFD)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1932bb4c-5f79-4f3a-ac6c-11e49b28fe6f",
+              "name": "Service Unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "aircrafts",
+                    ":searchBy",
+                    ":searchParam",
+                    "all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "withImage",
+                      "value": "false"
+                    },
+                    {
+                      "key": "withRegistrations",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "searchBy",
+                      "description": "Criteria to search aircraft by"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "searchParam",
+                      "description": "(Required) Value of the search criteria. If `searchBy` is: \r\n* `id`, then this field should be an ID of an aircraft (as specified in the database of this API);\r\n* `reg`, then this field should be a tail-number of an aircraft (with or without spaces or dashes, any case formats are acceptable, e.g.PH-BXO, DeMhJ);\r\n* `icao24`, then this field should be a ICAO 24-bit Mode-S address of an aircraft specified in hexadecimal format (e.g. 484161, 483EFD)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c7961c58-3e50-4ce7-a073-5592f8942a9e",
+          "name": "AeroDataBox Airline Fleet / Aircraft List by Airline Code (BETA) / TIER 3",
+          "request": {
+            "name": "AeroDataBox Airline Fleet / Aircraft List by Airline Code (BETA) / TIER 3",
+            "description": {
+              "content": "*Returns:* A paged list of aircraft in the fleet of the specified airline. \r\n\r\nThat will include *active* aircraft currently flying in an *active* airline, verfified through more than one source.\r\nUnconfirmed sightings of an aircraft will not qualify said aircraft to be listed in the fleet.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "airlines",
+                ":airlineCode",
+                "aircrafts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "<integer>",
+                  "description": "(Required) The number of returned records will be capped at this value.\r\nMust be a positive value and not exceed the limit stipulated by your pricing plan."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageOffset",
+                  "value": "0",
+                  "description": "The number of records to skip before listing a page of records. In conjunction with `pageSize` effectively determines the page number (default  - 0)."
+                },
+                {
+                  "disabled": false,
+                  "key": "withRegistrations",
+                  "value": "false",
+                  "description": "Should include the history of aircraft registrations (default: false)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "airlineCode",
+                  "description": "(Required) 3-character ICAO-code of the airliner (e.g., KLM, ACA); or\r\n2-character IATA-code of the airline (e.g., KL, AC).\r\n            \r\nPlease note that more than one active airline may have the same IATA code, therefore IATA codes are not recommended for this endpoint."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) API.market API Key",
+                "key": "x-api-market-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "448fdccf-c4aa-4954-9e91-15c07abd192a",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airlines",
+                    ":airlineCode",
+                    "aircrafts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageOffset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "withRegistrations",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "airlineCode",
+                      "description": "(Required) 3-character ICAO-code of the airliner (e.g., KLM, ACA); or\r\n2-character IATA-code of the airline (e.g., KL, AC).\r\n            \r\nPlease note that more than one active airline may have the same IATA code, therefore IATA codes are not recommended for this endpoint."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"totalCount\": 100,\n  \"pageOffset\": 100,\n  \"pageSize\": 100,\n  \"hasNextPage\": true,\n  \"count\": 100,\n  \"items\": [\n    \"example_value\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6865e799-55d2-408b-92ae-218d3cc314fd",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airlines",
+                    ":airlineCode",
+                    "aircrafts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageOffset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "withRegistrations",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "airlineCode",
+                      "description": "(Required) 3-character ICAO-code of the airliner (e.g., KLM, ACA); or\r\n2-character IATA-code of the airline (e.g., KL, AC).\r\n            \r\nPlease note that more than one active airline may have the same IATA code, therefore IATA codes are not recommended for this endpoint."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e49db3d9-522a-44b4-8add-cfe10d6cd1c8",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airlines",
+                    ":airlineCode",
+                    "aircrafts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageOffset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "withRegistrations",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "airlineCode",
+                      "description": "(Required) 3-character ICAO-code of the airliner (e.g., KLM, ACA); or\r\n2-character IATA-code of the airline (e.g., KL, AC).\r\n            \r\nPlease note that more than one active airline may have the same IATA code, therefore IATA codes are not recommended for this endpoint."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b20d9d40-116a-4424-9957-d353fdece124",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airlines",
+                    ":airlineCode",
+                    "aircrafts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageOffset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "withRegistrations",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "airlineCode",
+                      "description": "(Required) 3-character ICAO-code of the airliner (e.g., KLM, ACA); or\r\n2-character IATA-code of the airline (e.g., KL, AC).\r\n            \r\nPlease note that more than one active airline may have the same IATA code, therefore IATA codes are not recommended for this endpoint."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7c54c3d3-8f1d-47de-882e-1e8d1722e4ab",
+              "name": "Unavailable For Legal Reasons",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airlines",
+                    ":airlineCode",
+                    "aircrafts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageOffset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "withRegistrations",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "airlineCode",
+                      "description": "(Required) 3-character ICAO-code of the airliner (e.g., KLM, ACA); or\r\n2-character IATA-code of the airline (e.g., KL, AC).\r\n            \r\nPlease note that more than one active airline may have the same IATA code, therefore IATA codes are not recommended for this endpoint."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "code": 451,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c00b24c8-e30c-46cb-9e1b-dd6f46e5cfa9",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airlines",
+                    ":airlineCode",
+                    "aircrafts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageOffset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "withRegistrations",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "airlineCode",
+                      "description": "(Required) 3-character ICAO-code of the airliner (e.g., KLM, ACA); or\r\n2-character IATA-code of the airline (e.g., KL, AC).\r\n            \r\nPlease note that more than one active airline may have the same IATA code, therefore IATA codes are not recommended for this endpoint."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1ef38ae2-fe2b-4263-a7b4-8f2cfe99b1f0",
+              "name": "Service Unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "airlines",
+                    ":airlineCode",
+                    "aircrafts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageOffset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "withRegistrations",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "airlineCode",
+                      "description": "(Required) 3-character ICAO-code of the airliner (e.g., KLM, ACA); or\r\n2-character IATA-code of the airline (e.g., KL, AC).\r\n            \r\nPlease note that more than one active airline may have the same IATA code, therefore IATA codes are not recommended for this endpoint."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "32e67875-7852-416d-bb16-f3587e991521",
+          "name": "AeroDataBox Aircraft Image by Tail-number / TIER 2",
+          "request": {
+            "name": "AeroDataBox Aircraft Image by Tail-number / TIER 2",
+            "description": {
+              "content": "**What is the aircraft photo?**\r\n\r\nAircraft images are being searched in external sources by certain criteria without any manual intervention. \r\nTherefore, false matches may be returned. Only images with licenses approved for commercial use are returned. Please be advised that you may be required to mention author attribution before using the image.\r\n\r\n*Returns:* Image data with medium-sized direct image URL and licence approved for commercial use\r\nis returned.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "aircrafts",
+                "reg",
+                ":reg",
+                "image",
+                "beta"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "reg",
+                  "description": "(Required) Tail-number of the aircraft (full, stripped and any case formats are acceptable)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) API.market API Key",
+                "key": "x-api-market-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f84818bf-e440-4623-8993-8c7cd93a79f2",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "aircrafts",
+                    "reg",
+                    ":reg",
+                    "image",
+                    "beta"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reg",
+                      "description": "(Required) Tail-number of the aircraft (full, stripped and any case formats are acceptable)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"url\": \"example_value\",\n  \"webUrl\": \"example_value\",\n  \"author\": \"example_value\",\n  \"title\": \"example_value\",\n  \"description\": \"example_value\",\n  \"license\": \"example_value\",\n  \"htmlAttributions\": [\n    \"example_value\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6d4995d3-f5e2-439b-957f-8a131c199e19",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "aircrafts",
+                    "reg",
+                    ":reg",
+                    "image",
+                    "beta"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reg",
+                      "description": "(Required) Tail-number of the aircraft (full, stripped and any case formats are acceptable)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0071b1fd-ad40-4d3c-b054-d1a29f519f9d",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "aircrafts",
+                    "reg",
+                    ":reg",
+                    "image",
+                    "beta"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reg",
+                      "description": "(Required) Tail-number of the aircraft (full, stripped and any case formats are acceptable)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "adad0e26-5ae4-4fae-8646-6c014275aab3",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "aircrafts",
+                    "reg",
+                    ":reg",
+                    "image",
+                    "beta"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reg",
+                      "description": "(Required) Tail-number of the aircraft (full, stripped and any case formats are acceptable)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d93120f7-95bd-4385-b7f6-ebb00ee8e808",
+              "name": "Unavailable For Legal Reasons",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "aircrafts",
+                    "reg",
+                    ":reg",
+                    "image",
+                    "beta"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reg",
+                      "description": "(Required) Tail-number of the aircraft (full, stripped and any case formats are acceptable)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "code": 451,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "71f09444-a299-4e8b-b176-796817c62d36",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "aircrafts",
+                    "reg",
+                    ":reg",
+                    "image",
+                    "beta"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reg",
+                      "description": "(Required) Tail-number of the aircraft (full, stripped and any case formats are acceptable)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "827ab001-ce75-4cab-b165-95a59d5ca4e8",
+              "name": "Service Unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "aircrafts",
+                    "reg",
+                    ":reg",
+                    "image",
+                    "beta"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reg",
+                      "description": "(Required) Tail-number of the aircraft (full, stripped and any case formats are acceptable)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4b11abd5-62fe-4052-a0fc-139fdd569fb3",
+          "name": "AeroDataBox Search Active Aircraft Tail Numbers by Term / TIER 2",
+          "request": {
+            "name": "AeroDataBox Search Active Aircraft Tail Numbers by Term / TIER 2",
+            "description": {
+              "content": "*Returns:* List of active aircraft registrations with tail numbers starting from the term.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "aircrafts",
+                "search",
+                "term"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "(Required) Search term (min. 4 non whitespace characters length)"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "5",
+                  "description": "Maximum number of items to be returned (max. 10, defaut = 5)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) API.market API Key",
+                "key": "x-api-market-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2147fc87-2278-46fa-b890-af3991dfb1e3",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "aircrafts",
+                    "search",
+                    "term"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "5"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"searchBy\": \"example_value\",\n  \"count\": 100,\n  \"items\": [\n    \"example_value\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9c9ecf8f-f3df-47ab-9a51-6f292b6fab25",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "aircrafts",
+                    "search",
+                    "term"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "5"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e77e68ad-cfff-4917-86f2-6f825a8fb60c",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "aircrafts",
+                    "search",
+                    "term"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "5"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "92aa33f8-530d-41e3-88f0-55c523dfede3",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "aircrafts",
+                    "search",
+                    "term"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "5"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ff598491-7eb3-4471-ad6d-95b759122daa",
+              "name": "Unavailable For Legal Reasons",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "aircrafts",
+                    "search",
+                    "term"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "5"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "code": 451,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ef05de4d-ce9d-4972-a27b-08d63320a003",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "aircrafts",
+                    "search",
+                    "term"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "5"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b8662c15-4435-4956-9e98-6fae92b22d4d",
+              "name": "Service Unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "aircrafts",
+                    "search",
+                    "term"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "5"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) API.market API Key",
+                    "key": "x-api-market-key",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://prod.api.market/api/v1/aedbx/aerodatabox",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a353b200-471e-45b7-a83c-49de4cdc672c",
+    "name": "AeroDataBox API - Aviation and Flight Aircraft API API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Affordable aviation & flight data API tailored for small and medium businesses, teams and individual developers.",
+      "type": "text/plain"
+    }
+  }
+}

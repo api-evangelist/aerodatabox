@@ -1,0 +1,99 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "AeroDataBox API - Aviation and Flight Aircraft API Healthcheck API API",
+    "version": "1.14.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Healthcheck API",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "AeroDataBox General Status of Data Feed Services / FREE TIER",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://prod.api.market/api/v1/aedbx/aerodatabox/health/services/feeds/:service",
+            "headers": [
+              {
+                "name": "x-api-market-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "service",
+                "value": "",
+                "type": "path",
+                "description": "Data feed service name"
+              },
+              {
+                "name": "withHttpCode",
+                "value": "",
+                "type": "query",
+                "description": "If true, reflect status of the service in the HTTP code of the response (if the service is down, HTTP code will be 503)."
+              }
+            ]
+          },
+          "docs": "**Which is the general health of the data feed service?**\r\n \r\n*Returns:* Status of the service in general, regardless of the airports"
+        },
+        {
+          "info": {
+            "name": "AeroDataBox Data Feed Services Status by ICAO Code / FREE TIER",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://prod.api.market/api/v1/aedbx/aerodatabox/health/services/airports/:icao/feeds",
+            "headers": [
+              {
+                "name": "x-api-market-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "icao",
+                "value": "",
+                "type": "path",
+                "description": "4-digit ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.). Full, stripped and any case formats are acceptable."
+              }
+            ]
+          },
+          "docs": "**What is the status of data updates for the airport?**\r\n\r\nAt the moment airports having both ICAO and IATA code are present in database only.\r\n\r\n*Returns:* Current status of airport data feed services (live flight updates, flight schedules, etc.) for requested airport."
+        },
+        {
+          "info": {
+            "name": "AeroDataBox Airports Supporting Data Feed Service / FREE TIER",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://prod.api.market/api/v1/aedbx/aerodatabox/health/services/feeds/:service/airports",
+            "headers": [
+              {
+                "name": "x-api-market-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "service",
+                "value": "",
+                "type": "path",
+                "description": "Airport data feed service name"
+              }
+            ]
+          },
+          "docs": "**Which airports support flight schedules?** or **Which airports support live flight updates?**\r\n\r\n At the moment airports having both ICAO and IATA code are present in database only.\r\n \r\n*Returns:* Collection ICAO codes of airports supporting specified airport data feed service."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

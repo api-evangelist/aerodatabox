@@ -1,0 +1,458 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "AeroDataBox API - Aviation and Flight Aircraft API Flight API API",
+    "version": "1.14.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Flight API",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "AeroDataBox Flight Status (single Day) / TIER 2",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://prod.api.market/api/v1/aedbx/aerodatabox/flights/:searchBy/:searchParam",
+            "headers": [
+              {
+                "name": "x-api-market-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "searchBy",
+                "value": "",
+                "type": "path",
+                "description": "Criteria to search flight by"
+              },
+              {
+                "name": "searchParam",
+                "value": "",
+                "type": "path",
+                "description": "Value of the search criteria. If `searchBy` is: \r\n* `number`, then this field shoud be Flight number (with or without spaces, IATA or ICAO, any case formats are acceptable, e.g. KL1395, Klm 1395)\r\n* `callsign`, then this field should be ATC call-sign of the flight (with or without spaces, any case formats are acceptable, e.g.AFL1482, nca 008X);\r\n* `reg`, then this field should be Aircraft tail-number (with or without spaces or dashes, any case formats are acceptable, e.g.PH-BXO, DeMhJ);\r\n* `icao24`, then this field should be Aircraft ICAO 24-bit Mode-S address specified in hexadecimal format (e.g. 484161, 483EFD)."
+              },
+              {
+                "name": "dateLocalRole",
+                "value": "",
+                "type": "query",
+                "description": "* If set to `Both` (default, recommended for best results) then the dateLocal parameter shall be considered as both departure and arrival date. If a flight departs OR arrives on that date (in the local timezone of the origin or destination, respectively), it will be returned.\r\n* If set to `Departure` then the dateLocal parameter shall be considered as departure date only. Only the flights departing on that date (in the local timezone of origin) will be returned.\r\n* If set to `Arrival` then the dateLocal parameter shall be considered as arrival date only. Only the flights arriving on that date (in the local timezone of destination) will be returned."
+              },
+              {
+                "name": "withAircraftImage",
+                "value": "",
+                "type": "query",
+                "description": "Should include aircraft image (default: false).\r\n\r\nAircraft images are being searched in external sources by certain criteria without any manual intervention. \r\nTherefore, false matches may be returned. Only images with licenses approved for commercial use are returned. \r\nPlease be advised that you may be required to mention author attribution before using the image."
+              },
+              {
+                "name": "withLocation",
+                "value": "",
+                "type": "query",
+                "description": "Should include real-time positional data, e.g.: location, speed, altitude, etc., if available (default: false)."
+              },
+              {
+                "name": "withFlightPlan",
+                "value": "",
+                "type": "query",
+                "description": "Should include the flight plan filed with the ATC for the flight (default: false).\r\n\r\n* NOTE 1: Generally availabe to flights departing from, arriving to or crossing the mainland U.S. airspace.\r\n* NOTE 2: Only available on Basic and Ultra, Ultra-2 and Mega pricing plans.\r\n* NOTE 3: If set to true and the flight plan is found for one or more flights returned, **the request will be billed as 2 requests** against your API quota (except on Mega plan)."
+              }
+            ]
+          },
+          "docs": "**What is the status of a specific flight?**\r\n**What is the historical status or schedule of a specific flight on a specific date in past or in future?**\r\n\r\nThis endpoint returns data about a specific flight  live flight status (if the flight is within the coverage and not in distant future), \r\nor flight schedule data otherwise.\r\n\r\nIf `dateLocal` is specified, gets data about flight(s) departing or arriving on the day specified (local time).\r\nOtherwise, gets data about the status of flight(s) op"
+        },
+        {
+          "info": {
+            "name": "AeroDataBox Flight Status (single Day) / TIER 2",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://prod.api.market/api/v1/aedbx/aerodatabox/flights/:searchBy/:searchParam/:dateLocal",
+            "headers": [
+              {
+                "name": "x-api-market-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "searchBy",
+                "value": "",
+                "type": "path",
+                "description": "Criteria to search flight by"
+              },
+              {
+                "name": "searchParam",
+                "value": "",
+                "type": "path",
+                "description": "Value of the search criteria. If `searchBy` is: \r\n* `number`, then this field shoud be Flight number (with or without spaces, IATA or ICAO, any case formats are acceptable, e.g. KL1395, Klm 1395)\r\n* `callsign`, then this field should be ATC call-sign of the flight (with or without spaces, any case formats are acceptable, e.g.AFL1482, nca 008X);\r\n* `reg`, then this field should be Aircraft tail-number (with or without spaces or dashes, any case formats are acceptable, e.g.PH-BXO, DeMhJ);\r\n* `icao24`, then this field should be Aircraft ICAO 24-bit Mode-S address specified in hexadecimal format (e.g. 484161, 483EFD)."
+              },
+              {
+                "name": "dateLocal",
+                "value": "",
+                "type": "path",
+                "description": "Local date of departure or arrival (in format: YYYY-MM-DD, e.g.: 2019-08-29). Maximum/minimum allowable date is determined by the current data coverage limitations and your pricing plan."
+              },
+              {
+                "name": "dateLocalRole",
+                "value": "",
+                "type": "query",
+                "description": "* If set to `Both` (default, recommended for best results) then the dateLocal parameter shall be considered as both departure and arrival date. If a flight departs OR arrives on that date (in the local timezone of the origin or destination, respectively), it will be returned.\r\n* If set to `Departure` then the dateLocal parameter shall be considered as departure date only. Only the flights departing on that date (in the local timezone of origin) will be returned.\r\n* If set to `Arrival` then the dateLocal parameter shall be considered as arrival date only. Only the flights arriving on that date (in the local timezone of destination) will be returned."
+              },
+              {
+                "name": "withAircraftImage",
+                "value": "",
+                "type": "query",
+                "description": "Should include aircraft image (default: false).\r\n\r\nAircraft images are being searched in external sources by certain criteria without any manual intervention. \r\nTherefore, false matches may be returned. Only images with licenses approved for commercial use are returned. \r\nPlease be advised that you may be required to mention author attribution before using the image."
+              },
+              {
+                "name": "withLocation",
+                "value": "",
+                "type": "query",
+                "description": "Should include real-time positional data, e.g.: location, speed, altitude, etc., if available (default: false)."
+              },
+              {
+                "name": "withFlightPlan",
+                "value": "",
+                "type": "query",
+                "description": "Should include the flight plan filed with the ATC for the flight (default: false).\r\n\r\n* NOTE 1: Generally availabe to flights departing from, arriving to or crossing the mainland U.S. airspace.\r\n* NOTE 2: Only available on Basic and Ultra, Ultra-2 and Mega pricing plans.\r\n* NOTE 3: If set to true and the flight plan is found for one or more flights returned, **the request will be billed as 2 requests** against your API quota (except on Mega plan)."
+              }
+            ]
+          },
+          "docs": "**What is the status of a specific flight?**\r\n**What is the historical status or schedule of a specific flight on a specific date in past or in future?**\r\n\r\nThis endpoint returns data about a specific flight  live flight status (if the flight is within the coverage and not in distant future), \r\nor flight schedule data otherwise.\r\n\r\nIf `dateLocal` is specified, gets data about flight(s) departing or arriving on the day specified (local time).\r\nOtherwise, gets data about the status of flight(s) op"
+        },
+        {
+          "info": {
+            "name": "AeroDataBox Flight History and Schedule (range of Days) / TIER 3",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://prod.api.market/api/v1/aedbx/aerodatabox/flights/:searchBy/:searchParam/:dateFromLocal/:dateToLocal",
+            "headers": [
+              {
+                "name": "x-api-market-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "searchBy",
+                "value": "",
+                "type": "path",
+                "description": "Criteria to search flight by"
+              },
+              {
+                "name": "searchParam",
+                "value": "",
+                "type": "path",
+                "description": "Value of the search criteria. If `searchBy` is: \r\n* `number`, then this field shoud be Flight number (with or without spaces, IATA or ICAO, any case formats are acceptable, e.g. KL1395, Klm 1395)\r\n* `callsign`, then this field should be ATC call-sign of the flight (with or without spaces, any case formats are acceptable, e.g.AFL1482, nca 008X);\r\n* `reg`, then this field should be Aircraft tail-number (with or without spaces or dashes, any case formats are acceptable, e.g.PH-BXO, DeMhJ);\r\n* `icao24`, then this field should be Aircraft ICAO 24-bit Mode-S address specified in hexadecimal format (e.g. 484161, 483EFD)."
+              },
+              {
+                "name": "dateFromLocal",
+                "value": "",
+                "type": "path",
+                "description": "Beginning of the range of local dates of departure or arrival (in format: YYYY-MM-DD, e.g.: 2019-08-29). Maximum/minimum allowable value is determined by the current data coverage limitations and your pricing plan."
+              },
+              {
+                "name": "dateToLocal",
+                "value": "",
+                "type": "path",
+                "description": "End of the range of local dates of departure or arrival (in format: YYYY-MM-DD, e.g.: 2019-08-29). Maximum/minimum allowable value is determined by the current data coverage limitations and your pricing plan. This date must be bigger than the dateFromLocal. The maximum difference between this date and dateFromLocal is limited and is determined by your pricing plan (ranging from 7 to 30 days as per moment of writing)."
+              },
+              {
+                "name": "dateLocalRole",
+                "value": "",
+                "type": "query",
+                "description": "* If set to `Both` (default, recommended for best results) then the dateFromLocal and dateToLocal parameters shall be considered as both departure and arrival dates. If a flight departs OR arrives on dates within the specified range (in the local timezone of the origin or destination, respectively), it will be returned.\r\n* If set to `Departure` then the dateFromLocal and dateToLocal  parameters shall be considered as departure dates only. Only the flights departing on dates within the specified rang(in the local timezone of origin) will be returned.\r\n* If set to `Arrival` then the dateFromLocal and dateToLocal  parameters shall be considered as arrival dates only. Only the flights arriving on dates within the specified rangd (in the local timezone of destination) will be returned."
+              }
+            ]
+          },
+          "docs": "**What is the history or schedule of a specific flight within a specific range of dates in past or in future?**\r\n\r\nThis endpoint is the similar to the `Flight status` endpoint. \r\nThe only difference is that instead of returning the flight data on a single date, it returns the data over a range of dates, thus\r\nallowing to get insights on the flight history or schedule within the specified range.\r\n\r\nAll limitations and considerations applicable to `Flight status` endpoint are applicable to this en"
+        },
+        {
+          "info": {
+            "name": "AeroDataBox Flight Departure Dates / TIER 2",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://prod.api.market/api/v1/aedbx/aerodatabox/flights/:searchBy/:searchParam/dates",
+            "headers": [
+              {
+                "name": "x-api-market-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "searchBy",
+                "value": "",
+                "type": "path",
+                "description": "Criteria to search flight by"
+              },
+              {
+                "name": "searchParam",
+                "value": "",
+                "type": "path",
+                "description": "Value of the search criteria. If **searchBy** is: \r\n* `number`, then this field shoud be Flight number (with or without spaces, IATA or ICAO, any case formats are acceptable, e.g. KL1395, Klm 1395)\r\n* `callsign`, then this field should be ATC call-sign of the flight (with or without spaces, any case formats are acceptable, e.g.AFL1482, nca 008X);\r\n* `reg`: then this field should be Aircraft tail-number (with or without spaces or dashes, any case formats are acceptable, e.g.PH-BXO, DeMhJ);\r\n* `icao24`, then this field should be Aircraft ICAO 24-bit Mode-S address specified in hexadecimal format (e.g. 484161, 483EFD)."
+              }
+            ]
+          },
+          "docs": "**On which days the flight operates?** or **What is the flight schedule?**\r\n\r\nFlight can be searched by:\r\n* flight number it's being operated under; or\r\n* ATC-callsign it's being operated under; or\r\n* tail-number of the aircraft it's being operated by; or\r\n* Mode-S 24-bit ICAO Transponder address of the aircraft it's being operated by.\r\n\r\n*Returns:* Array of local departure dates in (YYYY-MM-DD) format for flights operated under speified call-sign and within the time range specified."
+        },
+        {
+          "info": {
+            "name": "AeroDataBox Flight Departure Dates / TIER 2",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://prod.api.market/api/v1/aedbx/aerodatabox/flights/:searchBy/:searchParam/dates/:fromLocal/:toLocal",
+            "headers": [
+              {
+                "name": "x-api-market-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "searchBy",
+                "value": "",
+                "type": "path",
+                "description": "Criteria to search flight by"
+              },
+              {
+                "name": "searchParam",
+                "value": "",
+                "type": "path",
+                "description": "Value of the search criteria. If **searchBy** is: \r\n* `number`, then this field shoud be Flight number (with or without spaces, IATA or ICAO, any case formats are acceptable, e.g. KL1395, Klm 1395)\r\n* `callsign`, then this field should be ATC call-sign of the flight (with or without spaces, any case formats are acceptable, e.g.AFL1482, nca 008X);\r\n* `reg`: then this field should be Aircraft tail-number (with or without spaces or dashes, any case formats are acceptable, e.g.PH-BXO, DeMhJ);\r\n* `icao24`, then this field should be Aircraft ICAO 24-bit Mode-S address specified in hexadecimal format (e.g. 484161, 483EFD)."
+              },
+              {
+                "name": "fromLocal",
+                "value": "",
+                "type": "path",
+                "description": "Beginning of the search range (local time, format: YYYY-MM-DD)"
+              },
+              {
+                "name": "toLocal",
+                "value": "",
+                "type": "path",
+                "description": "End of the search range (local time, format: YYYY-MM-DD)"
+              }
+            ]
+          },
+          "docs": "**On which days the flight operates?** or **What is the flight schedule?**\r\n\r\nFlight can be searched by:\r\n* flight number it's being operated under; or\r\n* ATC-callsign it's being operated under; or\r\n* tail-number of the aircraft it's being operated by; or\r\n* Mode-S 24-bit ICAO Transponder address of the aircraft it's being operated by.\r\n\r\n*Returns:* Array of local departure dates in (YYYY-MM-DD) format for flights operated under speified call-sign and within the time range specified."
+        },
+        {
+          "info": {
+            "name": "AeroDataBox FIDS (airport Departures and Arrivals) - by Local Time Range / TIER 2",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://prod.api.market/api/v1/aedbx/aerodatabox/flights/airports/:codeType/:code/:fromLocal/:toLocal",
+            "headers": [
+              {
+                "name": "x-api-market-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "codeType",
+                "value": "",
+                "type": "path",
+                "description": "Type of code to search airport by (`iata` or `icao`)"
+              },
+              {
+                "name": "code",
+                "value": "",
+                "type": "path",
+                "description": "If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+              },
+              {
+                "name": "fromLocal",
+                "value": "",
+                "type": "path",
+                "description": "Beginning of the search range (local time, format: YYYY-MM-DDTHH:mm)"
+              },
+              {
+                "name": "toLocal",
+                "value": "",
+                "type": "path",
+                "description": "End of the search range (local time, format: YYYY-MM-DDTHH:mm). Must be more than beginning of the search range by no more than 12 hours."
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query",
+                "description": "Direction of flights: Arrival, Departure or Both (default)"
+              },
+              {
+                "name": "withLeg",
+                "value": "",
+                "type": "query",
+                "description": "If set to true, the result will include movement information from airport opposite in this flight leg (airport of origin for arriving flight or airport of destination for departing flight).\r\nIn this case, Movement property will be replaced with Departure and Arrival properties for each flight.\r\nDefault: false."
+              },
+              {
+                "name": "withCancelled",
+                "value": "",
+                "type": "query",
+                "description": "If set to true, result will include cancelled, divered, likely cancelled (CanceledUncertain) flights.\r\nDefault: true."
+              },
+              {
+                "name": "withCodeshared",
+                "value": "",
+                "type": "query",
+                "description": "If set to true, the result will include flights with all code-shared statuses.\r\nOtherwise, code-sharing flights will be exclued. For airports, where no information about code-share statuses\r\nof flights are supplied (all flights are CodeshareStatus=Unknown), complex filtering will be applied \r\nto determine which flights are likely to be operational (caution: false results are possible)."
+              },
+              {
+                "name": "withCargo",
+                "value": "",
+                "type": "query",
+                "description": "If set to true, the result will include cargo flights (subject to availability)."
+              },
+              {
+                "name": "withPrivate",
+                "value": "",
+                "type": "query",
+                "description": "If set to true, the result will include private flights (subject to availability)."
+              },
+              {
+                "name": "withLocation",
+                "value": "",
+                "type": "query",
+                "description": "If set to true, each currently active flight within the result will be populated \r\nwith its present real-time location, altitude, speed and track (subject to availability)."
+              }
+            ]
+          },
+          "docs": "**What are current departures or arrivals at the airport?** or **What is the flight schedule at the airport?** or **What is flight history at the airport?**\r\n\r\nFlights may contain live updates with corresponding information related to the actual progress of the flight \r\n(including actual/estimated arrival/departure times). In this case this endpoint serves as a FIDS endpoint. \r\nPresense of live updates is subject to data coverage: not all airports have this coverage in our system.\r\n\r\nOtherwise f"
+        },
+        {
+          "info": {
+            "name": "AeroDataBox FIDS (airport Departures and Arrivals) - by Relative Time / by Current Time / TIER 2",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://prod.api.market/api/v1/aedbx/aerodatabox/flights/airports/:codeType/:code",
+            "headers": [
+              {
+                "name": "x-api-market-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "codeType",
+                "value": "",
+                "type": "path",
+                "description": "Type of code to search airport by (`iata` or `icao`)"
+              },
+              {
+                "name": "code",
+                "value": "",
+                "type": "path",
+                "description": "If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+              },
+              {
+                "name": "offsetMinutes",
+                "value": "",
+                "type": "query",
+                "description": "Beginning of the search range expressed in minutes relative to the current time at the airport (default: `-120`)"
+              },
+              {
+                "name": "durationMinutes",
+                "value": "",
+                "type": "query",
+                "description": "Length (duration) of the search range expressed in minutes (default: `720`)"
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query",
+                "description": "Direction of flights: Arrival, Departure or Both (default)"
+              },
+              {
+                "name": "withLeg",
+                "value": "",
+                "type": "query",
+                "description": "If set to true, the result will include movement information from airport opposite in this flight leg (airport of origin for arriving flight or airport of destination for departing flight).\r\nIn this case, Movement property will be replaced with Departure and Arrival properties for each flight.\r\nDefault: false."
+              },
+              {
+                "name": "withCancelled",
+                "value": "",
+                "type": "query",
+                "description": "If set to true, result will include cancelled, divered, likely cancelled (CanceledUncertain) flights.\r\nDefault: true."
+              },
+              {
+                "name": "withCodeshared",
+                "value": "",
+                "type": "query",
+                "description": "If set to true, the result will include flights with all code-shared statuses.\r\nOtherwise, code-sharing flights will be exclued. For airports, where no information about code-share statuses\r\nof flights are supplied (all flights are CodeshareStatus=Unknown), complex filtering will be applied \r\nto determine which flights are likely to be operational (caution: false results are possible)."
+              },
+              {
+                "name": "withCargo",
+                "value": "",
+                "type": "query",
+                "description": "If set to true, the result will include cargo flights (subject to availability)."
+              },
+              {
+                "name": "withPrivate",
+                "value": "",
+                "type": "query",
+                "description": "If set to true, the result will include private flights (subject to availability)."
+              },
+              {
+                "name": "withLocation",
+                "value": "",
+                "type": "query",
+                "description": "If set to true, each currently active flight within the result will be populated \r\nwith its present real-time location, altitude, speed and track (subject to availability)."
+              }
+            ]
+          },
+          "docs": "**What are current departures or arrivals at the airport?** or **What is the flight schedule at the airport?** or **What is flight history at the airport?**\r\n\r\nFlights may contain live updates with corresponding information related to the actual progress of the flight \r\n(including actual/estimated arrival/departure times). In this case this endpoint serves as a FIDS endpoint. \r\nPresense of live updates is subject to data coverage: not all airports have this coverage in our system.\r\n\r\nOtherwise f"
+        },
+        {
+          "info": {
+            "name": "AeroDataBox Search Flight Numbers by Term / TIER 2",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://prod.api.market/api/v1/aedbx/aerodatabox/flights/search/term",
+            "headers": [
+              {
+                "name": "x-api-market-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Search query (min. 2 non whitespace characters length)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to be returned (max. 100, defaut = 10)"
+              }
+            ]
+          },
+          "docs": "*Returns:* Distinct list of available flight numbers which start with the search query."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

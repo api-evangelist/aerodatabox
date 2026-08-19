@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "AeroDataBox API - Aviation and Flight Aircraft API Industry API API",
+    "version": "1.14.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Industry API",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "AeroDataBox FAA LADD Aircraft Status / TIER 3",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://prod.api.market/api/v1/aedbx/aerodatabox/industry/faa-ladd/:id/status",
+            "headers": [
+              {
+                "name": "x-api-market-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Callsign or aircraft tail number"
+              }
+            ]
+          },
+          "docs": "*Returns:* The **current** status of the specified aircraft in the Limiting Aircraft Displayed program\r\nof the Federal Aviation Administration of the U.S. Department of Transportation (FAA LADD). \r\nThe industry list of blocked aircraft is synchrornized weekly with the FAA. \r\nMore information about FAA LADD: https://www.faa.gov/pilots/ladd\r\n\r\n**DISCLAIMER.** This endpoint is designed to provide easy access to verification against the FAA LADD industry list.\r\nEven though it is based on the officia"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

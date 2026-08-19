@@ -1,0 +1,227 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "AeroDataBox API - Aviation and Flight Aircraft API Airport API API",
+    "version": "1.14.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Airport API",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "AeroDataBox Airport by Code / TIER 1",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://prod.api.market/api/v1/aedbx/aerodatabox/airports/:codeType/:code",
+            "headers": [
+              {
+                "name": "x-api-market-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "codeType",
+                "value": "",
+                "type": "path",
+                "description": "Type of code to search airport by (`iata` or `icao`)"
+              },
+              {
+                "name": "code",
+                "value": "",
+                "type": "path",
+                "description": "If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+              },
+              {
+                "name": "withRunways",
+                "value": "",
+                "type": "query",
+                "description": "Include runways data (default - false)"
+              },
+              {
+                "name": "withTime",
+                "value": "",
+                "type": "query",
+                "description": "Include current local time (default - false)"
+              }
+            ]
+          },
+          "docs": "At the moment airports having both ICAO and IATA code are present in database only.\r\n\r\n*Returns*: Single airport data, if found."
+        },
+        {
+          "info": {
+            "name": "AeroDataBox Airport Runways / TIER 1",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://prod.api.market/api/v1/aedbx/aerodatabox/airports/:codeType/:code/runways",
+            "headers": [
+              {
+                "name": "x-api-market-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "codeType",
+                "value": "",
+                "type": "path",
+                "description": "Type of code to search airport by (`iata` or `icao`)"
+              },
+              {
+                "name": "code",
+                "value": "",
+                "type": "path",
+                "description": "If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+              }
+            ]
+          },
+          "docs": "**Which runways does this airport have?**\r\n\r\nAt the moment airports having both ICAO and IATA code are present in database only.\r\n\r\n*Returns*: Collection of runway data items."
+        },
+        {
+          "info": {
+            "name": "AeroDataBox Search Airports by Location / TIER 2",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://prod.api.market/api/v1/aedbx/aerodatabox/airports/search/location",
+            "headers": [
+              {
+                "name": "x-api-market-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "lat",
+                "value": "",
+                "type": "query",
+                "description": "Latitude location coordinate in decimal format (between -90 and 90)"
+              },
+              {
+                "name": "lon",
+                "value": "",
+                "type": "query",
+                "description": "Longitude location coordinate in decimal format (between -180 and 180)"
+              },
+              {
+                "name": "radiusKm",
+                "value": "",
+                "type": "query",
+                "description": "Radius of search around specified location in kilometers (max. 1000 km)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of airports to be returned (max. 250)"
+              },
+              {
+                "name": "withFlightInfoOnly",
+                "value": "",
+                "type": "query",
+                "description": "If set to true, will only return airports which have flight data (scheduled or live) available. Default = false."
+              }
+            ]
+          },
+          "docs": "**What are the airports closest to the location?**\r\n\r\nAt the moment airports having both ICAO and IATA code and flight schedules are present available only.\r\n\r\n*Returns:* A list of airports found within the specified radius around the specified location."
+        },
+        {
+          "info": {
+            "name": "AeroDataBox Search Airports by IP Address Geolocation / TIER 2",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://prod.api.market/api/v1/aedbx/aerodatabox/airports/search/ip",
+            "headers": [
+              {
+                "name": "x-api-market-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "A valid public IP v4 address"
+              },
+              {
+                "name": "radiusKm",
+                "value": "",
+                "type": "query",
+                "description": "Radius of search around specified location in kilometers (max. 1000 km)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of airports to be returned (max. 250)"
+              },
+              {
+                "name": "withFlightInfoOnly",
+                "value": "",
+                "type": "query",
+                "description": "If set to true, will only return airports which have flight data (scheduled or live) available. Default = false."
+              }
+            ]
+          },
+          "docs": "**What are the airports closest to the customer, based on their IP address?**\r\n**What are the airports closest to the location determined (geo-located) by a IP address?**\r\n\r\nThis endpoint determines the location by the IP address provided and then returns the list of the nearest airports\r\nin the same way as `Search airports by location` endpoint does. \r\n\r\nPlease note:\r\n* IP geo-location is not a precise method and it determines an approximate location only.\r\n* At the moment airports having both "
+        },
+        {
+          "info": {
+            "name": "AeroDataBox Search Airports by Free Text / TIER 2",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://prod.api.market/api/v1/aedbx/aerodatabox/airports/search/term",
+            "headers": [
+              {
+                "name": "x-api-market-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Search query (min. 3 non whitespace characters length)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of airports to be returned (max. 250, defaut = 10)"
+              },
+              {
+                "name": "withFlightInfoOnly",
+                "value": "",
+                "type": "query",
+                "description": "If set to true, will only return airports which have flight data (scheduled or live) available. Default = false."
+              },
+              {
+                "name": "withSearchByCode",
+                "value": "",
+                "type": "query",
+                "description": "If set to true, will attempt to interpret short words within the search query as IATA or ICAO code\r\nand prioritize exact matches by these codes (they will appear higher than others). \r\nOtherwise, the search by code will be completely excluded (only the name of an airport or its city will be searched). \r\nDefault = true."
+              }
+            ]
+          },
+          "docs": "At the moment airports having both ICAO and IATA code and flight schedules are present available only.\r\n\r\n*Returns:* List of airports with names and city names (and IATA/ICAO code, if enabled) matching the search term."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

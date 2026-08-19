@@ -1,0 +1,195 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "AeroDataBox API - Aviation and Flight Aircraft API Flight Alert API API",
+    "version": "1.14.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Flight Alert API",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "AeroDataBox Create Web-hook Subscription / TIER 4",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://prod.api.market/api/v1/aedbx/aerodatabox/subscriptions/webhook/:subjectType/:subjectId",
+            "headers": [
+              {
+                "name": "x-api-market-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "subjectType",
+                "value": "",
+                "type": "path",
+                "description": "Subject type"
+              },
+              {
+                "name": "subjectId",
+                "value": "",
+                "type": "path",
+                "description": "Subject ID. If `subjectType` is: \r\n* `FlightByNumber`, then this field must be a flight number (with or without spaces, IATA or ICAO, any case formats are acceptable, e.g. KL1395, Klm 1395);\r\n* `FlightByAirportIcao`, then this field must be a 4-character ICAO-code of the airport where flights are operated (e.g.: EHAM, KLAX, UUEE, etc.);"
+              },
+              {
+                "name": "useCredits",
+                "value": "",
+                "type": "query",
+                "description": "THIS IS A TEMPORARY MIGRATION PARAMETER FOR EASIER TRANSITION. \r\nDefault value: false.\r\nSet to true to create a web-hook subscription under the new, credit-based billing model.In this case, the call will be free of charge despite Tier 4.\r\nAfter transition this parameter will be ignored as all subscriptions will be created as credit-based and you will be able to remove it."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "*This endpoitns is a part of Flight alert PUSH API currently powered by webhooks.  \r\nIf you are running your own web service, you can subscribe to flights by number or airport code. \r\nAfter that, your HTTP endpoint will be called (notified) whenever the flight information gets \r\nupdated.*\r\n\r\nCreates a web-hook subscription on a subject (e.g., flight alerts by number or by airport code).\r\nReturns information about created subscription. Subscription ID contained in it\r\ncan be used to refresh or re"
+        },
+        {
+          "info": {
+            "name": "AeroDataBox Get Web-hook Subscription / FREE TIER",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://prod.api.market/api/v1/aedbx/aerodatabox/subscriptions/webhook/:subscriptionId",
+            "headers": [
+              {
+                "name": "x-api-market-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path",
+                "description": "Subscription ID"
+              }
+            ]
+          },
+          "docs": "*This endpoint is a part of Flight alert PUSH API currently powered by webhooks.  \r\nIf you are running your own web service, you can subscribe to flights by number or airport code. \r\nAfter that, your HTTP endpoint will be called (notified) whenever the flight information gets \r\nupdated.*\r\n\r\nGets information about an existing active web-hook subscription."
+        },
+        {
+          "info": {
+            "name": "AeroDataBox Remove Web-hook Subscription / FREE TIER",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://prod.api.market/api/v1/aedbx/aerodatabox/subscriptions/webhook/:subscriptionId",
+            "headers": [
+              {
+                "name": "x-api-market-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path",
+                "description": "Subscription ID"
+              }
+            ]
+          },
+          "docs": "*This endpoitns is a part of Flight alert PUSH API currently powered by webhooks.  \r\nIf you are running your own web service, you can subscribe to flights by number or airport code. \r\nAfter that, your HTTP endpoint will be called (notified) whenever the flight information gets \r\nupdated.*\r\n\r\nRemoves the subscription"
+        },
+        {
+          "info": {
+            "name": "AeroDataBox List Web-hook Subscriptions / FREE TIER",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://prod.api.market/api/v1/aedbx/aerodatabox/subscriptions/webhook",
+            "headers": [
+              {
+                "name": "x-api-market-key",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "*This endpoitns is a part of Flight alert PUSH API currently powered by webhooks.  \r\nIf you are running your own web service, you can subscribe to flights by number or airport code. \r\nAfter that, your HTTP endpoint will be called (notified) whenever the flight information gets \r\nupdated.*\r\n\r\nGet the list of existing active web-hook subscriptions"
+        },
+        {
+          "info": {
+            "name": "AeroDataBox Refresh Web-hook Subscription (DEPRECATED) / TIER 4",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://prod.api.market/api/v1/aedbx/aerodatabox/subscriptions/webhook/:subscriptionId/refresh",
+            "headers": [
+              {
+                "name": "x-api-market-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path",
+                "description": "Subscription ID"
+              },
+              {
+                "name": "useCredits",
+                "value": "",
+                "type": "query",
+                "description": "THIS IS A TEMPORARY MIGRATION PARAMETER FOR EASIER TRANSITION. \r\nDefault value: false.\r\nSet to true to refresh an existing web-hook subscription under the new, credit-based billing model. In this case, the call will be free of charge despite Tier 4."
+              }
+            ]
+          },
+          "docs": " *This endpoitns is a part of Flight alert PUSH API currently powered by webhooks.  \r\n If you are running your own web service, you can subscribe to flights by number or airport code. \r\n After that, your HTTP endpoint will be called (notified) whenever the flight information gets \r\n updated.*\r\n \r\n Refreshes an existing web-hook subscription\r\n \r\n If the subscription had an expiration date-time set when created, this endpoint \r\n will extend it by the same period of time as the one it was originall"
+        },
+        {
+          "info": {
+            "name": "AeroDataBox Get Web-hook Subscription Balance / FREE TIER",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://prod.api.market/api/v1/aedbx/aerodatabox/subscriptions/balance",
+            "headers": [
+              {
+                "name": "x-api-market-key",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "The current web-hook subscription balance information.\r\nThis is separate from your API marketplace quota and is used solely for billing of web-hook subscriptions.\r\nFor more details about how flight alert API billing works, refer to our guide at https://aerodatabox.com/flight-alert-api-2026/"
+        },
+        {
+          "info": {
+            "name": "AeroDataBox Refill Web-hook Subscription Balance / TIER 1",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://prod.api.market/api/v1/aedbx/aerodatabox/subscriptions/balance/refill",
+            "headers": [
+              {
+                "name": "x-api-market-key",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Performs refill operation on the web-hook subscription balance by the specified amount of credits.\r\nThis balance is separate from your API marketplace quota and is used solely for billing of web-hook subscriptions.\r\n\r\nIn the request body, you specify how many credits you want to add. This is a variable-rate endpoint and the amount of API units \r\ndeducted from your API quota depends on the amount of flight alerts credits requested.\r\nThe conversion rate is: 1 credit = 1 API unit.\r\n\r\nAdditional lim"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
