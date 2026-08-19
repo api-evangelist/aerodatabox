@@ -28,7 +28,7 @@ description: >-
   flight status, aircraft information, airport data, delay statistics, and flight alert webhooks through a RESTful API
   available on RapidAPI and API.Market. AeroDataBox covers global aviation data across airlines, aircraft, airports, and
   flight operations.
-specificationVersion: '0.16'
+specificationVersion: '0.23'
 maintainers:
   - FN: API Evangelist
     url: http://apievangelist.com
