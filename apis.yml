@@ -2,11 +2,11 @@ aid: aerodatabox
 url: https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/apis.yml
 name: AeroDataBox
 tags:
-  - Aviation
-  - Flights
-  - Aerospace
-  - Flight Data
-  - Airport Data
+- Aviation
+- Flights
+- Aerospace
+- Flight Data
+- Airport Data
 deliveryModel:
   model: saas
   open_source: false
@@ -33,21 +33,20 @@ accessModel:
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/aerodatabox.png
 created: '2025-02-24'
-modified: '2026-05-19'
-description: >-
-  AeroDataBox is an affordable aviation and flight data API platform tailored for small and medium businesses,
-  individual developers, researchers, and students. Founded in 2019, the platform provides real-time and historical
-  flight status, aircraft information, airport data, delay statistics, and flight alert webhooks through a RESTful API
-  available on RapidAPI and API.Market. AeroDataBox covers global aviation data across airlines, aircraft, airports, and
-  flight operations.
+modified: '2026-09-16'
+description: AeroDataBox is an affordable aviation and flight data API platform tailored for small and
+  medium businesses, individual developers, researchers, and students. Founded in 2019, the platform provides
+  real-time and historical flight status, aircraft information, airport data, delay statistics, and flight
+  alert webhooks through a RESTful API available on RapidAPI and API.Market. AeroDataBox covers global
+  aviation data across airlines, aircraft, airports, and flight operations.
 specificationVersion: '0.23'
 maintainers:
-  - FN: API Evangelist
-    url: http://apievangelist.com
-    email: info@apievangelist.com
+- FN: API Evangelist
+  url: http://apievangelist.com
+  email: info@apievangelist.com
 apis:
 - aid: aerodatabox:aerodatabox-aircraft-api-api
-  name: AeroDataBox Aircraft API API
+  name: AeroDataBox Aircraft API
   description: The Aircraft API API from AeroDataBox — 6 operation(s) for aircraft api.
   humanURL: https://doc.aerodatabox.com/
   baseURL: https://prod.api.market/api/v1/aedbx/aerodatabox
@@ -59,7 +58,7 @@ apis:
   - type: Documentation
     url: https://doc.aerodatabox.com/
 - aid: aerodatabox:aerodatabox-airport-api-api
-  name: AeroDataBox Airport API API
+  name: AeroDataBox Airport API
   description: The Airport API API from AeroDataBox — 5 operation(s) for airport api.
   humanURL: https://doc.aerodatabox.com/
   baseURL: https://prod.api.market/api/v1/aedbx/aerodatabox
@@ -71,7 +70,7 @@ apis:
   - type: Documentation
     url: https://doc.aerodatabox.com/
 - aid: aerodatabox:aerodatabox-flight-alert-api-api
-  name: AeroDataBox Flight Alert API API
+  name: AeroDataBox Flight Alert API
   description: The Flight Alert API API from AeroDataBox — 6 operation(s) for flight alert api.
   humanURL: https://doc.aerodatabox.com/
   baseURL: https://prod.api.market/api/v1/aedbx/aerodatabox
@@ -83,7 +82,7 @@ apis:
   - type: Documentation
     url: https://doc.aerodatabox.com/
 - aid: aerodatabox:aerodatabox-flight-api-api
-  name: AeroDataBox Flight API API
+  name: AeroDataBox Flight API
   description: The Flight API API from AeroDataBox — 8 operation(s) for flight api.
   humanURL: https://doc.aerodatabox.com/
   baseURL: https://prod.api.market/api/v1/aedbx/aerodatabox
@@ -95,7 +94,7 @@ apis:
   - type: Documentation
     url: https://doc.aerodatabox.com/
 - aid: aerodatabox:aerodatabox-healthcheck-api-api
-  name: AeroDataBox Healthcheck API API
+  name: AeroDataBox Healthcheck API
   description: The Healthcheck API API from AeroDataBox — 3 operation(s) for healthcheck api.
   humanURL: https://doc.aerodatabox.com/
   baseURL: https://prod.api.market/api/v1/aedbx/aerodatabox
@@ -107,7 +106,7 @@ apis:
   - type: Documentation
     url: https://doc.aerodatabox.com/
 - aid: aerodatabox:aerodatabox-industry-api-api
-  name: AeroDataBox Industry API API
+  name: AeroDataBox Industry API
   description: The Industry API API from AeroDataBox — 1 operation(s) for industry api.
   humanURL: https://doc.aerodatabox.com/
   baseURL: https://prod.api.market/api/v1/aedbx/aerodatabox
@@ -119,7 +118,7 @@ apis:
   - type: Documentation
     url: https://doc.aerodatabox.com/
 - aid: aerodatabox:aerodatabox-miscellaneous-api-api
-  name: AeroDataBox Miscellaneous API API
+  name: AeroDataBox Miscellaneous API
   description: The Miscellaneous API API from AeroDataBox — 4 operation(s) for miscellaneous api.
   humanURL: https://doc.aerodatabox.com/
   baseURL: https://prod.api.market/api/v1/aedbx/aerodatabox
@@ -131,7 +130,7 @@ apis:
   - type: Documentation
     url: https://doc.aerodatabox.com/
 - aid: aerodatabox:aerodatabox-statistical-api-api
-  name: AeroDataBox Statistical API API
+  name: AeroDataBox Statistical API
   description: The Statistical API API from AeroDataBox — 8 operation(s) for statistical api.
   humanURL: https://doc.aerodatabox.com/
   baseURL: https://prod.api.market/api/v1/aedbx/aerodatabox
@@ -143,99 +142,94 @@ apis:
   - type: Documentation
     url: https://doc.aerodatabox.com/
 common:
-  - type: Website
-    url: https://www.aerodatabox.com/
-  - type: AgenticAccess
-    url: agentic-access/aerodatabox-agentic-access.yml
-  - type: DomainSecurity
-    url: security/aerodatabox-domain-security.yml
-  - url: https://doc.aerodatabox.com/
-    type: Documentation
-  - url: https://www.aerodatabox.com/
-    type: Portal
-  - url: https://rapidapi.com/aerodatabox/api/aerodatabox
-    type: Marketplace
-    title: RapidAPI
-  - url: https://api.market/store/aedbx/aerodatabox
-    type: Marketplace
-    title: API.Market
-  - url: https://www.aerodatabox.com/pricing
-    type: Pricing
-  - url: https://www.aerodatabox.com/terms-of-service
-    type: TermsOfService
-  - url: https://www.aerodatabox.com/privacy-policy
-    type: PrivacyPolicy
-  - url: https://www.aerodatabox.com/contact
-    type: Contact
-  - type: Features
-    data:
-      - name: Real-Time Flight Status
-        description: >-
-          Live flight tracking with departure and arrival times, current status, and delay information for flights
-          worldwide.
-      - name: FIDS Airport Departures and Arrivals
-        description: >-
-          Flight Information Display System data showing all departures and arrivals at any airport for a given time
-          window.
-      - name: Aircraft Search and Profiles
-        description: >-
-          Lookup aircraft by tail number, registration, or ICAO24 hex code with fleet data, registration history, and
-          images.
-      - name: Airport Search by Location
-        description: >-
-          Find airports by geographic coordinates, IP address geolocation, or free-text search with runway data
-          included.
-      - name: Flight Delay Statistics
-        description: >-
-          Current and historical delay data for airports and specific flight numbers enabling trend analysis and SLA
-          monitoring.
-      - name: Webhook Flight Alerts
-        description: >-
-          Push notification subscriptions for real-time flight status changes, supporting event-driven application
-          architectures.
-      - name: FAA LADD Status
-        description: >-
-          FAA Limiting Aircraft Data Displayed (LADD) status lookup to determine if an aircraft is opted out of public
-          tracking.
-      - name: Solar Time Calculations
-        description: >-
-          Sunrise, sunset, and solar position data for any airport and date, useful for scheduling and operations
-          planning.
-      - name: Route Statistics
-        description: Daily route statistics for airports showing which routes operate and their frequency.
-  - type: UseCases
-    data:
-      - name: Flight Tracking Applications
-        description: >-
-          Build consumer or enterprise flight tracking apps using real-time status data for specific flights or all
-          flights at an airport.
-      - name: Travel Booking Notifications
-        description: Send flight status alerts to travelers by integrating webhook subscriptions for departure and arrival updates.
-      - name: Airport Operations Intelligence
-        description: Monitor airport performance, delay patterns, and route activity for operations research and capacity planning.
-      - name: Airline Research and Analysis
-        description: >-
-          Analyze fleet composition, route networks, and on-time performance for competitive intelligence and market
-          research.
-      - name: Aviation Data Journalism
-        description: Access historical delay and route statistics for data-driven journalism and research on aviation trends.
-      - name: Aircraft Valuation and Tracking
-        description: Track aircraft registrations and history for aviation finance, insurance, and asset management applications.
-      - name: Trip Planning Tools
-        description: >-
-          Integrate airport search, local time, and solar data into travel planning applications to enhance itinerary
-          building.
-  - url: rules/aerodatabox-spectral-rules.yml
-    type: SpectralRules
-  - url: vocabulary/aerodatabox-vocabulary.yaml
-    type: Vocabulary
-  - url: json-ld/aerodatabox-context.jsonld
-    type: JSONLD
-  - type: Integrations
-    data:
-      - name: RapidAPI
-        description: Available on RapidAPI Hub with interactive API playground and usage metering for easy developer onboarding.
-      - name: API.Market
-        description: Available on API.Market marketplace with official OpenAPI v3 specifications for download and code generation.
-      - name: Webhook Endpoints
-        description: Integrates with any webhook-capable endpoint for real-time flight status push notifications.
+- type: Website
+  url: https://www.aerodatabox.com/
+- type: AgenticAccess
+  url: agentic-access/aerodatabox-agentic-access.yml
+- type: DomainSecurity
+  url: security/aerodatabox-domain-security.yml
+- url: https://doc.aerodatabox.com/
+  type: Documentation
+- url: https://www.aerodatabox.com/
+  type: Portal
+- url: https://rapidapi.com/aerodatabox/api/aerodatabox
+  type: Marketplace
+  title: RapidAPI
+- url: https://api.market/store/aedbx/aerodatabox
+  type: Marketplace
+  title: API.Market
+- url: https://www.aerodatabox.com/pricing
+  type: Pricing
+- url: https://www.aerodatabox.com/terms-of-service
+  type: TermsOfService
+- url: https://www.aerodatabox.com/privacy-policy
+  type: PrivacyPolicy
+- url: https://www.aerodatabox.com/contact
+  type: Contact
+- type: Features
+  data:
+  - name: Real-Time Flight Status
+    description: Live flight tracking with departure and arrival times, current status, and delay information
+      for flights worldwide.
+  - name: FIDS Airport Departures and Arrivals
+    description: Flight Information Display System data showing all departures and arrivals at any airport
+      for a given time window.
+  - name: Aircraft Search and Profiles
+    description: Lookup aircraft by tail number, registration, or ICAO24 hex code with fleet data, registration
+      history, and images.
+  - name: Airport Search by Location
+    description: Find airports by geographic coordinates, IP address geolocation, or free-text search
+      with runway data included.
+  - name: Flight Delay Statistics
+    description: Current and historical delay data for airports and specific flight numbers enabling trend
+      analysis and SLA monitoring.
+  - name: Webhook Flight Alerts
+    description: Push notification subscriptions for real-time flight status changes, supporting event-driven
+      application architectures.
+  - name: FAA LADD Status
+    description: FAA Limiting Aircraft Data Displayed (LADD) status lookup to determine if an aircraft
+      is opted out of public tracking.
+  - name: Solar Time Calculations
+    description: Sunrise, sunset, and solar position data for any airport and date, useful for scheduling
+      and operations planning.
+  - name: Route Statistics
+    description: Daily route statistics for airports showing which routes operate and their frequency.
+- type: UseCases
+  data:
+  - name: Flight Tracking Applications
+    description: Build consumer or enterprise flight tracking apps using real-time status data for specific
+      flights or all flights at an airport.
+  - name: Travel Booking Notifications
+    description: Send flight status alerts to travelers by integrating webhook subscriptions for departure
+      and arrival updates.
+  - name: Airport Operations Intelligence
+    description: Monitor airport performance, delay patterns, and route activity for operations research
+      and capacity planning.
+  - name: Airline Research and Analysis
+    description: Analyze fleet composition, route networks, and on-time performance for competitive intelligence
+      and market research.
+  - name: Aviation Data Journalism
+    description: Access historical delay and route statistics for data-driven journalism and research
+      on aviation trends.
+  - name: Aircraft Valuation and Tracking
+    description: Track aircraft registrations and history for aviation finance, insurance, and asset management
+      applications.
+  - name: Trip Planning Tools
+    description: Integrate airport search, local time, and solar data into travel planning applications
+      to enhance itinerary building.
+- url: rules/aerodatabox-spectral-rules.yml
+  type: SpectralRules
+- url: vocabulary/aerodatabox-vocabulary.yaml
+  type: Vocabulary
+- url: json-ld/aerodatabox-context.jsonld
+  type: JSONLD
+- type: Integrations
+  data:
+  - name: RapidAPI
+    description: Available on RapidAPI Hub with interactive API playground and usage metering for easy
+      developer onboarding.
+  - name: API.Market
+    description: Available on API.Market marketplace with official OpenAPI v3 specifications for download
+      and code generation.
+  - name: Webhook Endpoints
+    description: Integrates with any webhook-capable endpoint for real-time flight status push notifications.
