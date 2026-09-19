@@ -1,6 +1,9 @@
 aid: aerodatabox
 url: https://raw.githubusercontent.com/api-evangelist/aerodatabox/refs/heads/main/apis.yml
 name: AeroDataBox
+x-docs-platform: stoplight
+x-docs-platform-confidence: medium
+x-docs-platform-checked: 2026-09-17
 tags:
 - Aviation
 - Flights
