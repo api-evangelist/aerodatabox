@@ -1,6 +1,6 @@
-openapi: 3.0.4
+openapi: 3.2.0
 info:
-  title: AeroDataBox API - Aviation and Flight Aircraft API Healthcheck API API
+  title: AeroDataBox API - Aviation and Flight Healthcheck API
   description: Affordable aviation & flight data API tailored for small and medium businesses, teams and individual developers.
   termsOfService: https://aerodatabox.com/terms/
   contact:
@@ -25,7 +25,10 @@ paths:
       tags:
       - Healthcheck API
       summary: AeroDataBox General Status of Data Feed Services / FREE TIER
-      description: "**Which is the general health of the data feed service?**\r\n \r\n*Returns:* Status of the service in general, regardless of the airports"
+      description: '**Which is the general health of the data feed service?**
+
+
+        *Returns:* Status of the service in general, regardless of the airports'
       operationId: GetFeedServiceStatus
       parameters:
       - name: service
@@ -158,7 +161,13 @@ paths:
       tags:
       - Healthcheck API
       summary: AeroDataBox Data Feed Services Status by ICAO Code / FREE TIER
-      description: "**What is the status of data updates for the airport?**\r\n\r\nAt the moment airports having both ICAO and IATA code are present in database only.\r\n\r\n*Returns:* Current status of airport data feed services (live flight updates, flight schedules, etc.) for requested airport."
+      description: '**What is the status of data updates for the airport?**
+
+
+        At the moment airports having both ICAO and IATA code are present in database only.
+
+
+        *Returns:* Current status of airport data feed services (live flight updates, flight schedules, etc.) for requested airport.'
       operationId: GetAirportFeedStatus
       parameters:
       - name: icao
@@ -272,7 +281,13 @@ paths:
       tags:
       - Healthcheck API
       summary: AeroDataBox Airports Supporting Data Feed Service / FREE TIER
-      description: "**Which airports support flight schedules?** or **Which airports support live flight updates?**\r\n\r\n At the moment airports having both ICAO and IATA code are present in database only.\r\n \r\n*Returns:* Collection ICAO codes of airports supporting specified airport data feed service."
+      description: '**Which airports support flight schedules?** or **Which airports support live flight updates?**
+
+
+        At the moment airports having both ICAO and IATA code are present in database only.
+
+
+        *Returns:* Collection ICAO codes of airports supporting specified airport data feed service.'
       operationId: GetFeedAirports
       parameters:
       - name: service
@@ -371,6 +386,65 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    AirportFeedServiceStatusContract:
+      required:
+      - adsbUpdatesFeed
+      - flightSchedulesFeed
+      - generalAvailability
+      - liveFlightUpdatesFeed
+      type: object
+      properties:
+        flightSchedulesFeed:
+          $ref: '#/components/schemas/FeedServiceStatusContract'
+        liveFlightUpdatesFeed:
+          $ref: '#/components/schemas/FeedServiceStatusContract'
+        adsbUpdatesFeed:
+          $ref: '#/components/schemas/FeedServiceStatusContract'
+        generalAvailability:
+          $ref: '#/components/schemas/FlightDataGeneralAvailabilityContract'
+      additionalProperties: false
+      description: 'Airport data feed services status.
+
+        Read https://aerodatabox.com/data-coverage for context.'
+    FlightDataGeneralAvailabilityContract:
+      type: object
+      properties:
+        minAvailableLocalDate:
+          type:
+          - string
+          - 'null'
+          description: 'Date of the oldest flight stored (based on scheduled local times)
+
+            If not specified, no flight data available'
+          format: date-time
+        maxAvailableLocalDate:
+          type:
+          - string
+          - 'null'
+          description: 'Date of the most recent flight stored (based on scheduled local times)
+
+            If not specified, no flight data available'
+          format: date-time
+      additionalProperties: false
+    FeedServiceEnum:
+      enum:
+      - FlightSchedules
+      - FlightLiveUpdates
+      - AdsbUpdates
+      type: string
+      description: 'Airport feed service defininitions<p>Possible values:</p>
+
+        <ul>
+
+        <li><b>0 - FlightSchedules</b>: Flight schedules data feed for this airport (static schedules data without actual updates)</li>
+
+        <li><b>1 - FlightLiveUpdates</b>: Actual flight status and time updates for this airport</li>
+
+        <li><b>2 - AdsbUpdates</b>: Flight updates derived from ADS-B data for this airport: runway, actual/estimated time on the runway, call-sign, ModeS 24-bit ICAO code, aircraft registration</li>
+
+        </ul>
+
+        '
     FeedServiceStatus:
       enum:
       - Down
@@ -380,7 +454,25 @@ components:
       - Unknown
       - Unavailable
       type: string
-      description: "Descriptor of feed service status<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - Down</b>: Service is provided, but is currently down</li>\r\n<li><b>1 - Degraded</b>: Service is up and running, but performance is degraded: delays and disruptions are likely</li>\r\n<li><b>2 - OKPartial</b>: Service is up and running normally, but updates vailable for not all or only few flights</li>\r\n<li><b>3 - OK</b>: Service is up and running normally</li>\r\n<li><b>-2 - Unknown</b>: Status of service is unknown</li>\r\n<li><b>-1 - Unavailable</b>: Service is not provided</li>\r\n</ul>\r\n"
+      description: 'Descriptor of feed service status<p>Possible values:</p>
+
+        <ul>
+
+        <li><b>0 - Down</b>: Service is provided, but is currently down</li>
+
+        <li><b>1 - Degraded</b>: Service is up and running, but performance is degraded: delays and disruptions are likely</li>
+
+        <li><b>2 - OKPartial</b>: Service is up and running normally, but updates vailable for not all or only few flights</li>
+
+        <li><b>3 - OK</b>: Service is up and running normally</li>
+
+        <li><b>-2 - Unknown</b>: Status of service is unknown</li>
+
+        <li><b>-1 - Unavailable</b>: Service is not provided</li>
+
+        </ul>
+
+        '
     ErrorContract:
       required:
       - message
@@ -403,19 +495,23 @@ components:
         status:
           $ref: '#/components/schemas/FeedServiceStatus'
         minAvailableLocalDate:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Date of the oldest flight stored (based on scheduled local times)
           format: date-time
-          nullable: true
           deprecated: true
         maxAvailableLocalDate:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Date of the most recent flight stored (based on scheduled local times)
           format: date-time
-          nullable: true
           deprecated: true
       additionalProperties: false
-      description: "Feed service status contract.\r\nRead https://aerodatabox.com/data-coverage for context."
+      description: 'Feed service status contract.
+
+        Read https://aerodatabox.com/data-coverage for context.'
     StringCollectionContract:
       required:
       - count
@@ -435,42 +531,3 @@ components:
             type: string
           description: The collection of items
       additionalProperties: false
-    FlightDataGeneralAvailabilityContract:
-      type: object
-      properties:
-        minAvailableLocalDate:
-          type: string
-          description: "Date of the oldest flight stored (based on scheduled local times)\r\nIf not specified, no flight data available"
-          format: date-time
-          nullable: true
-        maxAvailableLocalDate:
-          type: string
-          description: "Date of the most recent flight stored (based on scheduled local times)\r\nIf not specified, no flight data available"
-          format: date-time
-          nullable: true
-      additionalProperties: false
-    AirportFeedServiceStatusContract:
-      required:
-      - adsbUpdatesFeed
-      - flightSchedulesFeed
-      - generalAvailability
-      - liveFlightUpdatesFeed
-      type: object
-      properties:
-        flightSchedulesFeed:
-          $ref: '#/components/schemas/FeedServiceStatusContract'
-        liveFlightUpdatesFeed:
-          $ref: '#/components/schemas/FeedServiceStatusContract'
-        adsbUpdatesFeed:
-          $ref: '#/components/schemas/FeedServiceStatusContract'
-        generalAvailability:
-          $ref: '#/components/schemas/FlightDataGeneralAvailabilityContract'
-      additionalProperties: false
-      description: "Airport data feed services status.\r\nRead https://aerodatabox.com/data-coverage for context."
-    FeedServiceEnum:
-      enum:
-      - FlightSchedules
-      - FlightLiveUpdates
-      - AdsbUpdates
-      type: string
-      description: "Airport feed service defininitions<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - FlightSchedules</b>: Flight schedules data feed for this airport (static schedules data without actual updates)</li>\r\n<li><b>1 - FlightLiveUpdates</b>: Actual flight status and time updates for this airport</li>\r\n<li><b>2 - AdsbUpdates</b>: Flight updates derived from ADS-B data for this airport: runway, actual/estimated time on the runway, call-sign, ModeS 24-bit ICAO code, aircraft registration</li>\r\n</ul>\r\n"

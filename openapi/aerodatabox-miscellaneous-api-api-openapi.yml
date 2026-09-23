@@ -1,6 +1,6 @@
-openapi: 3.0.4
+openapi: 3.2.0
 info:
-  title: AeroDataBox API - Aviation and Flight Aircraft API Miscellaneous API API
+  title: AeroDataBox API - Aviation and Flight Miscellaneous API
   description: Affordable aviation & flight data API tailored for small and medium businesses, teams and individual developers.
   termsOfService: https://aerodatabox.com/terms/
   contact:
@@ -25,7 +25,13 @@ paths:
       tags:
       - Miscellaneous API
       summary: AeroDataBox Current Local Time at the Airport / TIER 1
-      description: "**What is the current local time at the airport?**\r\n\r\nAt the moment airports having both ICAO and IATA code are present in database only.\r\n\r\n*Returns:* Local time at the airport, if airport is found."
+      description: '**What is the current local time at the airport?**
+
+
+        At the moment airports having both ICAO and IATA code are present in database only.
+
+
+        *Returns:* Local time at the airport, if airport is found.'
       operationId: GetAirportLocalTime
       parameters:
       - name: codeType
@@ -35,7 +41,14 @@ paths:
           $ref: '#/components/schemas/AirportCodesByEnum'
       - name: code
         in: path
-        description: "If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+        description: 'If `codeType` is:
+
+          * `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);
+
+          * `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).
+
+
+          Full, stripped and any case formats are acceptable.'
         required: true
         schema:
           maxLength: 4
@@ -142,7 +155,21 @@ paths:
       tags:
       - Miscellaneous API
       summary: AeroDataBox Solar and Day Time at the Airport / TIER 1
-      description: "**What is the sun position in the sky now at a specific time at the airport?** or\r\n**When does the sun rise and set at the airport today or on the other day at the airport?** or\r\n**Is it dark now or is it day at the airport?**\r\n\r\nAt the moment airports having both ICAO and IATA code are present in database only.\r\n\r\n*Returns:* If airport is found, returns various solar-related information: sun position in the sky,\r\ndaytime (day, night, twilight: civil, nautical, astronomical, golden/blue hours), \r\nsunrise and sunset times, etc."
+      description: '**What is the sun position in the sky now at a specific time at the airport?** or
+
+        **When does the sun rise and set at the airport today or on the other day at the airport?** or
+
+        **Is it dark now or is it day at the airport?**
+
+
+        At the moment airports having both ICAO and IATA code are present in database only.
+
+
+        *Returns:* If airport is found, returns various solar-related information: sun position in the sky,
+
+        daytime (day, night, twilight: civil, nautical, astronomical, golden/blue hours),
+
+        sunrise and sunset times, etc.'
       operationId: GetAirportSolarTime_SolarTimeCurrent
       parameters:
       - name: codeType
@@ -152,7 +179,14 @@ paths:
           $ref: '#/components/schemas/AirportCodesByEnum'
       - name: code
         in: path
-        description: "If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+        description: 'If `codeType` is:
+
+          * `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);
+
+          * `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).
+
+
+          Full, stripped and any case formats are acceptable.'
         required: true
         schema:
           maxLength: 4
@@ -271,7 +305,21 @@ paths:
       tags:
       - Miscellaneous API
       summary: AeroDataBox Solar and Day Time at the Airport / TIER 1
-      description: "**What is the sun position in the sky now at a specific time at the airport?** or\r\n**When does the sun rise and set at the airport today or on the other day at the airport?** or\r\n**Is it dark now or is it day at the airport?**\r\n\r\nAt the moment airports having both ICAO and IATA code are present in database only.\r\n\r\n*Returns:* If airport is found, returns various solar-related information: sun position in the sky,\r\ndaytime (day, night, twilight: civil, nautical, astronomical, golden/blue hours), \r\nsunrise and sunset times, etc."
+      description: '**What is the sun position in the sky now at a specific time at the airport?** or
+
+        **When does the sun rise and set at the airport today or on the other day at the airport?** or
+
+        **Is it dark now or is it day at the airport?**
+
+
+        At the moment airports having both ICAO and IATA code are present in database only.
+
+
+        *Returns:* If airport is found, returns various solar-related information: sun position in the sky,
+
+        daytime (day, night, twilight: civil, nautical, astronomical, golden/blue hours),
+
+        sunrise and sunset times, etc.'
       operationId: GetAirportSolarTime_SolarTimeSpecificDate
       parameters:
       - name: codeType
@@ -281,7 +329,14 @@ paths:
           $ref: '#/components/schemas/AirportCodesByEnum'
       - name: code
         in: path
-        description: "If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+        description: 'If `codeType` is:
+
+          * `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);
+
+          * `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).
+
+
+          Full, stripped and any case formats are acceptable.'
         required: true
         schema:
           maxLength: 4
@@ -289,7 +344,7 @@ paths:
           type: string
       - name: dateLocal
         in: path
-        description: "The moment of time which solar data is request for (local time, format: YYYY-MM-DDTHH:mm). \r\nDefault - current time."
+        description: "The moment of time which solar data is request for (local time, format: YYYY-MM-DDTHH:mm). \nDefault - current time."
         required: true
         schema:
           pattern: \d{4}-\d{2}-\d{2}(T\d{2}:\d{2})?
@@ -408,7 +463,19 @@ paths:
       tags:
       - Miscellaneous API
       summary: AeroDataBox Distance and Flight Time Between Airports / TIER 2
-      description: "**What is the great circle distance between airports?** \r\n**What is approximate flight time between airports?**\r\n** What is the flight time between airports based on history of flights and/or aircraft type?** (machine-learning based)\r\n\r\nUse `flightTimeModel` = <a href=\"#model-ModelFlightTimeEnum\">ML01</a> to get more accurate results based on historical performance of flights on a specific route \r\nand aircraft type.\r\n\r\n*Returns:* Distance and approximate flight time between airports, if both airports found."
+      description: '**What is the great circle distance between airports?**
+
+        **What is approximate flight time between airports?**
+
+        ** What is the flight time between airports based on history of flights and/or aircraft type?** (machine-learning based)
+
+
+        Use `flightTimeModel` = ML01 to get more accurate results based on historical performance of flights on a specific route
+
+        and aircraft type.
+
+
+        *Returns:* Distance and approximate flight time between airports, if both airports found.'
       operationId: GetAirportDistanceTime
       parameters:
       - name: codeType
@@ -418,7 +485,14 @@ paths:
           $ref: '#/components/schemas/AirportCodesByEnum'
       - name: codeFrom
         in: path
-        description: "If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the origin airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the origin  airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+        description: 'If `codeType` is:
+
+          * `icao`, then this field must be a 4-character ICAO-code of the origin airport (e.g.: EHAM, KLAX, UUEE, etc.);
+
+          * `iata`, then this field must be a 3-character IATA-code of the origin  airport (e.g.: AMS, SFO, LAX, etc.).
+
+
+          Full, stripped and any case formats are acceptable.'
         required: true
         schema:
           maxLength: 4
@@ -426,7 +500,16 @@ paths:
           type: string
       - name: codeTo
         in: path
-        description: "If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the destination airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the destination  airport (e.g.: AMS, SFO, LAX, etc.);\r\n* `local`, then the format of this field is subject to specific standards of relevant national or local airport codification systems.\r\n\r\nFull, stripped and any case formats are acceptable."
+        description: 'If `codeType` is:
+
+          * `icao`, then this field must be a 4-character ICAO-code of the destination airport (e.g.: EHAM, KLAX, UUEE, etc.);
+
+          * `iata`, then this field must be a 3-character IATA-code of the destination  airport (e.g.: AMS, SFO, LAX, etc.);
+
+          * `local`, then the format of this field is subject to specific standards of relevant national or local airport codification systems.
+
+
+          Full, stripped and any case formats are acceptable.'
         required: true
         schema:
           maxLength: 4
@@ -434,12 +517,16 @@ paths:
           type: string
       - name: aircraftName
         in: query
-        description: "Aircraft type name (free text). \r\nIf specified, the aircraft type will be attempted to be taken into account to provide more accurate result."
+        description: "Aircraft type name (free text). \nIf specified, the aircraft type will be attempted to be taken into account to provide more accurate result."
         schema:
           type: string
       - name: flightTimeModel
         in: query
-        description: "Model of calculation of the flight time. Default is <a href=\"#model-ModelFlightTimeEnum\"></a>\r\nMore advanced model(s) is available, including machine learning-based models.\r\nSee <a href=\"#model-ModelFlightTimeEnum\">ModelFlightTimeEnum</a> for details."
+        description: 'Model of calculation of the flight time. Default is <a href="#model-ModelFlightTimeEnum"></a>
+
+          More advanced model(s) is available, including machine learning-based models.
+
+          See <a href="#model-ModelFlightTimeEnum">ModelFlightTimeEnum</a> for details.'
         schema:
           $ref: '#/components/schemas/ModelFlightTimeEnum'
       responses:
@@ -534,109 +621,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    DayTime:
-      enum:
-      - Night
-      - TwilightAstronomical
-      - TwilightNautical
-      - TwilightCivil
-      - Day
-      - BlueHour
-      - GoldenHour
-      type: string
-      description: "Daytime states<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - Night</b></li>\r\n<li><b>1 - TwilightAstronomical</b></li>\r\n<li><b>2 - TwilightNautical</b></li>\r\n<li><b>3 - TwilightCivil</b></li>\r\n<li><b>4 - Day</b></li>\r\n<li><b>5 - BlueHour</b></li>\r\n<li><b>6 - GoldenHour</b></li>\r\n</ul>\r\n"
-    ErrorContract:
-      required:
-      - message
-      type: object
-      properties:
-        message:
-          minLength: 1
-          type: string
-          description: Error message
-      additionalProperties: false
-      description: Error response
-    AirportCodesByEnum:
-      enum:
-      - Icao
-      - Iata
-      type: string
-      description: "Search by airport code type<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - Icao</b>: ICAO-code</li>\r\n<li><b>1 - Iata</b>: IATA-code</li>\r\n</ul>\r\n"
-    AirportLocalTimeContract:
-      required:
-      - time
-      - timeZoneId
-      type: object
-      properties:
-        time:
-          $ref: '#/components/schemas/DateTimeContract'
-        timeZoneId:
-          minLength: 1
-          type: string
-          description: Timezone ID of the airport (Olson format)
-      additionalProperties: false
-      description: Information about the local time at an airport
-    ListingAirportContract:
-      required:
-      - name
-      type: object
-      properties:
-        icao:
-          type: string
-          description: ICAO code of the airport
-          nullable: true
-        iata:
-          type: string
-          description: IATA code of the airport
-          nullable: true
-        localCode:
-          type: string
-          description: Code of the airport within the local or national codification system
-          nullable: true
-        name:
-          minLength: 1
-          type: string
-          description: Name of the airport
-        shortName:
-          type: string
-          description: Shortened name of the airport
-          nullable: true
-        municipalityName:
-          type: string
-          description: Name of the municipality this airport belongs to
-          nullable: true
-        location:
-          $ref: '#/components/schemas/GeoCoordinatesContract'
-        countryCode:
-          type: string
-          description: Two-letter country code of the airport
-          nullable: true
-        timeZone:
-          type: string
-          description: Time zone of the airport in Olson format (e.g. "Europe/Amsterdam")
-          nullable: true
-      additionalProperties: false
-      description: Flight's airport reference contract
-    GeoCoordinatesContract:
-      required:
-      - lat
-      - lon
-      type: object
-      properties:
-        lat:
-          maximum: 90
-          minimum: -90
-          type: number
-          description: Latitude, in degrees
-          format: float
-        lon:
-          maximum: 180
-          minimum: -180
-          type: number
-          description: Longitude, in degrees
-          format: float
-      additionalProperties: false
-      description: Geographical coordinates data
     Angle:
       required:
       - deg
@@ -656,22 +640,37 @@ components:
           description: Angle in radians (between `-Pi` and `Pi`)
           format: double
       additionalProperties: false
-    DateTimeContract:
-      required:
-      - local
-      - utc
-      type: object
-      properties:
-        utc:
-          type: string
-          description: UTC-time
-          format: date-time
-        local:
-          type: string
-          description: Local time
-          format: date-time
-      additionalProperties: false
-      description: Descriptor date-time represented in both UTC and local timezones
+    DayTime:
+      enum:
+      - Night
+      - TwilightAstronomical
+      - TwilightNautical
+      - TwilightCivil
+      - Day
+      - BlueHour
+      - GoldenHour
+      type: string
+      description: 'Daytime states<p>Possible values:</p>
+
+        <ul>
+
+        <li><b>0 - Night</b></li>
+
+        <li><b>1 - TwilightAstronomical</b></li>
+
+        <li><b>2 - TwilightNautical</b></li>
+
+        <li><b>3 - TwilightCivil</b></li>
+
+        <li><b>4 - Day</b></li>
+
+        <li><b>5 - BlueHour</b></li>
+
+        <li><b>6 - GoldenHour</b></li>
+
+        </ul>
+
+        '
     SolarStateContract:
       required:
       - dayTime
@@ -741,32 +740,115 @@ components:
           description: Distance in feet
           format: double
       additionalProperties: false
+    ListingAirportContract:
+      required:
+      - name
+      type: object
+      properties:
+        icao:
+          type:
+          - string
+          - 'null'
+          description: ICAO code of the airport
+        iata:
+          type:
+          - string
+          - 'null'
+          description: IATA code of the airport
+        localCode:
+          type:
+          - string
+          - 'null'
+          description: Code of the airport within the local or national codification system
+        name:
+          minLength: 1
+          type: string
+          description: Name of the airport
+        shortName:
+          type:
+          - string
+          - 'null'
+          description: Shortened name of the airport
+        municipalityName:
+          type:
+          - string
+          - 'null'
+          description: Name of the municipality this airport belongs to
+        location:
+          $ref: '#/components/schemas/GeoCoordinatesContract'
+        countryCode:
+          type:
+          - string
+          - 'null'
+          description: Two-letter country code of the airport
+        timeZone:
+          type:
+          - string
+          - 'null'
+          description: Time zone of the airport in Olson format (e.g. "Europe/Amsterdam")
+      additionalProperties: false
+      description: Flight's airport reference contract
     ModelFlightTimeEnum:
       enum:
       - Standard
       - ML01
       type: string
-      description: "Models of calculating the flight time.<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - Standard</b>: Standard model of calculation which takes into account the great circle distance and the average speed of all aircraft typically operating on those distances.</li>\r\n<li><b>1 - ML01</b>: Experimental machine learning (ML) model, which attempts to provide more accurate prediction of the flight time by taking into account the history of flights on specified route and aircraft type within the recent year. This may come in handy in case when on certain routes flights take significant detours due to extended airspace closures dictated by war conflicts, sanction regulations, etc. This can result in significantly increased flight times comparing to regular estimations. Or, some routes generally experience longer delays than other routes of the same distance. This model attempts to take such factors into account and reflect it in the prediction. If a model cannot be applied due to lack of historical and/or aircraft data or prediction is too off set, it automatically fallbacks to `Standard`.</li>\r\n</ul>\r\n"
-    AirportDistanceTimeContract:
+      description: 'Models of calculating the flight time.<p>Possible values:</p>
+
+        <ul>
+
+        <li><b>0 - Standard</b>: Standard model of calculation which takes into account the great circle distance and the average speed of all aircraft typically operating on those distances.</li>
+
+        <li><b>1 - ML01</b>: Experimental machine learning (ML) model, which attempts to provide more accurate prediction of the flight time by taking into account the history of flights on specified route and aircraft type within the recent year. This may come in handy in case when on certain routes flights take significant detours due to extended airspace closures dictated by war conflicts, sanction regulations, etc. This can result in significantly increased flight times comparing to regular estimations. Or, some routes generally experience longer delays than other routes of the same distance. This model attempts to take such factors into account and reflect it in the prediction. If a model cannot be applied due to lack of historical and/or aircraft data or prediction is too off set, it automatically fallbacks to `Standard`.</li>
+
+        </ul>
+
+        '
+    ErrorContract:
       required:
-      - approxFlightTime
-      - from
-      - greatCircleDistance
-      - to
+      - message
       type: object
       properties:
-        from:
-          $ref: '#/components/schemas/ListingAirportContract'
-        to:
-          $ref: '#/components/schemas/ListingAirportContract'
-        greatCircleDistance:
-          $ref: '#/components/schemas/Distance'
-        approxFlightTime:
+        message:
+          minLength: 1
           type: string
-          description: "Approximate flight time based on re-calculation of great circle distance\r\nagainst statistical duration average of multiple flights covered similar\r\ndistance before."
-          format: date-span
+          description: Error message
       additionalProperties: false
-      description: "Contract containing information on distance and approximate flight time\r\nbetween specified airports"
+      description: Error response
+    AirportLocalTimeContract:
+      required:
+      - time
+      - timeZoneId
+      type: object
+      properties:
+        time:
+          $ref: '#/components/schemas/DateTimeContract'
+        timeZoneId:
+          minLength: 1
+          type: string
+          description: Timezone ID of the airport (Olson format)
+      additionalProperties: false
+      description: Information about the local time at an airport
+    GeoCoordinatesContract:
+      required:
+      - lat
+      - lon
+      type: object
+      properties:
+        lat:
+          maximum: 90
+          minimum: -90
+          type: number
+          description: Latitude, in degrees
+          format: float
+        lon:
+          maximum: 180
+          minimum: -180
+          type: number
+          description: Longitude, in degrees
+          format: float
+      additionalProperties: false
+      description: Geographical coordinates data
     Azimuth:
       required:
       - deg
@@ -786,3 +868,61 @@ components:
           description: Angle in radians (`0` and `2 * Pi`)
           format: double
       additionalProperties: false
+    AirportDistanceTimeContract:
+      required:
+      - approxFlightTime
+      - from
+      - greatCircleDistance
+      - to
+      type: object
+      properties:
+        from:
+          $ref: '#/components/schemas/ListingAirportContract'
+        to:
+          $ref: '#/components/schemas/ListingAirportContract'
+        greatCircleDistance:
+          $ref: '#/components/schemas/Distance'
+        approxFlightTime:
+          type: string
+          description: 'Approximate flight time based on re-calculation of great circle distance
+
+            against statistical duration average of multiple flights covered similar
+
+            distance before.'
+          format: date-span
+      additionalProperties: false
+      description: 'Contract containing information on distance and approximate flight time
+
+        between specified airports'
+    DateTimeContract:
+      required:
+      - local
+      - utc
+      type: object
+      properties:
+        utc:
+          type: string
+          description: UTC-time
+          format: date-time
+        local:
+          type: string
+          description: Local time
+          format: date-time
+      additionalProperties: false
+      description: Descriptor date-time represented in both UTC and local timezones
+    AirportCodesByEnum:
+      enum:
+      - Icao
+      - Iata
+      type: string
+      description: 'Search by airport code type<p>Possible values:</p>
+
+        <ul>
+
+        <li><b>0 - Icao</b>: ICAO-code</li>
+
+        <li><b>1 - Iata</b>: IATA-code</li>
+
+        </ul>
+
+        '

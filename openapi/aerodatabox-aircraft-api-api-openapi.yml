@@ -1,6 +1,6 @@
-openapi: 3.0.4
+openapi: 3.2.0
 info:
-  title: AeroDataBox API - Aviation and Flight Aircraft API API
+  title: AeroDataBox API - Aviation and Flight Aircraft API
   description: Affordable aviation & flight data API tailored for small and medium businesses, teams and individual developers.
   termsOfService: https://aerodatabox.com/terms/
   contact:
@@ -35,7 +35,7 @@ paths:
           $ref: '#/components/schemas/AircraftSearchByEnum'
       - name: searchParam
         in: path
-        description: "Value of the search criteria. If `searchBy` is: \r\n* `id`: then this field should be an ID of an aircraft (as specified in the database of this API);\r\n* `reg`: then this field should be a tail-number of an aircraft (with or without spaces or dashes, any case formats are acceptable, e.g.PH-BXO, DeMhJ), multiple matches are possible - see below;\r\n* `icao24`, then this field should be a ICAO 24-bit Mode-S address of an aircraft specified in hexadecimal format (e.g. 484161, 483EFD), multiple matches are possible - see below.\r\n\r\n*If multiple matches are possible:*\r\n\r\nThere cannot be more than one aircraft actively flying with the same tail-number or ICAO 24-bit Mode-S address at any moment of time. \r\nHowever, historically aircraft tail-numbers or addresses may be used multiple times by different aircraft.\r\nThis endpoint is supposed to return a **single** aircraft data. In case if multiple aircraft satisfy the search criteria, the best match will be chosen as follows:\r\n* If an active aircraft is found according to the requested critera, it is returned.\r\n* Otherwise, an aircraft that used requested tail-number/address the most recently is returned. \r\n* If usage time may not be determined, the aircraft stored in the database the most recently is returned."
+        description: "Value of the search criteria. If `searchBy` is: \n* `id`: then this field should be an ID of an aircraft (as specified in the database of this API);\n* `reg`: then this field should be a tail-number of an aircraft (with or without spaces or dashes, any case formats are acceptable, e.g.PH-BXO, DeMhJ), multiple matches are possible - see below;\n* `icao24`, then this field should be a ICAO 24-bit Mode-S address of an aircraft specified in hexadecimal format (e.g. 484161, 483EFD), multiple matches are possible - see below.\n\n*If multiple matches are possible:*\n\nThere cannot be more than one aircraft actively flying with the same tail-number or ICAO 24-bit Mode-S address at any moment of time. \nHowever, historically aircraft tail-numbers or addresses may be used multiple times by different aircraft.\nThis endpoint is supposed to return a **single** aircraft data. In case if multiple aircraft satisfy the search criteria, the best match will be chosen as follows:\n* If an active aircraft is found according to the requested critera, it is returned.\n* Otherwise, an aircraft that used requested tail-number/address the most recently is returned. \n* If usage time may not be determined, the aircraft stored in the database the most recently is returned."
         required: true
         schema:
           maxLength: 10
@@ -177,7 +177,7 @@ paths:
     get:
       tags:
       - Aircraft API
-      summary: AeroDataBox Single Aircraft Registration History (by Tail-number, Mode-S or ID) / TIER 1
+      summary: AeroDataBox Single Aircraft Registration History (by Tail-number, Mode-S or ID)…
       description: '*Returns:* A list of all known registrations of a single aircraft, *best* matching specified search criteria, if found'
       operationId: GetAircraftRegistrations
       parameters:
@@ -188,7 +188,7 @@ paths:
           $ref: '#/components/schemas/AircraftSearchByEnum'
       - name: searchParam
         in: path
-        description: "Value of the search criteria. If `searchBy` is: \r\n* `id`, then this field should be an ID of an aircraft (as specified in the database of this API);\r\n* `reg`, then this field should be a tail-number of an aircraft (with or without spaces or dashes, any case formats are acceptable, e.g.PH-BXO, DeMhJ), multiple matches are possible - see below;\r\n* `icao24`, then this field should be a ICAO 24-bit Mode-S address of an aircraft specified in hexadecimal format (e.g. 484161, 483EFD), multiple matches are possible - see below.\r\n\r\n*If multiple matches are possible:* see similar remark to `Single aircraft` endpoint."
+        description: "Value of the search criteria. If `searchBy` is: \n* `id`, then this field should be an ID of an aircraft (as specified in the database of this API);\n* `reg`, then this field should be a tail-number of an aircraft (with or without spaces or dashes, any case formats are acceptable, e.g.PH-BXO, DeMhJ), multiple matches are possible - see below;\n* `icao24`, then this field should be a ICAO 24-bit Mode-S address of an aircraft specified in hexadecimal format (e.g. 484161, 483EFD), multiple matches are possible - see below.\n\n*If multiple matches are possible:* see similar remark to `Single aircraft` endpoint."
         required: true
         schema:
           maxLength: 10
@@ -307,7 +307,7 @@ paths:
           $ref: '#/components/schemas/AircraftSearchByEnum'
       - name: searchParam
         in: path
-        description: "Value of the search criteria. If `searchBy` is: \r\n* `id`, then this field should be an ID of an aircraft (as specified in the database of this API);\r\n* `reg`, then this field should be a tail-number of an aircraft (with or without spaces or dashes, any case formats are acceptable, e.g.PH-BXO, DeMhJ);\r\n* `icao24`, then this field should be a ICAO 24-bit Mode-S address of an aircraft specified in hexadecimal format (e.g. 484161, 483EFD)."
+        description: "Value of the search criteria. If `searchBy` is: \n* `id`, then this field should be an ID of an aircraft (as specified in the database of this API);\n* `reg`, then this field should be a tail-number of an aircraft (with or without spaces or dashes, any case formats are acceptable, e.g.PH-BXO, DeMhJ);\n* `icao24`, then this field should be a ICAO 24-bit Mode-S address of an aircraft specified in hexadecimal format (e.g. 484161, 483EFD)."
         required: true
         schema:
           maxLength: 10
@@ -428,12 +428,17 @@ paths:
       tags:
       - Aircraft API
       summary: AeroDataBox Airline Fleet / Aircraft List by Airline Code (BETA) / TIER 3
-      description: "*Returns:* A paged list of aircraft in the fleet of the specified airline. \r\n\r\nThat will include *active* aircraft currently flying in an *active* airline, verfified through more than one source.\r\nUnconfirmed sightings of an aircraft will not qualify said aircraft to be listed in the fleet."
+      description: '*Returns:* A paged list of aircraft in the fleet of the specified airline.
+
+
+        That will include *active* aircraft currently flying in an *active* airline, verfified through more than one source.
+
+        Unconfirmed sightings of an aircraft will not qualify said aircraft to be listed in the fleet.'
       operationId: GetAirlineFleet
       parameters:
       - name: airlineCode
         in: path
-        description: "3-character ICAO-code of the airliner (e.g., KLM, ACA); or\r\n2-character IATA-code of the airline (e.g., KL, AC).\r\n            \r\nPlease note that more than one active airline may have the same IATA code, therefore IATA codes are not recommended for this endpoint."
+        description: "3-character ICAO-code of the airliner (e.g., KLM, ACA); or\n2-character IATA-code of the airline (e.g., KL, AC).\n            \nPlease note that more than one active airline may have the same IATA code, therefore IATA codes are not recommended for this endpoint."
         required: true
         schema:
           maxLength: 3
@@ -441,7 +446,9 @@ paths:
           type: string
       - name: pageSize
         in: query
-        description: "The number of returned records will be capped at this value.\r\nMust be a positive value and not exceed the limit stipulated by your pricing plan."
+        description: 'The number of returned records will be capped at this value.
+
+          Must be a positive value and not exceed the limit stipulated by your pricing plan.'
         required: true
         schema:
           maximum: 2147483647
@@ -569,7 +576,17 @@ paths:
       tags:
       - Aircraft API
       summary: AeroDataBox Aircraft Image by Tail-number / TIER 2
-      description: "**What is the aircraft photo?**\r\n\r\nAircraft images are being searched in external sources by certain criteria without any manual intervention. \r\nTherefore, false matches may be returned. Only images with licenses approved for commercial use are returned. Please be advised that you may be required to mention author attribution before using the image.\r\n\r\n*Returns:* Image data with medium-sized direct image URL and licence approved for commercial use\r\nis returned."
+      description: '**What is the aircraft photo?**
+
+
+        Aircraft images are being searched in external sources by certain criteria without any manual intervention.
+
+        Therefore, false matches may be returned. Only images with licenses approved for commercial use are returned. Please be advised that you may be required to mention author attribution before using the image.
+
+
+        *Returns:* Image data with medium-sized direct image URL and licence approved for commercial use
+
+        is returned.'
       operationId: GetAircraftImageByRegistration
       parameters:
       - name: reg
@@ -793,6 +810,49 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ResourceContract:
+      required:
+      - license
+      - url
+      type: object
+      properties:
+        url:
+          minLength: 1
+          type: string
+          description: URL of the resource
+        webUrl:
+          type:
+          - string
+          - 'null'
+          description: URL of web-page containing the resource
+        author:
+          type:
+          - string
+          - 'null'
+          description: Author name of the resource
+        title:
+          type:
+          - string
+          - 'null'
+          description: Title of the resource
+        description:
+          type:
+          - string
+          - 'null'
+          description: Description of the resource
+        license:
+          $ref: '#/components/schemas/LicenseType'
+        htmlAttributions:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: 'Attributions maintaining copyright, ownership and other legal information adjusted for displaying
+
+            as HTML. Each element represent one line.'
+      additionalProperties: false
+      description: Single media resource data
     AircraftContractPagedCollectionContract:
       required:
       - count
@@ -813,13 +873,15 @@ components:
           maximum: 2147483647
           minimum: 0
           type: integer
-          description: "The offset of the current page of the collection \r\n(number of items skipped before this page)"
+          description: "The offset of the current page of the collection \n(number of items skipped before this page)"
           format: int32
         pageSize:
           maximum: 2147483647
           minimum: 0
           type: integer
-          description: "Maximum number of items on the current page of the collection\r\n(`Count` cannot be more than this value)"
+          description: 'Maximum number of items on the current page of the collection
+
+            (`Count` cannot be more than this value)'
           format: int32
         hasNextPage:
           type: boolean
@@ -838,69 +900,25 @@ components:
             $ref: '#/components/schemas/AircraftContract'
           description: The collection of items
       additionalProperties: false
-    AircraftRegistrationContract:
-      required:
-      - active
-      - reg
-      type: object
-      properties:
-        reg:
-          minLength: 1
-          type: string
-          description: Tail-number of the aircraft
-        active:
-          type: boolean
-          description: Indicator if aircraft is operational under this registration
-        hexIcao:
-          type: string
-          description: ICAO 24 bit Mode-S hexadecimal transponder address
-          nullable: true
-        airlineName:
-          type: string
-          description: Name of the airline operating the aircraft
-          nullable: true
-        registrationDate:
-          type: string
-          description: Date of assigning current registration
-          format: date-time
-          nullable: true
-      additionalProperties: false
-      description: Aircraft registration data
-    StringAircraftContractSearchResultCollectionContract:
-      required:
-      - count
-      - items
-      - searchBy
-      type: object
-      properties:
-        searchBy:
-          minLength: 1
-          type: string
-          description: "Search parameter used to find the result. \r\nPlease note, it may be different from the actual input provided!"
-        count:
-          maximum: 2147483647
-          minimum: 0
-          type: integer
-          description: The number of items in the collection
-          format: int32
-          readOnly: true
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/AircraftContract'
-          description: The collection of items
-      additionalProperties: false
-    ErrorContract:
-      required:
-      - message
-      type: object
-      properties:
-        message:
-          minLength: 1
-          type: string
-          description: Error message
-      additionalProperties: false
-      description: Error response
+    AircraftSearchByEnum:
+      enum:
+      - Id
+      - Reg
+      - Icao24
+      type: string
+      description: 'Criteria to search aircraft by<p>Possible values:</p>
+
+        <ul>
+
+        <li><b>0 - Id</b>: ID of the aircraft (as stored in this API)</li>
+
+        <li><b>1 - Reg</b>: Search by aircraft tail-number</li>
+
+        <li><b>2 - Icao24</b>: Search by 24-bit ICAO Mode-S Transponder code</li>
+
+        </ul>
+
+        '
     LicenseType:
       enum:
       - AllRightsReserved
@@ -915,43 +933,70 @@ components:
       - PublicDomainDedicationCC0
       - PublicDomainMark
       type: string
-      description: "<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - AllRightsReserved</b>: All Rights Reserved.</li>\r\n<li><b>1 - AttributionNoncommercialShareAlikeCC</b>: Creative Commons: Attribution Non-Commercial, Share-alike License.</li>\r\n<li><b>2 - AttributionNoncommercialCC</b>: Creative Commons: Attribution Non-Commercial License.</li>\r\n<li><b>3 - AttributionNoncommercialNoDerivativesCC</b>: Creative Commons: Attribution Non-Commercial, No Derivatives License.</li>\r\n<li><b>4 - AttributionCC</b>: Creative Commons: Attribution License.</li>\r\n<li><b>5 - AttributionShareAlikeCC</b>: Creative Commons: Attribution Share-alike License.</li>\r\n<li><b>6 - AttributionNoDerivativesCC</b>: Creative Commons: Attribution No Derivatives License.</li>\r\n<li><b>7 - NoKnownCopyrightRestrictions</b>: No Known Copyright Resitrctions (Flickr Commons).</li>\r\n<li><b>8 - UnitedStatesGovernmentWork</b>: United States Government Work</li>\r\n<li><b>9 - PublicDomainDedicationCC0</b>: Public Domain Dedication, CC0</li>\r\n<li><b>10 - PublicDomainMark</b>: Public Domain Mark</li>\r\n</ul>\r\n"
-    ResourceContract:
+      description: '<p>Possible values:</p>
+
+        <ul>
+
+        <li><b>0 - AllRightsReserved</b>: All Rights Reserved.</li>
+
+        <li><b>1 - AttributionNoncommercialShareAlikeCC</b>: Creative Commons: Attribution Non-Commercial, Share-alike License.</li>
+
+        <li><b>2 - AttributionNoncommercialCC</b>: Creative Commons: Attribution Non-Commercial License.</li>
+
+        <li><b>3 - AttributionNoncommercialNoDerivativesCC</b>: Creative Commons: Attribution Non-Commercial, No Derivatives License.</li>
+
+        <li><b>4 - AttributionCC</b>: Creative Commons: Attribution License.</li>
+
+        <li><b>5 - AttributionShareAlikeCC</b>: Creative Commons: Attribution Share-alike License.</li>
+
+        <li><b>6 - AttributionNoDerivativesCC</b>: Creative Commons: Attribution No Derivatives License.</li>
+
+        <li><b>7 - NoKnownCopyrightRestrictions</b>: No Known Copyright Resitrctions (Flickr Commons).</li>
+
+        <li><b>8 - UnitedStatesGovernmentWork</b>: United States Government Work</li>
+
+        <li><b>9 - PublicDomainDedicationCC0</b>: Public Domain Dedication, CC0</li>
+
+        <li><b>10 - PublicDomainMark</b>: Public Domain Mark</li>
+
+        </ul>
+
+        '
+    ErrorContract:
       required:
-      - license
-      - url
+      - message
       type: object
       properties:
-        url:
+        message:
           minLength: 1
           type: string
-          description: URL of the resource
-        webUrl:
+          description: Error message
+      additionalProperties: false
+      description: Error response
+    StringAircraftContractSearchResultCollectionContract:
+      required:
+      - count
+      - items
+      - searchBy
+      type: object
+      properties:
+        searchBy:
+          minLength: 1
           type: string
-          description: URL of web-page containing the resource
-          nullable: true
-        author:
-          type: string
-          description: Author name of the resource
-          nullable: true
-        title:
-          type: string
-          description: Title of the resource
-          nullable: true
-        description:
-          type: string
-          description: Description of the resource
-          nullable: true
-        license:
-          $ref: '#/components/schemas/LicenseType'
-        htmlAttributions:
+          description: "Search parameter used to find the result. \nPlease note, it may be different from the actual input provided!"
+        count:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+          description: The number of items in the collection
+          format: int32
+          readOnly: true
+        items:
           type: array
           items:
-            type: string
-          description: "Attributions maintaining copyright, ownership and other legal information adjusted for displaying\r\nas HTML. Each element represent one line."
-          nullable: true
+            $ref: '#/components/schemas/AircraftContract'
+          description: The collection of items
       additionalProperties: false
-      description: Single media resource data
     EngineType:
       enum:
       - Unknown
@@ -959,14 +1004,21 @@ components:
       - Turboprop
       - Piston
       type: string
-      description: "<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - Unknown</b></li>\r\n<li><b>1 - Jet</b></li>\r\n<li><b>2 - Turboprop</b></li>\r\n<li><b>3 - Piston</b></li>\r\n</ul>\r\n"
-    AircraftSearchByEnum:
-      enum:
-      - Id
-      - Reg
-      - Icao24
-      type: string
-      description: "Criteria to search aircraft by<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - Id</b>: ID of the aircraft (as stored in this API)</li>\r\n<li><b>1 - Reg</b>: Search by aircraft tail-number</li>\r\n<li><b>2 - Icao24</b>: Search by 24-bit ICAO Mode-S Transponder code</li>\r\n</ul>\r\n"
+      description: '<p>Possible values:</p>
+
+        <ul>
+
+        <li><b>0 - Unknown</b></li>
+
+        <li><b>1 - Jet</b></li>
+
+        <li><b>2 - Turboprop</b></li>
+
+        <li><b>3 - Piston</b></li>
+
+        </ul>
+
+        '
     AircraftContract:
       required:
       - active
@@ -989,98 +1041,149 @@ components:
           type: boolean
           description: Indicator if aircraft is operational under this registration
         serial:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Serial number
-          nullable: true
         hexIcao:
-          type: string
+          type:
+          - string
+          - 'null'
           description: ICAO 24 bit Mode-S hexadecimal transponder address
-          nullable: true
         airlineName:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Name of the airline operating the aircraft
-          nullable: true
         iataType:
-          type: string
+          type:
+          - string
+          - 'null'
           description: IATA-type of the aircraft
-          nullable: true
         iataCodeShort:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Short variant of IATA-code of the aircraft
-          nullable: true
         icaoCode:
-          type: string
+          type:
+          - string
+          - 'null'
           description: ICAO-code of the aircraft
-          nullable: true
         model:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Model of the aircraft
-          nullable: true
         modelCode:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Model code of the aircraft
-          nullable: true
         numSeats:
-          type: integer
+          type:
+          - integer
+          - 'null'
           description: Number of passenger seats
           format: int32
-          nullable: true
         rolloutDate:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Date of roll-out (UTC)
           format: date-time
-          nullable: true
         firstFlightDate:
-          type: string
+          type:
+          - string
+          - 'null'
           description: First flight date
           format: date-time
-          nullable: true
         deliveryDate:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Date of delivery to the owner
           format: date-time
-          nullable: true
         registrationDate:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Date of assigning current registration
           format: date-time
-          nullable: true
         typeName:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Type name
-          nullable: true
         numEngines:
-          type: integer
+          type:
+          - integer
+          - 'null'
           description: Number of engines
           format: int32
-          nullable: true
         engineType:
           $ref: '#/components/schemas/EngineType'
         isFreighter:
           type: boolean
           description: Marker if aircraft is cargo or not
         productionLine:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Production line
-          nullable: true
         ageYears:
-          type: number
+          type:
+          - number
+          - 'null'
           description: Age of the aircraft in year
           format: float
-          nullable: true
         verified:
           type: boolean
         image:
           $ref: '#/components/schemas/ResourceContract'
         numRegistrations:
           type: integer
-          description: "An aircraft may have a history of past registrations with other airlines or operators.\r\nThis field represents a total number of registration records known in our database."
+          description: 'An aircraft may have a history of past registrations with other airlines or operators.
+
+            This field represents a total number of registration records known in our database.'
           format: int32
         registrations:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             $ref: '#/components/schemas/AircraftRegistrationContract'
           description: A history of all registrations with other airlines or operators (if provided by the endpoint).
-          nullable: true
       additionalProperties: false
       description: Single aircraft data
+    AircraftRegistrationContract:
+      required:
+      - active
+      - reg
+      type: object
+      properties:
+        reg:
+          minLength: 1
+          type: string
+          description: Tail-number of the aircraft
+        active:
+          type: boolean
+          description: Indicator if aircraft is operational under this registration
+        hexIcao:
+          type:
+          - string
+          - 'null'
+          description: ICAO 24 bit Mode-S hexadecimal transponder address
+        airlineName:
+          type:
+          - string
+          - 'null'
+          description: Name of the airline operating the aircraft
+        registrationDate:
+          type:
+          - string
+          - 'null'
+          description: Date of assigning current registration
+          format: date-time
+      additionalProperties: false
+      description: Aircraft registration data

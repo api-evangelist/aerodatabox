@@ -1,6 +1,6 @@
-openapi: 3.0.4
+openapi: 3.2.0
 info:
-  title: AeroDataBox API - Aviation and Flight Aircraft API Airport API API
+  title: AeroDataBox API - Aviation and Flight Airport API
   description: Affordable aviation & flight data API tailored for small and medium businesses, teams and individual developers.
   termsOfService: https://aerodatabox.com/terms/
   contact:
@@ -25,7 +25,10 @@ paths:
       tags:
       - Airport API
       summary: AeroDataBox Airport by Code / TIER 1
-      description: "At the moment airports having both ICAO and IATA code are present in database only.\r\n\r\n*Returns*: Single airport data, if found."
+      description: 'At the moment airports having both ICAO and IATA code are present in database only.
+
+
+        *Returns*: Single airport data, if found.'
       operationId: GetAirport
       parameters:
       - name: codeType
@@ -35,7 +38,14 @@ paths:
           $ref: '#/components/schemas/AirportCodesByEnum'
       - name: code
         in: path
-        description: "If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+        description: 'If `codeType` is:
+
+          * `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);
+
+          * `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).
+
+
+          Full, stripped and any case formats are acceptable.'
         required: true
         schema:
           maxLength: 4
@@ -167,7 +177,13 @@ paths:
       tags:
       - Airport API
       summary: AeroDataBox Airport Runways / TIER 1
-      description: "**Which runways does this airport have?**\r\n\r\nAt the moment airports having both ICAO and IATA code are present in database only.\r\n\r\n*Returns*: Collection of runway data items."
+      description: '**Which runways does this airport have?**
+
+
+        At the moment airports having both ICAO and IATA code are present in database only.
+
+
+        *Returns*: Collection of runway data items.'
       operationId: GetAirportRunways
       parameters:
       - name: codeType
@@ -177,7 +193,14 @@ paths:
           $ref: '#/components/schemas/AirportCodesByEnum'
       - name: code
         in: path
-        description: "If `codeType` is:\r\n* `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);\r\n* `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).\r\n\r\nFull, stripped and any case formats are acceptable."
+        description: 'If `codeType` is:
+
+          * `icao`, then this field must be a 4-character ICAO-code of the airport (e.g.: EHAM, KLAX, UUEE, etc.);
+
+          * `iata`, then this field must be a 3-character IATA-code of the airport (e.g.: AMS, SFO, LAX, etc.).
+
+
+          Full, stripped and any case formats are acceptable.'
         required: true
         schema:
           maxLength: 4
@@ -287,7 +310,13 @@ paths:
       tags:
       - Airport API
       summary: AeroDataBox Search Airports by Location / TIER 2
-      description: "**What are the airports closest to the location?**\r\n\r\nAt the moment airports having both ICAO and IATA code and flight schedules are present available only.\r\n\r\n*Returns:* A list of airports found within the specified radius around the specified location."
+      description: '**What are the airports closest to the location?**
+
+
+        At the moment airports having both ICAO and IATA code and flight schedules are present available only.
+
+
+        *Returns:* A list of airports found within the specified radius around the specified location.'
       operationId: SearchAirportsByLocation
       parameters:
       - name: lat
@@ -427,7 +456,24 @@ paths:
       tags:
       - Airport API
       summary: AeroDataBox Search Airports by IP Address Geolocation / TIER 2
-      description: "**What are the airports closest to the customer, based on their IP address?**\r\n**What are the airports closest to the location determined (geo-located) by a IP address?**\r\n\r\nThis endpoint determines the location by the IP address provided and then returns the list of the nearest airports\r\nin the same way as `Search airports by location` endpoint does. \r\n\r\nPlease note:\r\n* IP geo-location is not a precise method and it determines an approximate location only.\r\n* At the moment airports having both ICAO and IATA code and flight schedules are present available only.\r\n\r\n*Returns:* A list of airports found within the specified radius around the location approximated (geo-located) from the specified IP address."
+      description: '**What are the airports closest to the customer, based on their IP address?**
+
+        **What are the airports closest to the location determined (geo-located) by a IP address?**
+
+
+        This endpoint determines the location by the IP address provided and then returns the list of the nearest airports
+
+        in the same way as `Search airports by location` endpoint does.
+
+
+        Please note:
+
+        * IP geo-location is not a precise method and it determines an approximate location only.
+
+        * At the moment airports having both ICAO and IATA code and flight schedules are present available only.
+
+
+        *Returns:* A list of airports found within the specified radius around the location approximated (geo-located) from the specified IP address.'
       operationId: SearchAirportsByIpGeoLocation
       parameters:
       - name: q
@@ -559,7 +605,10 @@ paths:
       tags:
       - Airport API
       summary: AeroDataBox Search Airports by Free Text / TIER 2
-      description: "At the moment airports having both ICAO and IATA code and flight schedules are present available only.\r\n\r\n*Returns:* List of airports with names and city names (and IATA/ICAO code, if enabled) matching the search term."
+      description: 'At the moment airports having both ICAO and IATA code and flight schedules are present available only.
+
+
+        *Returns:* List of airports with names and city names (and IATA/ICAO code, if enabled) matching the search term.'
       operationId: SearchAirportByTerm
       parameters:
       - name: q
@@ -583,7 +632,7 @@ paths:
           default: false
       - name: withSearchByCode
         in: query
-        description: "If set to true, will attempt to interpret short words within the search query as IATA or ICAO code\r\nand prioritize exact matches by these codes (they will appear higher than others). \r\nOtherwise, the search by code will be completely excluded (only the name of an airport or its city will be searched). \r\nDefault = true."
+        description: "If set to true, will attempt to interpret short words within the search query as IATA or ICAO code\nand prioritize exact matches by these codes (they will appear higher than others). \nOtherwise, the search by code will be completely excluded (only the name of an airport or its city will be searched). \nDefault = true."
         schema:
           type: boolean
           default: true
@@ -679,79 +728,42 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ErrorContract:
-      required:
-      - message
+    AirportUrlsContract:
       type: object
       properties:
-        message:
-          minLength: 1
-          type: string
-          description: Error message
+        webSite:
+          type:
+          - string
+          - 'null'
+          description: Main web-site of the airport
+        wikipedia:
+          type:
+          - string
+          - 'null'
+          description: Wikipedia page of the airport
+        twitter:
+          type:
+          - string
+          - 'null'
+          description: Twitter feed of the airport
+        liveAtc:
+          type:
+          - string
+          - 'null'
+          description: LiveAtc page of the airport
+        flightRadar:
+          type:
+          - string
+          - 'null'
+          description: FlightRadar page of the airport
+        googleMaps:
+          type:
+          - string
+          - 'null'
+          description: Google Maps URL of the airport
       additionalProperties: false
-      description: Error response
-    AirportCodesByEnum:
-      enum:
-      - Icao
-      - Iata
-      type: string
-      description: "Search by airport code type<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - Icao</b>: ICAO-code</li>\r\n<li><b>1 - Iata</b>: IATA-code</li>\r\n</ul>\r\n"
-    AirportLocalTimeContract:
-      required:
-      - time
-      - timeZoneId
-      type: object
-      properties:
-        time:
-          $ref: '#/components/schemas/DateTimeContract'
-        timeZoneId:
-          minLength: 1
-          type: string
-          description: Timezone ID of the airport (Olson format)
-      additionalProperties: false
-      description: Information about the local time at an airport
-    ListingAirportContract:
-      required:
-      - name
-      type: object
-      properties:
-        icao:
-          type: string
-          description: ICAO code of the airport
-          nullable: true
-        iata:
-          type: string
-          description: IATA code of the airport
-          nullable: true
-        localCode:
-          type: string
-          description: Code of the airport within the local or national codification system
-          nullable: true
-        name:
-          minLength: 1
-          type: string
-          description: Name of the airport
-        shortName:
-          type: string
-          description: Shortened name of the airport
-          nullable: true
-        municipalityName:
-          type: string
-          description: Name of the municipality this airport belongs to
-          nullable: true
-        location:
-          $ref: '#/components/schemas/GeoCoordinatesContract'
-        countryCode:
-          type: string
-          description: Two-letter country code of the airport
-          nullable: true
-        timeZone:
-          type: string
-          description: Time zone of the airport in Olson format (e.g. "Europe/Amsterdam")
-          nullable: true
-      additionalProperties: false
-      description: Flight's airport reference contract
-    StringListingAirportContractSearchResultCollectionContract:
+      description: Airport URLs contract
+    GeoCoordinatesContractListingAirportContractSearchResultCollectionContract:
       required:
       - count
       - items
@@ -759,9 +771,7 @@ components:
       type: object
       properties:
         searchBy:
-          minLength: 1
-          type: string
-          description: "Search parameter used to find the result. \r\nPlease note, it may be different from the actual input provided!"
+          $ref: '#/components/schemas/GeoCoordinatesContract'
         count:
           maximum: 2147483647
           minimum: 0
@@ -775,121 +785,6 @@ components:
             $ref: '#/components/schemas/ListingAirportContract'
           description: The collection of items
       additionalProperties: false
-    AirportUrlsContract:
-      type: object
-      properties:
-        webSite:
-          type: string
-          description: Main web-site of the airport
-          nullable: true
-        wikipedia:
-          type: string
-          description: Wikipedia page of the airport
-          nullable: true
-        twitter:
-          type: string
-          description: Twitter feed of the airport
-          nullable: true
-        liveAtc:
-          type: string
-          description: LiveAtc page of the airport
-          nullable: true
-        flightRadar:
-          type: string
-          description: FlightRadar page of the airport
-          nullable: true
-        googleMaps:
-          type: string
-          description: Google Maps URL of the airport
-          nullable: true
-      additionalProperties: false
-      description: Airport URLs contract
-    ContinentContract:
-      required:
-      - code
-      type: object
-      properties:
-        code:
-          minLength: 1
-          type: string
-          description: Code
-        name:
-          type: string
-          description: Name
-          nullable: true
-      additionalProperties: false
-      description: Continent data
-    GeoCoordinatesContract:
-      required:
-      - lat
-      - lon
-      type: object
-      properties:
-        lat:
-          maximum: 90
-          minimum: -90
-          type: number
-          description: Latitude, in degrees
-          format: float
-        lon:
-          maximum: 180
-          minimum: -180
-          type: number
-          description: Longitude, in degrees
-          format: float
-      additionalProperties: false
-      description: Geographical coordinates data
-    DateTimeContract:
-      required:
-      - local
-      - utc
-      type: object
-      properties:
-        utc:
-          type: string
-          description: UTC-time
-          format: date-time
-        local:
-          type: string
-          description: Local time
-          format: date-time
-      additionalProperties: false
-      description: Descriptor date-time represented in both UTC and local timezones
-    RunwayContract:
-      required:
-      - isClosed
-      - name
-      - surface
-      - trueHdg
-      type: object
-      properties:
-        name:
-          minLength: 1
-          type: string
-          description: 'Name of the runway. E.g.: 27L, 06, 36C, etc.'
-        trueHdg:
-          type: number
-          description: True heading of the runway in degrees
-          format: double
-        length:
-          $ref: '#/components/schemas/Distance'
-        width:
-          $ref: '#/components/schemas/Distance'
-        isClosed:
-          type: boolean
-          description: Marker, if runway is closed
-        location:
-          $ref: '#/components/schemas/GeoCoordinatesContract'
-        surface:
-          $ref: '#/components/schemas/SurfaceType'
-        displacedThreshold:
-          $ref: '#/components/schemas/Distance'
-        hasLighting:
-          type: boolean
-          description: Does runway has lights
-          nullable: true
-      additionalProperties: false
-      description: Single runway data
     Distance:
       required:
       - feet
@@ -920,6 +815,54 @@ components:
           description: Distance in feet
           format: double
       additionalProperties: false
+    ListingAirportContract:
+      required:
+      - name
+      type: object
+      properties:
+        icao:
+          type:
+          - string
+          - 'null'
+          description: ICAO code of the airport
+        iata:
+          type:
+          - string
+          - 'null'
+          description: IATA code of the airport
+        localCode:
+          type:
+          - string
+          - 'null'
+          description: Code of the airport within the local or national codification system
+        name:
+          minLength: 1
+          type: string
+          description: Name of the airport
+        shortName:
+          type:
+          - string
+          - 'null'
+          description: Shortened name of the airport
+        municipalityName:
+          type:
+          - string
+          - 'null'
+          description: Name of the municipality this airport belongs to
+        location:
+          $ref: '#/components/schemas/GeoCoordinatesContract'
+        countryCode:
+          type:
+          - string
+          - 'null'
+          description: Two-letter country code of the airport
+        timeZone:
+          type:
+          - string
+          - 'null'
+          description: Time zone of the airport in Olson format (e.g. "Europe/Amsterdam")
+      additionalProperties: false
+      description: Flight's airport reference contract
     SurfaceType:
       enum:
       - Unknown
@@ -932,29 +875,31 @@ components:
       - Water
       - Snow
       type: string
-      description: "<p>Possible values:</p>\r\n<ul>\r\n<li><b>0 - Unknown</b></li>\r\n<li><b>1 - Asphalt</b></li>\r\n<li><b>2 - Concrete</b></li>\r\n<li><b>3 - Grass</b></li>\r\n<li><b>4 - Dirt</b></li>\r\n<li><b>5 - Gravel</b></li>\r\n<li><b>6 - DryLakebed</b></li>\r\n<li><b>7 - Water</b></li>\r\n<li><b>8 - Snow</b></li>\r\n</ul>\r\n"
-    GeoCoordinatesContractListingAirportContractSearchResultCollectionContract:
-      required:
-      - count
-      - items
-      - searchBy
-      type: object
-      properties:
-        searchBy:
-          $ref: '#/components/schemas/GeoCoordinatesContract'
-        count:
-          maximum: 2147483647
-          minimum: 0
-          type: integer
-          description: The number of items in the collection
-          format: int32
-          readOnly: true
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/ListingAirportContract'
-          description: The collection of items
-      additionalProperties: false
+      description: '<p>Possible values:</p>
+
+        <ul>
+
+        <li><b>0 - Unknown</b></li>
+
+        <li><b>1 - Asphalt</b></li>
+
+        <li><b>2 - Concrete</b></li>
+
+        <li><b>3 - Grass</b></li>
+
+        <li><b>4 - Dirt</b></li>
+
+        <li><b>5 - Gravel</b></li>
+
+        <li><b>6 - DryLakebed</b></li>
+
+        <li><b>7 - Water</b></li>
+
+        <li><b>8 - Snow</b></li>
+
+        </ul>
+
+        '
     AirportContract:
       required:
       - continent
@@ -967,29 +912,34 @@ components:
       type: object
       properties:
         icao:
-          type: string
+          type:
+          - string
+          - 'null'
           description: ICAO code of the airport
-          nullable: true
         iata:
-          type: string
+          type:
+          - string
+          - 'null'
           description: IATA code of the airport
-          nullable: true
         localCode:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Code of the airport within the local or national coding system
-          nullable: true
         shortName:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Shortened name of the airport
-          nullable: true
         fullName:
           minLength: 1
           type: string
           description: Full name of the airport (derived from own airport name and municipality name)
         municipalityName:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Name of the municipality this airport belongs to
-          nullable: true
         location:
           $ref: '#/components/schemas/GeoCoordinatesContract'
         elevation:
@@ -1005,15 +955,27 @@ components:
         urls:
           $ref: '#/components/schemas/AirportUrlsContract'
         runways:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             $ref: '#/components/schemas/RunwayContract'
           description: List of runway information, if requested
-          nullable: true
         currentTime:
           $ref: '#/components/schemas/AirportLocalTimeContract'
       additionalProperties: false
       description: Single airport data
+    ErrorContract:
+      required:
+      - message
+      type: object
+      properties:
+        message:
+          minLength: 1
+          type: string
+          description: Error message
+      additionalProperties: false
+      description: Error response
     CountryContract:
       required:
       - code
@@ -1024,8 +986,151 @@ components:
           type: string
           description: Code
         name:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Name
-          nullable: true
       additionalProperties: false
       description: Country data
+    ContinentContract:
+      required:
+      - code
+      type: object
+      properties:
+        code:
+          minLength: 1
+          type: string
+          description: Code
+        name:
+          type:
+          - string
+          - 'null'
+          description: Name
+      additionalProperties: false
+      description: Continent data
+    GeoCoordinatesContract:
+      required:
+      - lat
+      - lon
+      type: object
+      properties:
+        lat:
+          maximum: 90
+          minimum: -90
+          type: number
+          description: Latitude, in degrees
+          format: float
+        lon:
+          maximum: 180
+          minimum: -180
+          type: number
+          description: Longitude, in degrees
+          format: float
+      additionalProperties: false
+      description: Geographical coordinates data
+    AirportLocalTimeContract:
+      required:
+      - time
+      - timeZoneId
+      type: object
+      properties:
+        time:
+          $ref: '#/components/schemas/DateTimeContract'
+        timeZoneId:
+          minLength: 1
+          type: string
+          description: Timezone ID of the airport (Olson format)
+      additionalProperties: false
+      description: Information about the local time at an airport
+    StringListingAirportContractSearchResultCollectionContract:
+      required:
+      - count
+      - items
+      - searchBy
+      type: object
+      properties:
+        searchBy:
+          minLength: 1
+          type: string
+          description: "Search parameter used to find the result. \nPlease note, it may be different from the actual input provided!"
+        count:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+          description: The number of items in the collection
+          format: int32
+          readOnly: true
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ListingAirportContract'
+          description: The collection of items
+      additionalProperties: false
+    RunwayContract:
+      required:
+      - isClosed
+      - name
+      - surface
+      - trueHdg
+      type: object
+      properties:
+        name:
+          minLength: 1
+          type: string
+          description: 'Name of the runway. E.g.: 27L, 06, 36C, etc.'
+        trueHdg:
+          type: number
+          description: True heading of the runway in degrees
+          format: double
+        length:
+          $ref: '#/components/schemas/Distance'
+        width:
+          $ref: '#/components/schemas/Distance'
+        isClosed:
+          type: boolean
+          description: Marker, if runway is closed
+        location:
+          $ref: '#/components/schemas/GeoCoordinatesContract'
+        surface:
+          $ref: '#/components/schemas/SurfaceType'
+        displacedThreshold:
+          $ref: '#/components/schemas/Distance'
+        hasLighting:
+          type:
+          - boolean
+          - 'null'
+          description: Does runway has lights
+      additionalProperties: false
+      description: Single runway data
+    DateTimeContract:
+      required:
+      - local
+      - utc
+      type: object
+      properties:
+        utc:
+          type: string
+          description: UTC-time
+          format: date-time
+        local:
+          type: string
+          description: Local time
+          format: date-time
+      additionalProperties: false
+      description: Descriptor date-time represented in both UTC and local timezones
+    AirportCodesByEnum:
+      enum:
+      - Icao
+      - Iata
+      type: string
+      description: 'Search by airport code type<p>Possible values:</p>
+
+        <ul>
+
+        <li><b>0 - Icao</b>: ICAO-code</li>
+
+        <li><b>1 - Iata</b>: IATA-code</li>
+
+        </ul>
+
+        '
