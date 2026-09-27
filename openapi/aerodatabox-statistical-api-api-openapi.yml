@@ -1102,6 +1102,78 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    AirportCodesByEnum:
+      enum:
+      - Icao
+      - Iata
+      type: string
+      description: 'Search by airport code type<p>Possible values:</p>
+
+        <ul>
+
+        <li><b>0 - Icao</b>: ICAO-code</li>
+
+        <li><b>1 - Iata</b>: IATA-code</li>
+
+        </ul>
+
+        '
+    DailyRouteStatRecordContract:
+      required:
+      - averageDailyFlights
+      - destination
+      - operators
+      type: object
+      properties:
+        destination:
+          $ref: '#/components/schemas/ListingAirportContract'
+        averageDailyFlights:
+          type: number
+          description: Daily average of flights per destination
+          format: float
+        operators:
+          type: array
+          items:
+            $ref: '#/components/schemas/FlightAirlineContract'
+          description: Airlines operating on the route
+      additionalProperties: false
+      description: Statistical record of route daily statistics
+    FlightLegDelayContract:
+      required:
+      - number
+      type: object
+      properties:
+        number:
+          minLength: 1
+          type: string
+          description: Flight number
+        origins:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/FlightDelayContract'
+          description: Delay statistics of flight on departure at origins
+        destinations:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/FlightDelayContract'
+          description: Delay statistics of flight on arrival at destinations
+      additionalProperties: false
+      description: Delay statistics of a flight leg
+    DailyRouteStatContract:
+      required:
+      - routes
+      type: object
+      properties:
+        routes:
+          type: array
+          items:
+            $ref: '#/components/schemas/DailyRouteStatRecordContract'
+      additionalProperties: false
+      description: Route daily statistics of the airport
     DelayBracketContract:
       required:
       - num
@@ -1152,110 +1224,27 @@ components:
           format: float
       additionalProperties: false
       description: Delay bracket contract describing how many records are subject to a specific delay range
-    DailyRouteStatRecordContract:
-      required:
-      - averageDailyFlights
-      - destination
-      - operators
-      type: object
-      properties:
-        destination:
-          $ref: '#/components/schemas/ListingAirportContract'
-        averageDailyFlights:
-          type: number
-          description: Daily average of flights per destination
-          format: float
-        operators:
-          type: array
-          items:
-            $ref: '#/components/schemas/FlightAirlineContract'
-          description: Airlines operating on the route
-      additionalProperties: false
-      description: Statistical record of route daily statistics
-    ListingAirportContract:
+    FlightAirlineContract:
       required:
       - name
       type: object
       properties:
-        icao:
-          type:
-          - string
-          - 'null'
-          description: ICAO code of the airport
+        name:
+          minLength: 1
+          type: string
+          description: Airline name
         iata:
           type:
           - string
           - 'null'
-          description: IATA code of the airport
-        localCode:
+          description: IATA code of the airline
+        icao:
           type:
           - string
           - 'null'
-          description: Code of the airport within the local or national codification system
-        name:
-          minLength: 1
-          type: string
-          description: Name of the airport
-        shortName:
-          type:
-          - string
-          - 'null'
-          description: Shortened name of the airport
-        municipalityName:
-          type:
-          - string
-          - 'null'
-          description: Name of the municipality this airport belongs to
-        location:
-          $ref: '#/components/schemas/GeoCoordinatesContract'
-        countryCode:
-          type:
-          - string
-          - 'null'
-          description: Two-letter country code of the airport
-        timeZone:
-          type:
-          - string
-          - 'null'
-          description: Time zone of the airport in Olson format (e.g. "Europe/Amsterdam")
+          description: ICAO code of the airline
       additionalProperties: false
-      description: Flight's airport reference contract
-    FlightLegDelayContract:
-      required:
-      - number
-      type: object
-      properties:
-        number:
-          minLength: 1
-          type: string
-          description: Flight number
-        origins:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/FlightDelayContract'
-          description: Delay statistics of flight on departure at origins
-        destinations:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/FlightDelayContract'
-          description: Delay statistics of flight on arrival at destinations
-      additionalProperties: false
-      description: Delay statistics of a flight leg
-    DailyRouteStatContract:
-      required:
-      - routes
-      type: object
-      properties:
-        routes:
-          type: array
-          items:
-            $ref: '#/components/schemas/DailyRouteStatRecordContract'
-      additionalProperties: false
-      description: Route daily statistics of the airport
+      description: Flight's airline reference conract
     FlightDelayContract:
       required:
       - airportIcao
@@ -1321,17 +1310,6 @@ components:
           format: date-time
       additionalProperties: false
       description: Delay statistics for a flight movement
-    ErrorContract:
-      required:
-      - message
-      type: object
-      properties:
-        message:
-          minLength: 1
-          type: string
-          description: Error message
-      additionalProperties: false
-      description: Error response
     StatisticClass:
       enum:
       - Flight
@@ -1348,47 +1326,76 @@ components:
         </ul>
 
         '
-    FlightAirlineContract:
+    AirportDelayContract:
+      required:
+      - airportIcao
+      - arrivalsDelayInformation
+      - departuresDelayInformation
+      - from
+      - to
+      type: object
+      properties:
+        airportIcao:
+          minLength: 1
+          type: string
+          description: Airport ICAO code
+        from:
+          $ref: '#/components/schemas/DateTimeContract'
+        to:
+          $ref: '#/components/schemas/DateTimeContract'
+        departuresDelayInformation:
+          $ref: '#/components/schemas/FlightBatchDelayContract'
+        arrivalsDelayInformation:
+          $ref: '#/components/schemas/FlightBatchDelayContract'
+      additionalProperties: false
+    ListingAirportContract:
       required:
       - name
       type: object
       properties:
-        name:
-          minLength: 1
-          type: string
-          description: Airline name
-        iata:
-          type:
-          - string
-          - 'null'
-          description: IATA code of the airline
         icao:
           type:
           - string
           - 'null'
-          description: ICAO code of the airline
+          description: ICAO code of the airport
+        iata:
+          type:
+          - string
+          - 'null'
+          description: IATA code of the airport
+        localCode:
+          type:
+          - string
+          - 'null'
+          description: Code of the airport within the local or national codification system
+        name:
+          minLength: 1
+          type: string
+          description: Name of the airport
+        shortName:
+          type:
+          - string
+          - 'null'
+          description: Shortened name of the airport
+        municipalityName:
+          type:
+          - string
+          - 'null'
+          description: Name of the municipality this airport belongs to
+        location:
+          $ref: '#/components/schemas/GeoCoordinatesContract'
+        countryCode:
+          type:
+          - string
+          - 'null'
+          description: Two-letter country code of the airport
+        timeZone:
+          type:
+          - string
+          - 'null'
+          description: Time zone of the airport in Olson format (e.g. "Europe/Amsterdam")
       additionalProperties: false
-      description: Flight's airline reference conract
-    GeoCoordinatesContract:
-      required:
-      - lat
-      - lon
-      type: object
-      properties:
-        lat:
-          maximum: 90
-          minimum: -90
-          type: number
-          description: Latitude, in degrees
-          format: float
-        lon:
-          maximum: 180
-          minimum: -180
-          type: number
-          description: Longitude, in degrees
-          format: float
-      additionalProperties: false
-      description: Geographical coordinates data
+      description: Flight's airport reference contract
     FlightBatchDelayContract:
       required:
       - numCancelled
@@ -1431,28 +1438,33 @@ components:
           format: float
       additionalProperties: false
       description: Delay information about a batch of flights
-    AirportDelayContract:
+    ErrorContract:
       required:
-      - airportIcao
-      - arrivalsDelayInformation
-      - departuresDelayInformation
-      - from
-      - to
+      - message
       type: object
       properties:
-        airportIcao:
+        message:
           minLength: 1
           type: string
-          description: Airport ICAO code
-        from:
-          $ref: '#/components/schemas/DateTimeContract'
-        to:
-          $ref: '#/components/schemas/DateTimeContract'
-        departuresDelayInformation:
-          $ref: '#/components/schemas/FlightBatchDelayContract'
-        arrivalsDelayInformation:
-          $ref: '#/components/schemas/FlightBatchDelayContract'
+          description: Error message
       additionalProperties: false
+      description: Error response
+    DateTimeContract:
+      required:
+      - local
+      - utc
+      type: object
+      properties:
+        utc:
+          type: string
+          description: UTC-time
+          format: date-time
+        local:
+          type: string
+          description: Local time
+          format: date-time
+      additionalProperties: false
+      description: Descriptor date-time represented in both UTC and local timezones
     PercentileBracketContract:
       required:
       - delay
@@ -1471,35 +1483,23 @@ components:
           format: date-span
       additionalProperties: false
       description: Percentile bracket contract describing the flight delay for a specific percentile of the distribution
-    DateTimeContract:
+    GeoCoordinatesContract:
       required:
-      - local
-      - utc
+      - lat
+      - lon
       type: object
       properties:
-        utc:
-          type: string
-          description: UTC-time
-          format: date-time
-        local:
-          type: string
-          description: Local time
-          format: date-time
+        lat:
+          maximum: 90
+          minimum: -90
+          type: number
+          description: Latitude, in degrees
+          format: float
+        lon:
+          maximum: 180
+          minimum: -180
+          type: number
+          description: Longitude, in degrees
+          format: float
       additionalProperties: false
-      description: Descriptor date-time represented in both UTC and local timezones
-    AirportCodesByEnum:
-      enum:
-      - Icao
-      - Iata
-      type: string
-      description: 'Search by airport code type<p>Possible values:</p>
-
-        <ul>
-
-        <li><b>0 - Icao</b>: ICAO-code</li>
-
-        <li><b>1 - Iata</b>: IATA-code</li>
-
-        </ul>
-
-        '
+      description: Geographical coordinates data

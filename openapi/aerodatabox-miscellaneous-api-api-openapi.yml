@@ -621,6 +621,22 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    AirportCodesByEnum:
+      enum:
+      - Icao
+      - Iata
+      type: string
+      description: 'Search by airport code type<p>Possible values:</p>
+
+        <ul>
+
+        <li><b>0 - Icao</b>: ICAO-code</li>
+
+        <li><b>1 - Iata</b>: IATA-code</li>
+
+        </ul>
+
+        '
     Angle:
       required:
       - deg
@@ -640,76 +656,6 @@ components:
           description: Angle in radians (between `-Pi` and `Pi`)
           format: double
       additionalProperties: false
-    DayTime:
-      enum:
-      - Night
-      - TwilightAstronomical
-      - TwilightNautical
-      - TwilightCivil
-      - Day
-      - BlueHour
-      - GoldenHour
-      type: string
-      description: 'Daytime states<p>Possible values:</p>
-
-        <ul>
-
-        <li><b>0 - Night</b></li>
-
-        <li><b>1 - TwilightAstronomical</b></li>
-
-        <li><b>2 - TwilightNautical</b></li>
-
-        <li><b>3 - TwilightCivil</b></li>
-
-        <li><b>4 - Day</b></li>
-
-        <li><b>5 - BlueHour</b></li>
-
-        <li><b>6 - GoldenHour</b></li>
-
-        </ul>
-
-        '
-    SolarStateContract:
-      required:
-      - dayTime
-      - location
-      - sunAzimuth
-      - sunElevation
-      type: object
-      properties:
-        location:
-          $ref: '#/components/schemas/GeoCoordinatesContract'
-        sunElevation:
-          $ref: '#/components/schemas/Angle'
-        sunAzimuth:
-          $ref: '#/components/schemas/Azimuth'
-        dayTime:
-          type: array
-          items:
-            $ref: '#/components/schemas/DayTime'
-          description: Daytime states
-        dawnAstronomical:
-          $ref: '#/components/schemas/DateTimeContract'
-        dawnNautical:
-          $ref: '#/components/schemas/DateTimeContract'
-        dawnCivil:
-          $ref: '#/components/schemas/DateTimeContract'
-        sunrise:
-          $ref: '#/components/schemas/DateTimeContract'
-        noonTrue:
-          $ref: '#/components/schemas/DateTimeContract'
-        sunset:
-          $ref: '#/components/schemas/DateTimeContract'
-        duskCivil:
-          $ref: '#/components/schemas/DateTimeContract'
-        duskNautical:
-          $ref: '#/components/schemas/DateTimeContract'
-        duskAstronomical:
-          $ref: '#/components/schemas/DateTimeContract'
-      additionalProperties: false
-      description: Solar information at the moment
     Distance:
       required:
       - feet
@@ -788,67 +734,6 @@ components:
           description: Time zone of the airport in Olson format (e.g. "Europe/Amsterdam")
       additionalProperties: false
       description: Flight's airport reference contract
-    ModelFlightTimeEnum:
-      enum:
-      - Standard
-      - ML01
-      type: string
-      description: 'Models of calculating the flight time.<p>Possible values:</p>
-
-        <ul>
-
-        <li><b>0 - Standard</b>: Standard model of calculation which takes into account the great circle distance and the average speed of all aircraft typically operating on those distances.</li>
-
-        <li><b>1 - ML01</b>: Experimental machine learning (ML) model, which attempts to provide more accurate prediction of the flight time by taking into account the history of flights on specified route and aircraft type within the recent year. This may come in handy in case when on certain routes flights take significant detours due to extended airspace closures dictated by war conflicts, sanction regulations, etc. This can result in significantly increased flight times comparing to regular estimations. Or, some routes generally experience longer delays than other routes of the same distance. This model attempts to take such factors into account and reflect it in the prediction. If a model cannot be applied due to lack of historical and/or aircraft data or prediction is too off set, it automatically fallbacks to `Standard`.</li>
-
-        </ul>
-
-        '
-    ErrorContract:
-      required:
-      - message
-      type: object
-      properties:
-        message:
-          minLength: 1
-          type: string
-          description: Error message
-      additionalProperties: false
-      description: Error response
-    AirportLocalTimeContract:
-      required:
-      - time
-      - timeZoneId
-      type: object
-      properties:
-        time:
-          $ref: '#/components/schemas/DateTimeContract'
-        timeZoneId:
-          minLength: 1
-          type: string
-          description: Timezone ID of the airport (Olson format)
-      additionalProperties: false
-      description: Information about the local time at an airport
-    GeoCoordinatesContract:
-      required:
-      - lat
-      - lon
-      type: object
-      properties:
-        lat:
-          maximum: 90
-          minimum: -90
-          type: number
-          description: Latitude, in degrees
-          format: float
-        lon:
-          maximum: 180
-          minimum: -180
-          type: number
-          description: Longitude, in degrees
-          format: float
-      additionalProperties: false
-      description: Geographical coordinates data
     Azimuth:
       required:
       - deg
@@ -894,6 +779,86 @@ components:
       description: 'Contract containing information on distance and approximate flight time
 
         between specified airports'
+    AirportLocalTimeContract:
+      required:
+      - time
+      - timeZoneId
+      type: object
+      properties:
+        time:
+          $ref: '#/components/schemas/DateTimeContract'
+        timeZoneId:
+          minLength: 1
+          type: string
+          description: Timezone ID of the airport (Olson format)
+      additionalProperties: false
+      description: Information about the local time at an airport
+    ErrorContract:
+      required:
+      - message
+      type: object
+      properties:
+        message:
+          minLength: 1
+          type: string
+          description: Error message
+      additionalProperties: false
+      description: Error response
+    ModelFlightTimeEnum:
+      enum:
+      - Standard
+      - ML01
+      type: string
+      description: 'Models of calculating the flight time.<p>Possible values:</p>
+
+        <ul>
+
+        <li><b>0 - Standard</b>: Standard model of calculation which takes into account the great circle distance and the average speed of all aircraft typically operating on those distances.</li>
+
+        <li><b>1 - ML01</b>: Experimental machine learning (ML) model, which attempts to provide more accurate prediction of the flight time by taking into account the history of flights on specified route and aircraft type within the recent year. This may come in handy in case when on certain routes flights take significant detours due to extended airspace closures dictated by war conflicts, sanction regulations, etc. This can result in significantly increased flight times comparing to regular estimations. Or, some routes generally experience longer delays than other routes of the same distance. This model attempts to take such factors into account and reflect it in the prediction. If a model cannot be applied due to lack of historical and/or aircraft data or prediction is too off set, it automatically fallbacks to `Standard`.</li>
+
+        </ul>
+
+        '
+    SolarStateContract:
+      required:
+      - dayTime
+      - location
+      - sunAzimuth
+      - sunElevation
+      type: object
+      properties:
+        location:
+          $ref: '#/components/schemas/GeoCoordinatesContract'
+        sunElevation:
+          $ref: '#/components/schemas/Angle'
+        sunAzimuth:
+          $ref: '#/components/schemas/Azimuth'
+        dayTime:
+          type: array
+          items:
+            $ref: '#/components/schemas/DayTime'
+          description: Daytime states
+        dawnAstronomical:
+          $ref: '#/components/schemas/DateTimeContract'
+        dawnNautical:
+          $ref: '#/components/schemas/DateTimeContract'
+        dawnCivil:
+          $ref: '#/components/schemas/DateTimeContract'
+        sunrise:
+          $ref: '#/components/schemas/DateTimeContract'
+        noonTrue:
+          $ref: '#/components/schemas/DateTimeContract'
+        sunset:
+          $ref: '#/components/schemas/DateTimeContract'
+        duskCivil:
+          $ref: '#/components/schemas/DateTimeContract'
+        duskNautical:
+          $ref: '#/components/schemas/DateTimeContract'
+        duskAstronomical:
+          $ref: '#/components/schemas/DateTimeContract'
+      additionalProperties: false
+      description: Solar information at the moment
     DateTimeContract:
       required:
       - local
@@ -910,18 +875,53 @@ components:
           format: date-time
       additionalProperties: false
       description: Descriptor date-time represented in both UTC and local timezones
-    AirportCodesByEnum:
+    GeoCoordinatesContract:
+      required:
+      - lat
+      - lon
+      type: object
+      properties:
+        lat:
+          maximum: 90
+          minimum: -90
+          type: number
+          description: Latitude, in degrees
+          format: float
+        lon:
+          maximum: 180
+          minimum: -180
+          type: number
+          description: Longitude, in degrees
+          format: float
+      additionalProperties: false
+      description: Geographical coordinates data
+    DayTime:
       enum:
-      - Icao
-      - Iata
+      - Night
+      - TwilightAstronomical
+      - TwilightNautical
+      - TwilightCivil
+      - Day
+      - BlueHour
+      - GoldenHour
       type: string
-      description: 'Search by airport code type<p>Possible values:</p>
+      description: 'Daytime states<p>Possible values:</p>
 
         <ul>
 
-        <li><b>0 - Icao</b>: ICAO-code</li>
+        <li><b>0 - Night</b></li>
 
-        <li><b>1 - Iata</b>: IATA-code</li>
+        <li><b>1 - TwilightAstronomical</b></li>
+
+        <li><b>2 - TwilightNautical</b></li>
+
+        <li><b>3 - TwilightCivil</b></li>
+
+        <li><b>4 - Day</b></li>
+
+        <li><b>5 - BlueHour</b></li>
+
+        <li><b>6 - GoldenHour</b></li>
 
         </ul>
 

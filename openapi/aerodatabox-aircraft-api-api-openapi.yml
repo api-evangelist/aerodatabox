@@ -810,49 +810,30 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ResourceContract:
+    StringAircraftContractSearchResultCollectionContract:
       required:
-      - license
-      - url
+      - count
+      - items
+      - searchBy
       type: object
       properties:
-        url:
+        searchBy:
           minLength: 1
           type: string
-          description: URL of the resource
-        webUrl:
-          type:
-          - string
-          - 'null'
-          description: URL of web-page containing the resource
-        author:
-          type:
-          - string
-          - 'null'
-          description: Author name of the resource
-        title:
-          type:
-          - string
-          - 'null'
-          description: Title of the resource
-        description:
-          type:
-          - string
-          - 'null'
-          description: Description of the resource
-        license:
-          $ref: '#/components/schemas/LicenseType'
-        htmlAttributions:
-          type:
-          - array
-          - 'null'
+          description: "Search parameter used to find the result. \nPlease note, it may be different from the actual input provided!"
+        count:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+          description: The number of items in the collection
+          format: int32
+          readOnly: true
+        items:
+          type: array
           items:
-            type: string
-          description: 'Attributions maintaining copyright, ownership and other legal information adjusted for displaying
-
-            as HTML. Each element represent one line.'
+            $ref: '#/components/schemas/AircraftContract'
+          description: The collection of items
       additionalProperties: false
-      description: Single media resource data
     AircraftContractPagedCollectionContract:
       required:
       - count
@@ -919,106 +900,80 @@ components:
         </ul>
 
         '
-    LicenseType:
-      enum:
-      - AllRightsReserved
-      - AttributionNoncommercialShareAlikeCC
-      - AttributionNoncommercialCC
-      - AttributionNoncommercialNoDerivativesCC
-      - AttributionCC
-      - AttributionShareAlikeCC
-      - AttributionNoDerivativesCC
-      - NoKnownCopyrightRestrictions
-      - UnitedStatesGovernmentWork
-      - PublicDomainDedicationCC0
-      - PublicDomainMark
-      type: string
-      description: '<p>Possible values:</p>
-
-        <ul>
-
-        <li><b>0 - AllRightsReserved</b>: All Rights Reserved.</li>
-
-        <li><b>1 - AttributionNoncommercialShareAlikeCC</b>: Creative Commons: Attribution Non-Commercial, Share-alike License.</li>
-
-        <li><b>2 - AttributionNoncommercialCC</b>: Creative Commons: Attribution Non-Commercial License.</li>
-
-        <li><b>3 - AttributionNoncommercialNoDerivativesCC</b>: Creative Commons: Attribution Non-Commercial, No Derivatives License.</li>
-
-        <li><b>4 - AttributionCC</b>: Creative Commons: Attribution License.</li>
-
-        <li><b>5 - AttributionShareAlikeCC</b>: Creative Commons: Attribution Share-alike License.</li>
-
-        <li><b>6 - AttributionNoDerivativesCC</b>: Creative Commons: Attribution No Derivatives License.</li>
-
-        <li><b>7 - NoKnownCopyrightRestrictions</b>: No Known Copyright Resitrctions (Flickr Commons).</li>
-
-        <li><b>8 - UnitedStatesGovernmentWork</b>: United States Government Work</li>
-
-        <li><b>9 - PublicDomainDedicationCC0</b>: Public Domain Dedication, CC0</li>
-
-        <li><b>10 - PublicDomainMark</b>: Public Domain Mark</li>
-
-        </ul>
-
-        '
-    ErrorContract:
+    ResourceContract:
       required:
-      - message
+      - license
+      - url
       type: object
       properties:
-        message:
+        url:
           minLength: 1
           type: string
-          description: Error message
-      additionalProperties: false
-      description: Error response
-    StringAircraftContractSearchResultCollectionContract:
-      required:
-      - count
-      - items
-      - searchBy
-      type: object
-      properties:
-        searchBy:
-          minLength: 1
-          type: string
-          description: "Search parameter used to find the result. \nPlease note, it may be different from the actual input provided!"
-        count:
-          maximum: 2147483647
-          minimum: 0
-          type: integer
-          description: The number of items in the collection
-          format: int32
-          readOnly: true
-        items:
-          type: array
+          description: URL of the resource
+        webUrl:
+          type:
+          - string
+          - 'null'
+          description: URL of web-page containing the resource
+        author:
+          type:
+          - string
+          - 'null'
+          description: Author name of the resource
+        title:
+          type:
+          - string
+          - 'null'
+          description: Title of the resource
+        description:
+          type:
+          - string
+          - 'null'
+          description: Description of the resource
+        license:
+          $ref: '#/components/schemas/LicenseType'
+        htmlAttributions:
+          type:
+          - array
+          - 'null'
           items:
-            $ref: '#/components/schemas/AircraftContract'
-          description: The collection of items
+            type: string
+          description: 'Attributions maintaining copyright, ownership and other legal information adjusted for displaying
+
+            as HTML. Each element represent one line.'
       additionalProperties: false
-    EngineType:
-      enum:
-      - Unknown
-      - Jet
-      - Turboprop
-      - Piston
-      type: string
-      description: '<p>Possible values:</p>
-
-        <ul>
-
-        <li><b>0 - Unknown</b></li>
-
-        <li><b>1 - Jet</b></li>
-
-        <li><b>2 - Turboprop</b></li>
-
-        <li><b>3 - Piston</b></li>
-
-        </ul>
-
-        '
+      description: Single media resource data
+    AircraftRegistrationContract:
+      required:
+      - active
+      - reg
+      type: object
+      properties:
+        reg:
+          minLength: 1
+          type: string
+          description: Tail-number of the aircraft
+        active:
+          type: boolean
+          description: Indicator if aircraft is operational under this registration
+        hexIcao:
+          type:
+          - string
+          - 'null'
+          description: ICAO 24 bit Mode-S hexadecimal transponder address
+        airlineName:
+          type:
+          - string
+          - 'null'
+          description: Name of the airline operating the aircraft
+        registrationDate:
+          type:
+          - string
+          - 'null'
+          description: Date of assigning current registration
+          format: date-time
+      additionalProperties: false
+      description: Aircraft registration data
     AircraftContract:
       required:
       - active
@@ -1156,34 +1111,79 @@ components:
           description: A history of all registrations with other airlines or operators (if provided by the endpoint).
       additionalProperties: false
       description: Single aircraft data
-    AircraftRegistrationContract:
+    ErrorContract:
       required:
-      - active
-      - reg
+      - message
       type: object
       properties:
-        reg:
+        message:
           minLength: 1
           type: string
-          description: Tail-number of the aircraft
-        active:
-          type: boolean
-          description: Indicator if aircraft is operational under this registration
-        hexIcao:
-          type:
-          - string
-          - 'null'
-          description: ICAO 24 bit Mode-S hexadecimal transponder address
-        airlineName:
-          type:
-          - string
-          - 'null'
-          description: Name of the airline operating the aircraft
-        registrationDate:
-          type:
-          - string
-          - 'null'
-          description: Date of assigning current registration
-          format: date-time
+          description: Error message
       additionalProperties: false
-      description: Aircraft registration data
+      description: Error response
+    LicenseType:
+      enum:
+      - AllRightsReserved
+      - AttributionNoncommercialShareAlikeCC
+      - AttributionNoncommercialCC
+      - AttributionNoncommercialNoDerivativesCC
+      - AttributionCC
+      - AttributionShareAlikeCC
+      - AttributionNoDerivativesCC
+      - NoKnownCopyrightRestrictions
+      - UnitedStatesGovernmentWork
+      - PublicDomainDedicationCC0
+      - PublicDomainMark
+      type: string
+      description: '<p>Possible values:</p>
+
+        <ul>
+
+        <li><b>0 - AllRightsReserved</b>: All Rights Reserved.</li>
+
+        <li><b>1 - AttributionNoncommercialShareAlikeCC</b>: Creative Commons: Attribution Non-Commercial, Share-alike License.</li>
+
+        <li><b>2 - AttributionNoncommercialCC</b>: Creative Commons: Attribution Non-Commercial License.</li>
+
+        <li><b>3 - AttributionNoncommercialNoDerivativesCC</b>: Creative Commons: Attribution Non-Commercial, No Derivatives License.</li>
+
+        <li><b>4 - AttributionCC</b>: Creative Commons: Attribution License.</li>
+
+        <li><b>5 - AttributionShareAlikeCC</b>: Creative Commons: Attribution Share-alike License.</li>
+
+        <li><b>6 - AttributionNoDerivativesCC</b>: Creative Commons: Attribution No Derivatives License.</li>
+
+        <li><b>7 - NoKnownCopyrightRestrictions</b>: No Known Copyright Resitrctions (Flickr Commons).</li>
+
+        <li><b>8 - UnitedStatesGovernmentWork</b>: United States Government Work</li>
+
+        <li><b>9 - PublicDomainDedicationCC0</b>: Public Domain Dedication, CC0</li>
+
+        <li><b>10 - PublicDomainMark</b>: Public Domain Mark</li>
+
+        </ul>
+
+        '
+    EngineType:
+      enum:
+      - Unknown
+      - Jet
+      - Turboprop
+      - Piston
+      type: string
+      description: '<p>Possible values:</p>
+
+        <ul>
+
+        <li><b>0 - Unknown</b></li>
+
+        <li><b>1 - Jet</b></li>
+
+        <li><b>2 - Turboprop</b></li>
+
+        <li><b>3 - Piston</b></li>
+
+        </ul>
+
+        '

@@ -386,6 +386,62 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    FeedServiceStatusContract:
+      required:
+      - service
+      - status
+      type: object
+      properties:
+        service:
+          $ref: '#/components/schemas/FeedServiceEnum'
+        status:
+          $ref: '#/components/schemas/FeedServiceStatus'
+        minAvailableLocalDate:
+          type:
+          - string
+          - 'null'
+          description: Date of the oldest flight stored (based on scheduled local times)
+          format: date-time
+          deprecated: true
+        maxAvailableLocalDate:
+          type:
+          - string
+          - 'null'
+          description: Date of the most recent flight stored (based on scheduled local times)
+          format: date-time
+          deprecated: true
+      additionalProperties: false
+      description: 'Feed service status contract.
+
+        Read https://aerodatabox.com/data-coverage for context.'
+    FeedServiceStatus:
+      enum:
+      - Down
+      - Degraded
+      - OKPartial
+      - OK
+      - Unknown
+      - Unavailable
+      type: string
+      description: 'Descriptor of feed service status<p>Possible values:</p>
+
+        <ul>
+
+        <li><b>0 - Down</b>: Service is provided, but is currently down</li>
+
+        <li><b>1 - Degraded</b>: Service is up and running, but performance is degraded: delays and disruptions are likely</li>
+
+        <li><b>2 - OKPartial</b>: Service is up and running normally, but updates vailable for not all or only few flights</li>
+
+        <li><b>3 - OK</b>: Service is up and running normally</li>
+
+        <li><b>-2 - Unknown</b>: Status of service is unknown</li>
+
+        <li><b>-1 - Unavailable</b>: Service is not provided</li>
+
+        </ul>
+
+        '
     AirportFeedServiceStatusContract:
       required:
       - adsbUpdatesFeed
@@ -445,34 +501,6 @@ components:
         </ul>
 
         '
-    FeedServiceStatus:
-      enum:
-      - Down
-      - Degraded
-      - OKPartial
-      - OK
-      - Unknown
-      - Unavailable
-      type: string
-      description: 'Descriptor of feed service status<p>Possible values:</p>
-
-        <ul>
-
-        <li><b>0 - Down</b>: Service is provided, but is currently down</li>
-
-        <li><b>1 - Degraded</b>: Service is up and running, but performance is degraded: delays and disruptions are likely</li>
-
-        <li><b>2 - OKPartial</b>: Service is up and running normally, but updates vailable for not all or only few flights</li>
-
-        <li><b>3 - OK</b>: Service is up and running normally</li>
-
-        <li><b>-2 - Unknown</b>: Status of service is unknown</li>
-
-        <li><b>-1 - Unavailable</b>: Service is not provided</li>
-
-        </ul>
-
-        '
     ErrorContract:
       required:
       - message
@@ -484,34 +512,6 @@ components:
           description: Error message
       additionalProperties: false
       description: Error response
-    FeedServiceStatusContract:
-      required:
-      - service
-      - status
-      type: object
-      properties:
-        service:
-          $ref: '#/components/schemas/FeedServiceEnum'
-        status:
-          $ref: '#/components/schemas/FeedServiceStatus'
-        minAvailableLocalDate:
-          type:
-          - string
-          - 'null'
-          description: Date of the oldest flight stored (based on scheduled local times)
-          format: date-time
-          deprecated: true
-        maxAvailableLocalDate:
-          type:
-          - string
-          - 'null'
-          description: Date of the most recent flight stored (based on scheduled local times)
-          format: date-time
-          deprecated: true
-      additionalProperties: false
-      description: 'Feed service status contract.
-
-        Read https://aerodatabox.com/data-coverage for context.'
     StringCollectionContract:
       required:
       - count
