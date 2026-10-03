@@ -1102,6 +1102,44 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    GeoCoordinatesContract:
+      required:
+      - lat
+      - lon
+      type: object
+      properties:
+        lat:
+          maximum: 90
+          minimum: -90
+          type: number
+          description: Latitude, in degrees
+          format: float
+        lon:
+          maximum: 180
+          minimum: -180
+          type: number
+          description: Longitude, in degrees
+          format: float
+      additionalProperties: false
+      description: Geographical coordinates data
+    PercentileBracketContract:
+      required:
+      - delay
+      - percentile
+      type: object
+      properties:
+        percentile:
+          maximum: 95
+          minimum: 5
+          type: integer
+          description: Percentile of the distribution
+          format: int32
+        delay:
+          type: string
+          description: 'Delay of the flight for the specific percentile (format: [-]hh:mm:ss).'
+          format: date-span
+      additionalProperties: false
+      description: Percentile bracket contract describing the flight delay for a specific percentile of the distribution
     AirportCodesByEnum:
       enum:
       - Icao
@@ -1118,6 +1156,28 @@ components:
         </ul>
 
         '
+    DailyRouteStatContract:
+      required:
+      - routes
+      type: object
+      properties:
+        routes:
+          type: array
+          items:
+            $ref: '#/components/schemas/DailyRouteStatRecordContract'
+      additionalProperties: false
+      description: Route daily statistics of the airport
+    ErrorContract:
+      required:
+      - message
+      type: object
+      properties:
+        message:
+          minLength: 1
+          type: string
+          description: Error message
+      additionalProperties: false
+      description: Error response
     DailyRouteStatRecordContract:
       required:
       - averageDailyFlights
@@ -1163,17 +1223,80 @@ components:
           description: Delay statistics of flight on arrival at destinations
       additionalProperties: false
       description: Delay statistics of a flight leg
-    DailyRouteStatContract:
+    FlightBatchDelayContract:
       required:
-      - routes
+      - numCancelled
+      - numQualifiedTotal
+      - numTotal
       type: object
       properties:
-        routes:
-          type: array
-          items:
-            $ref: '#/components/schemas/DailyRouteStatRecordContract'
+        numTotal:
+          type: integer
+          description: Total number of flights in the the batch (including cancelled)
+          format: int32
+        numQualifiedTotal:
+          type: integer
+          description: 'Total number of flights in the batch, which were used to to calculate the
+
+            delay information (including cancelled). Should equal to or less than `NumTotal`.
+
+
+            The closer the value of this property to the value of `NumTotal`, the higher the
+
+            reliability of delay information'
+          format: int32
+        numCancelled:
+          type: integer
+          description: Total amount of flights in the batch
+          format: int32
+        medianDelay:
+          type:
+          - string
+          - 'null'
+          description: 'Median delay of flights in the batch (format: [-]hh:mm:ss).
+
+            Value can be negative (therefore, means early occurence).'
+          format: date-span
+        delayIndex:
+          type:
+          - number
+          - 'null'
+          description: Normalized value on scale from 0.0 to 5.0 which corresponds with current amount of delays and cancellations in a given batch of flights (the less - the better).
+          format: float
       additionalProperties: false
-      description: Route daily statistics of the airport
+      description: Delay information about a batch of flights
+    DateTimeContract:
+      required:
+      - local
+      - utc
+      type: object
+      properties:
+        utc:
+          type: string
+          description: UTC-time
+          format: date-time
+        local:
+          type: string
+          description: Local time
+          format: date-time
+      additionalProperties: false
+      description: Descriptor date-time represented in both UTC and local timezones
+    StatisticClass:
+      enum:
+      - Flight
+      - FlightAndHour
+      type: string
+      description: '<p>Possible values:</p>
+
+        <ul>
+
+        <li><b>0 - Flight</b></li>
+
+        <li><b>1 - FlightAndHour</b></li>
+
+        </ul>
+
+        '
     DelayBracketContract:
       required:
       - num
@@ -1224,6 +1347,76 @@ components:
           format: float
       additionalProperties: false
       description: Delay bracket contract describing how many records are subject to a specific delay range
+    AirportDelayContract:
+      required:
+      - airportIcao
+      - arrivalsDelayInformation
+      - departuresDelayInformation
+      - from
+      - to
+      type: object
+      properties:
+        airportIcao:
+          minLength: 1
+          type: string
+          description: Airport ICAO code
+        from:
+          $ref: '#/components/schemas/DateTimeContract'
+        to:
+          $ref: '#/components/schemas/DateTimeContract'
+        departuresDelayInformation:
+          $ref: '#/components/schemas/FlightBatchDelayContract'
+        arrivalsDelayInformation:
+          $ref: '#/components/schemas/FlightBatchDelayContract'
+      additionalProperties: false
+    ListingAirportContract:
+      required:
+      - name
+      type: object
+      properties:
+        icao:
+          type:
+          - string
+          - 'null'
+          description: ICAO code of the airport
+        iata:
+          type:
+          - string
+          - 'null'
+          description: IATA code of the airport
+        localCode:
+          type:
+          - string
+          - 'null'
+          description: Code of the airport within the local or national codification system
+        name:
+          minLength: 1
+          type: string
+          description: Name of the airport
+        shortName:
+          type:
+          - string
+          - 'null'
+          description: Shortened name of the airport
+        municipalityName:
+          type:
+          - string
+          - 'null'
+          description: Name of the municipality this airport belongs to
+        location:
+          $ref: '#/components/schemas/GeoCoordinatesContract'
+        countryCode:
+          type:
+          - string
+          - 'null'
+          description: Two-letter country code of the airport
+        timeZone:
+          type:
+          - string
+          - 'null'
+          description: Time zone of the airport in Olson format (e.g. "Europe/Amsterdam")
+      additionalProperties: false
+      description: Flight's airport reference contract
     FlightAirlineContract:
       required:
       - name
@@ -1310,196 +1503,3 @@ components:
           format: date-time
       additionalProperties: false
       description: Delay statistics for a flight movement
-    StatisticClass:
-      enum:
-      - Flight
-      - FlightAndHour
-      type: string
-      description: '<p>Possible values:</p>
-
-        <ul>
-
-        <li><b>0 - Flight</b></li>
-
-        <li><b>1 - FlightAndHour</b></li>
-
-        </ul>
-
-        '
-    AirportDelayContract:
-      required:
-      - airportIcao
-      - arrivalsDelayInformation
-      - departuresDelayInformation
-      - from
-      - to
-      type: object
-      properties:
-        airportIcao:
-          minLength: 1
-          type: string
-          description: Airport ICAO code
-        from:
-          $ref: '#/components/schemas/DateTimeContract'
-        to:
-          $ref: '#/components/schemas/DateTimeContract'
-        departuresDelayInformation:
-          $ref: '#/components/schemas/FlightBatchDelayContract'
-        arrivalsDelayInformation:
-          $ref: '#/components/schemas/FlightBatchDelayContract'
-      additionalProperties: false
-    ListingAirportContract:
-      required:
-      - name
-      type: object
-      properties:
-        icao:
-          type:
-          - string
-          - 'null'
-          description: ICAO code of the airport
-        iata:
-          type:
-          - string
-          - 'null'
-          description: IATA code of the airport
-        localCode:
-          type:
-          - string
-          - 'null'
-          description: Code of the airport within the local or national codification system
-        name:
-          minLength: 1
-          type: string
-          description: Name of the airport
-        shortName:
-          type:
-          - string
-          - 'null'
-          description: Shortened name of the airport
-        municipalityName:
-          type:
-          - string
-          - 'null'
-          description: Name of the municipality this airport belongs to
-        location:
-          $ref: '#/components/schemas/GeoCoordinatesContract'
-        countryCode:
-          type:
-          - string
-          - 'null'
-          description: Two-letter country code of the airport
-        timeZone:
-          type:
-          - string
-          - 'null'
-          description: Time zone of the airport in Olson format (e.g. "Europe/Amsterdam")
-      additionalProperties: false
-      description: Flight's airport reference contract
-    FlightBatchDelayContract:
-      required:
-      - numCancelled
-      - numQualifiedTotal
-      - numTotal
-      type: object
-      properties:
-        numTotal:
-          type: integer
-          description: Total number of flights in the the batch (including cancelled)
-          format: int32
-        numQualifiedTotal:
-          type: integer
-          description: 'Total number of flights in the batch, which were used to to calculate the
-
-            delay information (including cancelled). Should equal to or less than `NumTotal`.
-
-
-            The closer the value of this property to the value of `NumTotal`, the higher the
-
-            reliability of delay information'
-          format: int32
-        numCancelled:
-          type: integer
-          description: Total amount of flights in the batch
-          format: int32
-        medianDelay:
-          type:
-          - string
-          - 'null'
-          description: 'Median delay of flights in the batch (format: [-]hh:mm:ss).
-
-            Value can be negative (therefore, means early occurence).'
-          format: date-span
-        delayIndex:
-          type:
-          - number
-          - 'null'
-          description: Normalized value on scale from 0.0 to 5.0 which corresponds with current amount of delays and cancellations in a given batch of flights (the less - the better).
-          format: float
-      additionalProperties: false
-      description: Delay information about a batch of flights
-    ErrorContract:
-      required:
-      - message
-      type: object
-      properties:
-        message:
-          minLength: 1
-          type: string
-          description: Error message
-      additionalProperties: false
-      description: Error response
-    DateTimeContract:
-      required:
-      - local
-      - utc
-      type: object
-      properties:
-        utc:
-          type: string
-          description: UTC-time
-          format: date-time
-        local:
-          type: string
-          description: Local time
-          format: date-time
-      additionalProperties: false
-      description: Descriptor date-time represented in both UTC and local timezones
-    PercentileBracketContract:
-      required:
-      - delay
-      - percentile
-      type: object
-      properties:
-        percentile:
-          maximum: 95
-          minimum: 5
-          type: integer
-          description: Percentile of the distribution
-          format: int32
-        delay:
-          type: string
-          description: 'Delay of the flight for the specific percentile (format: [-]hh:mm:ss).'
-          format: date-span
-      additionalProperties: false
-      description: Percentile bracket contract describing the flight delay for a specific percentile of the distribution
-    GeoCoordinatesContract:
-      required:
-      - lat
-      - lon
-      type: object
-      properties:
-        lat:
-          maximum: 90
-          minimum: -90
-          type: number
-          description: Latitude, in degrees
-          format: float
-        lon:
-          maximum: 180
-          minimum: -180
-          type: number
-          description: Longitude, in degrees
-          format: float
-      additionalProperties: false
-      description: Geographical coordinates data

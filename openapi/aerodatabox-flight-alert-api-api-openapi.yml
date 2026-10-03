@@ -905,119 +905,75 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Pressure:
+    GeoCoordinatesContract:
       required:
-      - hPa
-      - inHg
-      - mmHg
+      - lat
+      - lon
       type: object
       properties:
-        hPa:
+        lat:
+          maximum: 90
+          minimum: -90
           type: number
-          description: Pressure in hectopascals
-          format: double
-        inHg:
+          description: Latitude, in degrees
+          format: float
+        lon:
+          maximum: 180
+          minimum: -180
           type: number
-          description: Pressure in inches mercury
-          format: double
-        mmHg:
-          type: number
-          description: Pressure in millimeters mercury
-          format: double
+          description: Longitude, in degrees
+          format: float
       additionalProperties: false
-    SubscriptionBillingType:
+      description: Geographical coordinates data
+    ErrorContract:
+      required:
+      - message
+      type: object
+      properties:
+        message:
+          minLength: 1
+          type: string
+          description: Error message
+      additionalProperties: false
+      description: Error response
+    CodeshareStatus:
       enum:
-      - LifetimeBased
-      - CreditBased
+      - Unknown
+      - IsOperator
+      - IsCodeshared
       type: string
-      description: 'Flight alert subscription billing type<p>Possible values:</p>
+      description: 'Flight code-share status<p>Possible values:</p>
 
         <ul>
 
-        <li><b>0 - LifetimeBased</b>: Subscription billed upon creation based on the life-time with set expiration date-time (BEING DEPRECATED)</li>
+        <li><b>0 - Unknown</b>: Code-sharing information is unavailable for this flight. Flight might be operated both by airline owning the flight number as well as by another airliner.</li>
 
-        <li><b>1 - CreditBased</b>: Subscription with no expiration date, billed based on the amount of notifications sent</li>
+        <li><b>1 - IsOperator</b>: Flight is operated by an airline owning the flight number (the same code)</li>
+
+        <li><b>2 - IsCodeshared</b>: Flight is code-shared (operated by an airline other than airline owning the flight number)</li>
 
         </ul>
 
         '
-    CreateWebHookSubscription:
-      required:
-      - url
-      type: object
-      properties:
-        url:
-          minLength: 1
-          type: string
-          description: 'Destination HTTP-endpoint where notifications will be sent to. Requirements:
+    FlightAirportMovementQualityEnum:
+      enum:
+      - Basic
+      - Live
+      - Approximate
+      type: string
+      description: 'Quality characteristics of the information provided within flight FlightAirportMovementContract<p>Possible values:</p>
 
-            * must be a valid public HTTP(S) URL not requiring additional authorization;
+        <ul>
 
-            * must use standard or alternative HTTP or HTTPS ports (80, 443, 8008, 8080) or any dynamic port greater or equal to 49152;
+        <li><b>0 - Basic</b></li>
 
-            * must be able to accept HTTP POST request with JSON-formatted body (application/json);
+        <li><b>1 - Live</b></li>
 
-            * must respond with one of successful HTTP status codes (2XX) within 10 seconds;
+        <li><b>2 - Approximate</b></li>
 
-            * the endpoint owner must be aware of and consent to receiving notifications at it.
+        </ul>
 
-
-            If endpoint is unavailable, responds with error status code or does not respond within timeout,
-
-            notification delivery retry may be attempted according to subscription settings.'
-        maxDeliveryRetries:
-          maximum: 2
-          minimum: 0
-          type:
-          - integer
-          - 'null'
-          description: "Maximum number of times a delivery attempt is retried after initial delivery attempt failure.\n\nCurrent default value is:\n\n\t* `2` for the old, lifetime-based web-hook subscriptions (will be phased out after the 4th of April, 2026);\n\t* `0` for the new, credit-based web-hook subscriptions (will be the default value for any web-hook subscription after the 4th of April, 2026)."
-          format: int32
-      additionalProperties: false
-      description: Command to create web-hook subscription
-    ResourceContract:
-      required:
-      - license
-      - url
-      type: object
-      properties:
-        url:
-          minLength: 1
-          type: string
-          description: URL of the resource
-        webUrl:
-          type:
-          - string
-          - 'null'
-          description: URL of web-page containing the resource
-        author:
-          type:
-          - string
-          - 'null'
-          description: Author name of the resource
-        title:
-          type:
-          - string
-          - 'null'
-          description: Title of the resource
-        description:
-          type:
-          - string
-          - 'null'
-          description: Description of the resource
-        license:
-          $ref: '#/components/schemas/LicenseType'
-        htmlAttributions:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-          description: 'Attributions maintaining copyright, ownership and other legal information adjusted for displaying
-
-            as HTML. Each element represent one line.'
-      additionalProperties: false
-      description: Single media resource data
+        '
     FlightStatus:
       enum:
       - Unknown
@@ -1067,6 +1023,94 @@ components:
         </ul>
 
         '
+    SubscriptionBillingType:
+      enum:
+      - LifetimeBased
+      - CreditBased
+      type: string
+      description: 'Flight alert subscription billing type<p>Possible values:</p>
+
+        <ul>
+
+        <li><b>0 - LifetimeBased</b>: Subscription billed upon creation based on the life-time with set expiration date-time (BEING DEPRECATED)</li>
+
+        <li><b>1 - CreditBased</b>: Subscription with no expiration date, billed based on the amount of notifications sent</li>
+
+        </ul>
+
+        '
+    DateTimeContract:
+      required:
+      - local
+      - utc
+      type: object
+      properties:
+        utc:
+          type: string
+          description: UTC-time
+          format: date-time
+        local:
+          type: string
+          description: Local time
+          format: date-time
+      additionalProperties: false
+      description: Descriptor date-time represented in both UTC and local timezones
+    SpeedFlightPlanUnitContract:
+      type: object
+      properties:
+        requested:
+          $ref: '#/components/schemas/Speed'
+        assigned:
+          $ref: '#/components/schemas/Speed'
+      additionalProperties: false
+      description: 'Contract describing unit (altitude, airspeed, etc.) which can be assigned and / or requested
+
+        in the context of the flight plan'
+    CreateWebHookSubscription:
+      required:
+      - url
+      type: object
+      properties:
+        url:
+          minLength: 1
+          type: string
+          description: 'Destination HTTP-endpoint where notifications will be sent to. Requirements:
+
+            * must be a valid public HTTP(S) URL not requiring additional authorization;
+
+            * must use standard or alternative HTTP or HTTPS ports (80, 443, 8008, 8080) or any dynamic port greater or equal to 49152;
+
+            * must be able to accept HTTP POST request with JSON-formatted body (application/json);
+
+            * must respond with one of successful HTTP status codes (2XX) within 10 seconds;
+
+            * the endpoint owner must be aware of and consent to receiving notifications at it.
+
+
+            If endpoint is unavailable, responds with error status code or does not respond within timeout,
+
+            notification delivery retry may be attempted according to subscription settings.'
+        maxDeliveryRetries:
+          maximum: 2
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+          description: "Maximum number of times a delivery attempt is retried after initial delivery attempt failure.\n\nCurrent default value is:\n\n\t* `2` for the old, lifetime-based web-hook subscriptions (will be phased out after the 4th of April, 2026);\n\t* `0` for the new, credit-based web-hook subscriptions (will be the default value for any web-hook subscription after the 4th of April, 2026)."
+          format: int32
+      additionalProperties: false
+      description: Command to create web-hook subscription
+    DistanceFlightPlanUnitContract:
+      type: object
+      properties:
+        requested:
+          $ref: '#/components/schemas/Distance'
+        assigned:
+          $ref: '#/components/schemas/Distance'
+      additionalProperties: false
+      description: 'Contract describing unit (altitude, airspeed, etc.) which can be assigned and / or requested
+
+        in the context of the flight plan'
     ListingAirportContract:
       required:
       - name
@@ -1115,89 +1159,22 @@ components:
           description: Time zone of the airport in Olson format (e.g. "Europe/Amsterdam")
       additionalProperties: false
       description: Flight's airport reference contract
-    Azimuth:
+    SubscriberContract:
       required:
-      - deg
-      - rad
+      - id
+      - type
       type: object
       properties:
-        deg:
-          maximum: 360
-          minimum: 0
-          type: number
-          description: Angle in degrees (between `0` and `360`)
-          format: double
-        rad:
-          maximum: 6.283185307179586
-          minimum: 0
-          type: number
-          description: Angle in radians (`0` and `2 * Pi`)
-          format: double
+        type:
+          minLength: 1
+          type: string
+          description: Type of subscriber. Completemented by SubscriberId.
+        id:
+          minLength: 1
+          type: string
+          description: ID
       additionalProperties: false
-    DistanceFlightPlanUnitContract:
-      type: object
-      properties:
-        requested:
-          $ref: '#/components/schemas/Distance'
-        assigned:
-          $ref: '#/components/schemas/Distance'
-      additionalProperties: false
-      description: 'Contract describing unit (altitude, airspeed, etc.) which can be assigned and / or requested
-
-        in the context of the flight plan'
-    SpeedFlightPlanUnitContract:
-      type: object
-      properties:
-        requested:
-          $ref: '#/components/schemas/Speed'
-        assigned:
-          $ref: '#/components/schemas/Speed'
-      additionalProperties: false
-      description: 'Contract describing unit (altitude, airspeed, etc.) which can be assigned and / or requested
-
-        in the context of the flight plan'
-    GeoCoordinatesContract:
-      required:
-      - lat
-      - lon
-      type: object
-      properties:
-        lat:
-          maximum: 90
-          minimum: -90
-          type: number
-          description: Latitude, in degrees
-          format: float
-        lon:
-          maximum: 180
-          minimum: -180
-          type: number
-          description: Longitude, in degrees
-          format: float
-      additionalProperties: false
-      description: Geographical coordinates data
-    FlightNotificationContract:
-      required:
-      - flights
-      - subscription
-      type: object
-      properties:
-        flights:
-          type: array
-          items:
-            $ref: '#/components/schemas/FlightNotificationItemContract'
-          description: Modified/created flight notification
-        subscription:
-          $ref: '#/components/schemas/SubscriptionContract'
-        balance:
-          $ref: '#/components/schemas/SubscriptionBalanceContract'
-      additionalProperties: false
-      description: Flight notification contract
-    FlightRules:
-      enum:
-      - IFR
-      - VFR
-      type: string
+      description: Describes subscriber (consumer of the subscription)
     FlightAirlineContract:
       required:
       - name
@@ -1219,51 +1196,271 @@ components:
           description: ICAO code of the airline
       additionalProperties: false
       description: Flight's airline reference conract
-    SubscriptionsBalanceRefillRequestContract:
+    FlightLocationContract:
       required:
-      - credits
+      - altitude
+      - groundSpeed
+      - lat
+      - lon
+      - pressure
+      - pressureAltitude
+      - reportedAtUtc
+      - trueTrack
       type: object
       properties:
-        credits:
-          maximum: 2147483647
-          minimum: 1
-          type: integer
-          description: Number of credits to add to the notification subscription balance.
-          format: int32
-      additionalProperties: false
-      description: Represents a contract for refilling flight alert credits on a subscription.
-    FlightPlanContract:
-      required:
-      - lastUpdatedUtc
-      - route
-      type: object
-      properties:
-        flightRules:
-          $ref: '#/components/schemas/FlightRules'
-        flightType:
-          $ref: '#/components/schemas/FlightType'
-        revisionNo:
+        pressureAltitude:
+          $ref: '#/components/schemas/Distance'
+        altitude:
+          $ref: '#/components/schemas/Distance'
+        pressure:
+          $ref: '#/components/schemas/Pressure'
+        groundSpeed:
+          $ref: '#/components/schemas/Speed'
+        trueTrack:
+          $ref: '#/components/schemas/Azimuth'
+        vsiFpm:
           type:
           - integer
           - 'null'
-          description: No. of revision of the flight plan
+          description: 'Vertical speed, in feet per minute
+
+            Not set if unknown or zero.'
           format: int32
-        status:
-          $ref: '#/components/schemas/FlightPlanStatus'
-        route:
+        reportedAtUtc:
+          type: string
+          description: Time (UTC) of when this positional data was reported
+          format: date-time
+        lat:
+          maximum: 90
+          minimum: -90
+          type: number
+          description: Latitude, in degrees
+          format: float
+        lon:
+          maximum: 180
+          minimum: -180
+          type: number
+          description: Longitude, in degrees
+          format: float
+      additionalProperties: false
+      description: 'Positional information about flight: location, altitude, speed and track'
+    FlightRules:
+      enum:
+      - IFR
+      - VFR
+      type: string
+    Speed:
+      required:
+      - kmPerHour
+      - kt
+      - meterPerSecond
+      - miPerHour
+      type: object
+      properties:
+        kt:
+          type: number
+          description: Speed in knots
+          format: double
+        kmPerHour:
+          type: number
+          description: Speed in km per hour
+          format: double
+        miPerHour:
+          type: number
+          description: Speed in miles per hour
+          format: double
+        meterPerSecond:
+          type: number
+          description: Speed in meters per second
+          format: double
+      additionalProperties: false
+    SubscriptionSubjectType:
+      enum:
+      - FlightByNumber
+      - FlightByAirportIcao
+      type: string
+      description: '<p>Possible values:</p>
+
+        <ul>
+
+        <li><b>0 - FlightByNumber</b></li>
+
+        <li><b>1 - FlightByAirportIcao</b></li>
+
+        </ul>
+
+        '
+    FlightNotificationContract:
+      required:
+      - flights
+      - subscription
+      type: object
+      properties:
+        flights:
+          type: array
+          items:
+            $ref: '#/components/schemas/FlightNotificationItemContract'
+          description: Modified/created flight notification
+        subscription:
+          $ref: '#/components/schemas/SubscriptionContract'
+        balance:
+          $ref: '#/components/schemas/SubscriptionBalanceContract'
+      additionalProperties: false
+      description: Flight notification contract
+    SubscriptionSubjectContract:
+      required:
+      - type
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/SubscriptionSubjectType'
+        id:
+          type:
+          - string
+          - 'null'
+          description: 'Subject ID of a subscription. Complements SubjectType.
+
+
+            E.g. SubjectType = "FlightNumber" and SubjectId = "DL 47" means that this
+
+            subscription is for all updates of flight with number DL47.'
+      additionalProperties: false
+      description: Describes subscription subject
+    ResourceContract:
+      required:
+      - license
+      - url
+      type: object
+      properties:
+        url:
           minLength: 1
           type: string
-          description: Route information for the flight as filed in the flight plan
-        altitude:
-          $ref: '#/components/schemas/DistanceFlightPlanUnitContract'
-        airspeed:
-          $ref: '#/components/schemas/SpeedFlightPlanUnitContract'
-        lastUpdatedUtc:
+          description: URL of the resource
+        webUrl:
+          type:
+          - string
+          - 'null'
+          description: URL of web-page containing the resource
+        author:
+          type:
+          - string
+          - 'null'
+          description: Author name of the resource
+        title:
+          type:
+          - string
+          - 'null'
+          description: Title of the resource
+        description:
+          type:
+          - string
+          - 'null'
+          description: Description of the resource
+        license:
+          $ref: '#/components/schemas/LicenseType'
+        htmlAttributions:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: 'Attributions maintaining copyright, ownership and other legal information adjusted for displaying
+
+            as HTML. Each element represent one line.'
+      additionalProperties: false
+      description: Single media resource data
+    LicenseType:
+      enum:
+      - AllRightsReserved
+      - AttributionNoncommercialShareAlikeCC
+      - AttributionNoncommercialCC
+      - AttributionNoncommercialNoDerivativesCC
+      - AttributionCC
+      - AttributionShareAlikeCC
+      - AttributionNoDerivativesCC
+      - NoKnownCopyrightRestrictions
+      - UnitedStatesGovernmentWork
+      - PublicDomainDedicationCC0
+      - PublicDomainMark
+      type: string
+      description: '<p>Possible values:</p>
+
+        <ul>
+
+        <li><b>0 - AllRightsReserved</b>: All Rights Reserved.</li>
+
+        <li><b>1 - AttributionNoncommercialShareAlikeCC</b>: Creative Commons: Attribution Non-Commercial, Share-alike License.</li>
+
+        <li><b>2 - AttributionNoncommercialCC</b>: Creative Commons: Attribution Non-Commercial License.</li>
+
+        <li><b>3 - AttributionNoncommercialNoDerivativesCC</b>: Creative Commons: Attribution Non-Commercial, No Derivatives License.</li>
+
+        <li><b>4 - AttributionCC</b>: Creative Commons: Attribution License.</li>
+
+        <li><b>5 - AttributionShareAlikeCC</b>: Creative Commons: Attribution Share-alike License.</li>
+
+        <li><b>6 - AttributionNoDerivativesCC</b>: Creative Commons: Attribution No Derivatives License.</li>
+
+        <li><b>7 - NoKnownCopyrightRestrictions</b>: No Known Copyright Resitrctions (Flickr Commons).</li>
+
+        <li><b>8 - UnitedStatesGovernmentWork</b>: United States Government Work</li>
+
+        <li><b>9 - PublicDomainDedicationCC0</b>: Public Domain Dedication, CC0</li>
+
+        <li><b>10 - PublicDomainMark</b>: Public Domain Mark</li>
+
+        </ul>
+
+        '
+    SubscriptionBalanceContract:
+      required:
+      - creditsRemaining
+      - lastDeductedUtc
+      - lastRefilledUtc
+      type: object
+      properties:
+        creditsRemaining:
+          type: integer
+          description: Alert credits remaining for the account.
+          format: int64
+        lastRefilledUtc:
           type: string
-          description: Time (UTC) of the latest known update to the flight plan
+          description: The datetime when the balance was last re-filled, in UTC.
+          format: date-time
+        lastDeductedUtc:
+          type: string
+          description: 'The datetime when the balance was last deducated, in UTC.
+
+            Deduction typically occurs when an alert notification was dispatched
+
+            for one of the alert subscriptions associated with the user account.'
           format: date-time
       additionalProperties: false
-      description: Flight plan contract
+      description: 'Represents the balance for all alert subscriptions associated with the user acount, including remaining credits and timestamps
+
+        for the most recent refill and deduction operations.'
+    FlightAircraftContract:
+      type: object
+      properties:
+        reg:
+          type:
+          - string
+          - 'null'
+          description: Tail-number of the aircraft
+        modeS:
+          type:
+          - string
+          - 'null'
+          description: ICAO 24 bit Mode-S hexadecimal transponder address
+        model:
+          type:
+          - string
+          - 'null'
+          description: Aircraft name and model
+        image:
+          $ref: '#/components/schemas/ResourceContract'
+      additionalProperties: false
+      description: Flight's aircraft reference contract
     FlightAirportMovementContract:
       required:
       - airport
@@ -1314,6 +1511,64 @@ components:
             you can expect within this contract (basic, live and/or approximate data).'
       additionalProperties: false
       description: Flight arrival or departure information
+    FlightPlanStatus:
+      enum:
+      - Proposed
+      - Active
+      - Dropped
+      - Cancelled
+      - Completed
+      type: string
+    SubscriptionContract:
+      required:
+      - createdOnUtc
+      - id
+      - isActive
+      - subject
+      - subscriber
+      type: object
+      properties:
+        id:
+          type: string
+          description: "Identifier of a subscription. \nUse this ID to control the subscription in future (e.g. update or delete)."
+          format: uuid
+        isActive:
+          type: boolean
+          description: Specifies if the subscription is active
+        billingType:
+          $ref: '#/components/schemas/SubscriptionBillingType'
+        activateBeforeUtc:
+          type:
+          - string
+          - 'null'
+          description: "Time (UTC) before which subscription must be activated (may be applicable to \nsome non-active newly created subscriptions)"
+          format: date-time
+        expiresOnUtc:
+          type:
+          - string
+          - 'null'
+          description: 'Time (UTC) when subscription expires and will be removed.
+
+
+            If not specified, subscription never expires.'
+          format: date-time
+        createdOnUtc:
+          type: string
+          description: Time (UTC) when subscription was created
+          format: date-time
+        subject:
+          $ref: '#/components/schemas/SubscriptionSubjectContract'
+        subscriber:
+          $ref: '#/components/schemas/SubscriberContract'
+        notices:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Additional messages
+      additionalProperties: false
+      description: Describes subscription
     FlightNotificationItemContract:
       required:
       - arrival
@@ -1371,210 +1626,90 @@ components:
           $ref: '#/components/schemas/FlightLocationContract'
       additionalProperties: false
       description: Flight notification message contract
-    SubscriptionSubjectContract:
+    FlightPlanContract:
       required:
-      - type
+      - lastUpdatedUtc
+      - route
       type: object
       properties:
-        type:
-          $ref: '#/components/schemas/SubscriptionSubjectType'
-        id:
+        flightRules:
+          $ref: '#/components/schemas/FlightRules'
+        flightType:
+          $ref: '#/components/schemas/FlightType'
+        revisionNo:
           type:
-          - string
+          - integer
           - 'null'
-          description: 'Subject ID of a subscription. Complements SubjectType.
-
-
-            E.g. SubjectType = "FlightNumber" and SubjectId = "DL 47" means that this
-
-            subscription is for all updates of flight with number DL47.'
-      additionalProperties: false
-      description: Describes subscription subject
-    Speed:
-      required:
-      - kmPerHour
-      - kt
-      - meterPerSecond
-      - miPerHour
-      type: object
-      properties:
-        kt:
-          type: number
-          description: Speed in knots
-          format: double
-        kmPerHour:
-          type: number
-          description: Speed in km per hour
-          format: double
-        miPerHour:
-          type: number
-          description: Speed in miles per hour
-          format: double
-        meterPerSecond:
-          type: number
-          description: Speed in meters per second
-          format: double
-      additionalProperties: false
-    SubscriberContract:
-      required:
-      - id
-      - type
-      type: object
-      properties:
-        type:
+          description: No. of revision of the flight plan
+          format: int32
+        status:
+          $ref: '#/components/schemas/FlightPlanStatus'
+        route:
           minLength: 1
           type: string
-          description: Type of subscriber. Completemented by SubscriberId.
-        id:
-          minLength: 1
+          description: Route information for the flight as filed in the flight plan
+        altitude:
+          $ref: '#/components/schemas/DistanceFlightPlanUnitContract'
+        airspeed:
+          $ref: '#/components/schemas/SpeedFlightPlanUnitContract'
+        lastUpdatedUtc:
           type: string
-          description: ID
-      additionalProperties: false
-      description: Describes subscriber (consumer of the subscription)
-    LicenseType:
-      enum:
-      - AllRightsReserved
-      - AttributionNoncommercialShareAlikeCC
-      - AttributionNoncommercialCC
-      - AttributionNoncommercialNoDerivativesCC
-      - AttributionCC
-      - AttributionShareAlikeCC
-      - AttributionNoDerivativesCC
-      - NoKnownCopyrightRestrictions
-      - UnitedStatesGovernmentWork
-      - PublicDomainDedicationCC0
-      - PublicDomainMark
-      type: string
-      description: '<p>Possible values:</p>
-
-        <ul>
-
-        <li><b>0 - AllRightsReserved</b>: All Rights Reserved.</li>
-
-        <li><b>1 - AttributionNoncommercialShareAlikeCC</b>: Creative Commons: Attribution Non-Commercial, Share-alike License.</li>
-
-        <li><b>2 - AttributionNoncommercialCC</b>: Creative Commons: Attribution Non-Commercial License.</li>
-
-        <li><b>3 - AttributionNoncommercialNoDerivativesCC</b>: Creative Commons: Attribution Non-Commercial, No Derivatives License.</li>
-
-        <li><b>4 - AttributionCC</b>: Creative Commons: Attribution License.</li>
-
-        <li><b>5 - AttributionShareAlikeCC</b>: Creative Commons: Attribution Share-alike License.</li>
-
-        <li><b>6 - AttributionNoDerivativesCC</b>: Creative Commons: Attribution No Derivatives License.</li>
-
-        <li><b>7 - NoKnownCopyrightRestrictions</b>: No Known Copyright Resitrctions (Flickr Commons).</li>
-
-        <li><b>8 - UnitedStatesGovernmentWork</b>: United States Government Work</li>
-
-        <li><b>9 - PublicDomainDedicationCC0</b>: Public Domain Dedication, CC0</li>
-
-        <li><b>10 - PublicDomainMark</b>: Public Domain Mark</li>
-
-        </ul>
-
-        '
-    DateTimeContract:
-      required:
-      - local
-      - utc
-      type: object
-      properties:
-        utc:
-          type: string
-          description: UTC-time
-          format: date-time
-        local:
-          type: string
-          description: Local time
+          description: Time (UTC) of the latest known update to the flight plan
           format: date-time
       additionalProperties: false
-      description: Descriptor date-time represented in both UTC and local timezones
-    FlightType:
-      enum:
-      - Other
-      - General
-      - Scheduled
-      - NonScheduled
-      - Military
-      type: string
-    SubscriptionContract:
+      description: Flight plan contract
+    Pressure:
       required:
-      - createdOnUtc
-      - id
-      - isActive
-      - subject
-      - subscriber
+      - hPa
+      - inHg
+      - mmHg
       type: object
       properties:
-        id:
-          type: string
-          description: "Identifier of a subscription. \nUse this ID to control the subscription in future (e.g. update or delete)."
-          format: uuid
-        isActive:
-          type: boolean
-          description: Specifies if the subscription is active
-        billingType:
-          $ref: '#/components/schemas/SubscriptionBillingType'
-        activateBeforeUtc:
-          type:
-          - string
-          - 'null'
-          description: "Time (UTC) before which subscription must be activated (may be applicable to \nsome non-active newly created subscriptions)"
-          format: date-time
-        expiresOnUtc:
-          type:
-          - string
-          - 'null'
-          description: 'Time (UTC) when subscription expires and will be removed.
-
-
-            If not specified, subscription never expires.'
-          format: date-time
-        createdOnUtc:
-          type: string
-          description: Time (UTC) when subscription was created
-          format: date-time
-        subject:
-          $ref: '#/components/schemas/SubscriptionSubjectContract'
-        subscriber:
-          $ref: '#/components/schemas/SubscriberContract'
-        notices:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-          description: Additional messages
+        hPa:
+          type: number
+          description: Pressure in hectopascals
+          format: double
+        inHg:
+          type: number
+          description: Pressure in inches mercury
+          format: double
+        mmHg:
+          type: number
+          description: Pressure in millimeters mercury
+          format: double
       additionalProperties: false
-      description: Describes subscription
-    SubscriptionBalanceContract:
+    Azimuth:
       required:
-      - creditsRemaining
-      - lastDeductedUtc
-      - lastRefilledUtc
+      - deg
+      - rad
       type: object
       properties:
-        creditsRemaining:
+        deg:
+          maximum: 360
+          minimum: 0
+          type: number
+          description: Angle in degrees (between `0` and `360`)
+          format: double
+        rad:
+          maximum: 6.283185307179586
+          minimum: 0
+          type: number
+          description: Angle in radians (`0` and `2 * Pi`)
+          format: double
+      additionalProperties: false
+    SubscriptionsBalanceRefillRequestContract:
+      required:
+      - credits
+      type: object
+      properties:
+        credits:
+          maximum: 2147483647
+          minimum: 1
           type: integer
-          description: Alert credits remaining for the account.
-          format: int64
-        lastRefilledUtc:
-          type: string
-          description: The datetime when the balance was last re-filled, in UTC.
-          format: date-time
-        lastDeductedUtc:
-          type: string
-          description: 'The datetime when the balance was last deducated, in UTC.
-
-            Deduction typically occurs when an alert notification was dispatched
-
-            for one of the alert subscriptions associated with the user account.'
-          format: date-time
+          description: Number of credits to add to the notification subscription balance.
+          format: int32
       additionalProperties: false
-      description: 'Represents the balance for all alert subscriptions associated with the user acount, including remaining credits and timestamps
-
-        for the most recent refill and deduction operations.'
+      description: Represents a contract for refilling flight alert credits on a subscription.
     Distance:
       required:
       - feet
@@ -1605,146 +1740,11 @@ components:
           description: Distance in feet
           format: double
       additionalProperties: false
-    FlightLocationContract:
-      required:
-      - altitude
-      - groundSpeed
-      - lat
-      - lon
-      - pressure
-      - pressureAltitude
-      - reportedAtUtc
-      - trueTrack
-      type: object
-      properties:
-        pressureAltitude:
-          $ref: '#/components/schemas/Distance'
-        altitude:
-          $ref: '#/components/schemas/Distance'
-        pressure:
-          $ref: '#/components/schemas/Pressure'
-        groundSpeed:
-          $ref: '#/components/schemas/Speed'
-        trueTrack:
-          $ref: '#/components/schemas/Azimuth'
-        vsiFpm:
-          type:
-          - integer
-          - 'null'
-          description: 'Vertical speed, in feet per minute
-
-            Not set if unknown or zero.'
-          format: int32
-        reportedAtUtc:
-          type: string
-          description: Time (UTC) of when this positional data was reported
-          format: date-time
-        lat:
-          maximum: 90
-          minimum: -90
-          type: number
-          description: Latitude, in degrees
-          format: float
-        lon:
-          maximum: 180
-          minimum: -180
-          type: number
-          description: Longitude, in degrees
-          format: float
-      additionalProperties: false
-      description: 'Positional information about flight: location, altitude, speed and track'
-    ErrorContract:
-      required:
-      - message
-      type: object
-      properties:
-        message:
-          minLength: 1
-          type: string
-          description: Error message
-      additionalProperties: false
-      description: Error response
-    SubscriptionSubjectType:
+    FlightType:
       enum:
-      - FlightByNumber
-      - FlightByAirportIcao
+      - Other
+      - General
+      - Scheduled
+      - NonScheduled
+      - Military
       type: string
-      description: '<p>Possible values:</p>
-
-        <ul>
-
-        <li><b>0 - FlightByNumber</b></li>
-
-        <li><b>1 - FlightByAirportIcao</b></li>
-
-        </ul>
-
-        '
-    FlightAircraftContract:
-      type: object
-      properties:
-        reg:
-          type:
-          - string
-          - 'null'
-          description: Tail-number of the aircraft
-        modeS:
-          type:
-          - string
-          - 'null'
-          description: ICAO 24 bit Mode-S hexadecimal transponder address
-        model:
-          type:
-          - string
-          - 'null'
-          description: Aircraft name and model
-        image:
-          $ref: '#/components/schemas/ResourceContract'
-      additionalProperties: false
-      description: Flight's aircraft reference contract
-    FlightPlanStatus:
-      enum:
-      - Proposed
-      - Active
-      - Dropped
-      - Cancelled
-      - Completed
-      type: string
-    CodeshareStatus:
-      enum:
-      - Unknown
-      - IsOperator
-      - IsCodeshared
-      type: string
-      description: 'Flight code-share status<p>Possible values:</p>
-
-        <ul>
-
-        <li><b>0 - Unknown</b>: Code-sharing information is unavailable for this flight. Flight might be operated both by airline owning the flight number as well as by another airliner.</li>
-
-        <li><b>1 - IsOperator</b>: Flight is operated by an airline owning the flight number (the same code)</li>
-
-        <li><b>2 - IsCodeshared</b>: Flight is code-shared (operated by an airline other than airline owning the flight number)</li>
-
-        </ul>
-
-        '
-    FlightAirportMovementQualityEnum:
-      enum:
-      - Basic
-      - Live
-      - Approximate
-      type: string
-      description: 'Quality characteristics of the information provided within flight FlightAirportMovementContract<p>Possible values:</p>
-
-        <ul>
-
-        <li><b>0 - Basic</b></li>
-
-        <li><b>1 - Live</b></li>
-
-        <li><b>2 - Approximate</b></li>
-
-        </ul>
-
-        '

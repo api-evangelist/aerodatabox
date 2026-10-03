@@ -1405,69 +1405,110 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Pressure:
+    GeoCoordinatesContract:
       required:
-      - hPa
-      - inHg
-      - mmHg
+      - lat
+      - lon
       type: object
       properties:
-        hPa:
+        lat:
+          maximum: 90
+          minimum: -90
           type: number
-          description: Pressure in hectopascals
-          format: double
-        inHg:
+          description: Latitude, in degrees
+          format: float
+        lon:
+          maximum: 180
+          minimum: -180
           type: number
-          description: Pressure in inches mercury
-          format: double
-        mmHg:
-          type: number
-          description: Pressure in millimeters mercury
-          format: double
+          description: Longitude, in degrees
+          format: float
       additionalProperties: false
-    ResourceContract:
+      description: Geographical coordinates data
+    AirportCodesByEnum:
+      enum:
+      - Icao
+      - Iata
+      type: string
+      description: 'Search by airport code type<p>Possible values:</p>
+
+        <ul>
+
+        <li><b>0 - Icao</b>: ICAO-code</li>
+
+        <li><b>1 - Iata</b>: IATA-code</li>
+
+        </ul>
+
+        '
+    FlightDirection:
+      enum:
+      - Arrival
+      - Departure
+      - Both
+      type: string
+      description: 'Direction of flight<p>Possible values:</p>
+
+        <ul>
+
+        <li><b>1 - Arrival</b></li>
+
+        <li><b>2 - Departure</b></li>
+
+        <li><b>3 - Both</b></li>
+
+        </ul>
+
+        '
+    ErrorContract:
       required:
-      - license
-      - url
+      - message
       type: object
       properties:
-        url:
+        message:
           minLength: 1
           type: string
-          description: URL of the resource
-        webUrl:
-          type:
-          - string
-          - 'null'
-          description: URL of web-page containing the resource
-        author:
-          type:
-          - string
-          - 'null'
-          description: Author name of the resource
-        title:
-          type:
-          - string
-          - 'null'
-          description: Title of the resource
-        description:
-          type:
-          - string
-          - 'null'
-          description: Description of the resource
-        license:
-          $ref: '#/components/schemas/LicenseType'
-        htmlAttributions:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-          description: 'Attributions maintaining copyright, ownership and other legal information adjusted for displaying
-
-            as HTML. Each element represent one line.'
+          description: Error message
       additionalProperties: false
-      description: Single media resource data
+      description: Error response
+    CodeshareStatus:
+      enum:
+      - Unknown
+      - IsOperator
+      - IsCodeshared
+      type: string
+      description: 'Flight code-share status<p>Possible values:</p>
+
+        <ul>
+
+        <li><b>0 - Unknown</b>: Code-sharing information is unavailable for this flight. Flight might be operated both by airline owning the flight number as well as by another airliner.</li>
+
+        <li><b>1 - IsOperator</b>: Flight is operated by an airline owning the flight number (the same code)</li>
+
+        <li><b>2 - IsCodeshared</b>: Flight is code-shared (operated by an airline other than airline owning the flight number)</li>
+
+        </ul>
+
+        '
+    FlightAirportMovementQualityEnum:
+      enum:
+      - Basic
+      - Live
+      - Approximate
+      type: string
+      description: 'Quality characteristics of the information provided within flight FlightAirportMovementContract<p>Possible values:</p>
+
+        <ul>
+
+        <li><b>0 - Basic</b></li>
+
+        <li><b>1 - Live</b></li>
+
+        <li><b>2 - Approximate</b></li>
+
+        </ul>
+
+        '
     FlightStatus:
       enum:
       - Unknown
@@ -1517,6 +1558,44 @@ components:
         </ul>
 
         '
+    DateTimeContract:
+      required:
+      - local
+      - utc
+      type: object
+      properties:
+        utc:
+          type: string
+          description: UTC-time
+          format: date-time
+        local:
+          type: string
+          description: Local time
+          format: date-time
+      additionalProperties: false
+      description: Descriptor date-time represented in both UTC and local timezones
+    FlightSearchItemContract:
+      required:
+      - number
+      type: object
+      properties:
+        number:
+          minLength: 1
+          type: string
+          description: Found flight number.
+      additionalProperties: false
+      description: Flight record found in the search result.
+    SpeedFlightPlanUnitContract:
+      type: object
+      properties:
+        requested:
+          $ref: '#/components/schemas/Speed'
+        assigned:
+          $ref: '#/components/schemas/Speed'
+      additionalProperties: false
+      description: 'Contract describing unit (altitude, airspeed, etc.) which can be assigned and / or requested
+
+        in the context of the flight plan'
     ListingAirportContract:
       required:
       - name
@@ -1565,25 +1644,6 @@ components:
           description: Time zone of the airport in Olson format (e.g. "Europe/Amsterdam")
       additionalProperties: false
       description: Flight's airport reference contract
-    Azimuth:
-      required:
-      - deg
-      - rad
-      type: object
-      properties:
-        deg:
-          maximum: 360
-          minimum: 0
-          type: number
-          description: Angle in degrees (between `0` and `360`)
-          format: double
-        rad:
-          maximum: 6.283185307179586
-          minimum: 0
-          type: number
-          description: Angle in radians (`0` and `2 * Pi`)
-          format: double
-      additionalProperties: false
     DistanceFlightPlanUnitContract:
       type: object
       properties:
@@ -1595,115 +1655,6 @@ components:
       description: 'Contract describing unit (altitude, airspeed, etc.) which can be assigned and / or requested
 
         in the context of the flight plan'
-    AirportCodesByEnum:
-      enum:
-      - Icao
-      - Iata
-      type: string
-      description: 'Search by airport code type<p>Possible values:</p>
-
-        <ul>
-
-        <li><b>0 - Icao</b>: ICAO-code</li>
-
-        <li><b>1 - Iata</b>: IATA-code</li>
-
-        </ul>
-
-        '
-    SpeedFlightPlanUnitContract:
-      type: object
-      properties:
-        requested:
-          $ref: '#/components/schemas/Speed'
-        assigned:
-          $ref: '#/components/schemas/Speed'
-      additionalProperties: false
-      description: 'Contract describing unit (altitude, airspeed, etc.) which can be assigned and / or requested
-
-        in the context of the flight plan'
-    GeoCoordinatesContract:
-      required:
-      - lat
-      - lon
-      type: object
-      properties:
-        lat:
-          maximum: 90
-          minimum: -90
-          type: number
-          description: Latitude, in degrees
-          format: float
-        lon:
-          maximum: 180
-          minimum: -180
-          type: number
-          description: Longitude, in degrees
-          format: float
-      additionalProperties: false
-      description: Geographical coordinates data
-    AirportFidsContract:
-      type: object
-      properties:
-        departures:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/AirportFlightContract'
-          description: Departing flights
-        arrivals:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/AirportFlightContract'
-          description: Arriving flights
-      additionalProperties: false
-      description: Airport schedule contract
-    AirportFlightContract:
-      required:
-      - codeshareStatus
-      - isCargo
-      - number
-      - status
-      type: object
-      properties:
-        movement:
-          $ref: '#/components/schemas/FlightAirportMovementContract'
-        departure:
-          $ref: '#/components/schemas/FlightAirportMovementContract'
-        arrival:
-          $ref: '#/components/schemas/FlightAirportMovementContract'
-        number:
-          minLength: 1
-          type: string
-          description: Flight Number
-        callSign:
-          type:
-          - string
-          - 'null'
-          description: ATC call-sign of the flight
-        status:
-          $ref: '#/components/schemas/FlightStatus'
-        codeshareStatus:
-          $ref: '#/components/schemas/CodeshareStatus'
-        isCargo:
-          type: boolean
-          description: Is cargo flight
-        aircraft:
-          $ref: '#/components/schemas/FlightAircraftContract'
-        airline:
-          $ref: '#/components/schemas/FlightAirlineContract'
-        location:
-          $ref: '#/components/schemas/FlightLocationContract'
-      additionalProperties: false
-      description: Flight data contract represented in airport schedule
-    FlightRules:
-      enum:
-      - IFR
-      - VFR
-      type: string
     FlightAirlineContract:
       required:
       - name
@@ -1725,90 +1676,216 @@ components:
           description: ICAO code of the airline
       additionalProperties: false
       description: Flight's airline reference conract
-    FlightSearchItemContract:
+    FlightLocationContract:
       required:
-      - number
+      - altitude
+      - groundSpeed
+      - lat
+      - lon
+      - pressure
+      - pressureAltitude
+      - reportedAtUtc
+      - trueTrack
       type: object
       properties:
-        number:
-          minLength: 1
-          type: string
-          description: Found flight number.
-      additionalProperties: false
-      description: Flight record found in the search result.
-    FlightDirection:
-      enum:
-      - Arrival
-      - Departure
-      - Both
-      type: string
-      description: 'Direction of flight<p>Possible values:</p>
-
-        <ul>
-
-        <li><b>1 - Arrival</b></li>
-
-        <li><b>2 - Departure</b></li>
-
-        <li><b>3 - Both</b></li>
-
-        </ul>
-
-        '
-    FlightSearchByEnum:
-      enum:
-      - Number
-      - Reg
-      - CallSign
-      - Icao24
-      type: string
-      description: 'Criteria to search flight by<p>Possible values:</p>
-
-        <ul>
-
-        <li><b>0 - Number</b>: Search by flight number</li>
-
-        <li><b>1 - Reg</b>: Search by aircraft registration</li>
-
-        <li><b>2 - CallSign</b>: Search by ATC call-sign</li>
-
-        <li><b>3 - Icao24</b>: Search by 24-bit ICAO Mode-S Transponder code</li>
-
-        </ul>
-
-        '
-    FlightPlanContract:
-      required:
-      - lastUpdatedUtc
-      - route
-      type: object
-      properties:
-        flightRules:
-          $ref: '#/components/schemas/FlightRules'
-        flightType:
-          $ref: '#/components/schemas/FlightType'
-        revisionNo:
+        pressureAltitude:
+          $ref: '#/components/schemas/Distance'
+        altitude:
+          $ref: '#/components/schemas/Distance'
+        pressure:
+          $ref: '#/components/schemas/Pressure'
+        groundSpeed:
+          $ref: '#/components/schemas/Speed'
+        trueTrack:
+          $ref: '#/components/schemas/Azimuth'
+        vsiFpm:
           type:
           - integer
           - 'null'
-          description: No. of revision of the flight plan
+          description: 'Vertical speed, in feet per minute
+
+            Not set if unknown or zero.'
           format: int32
-        status:
-          $ref: '#/components/schemas/FlightPlanStatus'
-        route:
+        reportedAtUtc:
+          type: string
+          description: Time (UTC) of when this positional data was reported
+          format: date-time
+        lat:
+          maximum: 90
+          minimum: -90
+          type: number
+          description: Latitude, in degrees
+          format: float
+        lon:
+          maximum: 180
+          minimum: -180
+          type: number
+          description: Longitude, in degrees
+          format: float
+      additionalProperties: false
+      description: 'Positional information about flight: location, altitude, speed and track'
+    FlightRules:
+      enum:
+      - IFR
+      - VFR
+      type: string
+    Speed:
+      required:
+      - kmPerHour
+      - kt
+      - meterPerSecond
+      - miPerHour
+      type: object
+      properties:
+        kt:
+          type: number
+          description: Speed in knots
+          format: double
+        kmPerHour:
+          type: number
+          description: Speed in km per hour
+          format: double
+        miPerHour:
+          type: number
+          description: Speed in miles per hour
+          format: double
+        meterPerSecond:
+          type: number
+          description: Speed in meters per second
+          format: double
+      additionalProperties: false
+    StringFlightSearchItemContractSearchResultCollectionContract:
+      required:
+      - count
+      - items
+      - searchBy
+      type: object
+      properties:
+        searchBy:
           minLength: 1
           type: string
-          description: Route information for the flight as filed in the flight plan
-        altitude:
-          $ref: '#/components/schemas/DistanceFlightPlanUnitContract'
-        airspeed:
-          $ref: '#/components/schemas/SpeedFlightPlanUnitContract'
-        lastUpdatedUtc:
-          type: string
-          description: Time (UTC) of the latest known update to the flight plan
-          format: date-time
+          description: "Search parameter used to find the result. \nPlease note, it may be different from the actual input provided!"
+        count:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+          description: The number of items in the collection
+          format: int32
+          readOnly: true
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/FlightSearchItemContract'
+          description: The collection of items
       additionalProperties: false
-      description: Flight plan contract
+    ResourceContract:
+      required:
+      - license
+      - url
+      type: object
+      properties:
+        url:
+          minLength: 1
+          type: string
+          description: URL of the resource
+        webUrl:
+          type:
+          - string
+          - 'null'
+          description: URL of web-page containing the resource
+        author:
+          type:
+          - string
+          - 'null'
+          description: Author name of the resource
+        title:
+          type:
+          - string
+          - 'null'
+          description: Title of the resource
+        description:
+          type:
+          - string
+          - 'null'
+          description: Description of the resource
+        license:
+          $ref: '#/components/schemas/LicenseType'
+        htmlAttributions:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: 'Attributions maintaining copyright, ownership and other legal information adjusted for displaying
+
+            as HTML. Each element represent one line.'
+      additionalProperties: false
+      description: Single media resource data
+    LicenseType:
+      enum:
+      - AllRightsReserved
+      - AttributionNoncommercialShareAlikeCC
+      - AttributionNoncommercialCC
+      - AttributionNoncommercialNoDerivativesCC
+      - AttributionCC
+      - AttributionShareAlikeCC
+      - AttributionNoDerivativesCC
+      - NoKnownCopyrightRestrictions
+      - UnitedStatesGovernmentWork
+      - PublicDomainDedicationCC0
+      - PublicDomainMark
+      type: string
+      description: '<p>Possible values:</p>
+
+        <ul>
+
+        <li><b>0 - AllRightsReserved</b>: All Rights Reserved.</li>
+
+        <li><b>1 - AttributionNoncommercialShareAlikeCC</b>: Creative Commons: Attribution Non-Commercial, Share-alike License.</li>
+
+        <li><b>2 - AttributionNoncommercialCC</b>: Creative Commons: Attribution Non-Commercial License.</li>
+
+        <li><b>3 - AttributionNoncommercialNoDerivativesCC</b>: Creative Commons: Attribution Non-Commercial, No Derivatives License.</li>
+
+        <li><b>4 - AttributionCC</b>: Creative Commons: Attribution License.</li>
+
+        <li><b>5 - AttributionShareAlikeCC</b>: Creative Commons: Attribution Share-alike License.</li>
+
+        <li><b>6 - AttributionNoDerivativesCC</b>: Creative Commons: Attribution No Derivatives License.</li>
+
+        <li><b>7 - NoKnownCopyrightRestrictions</b>: No Known Copyright Resitrctions (Flickr Commons).</li>
+
+        <li><b>8 - UnitedStatesGovernmentWork</b>: United States Government Work</li>
+
+        <li><b>9 - PublicDomainDedicationCC0</b>: Public Domain Dedication, CC0</li>
+
+        <li><b>10 - PublicDomainMark</b>: Public Domain Mark</li>
+
+        </ul>
+
+        '
+    FlightAircraftContract:
+      type: object
+      properties:
+        reg:
+          type:
+          - string
+          - 'null'
+          description: Tail-number of the aircraft
+        modeS:
+          type:
+          - string
+          - 'null'
+          description: ICAO 24 bit Mode-S hexadecimal transponder address
+        model:
+          type:
+          - string
+          - 'null'
+          description: Aircraft name and model
+        image:
+          $ref: '#/components/schemas/ResourceContract'
+      additionalProperties: false
+      description: Flight's aircraft reference contract
     FlightAirportMovementContract:
       required:
       - airport
@@ -1859,98 +1936,104 @@ components:
             you can expect within this contract (basic, live and/or approximate data).'
       additionalProperties: false
       description: Flight arrival or departure information
-    Speed:
-      required:
-      - kmPerHour
-      - kt
-      - meterPerSecond
-      - miPerHour
+    FlightPlanStatus:
+      enum:
+      - Proposed
+      - Active
+      - Dropped
+      - Cancelled
+      - Completed
+      type: string
+    AirportFidsContract:
       type: object
       properties:
-        kt:
-          type: number
-          description: Speed in knots
-          format: double
-        kmPerHour:
-          type: number
-          description: Speed in km per hour
-          format: double
-        miPerHour:
-          type: number
-          description: Speed in miles per hour
-          format: double
-        meterPerSecond:
-          type: number
-          description: Speed in meters per second
-          format: double
+        departures:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/AirportFlightContract'
+          description: Departing flights
+        arrivals:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/AirportFlightContract'
+          description: Arriving flights
       additionalProperties: false
-    LicenseType:
-      enum:
-      - AllRightsReserved
-      - AttributionNoncommercialShareAlikeCC
-      - AttributionNoncommercialCC
-      - AttributionNoncommercialNoDerivativesCC
-      - AttributionCC
-      - AttributionShareAlikeCC
-      - AttributionNoDerivativesCC
-      - NoKnownCopyrightRestrictions
-      - UnitedStatesGovernmentWork
-      - PublicDomainDedicationCC0
-      - PublicDomainMark
-      type: string
-      description: '<p>Possible values:</p>
-
-        <ul>
-
-        <li><b>0 - AllRightsReserved</b>: All Rights Reserved.</li>
-
-        <li><b>1 - AttributionNoncommercialShareAlikeCC</b>: Creative Commons: Attribution Non-Commercial, Share-alike License.</li>
-
-        <li><b>2 - AttributionNoncommercialCC</b>: Creative Commons: Attribution Non-Commercial License.</li>
-
-        <li><b>3 - AttributionNoncommercialNoDerivativesCC</b>: Creative Commons: Attribution Non-Commercial, No Derivatives License.</li>
-
-        <li><b>4 - AttributionCC</b>: Creative Commons: Attribution License.</li>
-
-        <li><b>5 - AttributionShareAlikeCC</b>: Creative Commons: Attribution Share-alike License.</li>
-
-        <li><b>6 - AttributionNoDerivativesCC</b>: Creative Commons: Attribution No Derivatives License.</li>
-
-        <li><b>7 - NoKnownCopyrightRestrictions</b>: No Known Copyright Resitrctions (Flickr Commons).</li>
-
-        <li><b>8 - UnitedStatesGovernmentWork</b>: United States Government Work</li>
-
-        <li><b>9 - PublicDomainDedicationCC0</b>: Public Domain Dedication, CC0</li>
-
-        <li><b>10 - PublicDomainMark</b>: Public Domain Mark</li>
-
-        </ul>
-
-        '
-    DateTimeContract:
+      description: Airport schedule contract
+    FlightPlanContract:
       required:
-      - local
-      - utc
+      - lastUpdatedUtc
+      - route
       type: object
       properties:
-        utc:
+        flightRules:
+          $ref: '#/components/schemas/FlightRules'
+        flightType:
+          $ref: '#/components/schemas/FlightType'
+        revisionNo:
+          type:
+          - integer
+          - 'null'
+          description: No. of revision of the flight plan
+          format: int32
+        status:
+          $ref: '#/components/schemas/FlightPlanStatus'
+        route:
+          minLength: 1
           type: string
-          description: UTC-time
-          format: date-time
-        local:
+          description: Route information for the flight as filed in the flight plan
+        altitude:
+          $ref: '#/components/schemas/DistanceFlightPlanUnitContract'
+        airspeed:
+          $ref: '#/components/schemas/SpeedFlightPlanUnitContract'
+        lastUpdatedUtc:
           type: string
-          description: Local time
+          description: Time (UTC) of the latest known update to the flight plan
           format: date-time
       additionalProperties: false
-      description: Descriptor date-time represented in both UTC and local timezones
-    FlightType:
-      enum:
-      - Other
-      - General
-      - Scheduled
-      - NonScheduled
-      - Military
-      type: string
+      description: Flight plan contract
+    Pressure:
+      required:
+      - hPa
+      - inHg
+      - mmHg
+      type: object
+      properties:
+        hPa:
+          type: number
+          description: Pressure in hectopascals
+          format: double
+        inHg:
+          type: number
+          description: Pressure in inches mercury
+          format: double
+        mmHg:
+          type: number
+          description: Pressure in millimeters mercury
+          format: double
+      additionalProperties: false
+    Azimuth:
+      required:
+      - deg
+      - rad
+      type: object
+      properties:
+        deg:
+          maximum: 360
+          minimum: 0
+          type: number
+          description: Angle in degrees (between `0` and `360`)
+          format: double
+        rad:
+          maximum: 6.283185307179586
+          minimum: 0
+          type: number
+          description: Angle in radians (`0` and `2 * Pi`)
+          format: double
+      additionalProperties: false
     FlightContract:
       required:
       - arrival
@@ -1998,30 +2081,44 @@ components:
           $ref: '#/components/schemas/FlightLocationContract'
       additionalProperties: false
       description: Individiual flight contract
-    StringFlightSearchItemContractSearchResultCollectionContract:
+    AirportFlightContract:
       required:
-      - count
-      - items
-      - searchBy
+      - codeshareStatus
+      - isCargo
+      - number
+      - status
       type: object
       properties:
-        searchBy:
+        movement:
+          $ref: '#/components/schemas/FlightAirportMovementContract'
+        departure:
+          $ref: '#/components/schemas/FlightAirportMovementContract'
+        arrival:
+          $ref: '#/components/schemas/FlightAirportMovementContract'
+        number:
           minLength: 1
           type: string
-          description: "Search parameter used to find the result. \nPlease note, it may be different from the actual input provided!"
-        count:
-          maximum: 2147483647
-          minimum: 0
-          type: integer
-          description: The number of items in the collection
-          format: int32
-          readOnly: true
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/FlightSearchItemContract'
-          description: The collection of items
+          description: Flight Number
+        callSign:
+          type:
+          - string
+          - 'null'
+          description: ATC call-sign of the flight
+        status:
+          $ref: '#/components/schemas/FlightStatus'
+        codeshareStatus:
+          $ref: '#/components/schemas/CodeshareStatus'
+        isCargo:
+          type: boolean
+          description: Is cargo flight
+        aircraft:
+          $ref: '#/components/schemas/FlightAircraftContract'
+        airline:
+          $ref: '#/components/schemas/FlightAirlineContract'
+        location:
+          $ref: '#/components/schemas/FlightLocationContract'
       additionalProperties: false
+      description: Flight data contract represented in airport schedule
     Distance:
       required:
       - feet
@@ -2052,129 +2149,32 @@ components:
           description: Distance in feet
           format: double
       additionalProperties: false
-    FlightLocationContract:
-      required:
-      - altitude
-      - groundSpeed
-      - lat
-      - lon
-      - pressure
-      - pressureAltitude
-      - reportedAtUtc
-      - trueTrack
-      type: object
-      properties:
-        pressureAltitude:
-          $ref: '#/components/schemas/Distance'
-        altitude:
-          $ref: '#/components/schemas/Distance'
-        pressure:
-          $ref: '#/components/schemas/Pressure'
-        groundSpeed:
-          $ref: '#/components/schemas/Speed'
-        trueTrack:
-          $ref: '#/components/schemas/Azimuth'
-        vsiFpm:
-          type:
-          - integer
-          - 'null'
-          description: 'Vertical speed, in feet per minute
-
-            Not set if unknown or zero.'
-          format: int32
-        reportedAtUtc:
-          type: string
-          description: Time (UTC) of when this positional data was reported
-          format: date-time
-        lat:
-          maximum: 90
-          minimum: -90
-          type: number
-          description: Latitude, in degrees
-          format: float
-        lon:
-          maximum: 180
-          minimum: -180
-          type: number
-          description: Longitude, in degrees
-          format: float
-      additionalProperties: false
-      description: 'Positional information about flight: location, altitude, speed and track'
-    ErrorContract:
-      required:
-      - message
-      type: object
-      properties:
-        message:
-          minLength: 1
-          type: string
-          description: Error message
-      additionalProperties: false
-      description: Error response
-    FlightAircraftContract:
-      type: object
-      properties:
-        reg:
-          type:
-          - string
-          - 'null'
-          description: Tail-number of the aircraft
-        modeS:
-          type:
-          - string
-          - 'null'
-          description: ICAO 24 bit Mode-S hexadecimal transponder address
-        model:
-          type:
-          - string
-          - 'null'
-          description: Aircraft name and model
-        image:
-          $ref: '#/components/schemas/ResourceContract'
-      additionalProperties: false
-      description: Flight's aircraft reference contract
-    FlightPlanStatus:
+    FlightType:
       enum:
-      - Proposed
-      - Active
-      - Dropped
-      - Cancelled
-      - Completed
+      - Other
+      - General
+      - Scheduled
+      - NonScheduled
+      - Military
       type: string
-    CodeshareStatus:
+    FlightSearchByEnum:
       enum:
-      - Unknown
-      - IsOperator
-      - IsCodeshared
+      - Number
+      - Reg
+      - CallSign
+      - Icao24
       type: string
-      description: 'Flight code-share status<p>Possible values:</p>
+      description: 'Criteria to search flight by<p>Possible values:</p>
 
         <ul>
 
-        <li><b>0 - Unknown</b>: Code-sharing information is unavailable for this flight. Flight might be operated both by airline owning the flight number as well as by another airliner.</li>
+        <li><b>0 - Number</b>: Search by flight number</li>
 
-        <li><b>1 - IsOperator</b>: Flight is operated by an airline owning the flight number (the same code)</li>
+        <li><b>1 - Reg</b>: Search by aircraft registration</li>
 
-        <li><b>2 - IsCodeshared</b>: Flight is code-shared (operated by an airline other than airline owning the flight number)</li>
+        <li><b>2 - CallSign</b>: Search by ATC call-sign</li>
 
-        </ul>
-
-        '
-    FlightAirportMovementQualityEnum:
-      enum:
-      - Basic
-      - Live
-      - Approximate
-      type: string
-      description: 'Quality characteristics of the information provided within flight FlightAirportMovementContract<p>Possible values:</p>
-
-        <ul>
-
-        <li><b>0 - Basic</b></li>
-
-        <li><b>1 - Live</b></li>
-
-        <li><b>2 - Approximate</b></li>
+        <li><b>3 - Icao24</b>: Search by 24-bit ICAO Mode-S Transponder code</li>
 
         </ul>
 
