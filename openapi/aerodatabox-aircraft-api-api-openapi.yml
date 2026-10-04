@@ -810,114 +810,72 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ResourceContract:
+    AircraftSearchByEnum:
+      enum:
+      - Id
+      - Reg
+      - Icao24
+      type: string
+      description: 'Criteria to search aircraft by<p>Possible values:</p>
+
+        <ul>
+
+        <li><b>0 - Id</b>: ID of the aircraft (as stored in this API)</li>
+
+        <li><b>1 - Reg</b>: Search by aircraft tail-number</li>
+
+        <li><b>2 - Icao24</b>: Search by 24-bit ICAO Mode-S Transponder code</li>
+
+        </ul>
+
+        '
+    AircraftContractPagedCollectionContract:
       required:
-      - license
-      - url
+      - count
+      - hasNextPage
+      - items
+      - pageOffset
+      - pageSize
+      - totalCount
       type: object
       properties:
-        url:
-          minLength: 1
-          type: string
-          description: URL of the resource
-        webUrl:
-          type:
-          - string
-          - 'null'
-          description: URL of web-page containing the resource
-        author:
-          type:
-          - string
-          - 'null'
-          description: Author name of the resource
-        title:
-          type:
-          - string
-          - 'null'
-          description: Title of the resource
-        description:
-          type:
-          - string
-          - 'null'
-          description: Description of the resource
-        license:
-          $ref: '#/components/schemas/LicenseType'
-        htmlAttributions:
-          type:
-          - array
-          - 'null'
+        totalCount:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+          description: The total number of items across all pages
+          format: int32
+        pageOffset:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+          description: "The offset of the current page of the collection \n(number of items skipped before this page)"
+          format: int32
+        pageSize:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+          description: 'Maximum number of items on the current page of the collection
+
+            (`Count` cannot be more than this value)'
+          format: int32
+        hasNextPage:
+          type: boolean
+          description: This value is true when collection has more pages
+          readOnly: true
+        count:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+          description: The number of items in the collection
+          format: int32
+          readOnly: true
+        items:
+          type: array
           items:
-            type: string
-          description: 'Attributions maintaining copyright, ownership and other legal information adjusted for displaying
-
-            as HTML. Each element represent one line.'
+            $ref: '#/components/schemas/AircraftContract'
+          description: The collection of items
       additionalProperties: false
-      description: Single media resource data
-    EngineType:
-      enum:
-      - Unknown
-      - Jet
-      - Turboprop
-      - Piston
-      type: string
-      description: '<p>Possible values:</p>
-
-        <ul>
-
-        <li><b>0 - Unknown</b></li>
-
-        <li><b>1 - Jet</b></li>
-
-        <li><b>2 - Turboprop</b></li>
-
-        <li><b>3 - Piston</b></li>
-
-        </ul>
-
-        '
-    LicenseType:
-      enum:
-      - AllRightsReserved
-      - AttributionNoncommercialShareAlikeCC
-      - AttributionNoncommercialCC
-      - AttributionNoncommercialNoDerivativesCC
-      - AttributionCC
-      - AttributionShareAlikeCC
-      - AttributionNoDerivativesCC
-      - NoKnownCopyrightRestrictions
-      - UnitedStatesGovernmentWork
-      - PublicDomainDedicationCC0
-      - PublicDomainMark
-      type: string
-      description: '<p>Possible values:</p>
-
-        <ul>
-
-        <li><b>0 - AllRightsReserved</b>: All Rights Reserved.</li>
-
-        <li><b>1 - AttributionNoncommercialShareAlikeCC</b>: Creative Commons: Attribution Non-Commercial, Share-alike License.</li>
-
-        <li><b>2 - AttributionNoncommercialCC</b>: Creative Commons: Attribution Non-Commercial License.</li>
-
-        <li><b>3 - AttributionNoncommercialNoDerivativesCC</b>: Creative Commons: Attribution Non-Commercial, No Derivatives License.</li>
-
-        <li><b>4 - AttributionCC</b>: Creative Commons: Attribution License.</li>
-
-        <li><b>5 - AttributionShareAlikeCC</b>: Creative Commons: Attribution Share-alike License.</li>
-
-        <li><b>6 - AttributionNoDerivativesCC</b>: Creative Commons: Attribution No Derivatives License.</li>
-
-        <li><b>7 - NoKnownCopyrightRestrictions</b>: No Known Copyright Resitrctions (Flickr Commons).</li>
-
-        <li><b>8 - UnitedStatesGovernmentWork</b>: United States Government Work</li>
-
-        <li><b>9 - PublicDomainDedicationCC0</b>: Public Domain Dedication, CC0</li>
-
-        <li><b>10 - PublicDomainMark</b>: Public Domain Mark</li>
-
-        </ul>
-
-        '
     ErrorContract:
       required:
       - message
@@ -929,6 +887,61 @@ components:
           description: Error message
       additionalProperties: false
       description: Error response
+    AircraftRegistrationContract:
+      required:
+      - active
+      - reg
+      type: object
+      properties:
+        reg:
+          minLength: 1
+          type: string
+          description: Tail-number of the aircraft
+        active:
+          type: boolean
+          description: Indicator if aircraft is operational under this registration
+        hexIcao:
+          type:
+          - string
+          - 'null'
+          description: ICAO 24 bit Mode-S hexadecimal transponder address
+        airlineName:
+          type:
+          - string
+          - 'null'
+          description: Name of the airline operating the aircraft
+        registrationDate:
+          type:
+          - string
+          - 'null'
+          description: Date of assigning current registration
+          format: date-time
+      additionalProperties: false
+      description: Aircraft registration data
+    StringAircraftContractSearchResultCollectionContract:
+      required:
+      - count
+      - items
+      - searchBy
+      type: object
+      properties:
+        searchBy:
+          minLength: 1
+          type: string
+          description: "Search parameter used to find the result. \nPlease note, it may be different from the actual input provided!"
+        count:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+          description: The number of items in the collection
+          format: int32
+          readOnly: true
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/AircraftContract'
+          description: The collection of items
+      additionalProperties: false
     AircraftContract:
       required:
       - active
@@ -1066,124 +1079,111 @@ components:
           description: A history of all registrations with other airlines or operators (if provided by the endpoint).
       additionalProperties: false
       description: Single aircraft data
-    StringAircraftContractSearchResultCollectionContract:
-      required:
-      - count
-      - items
-      - searchBy
-      type: object
-      properties:
-        searchBy:
-          minLength: 1
-          type: string
-          description: "Search parameter used to find the result. \nPlease note, it may be different from the actual input provided!"
-        count:
-          maximum: 2147483647
-          minimum: 0
-          type: integer
-          description: The number of items in the collection
-          format: int32
-          readOnly: true
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/AircraftContract'
-          description: The collection of items
-      additionalProperties: false
-    AircraftContractPagedCollectionContract:
-      required:
-      - count
-      - hasNextPage
-      - items
-      - pageOffset
-      - pageSize
-      - totalCount
-      type: object
-      properties:
-        totalCount:
-          maximum: 2147483647
-          minimum: 0
-          type: integer
-          description: The total number of items across all pages
-          format: int32
-        pageOffset:
-          maximum: 2147483647
-          minimum: 0
-          type: integer
-          description: "The offset of the current page of the collection \n(number of items skipped before this page)"
-          format: int32
-        pageSize:
-          maximum: 2147483647
-          minimum: 0
-          type: integer
-          description: 'Maximum number of items on the current page of the collection
-
-            (`Count` cannot be more than this value)'
-          format: int32
-        hasNextPage:
-          type: boolean
-          description: This value is true when collection has more pages
-          readOnly: true
-        count:
-          maximum: 2147483647
-          minimum: 0
-          type: integer
-          description: The number of items in the collection
-          format: int32
-          readOnly: true
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/AircraftContract'
-          description: The collection of items
-      additionalProperties: false
-    AircraftSearchByEnum:
+    EngineType:
       enum:
-      - Id
-      - Reg
-      - Icao24
+      - Unknown
+      - Jet
+      - Turboprop
+      - Piston
       type: string
-      description: 'Criteria to search aircraft by<p>Possible values:</p>
+      description: '<p>Possible values:</p>
 
         <ul>
 
-        <li><b>0 - Id</b>: ID of the aircraft (as stored in this API)</li>
+        <li><b>0 - Unknown</b></li>
 
-        <li><b>1 - Reg</b>: Search by aircraft tail-number</li>
+        <li><b>1 - Jet</b></li>
 
-        <li><b>2 - Icao24</b>: Search by 24-bit ICAO Mode-S Transponder code</li>
+        <li><b>2 - Turboprop</b></li>
+
+        <li><b>3 - Piston</b></li>
 
         </ul>
 
         '
-    AircraftRegistrationContract:
+    ResourceContract:
       required:
-      - active
-      - reg
+      - license
+      - url
       type: object
       properties:
-        reg:
+        url:
           minLength: 1
           type: string
-          description: Tail-number of the aircraft
-        active:
-          type: boolean
-          description: Indicator if aircraft is operational under this registration
-        hexIcao:
+          description: URL of the resource
+        webUrl:
           type:
           - string
           - 'null'
-          description: ICAO 24 bit Mode-S hexadecimal transponder address
-        airlineName:
+          description: URL of web-page containing the resource
+        author:
           type:
           - string
           - 'null'
-          description: Name of the airline operating the aircraft
-        registrationDate:
+          description: Author name of the resource
+        title:
           type:
           - string
           - 'null'
-          description: Date of assigning current registration
-          format: date-time
+          description: Title of the resource
+        description:
+          type:
+          - string
+          - 'null'
+          description: Description of the resource
+        license:
+          $ref: '#/components/schemas/LicenseType'
+        htmlAttributions:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: 'Attributions maintaining copyright, ownership and other legal information adjusted for displaying
+
+            as HTML. Each element represent one line.'
       additionalProperties: false
-      description: Aircraft registration data
+      description: Single media resource data
+    LicenseType:
+      enum:
+      - AllRightsReserved
+      - AttributionNoncommercialShareAlikeCC
+      - AttributionNoncommercialCC
+      - AttributionNoncommercialNoDerivativesCC
+      - AttributionCC
+      - AttributionShareAlikeCC
+      - AttributionNoDerivativesCC
+      - NoKnownCopyrightRestrictions
+      - UnitedStatesGovernmentWork
+      - PublicDomainDedicationCC0
+      - PublicDomainMark
+      type: string
+      description: '<p>Possible values:</p>
+
+        <ul>
+
+        <li><b>0 - AllRightsReserved</b>: All Rights Reserved.</li>
+
+        <li><b>1 - AttributionNoncommercialShareAlikeCC</b>: Creative Commons: Attribution Non-Commercial, Share-alike License.</li>
+
+        <li><b>2 - AttributionNoncommercialCC</b>: Creative Commons: Attribution Non-Commercial License.</li>
+
+        <li><b>3 - AttributionNoncommercialNoDerivativesCC</b>: Creative Commons: Attribution Non-Commercial, No Derivatives License.</li>
+
+        <li><b>4 - AttributionCC</b>: Creative Commons: Attribution License.</li>
+
+        <li><b>5 - AttributionShareAlikeCC</b>: Creative Commons: Attribution Share-alike License.</li>
+
+        <li><b>6 - AttributionNoDerivativesCC</b>: Creative Commons: Attribution No Derivatives License.</li>
+
+        <li><b>7 - NoKnownCopyrightRestrictions</b>: No Known Copyright Resitrctions (Flickr Commons).</li>
+
+        <li><b>8 - UnitedStatesGovernmentWork</b>: United States Government Work</li>
+
+        <li><b>9 - PublicDomainDedicationCC0</b>: Public Domain Dedication, CC0</li>
+
+        <li><b>10 - PublicDomainMark</b>: Public Domain Mark</li>
+
+        </ul>
+
+        '

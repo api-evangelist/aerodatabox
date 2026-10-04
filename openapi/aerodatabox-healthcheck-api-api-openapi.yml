@@ -386,37 +386,25 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ErrorContract:
-      required:
-      - message
-      type: object
-      properties:
-        message:
-          minLength: 1
-          type: string
-          description: Error message
-      additionalProperties: false
-      description: Error response
-    AirportFeedServiceStatusContract:
-      required:
-      - adsbUpdatesFeed
-      - flightSchedulesFeed
-      - generalAvailability
-      - liveFlightUpdatesFeed
-      type: object
-      properties:
-        flightSchedulesFeed:
-          $ref: '#/components/schemas/FeedServiceStatusContract'
-        liveFlightUpdatesFeed:
-          $ref: '#/components/schemas/FeedServiceStatusContract'
-        adsbUpdatesFeed:
-          $ref: '#/components/schemas/FeedServiceStatusContract'
-        generalAvailability:
-          $ref: '#/components/schemas/FlightDataGeneralAvailabilityContract'
-      additionalProperties: false
-      description: 'Airport data feed services status.
+    FeedServiceEnum:
+      enum:
+      - FlightSchedules
+      - FlightLiveUpdates
+      - AdsbUpdates
+      type: string
+      description: 'Airport feed service defininitions<p>Possible values:</p>
 
-        Read https://aerodatabox.com/data-coverage for context.'
+        <ul>
+
+        <li><b>0 - FlightSchedules</b>: Flight schedules data feed for this airport (static schedules data without actual updates)</li>
+
+        <li><b>1 - FlightLiveUpdates</b>: Actual flight status and time updates for this airport</li>
+
+        <li><b>2 - AdsbUpdates</b>: Flight updates derived from ADS-B data for this airport: runway, actual/estimated time on the runway, call-sign, ModeS 24-bit ICAO code, aircraft registration</li>
+
+        </ul>
+
+        '
     FeedServiceStatusContract:
       required:
       - service
@@ -445,64 +433,6 @@ components:
       description: 'Feed service status contract.
 
         Read https://aerodatabox.com/data-coverage for context.'
-    FeedServiceEnum:
-      enum:
-      - FlightSchedules
-      - FlightLiveUpdates
-      - AdsbUpdates
-      type: string
-      description: 'Airport feed service defininitions<p>Possible values:</p>
-
-        <ul>
-
-        <li><b>0 - FlightSchedules</b>: Flight schedules data feed for this airport (static schedules data without actual updates)</li>
-
-        <li><b>1 - FlightLiveUpdates</b>: Actual flight status and time updates for this airport</li>
-
-        <li><b>2 - AdsbUpdates</b>: Flight updates derived from ADS-B data for this airport: runway, actual/estimated time on the runway, call-sign, ModeS 24-bit ICAO code, aircraft registration</li>
-
-        </ul>
-
-        '
-    FlightDataGeneralAvailabilityContract:
-      type: object
-      properties:
-        minAvailableLocalDate:
-          type:
-          - string
-          - 'null'
-          description: 'Date of the oldest flight stored (based on scheduled local times)
-
-            If not specified, no flight data available'
-          format: date-time
-        maxAvailableLocalDate:
-          type:
-          - string
-          - 'null'
-          description: 'Date of the most recent flight stored (based on scheduled local times)
-
-            If not specified, no flight data available'
-          format: date-time
-      additionalProperties: false
-    StringCollectionContract:
-      required:
-      - count
-      - items
-      type: object
-      properties:
-        count:
-          maximum: 2147483647
-          minimum: 0
-          type: integer
-          description: The number of items in the collection
-          format: int32
-          readOnly: true
-        items:
-          type: array
-          items:
-            type: string
-          description: The collection of items
-      additionalProperties: false
     FeedServiceStatus:
       enum:
       - Down
@@ -531,3 +461,73 @@ components:
         </ul>
 
         '
+    ErrorContract:
+      required:
+      - message
+      type: object
+      properties:
+        message:
+          minLength: 1
+          type: string
+          description: Error message
+      additionalProperties: false
+      description: Error response
+    FlightDataGeneralAvailabilityContract:
+      type: object
+      properties:
+        minAvailableLocalDate:
+          type:
+          - string
+          - 'null'
+          description: 'Date of the oldest flight stored (based on scheduled local times)
+
+            If not specified, no flight data available'
+          format: date-time
+        maxAvailableLocalDate:
+          type:
+          - string
+          - 'null'
+          description: 'Date of the most recent flight stored (based on scheduled local times)
+
+            If not specified, no flight data available'
+          format: date-time
+      additionalProperties: false
+    AirportFeedServiceStatusContract:
+      required:
+      - adsbUpdatesFeed
+      - flightSchedulesFeed
+      - generalAvailability
+      - liveFlightUpdatesFeed
+      type: object
+      properties:
+        flightSchedulesFeed:
+          $ref: '#/components/schemas/FeedServiceStatusContract'
+        liveFlightUpdatesFeed:
+          $ref: '#/components/schemas/FeedServiceStatusContract'
+        adsbUpdatesFeed:
+          $ref: '#/components/schemas/FeedServiceStatusContract'
+        generalAvailability:
+          $ref: '#/components/schemas/FlightDataGeneralAvailabilityContract'
+      additionalProperties: false
+      description: 'Airport data feed services status.
+
+        Read https://aerodatabox.com/data-coverage for context.'
+    StringCollectionContract:
+      required:
+      - count
+      - items
+      type: object
+      properties:
+        count:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+          description: The number of items in the collection
+          format: int32
+          readOnly: true
+        items:
+          type: array
+          items:
+            type: string
+          description: The collection of items
+      additionalProperties: false

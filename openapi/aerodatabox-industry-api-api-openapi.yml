@@ -141,6 +141,17 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ErrorContract:
+      required:
+      - message
+      type: object
+      properties:
+        message:
+          minLength: 1
+          type: string
+          description: Error message
+      additionalProperties: false
+      description: Error response
     FaaLaddAircraftStatusContract:
       required:
       - id
@@ -171,14 +182,3 @@ components:
       description: 'Status of the aircraft tail number or callsign in the FAA Limiting Aircraft Data Displayed (LADD) Program list.
 
         See https://www.faa.gov/pilots/ladd for more details.'
-    ErrorContract:
-      required:
-      - message
-      type: object
-      properties:
-        message:
-          minLength: 1
-          type: string
-          description: Error message
-      additionalProperties: false
-      description: Error response
