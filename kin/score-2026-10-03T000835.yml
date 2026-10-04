@@ -1,21 +1,19 @@
-# Kin Score artifact — aerodatabox — 2026-09-02T224043
+# Kin Score artifact — aerodatabox — 2026-10-03T000835
 # The API Evangelist rating (https://github.com/api-evangelist/kin-score). Generated; do not edit.
 ---
 kin_score:
   slug: aerodatabox
-  schema_version: 0.18.0
-  scored_at: '2026-09-02'
-  run_ts: 2026-09-02T224043
-  composite: 39.5
-  band: developing
+  schema_version: 0.23.0
+  scored_at: '2026-10-03'
+  run_ts: 2026-10-03T000835
+  composite: 37.4
+  band: thin
   facets:
-    discoverability: 68.5
-    contract_quality: 63.0
-    governance: 28.8
+    discoverability: 66.1
+    contract_quality: 57.5
+    contract_governance: 27.3
     operational_transparency: 5.3
     developer_ergonomics: 19.0
-    commercial_clarity: 44.7
-    contract_governance: 28.8
     access_clarity: 44.7
   agent_readiness:
     score: 28.1
@@ -40,6 +38,12 @@ kin_score:
       protected_resource_metadata: false
       dynamic_client_registration: false
       agentic_commerce: false
+  regulatory:
+    applies: true
+    regime: Horizontal (data, software, accessibility, platform)
+    regime_id: horizontal
+    score: 18.6
+    matched_via: fallback
   provenance:
     agentic_access: derived
     contracts:
