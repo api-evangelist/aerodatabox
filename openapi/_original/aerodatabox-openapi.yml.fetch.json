@@ -1,0 +1,12 @@
+{
+ "url": "https://doc.aerodatabox.com/docs/openapi-direct-v1.json",
+ "requested_url": "https://doc.aerodatabox.com/docs/openapi-direct-v1.json",
+ "status": 200,
+ "content_type": "application/json;charset=utf-8",
+ "bytes": 292609,
+ "sha256": "6c7cb259cce980f949276fc3e44dcc37842c0a20bb894536006adc636e715c8d",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "equivalent",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the provider's current document describes the same operations (Jaccard 0.976), but the bytes differ, so the archive is an earlier or reformatted copy."
+}
