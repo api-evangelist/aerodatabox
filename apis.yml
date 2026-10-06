@@ -36,7 +36,7 @@ accessModel:
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/aerodatabox.png
 created: '2025-02-24'
-modified: '2026-09-16'
+modified: '2026-10-06'
 description: AeroDataBox is an affordable aviation and flight data API platform tailored for small and
   medium businesses, individual developers, researchers, and students. Founded in 2019, the platform provides
   real-time and historical flight status, aircraft information, airport data, delay statistics, and flight
@@ -145,6 +145,10 @@ apis:
   - type: Documentation
     url: https://doc.aerodatabox.com/
 common:
+- url: https://aerodatabox.com/news
+  type: Blog
+- url: https://aerodatabox.com/news/rss.xml
+  type: BlogRSS
 - type: Website
   url: https://www.aerodatabox.com/
 - type: AgenticAccess
