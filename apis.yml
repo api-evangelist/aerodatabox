@@ -145,6 +145,12 @@ apis:
   - type: Documentation
     url: https://doc.aerodatabox.com/
 common:
+- type: Plans
+  url: plans/aerodatabox-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/aerodatabox-rate-limits.yml
+- type: FinOps
+  url: finops/aerodatabox-finops.yml
 - url: https://aerodatabox.com/news
   type: Blog
 - url: https://aerodatabox.com/news/rss.xml
