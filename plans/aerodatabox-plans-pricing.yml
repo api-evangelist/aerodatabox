@@ -49,3 +49,19 @@ plans:
       - name: Aircraft and registration data
       - name: Statistical endpoints
       - name: Flight alerts
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - tiered
+  units:
+  - period
+  plans:
+  - name: Marketplace Subscription
+    access: other
+    model: tiered
+    model_how: stated
+    units:
+    - period
+    periods:
+    - month
