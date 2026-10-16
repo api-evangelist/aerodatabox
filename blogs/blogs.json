@@ -1,0 +1,21 @@
+{
+  "repo": "aerodatabox",
+  "feeds": [
+    {
+      "source": "https://aerodatabox.com/news",
+      "feed_url": "https://aerodatabox.com/news/rss.xml",
+      "title": "",
+      "saved": 0,
+      "method": "discovered"
+    },
+    {
+      "source": "https://aerodatabox.com/news/rss.xml",
+      "feed_url": "https://aerodatabox.com/news/rss.xml",
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    }
+  ],
+  "post_count": 0,
+  "fetched": "2026-10-10T13:15:00Z"
+}
