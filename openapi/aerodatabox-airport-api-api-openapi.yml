@@ -728,6 +728,72 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    GeoCoordinatesContractListingAirportContractSearchResultCollectionContract:
+      required:
+      - count
+      - items
+      - searchBy
+      type: object
+      properties:
+        searchBy:
+          $ref: '#/components/schemas/GeoCoordinatesContract'
+        count:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+          description: The number of items in the collection
+          format: int32
+          readOnly: true
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ListingAirportContract'
+          description: The collection of items
+      additionalProperties: false
+    AirportLocalTimeContract:
+      required:
+      - time
+      - timeZoneId
+      type: object
+      properties:
+        time:
+          $ref: '#/components/schemas/DateTimeContract'
+        timeZoneId:
+          minLength: 1
+          type: string
+          description: Timezone ID of the airport (Olson format)
+      additionalProperties: false
+      description: Information about the local time at an airport
+    Distance:
+      required:
+      - feet
+      - km
+      - meter
+      - mile
+      - nm
+      type: object
+      properties:
+        meter:
+          type: number
+          description: Distance in meters
+          format: double
+        km:
+          type: number
+          description: Distance in kilometers
+          format: double
+        mile:
+          type: number
+          description: Distance in statute miles
+          format: double
+        nm:
+          type: number
+          description: Distance in nautical miles
+          format: double
+        feet:
+          type: number
+          description: Distance in feet
+          format: double
+      additionalProperties: false
     AirportUrlsContract:
       type: object
       properties:
@@ -799,6 +865,50 @@ components:
           description: Does runway has lights
       additionalProperties: false
       description: Single runway data
+    GeoCoordinatesContract:
+      required:
+      - lat
+      - lon
+      type: object
+      properties:
+        lat:
+          maximum: 90
+          minimum: -90
+          type: number
+          description: Latitude, in degrees
+          format: float
+        lon:
+          maximum: 180
+          minimum: -180
+          type: number
+          description: Longitude, in degrees
+          format: float
+      additionalProperties: false
+      description: Geographical coordinates data
+    StringListingAirportContractSearchResultCollectionContract:
+      required:
+      - count
+      - items
+      - searchBy
+      type: object
+      properties:
+        searchBy:
+          minLength: 1
+          type: string
+          description: "Search parameter used to find the result. \nPlease note, it may be different from the actual input provided!"
+        count:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+          description: The number of items in the collection
+          format: int32
+          readOnly: true
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ListingAirportContract'
+          description: The collection of items
+      additionalProperties: false
     ListingAirportContract:
       required:
       - name
@@ -847,43 +957,6 @@ components:
           description: Time zone of the airport in Olson format (e.g. "Europe/Amsterdam")
       additionalProperties: false
       description: Flight's airport reference contract
-    SurfaceType:
-      enum:
-      - Unknown
-      - Asphalt
-      - Concrete
-      - Grass
-      - Dirt
-      - Gravel
-      - DryLakebed
-      - Water
-      - Snow
-      type: string
-      description: '<p>Possible values:</p>
-
-        <ul>
-
-        <li><b>0 - Unknown</b></li>
-
-        <li><b>1 - Asphalt</b></li>
-
-        <li><b>2 - Concrete</b></li>
-
-        <li><b>3 - Grass</b></li>
-
-        <li><b>4 - Dirt</b></li>
-
-        <li><b>5 - Gravel</b></li>
-
-        <li><b>6 - DryLakebed</b></li>
-
-        <li><b>7 - Water</b></li>
-
-        <li><b>8 - Snow</b></li>
-
-        </ul>
-
-        '
     DateTimeContract:
       required:
       - local
@@ -900,175 +973,6 @@ components:
           format: date-time
       additionalProperties: false
       description: Descriptor date-time represented in both UTC and local timezones
-    Distance:
-      required:
-      - feet
-      - km
-      - meter
-      - mile
-      - nm
-      type: object
-      properties:
-        meter:
-          type: number
-          description: Distance in meters
-          format: double
-        km:
-          type: number
-          description: Distance in kilometers
-          format: double
-        mile:
-          type: number
-          description: Distance in statute miles
-          format: double
-        nm:
-          type: number
-          description: Distance in nautical miles
-          format: double
-        feet:
-          type: number
-          description: Distance in feet
-          format: double
-      additionalProperties: false
-    StringListingAirportContractSearchResultCollectionContract:
-      required:
-      - count
-      - items
-      - searchBy
-      type: object
-      properties:
-        searchBy:
-          minLength: 1
-          type: string
-          description: "Search parameter used to find the result. \nPlease note, it may be different from the actual input provided!"
-        count:
-          maximum: 2147483647
-          minimum: 0
-          type: integer
-          description: The number of items in the collection
-          format: int32
-          readOnly: true
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/ListingAirportContract'
-          description: The collection of items
-      additionalProperties: false
-    ErrorContract:
-      required:
-      - message
-      type: object
-      properties:
-        message:
-          minLength: 1
-          type: string
-          description: Error message
-      additionalProperties: false
-      description: Error response
-    ContinentContract:
-      required:
-      - code
-      type: object
-      properties:
-        code:
-          minLength: 1
-          type: string
-          description: Code
-        name:
-          type:
-          - string
-          - 'null'
-          description: Name
-      additionalProperties: false
-      description: Continent data
-    GeoCoordinatesContract:
-      required:
-      - lat
-      - lon
-      type: object
-      properties:
-        lat:
-          maximum: 90
-          minimum: -90
-          type: number
-          description: Latitude, in degrees
-          format: float
-        lon:
-          maximum: 180
-          minimum: -180
-          type: number
-          description: Longitude, in degrees
-          format: float
-      additionalProperties: false
-      description: Geographical coordinates data
-    AirportCodesByEnum:
-      enum:
-      - Icao
-      - Iata
-      type: string
-      description: 'Search by airport code type<p>Possible values:</p>
-
-        <ul>
-
-        <li><b>0 - Icao</b>: ICAO-code</li>
-
-        <li><b>1 - Iata</b>: IATA-code</li>
-
-        </ul>
-
-        '
-    AirportLocalTimeContract:
-      required:
-      - time
-      - timeZoneId
-      type: object
-      properties:
-        time:
-          $ref: '#/components/schemas/DateTimeContract'
-        timeZoneId:
-          minLength: 1
-          type: string
-          description: Timezone ID of the airport (Olson format)
-      additionalProperties: false
-      description: Information about the local time at an airport
-    CountryContract:
-      required:
-      - code
-      type: object
-      properties:
-        code:
-          minLength: 1
-          type: string
-          description: Code
-        name:
-          type:
-          - string
-          - 'null'
-          description: Name
-      additionalProperties: false
-      description: Country data
-    GeoCoordinatesContractListingAirportContractSearchResultCollectionContract:
-      required:
-      - count
-      - items
-      - searchBy
-      type: object
-      properties:
-        searchBy:
-          $ref: '#/components/schemas/GeoCoordinatesContract'
-        count:
-          maximum: 2147483647
-          minimum: 0
-          type: integer
-          description: The number of items in the collection
-          format: int32
-          readOnly: true
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/ListingAirportContract'
-          description: The collection of items
-      additionalProperties: false
     AirportContract:
       required:
       - continent
@@ -1134,3 +1038,99 @@ components:
           $ref: '#/components/schemas/AirportLocalTimeContract'
       additionalProperties: false
       description: Single airport data
+    SurfaceType:
+      enum:
+      - Unknown
+      - Asphalt
+      - Concrete
+      - Grass
+      - Dirt
+      - Gravel
+      - DryLakebed
+      - Water
+      - Snow
+      type: string
+      description: '<p>Possible values:</p>
+
+        <ul>
+
+        <li><b>0 - Unknown</b></li>
+
+        <li><b>1 - Asphalt</b></li>
+
+        <li><b>2 - Concrete</b></li>
+
+        <li><b>3 - Grass</b></li>
+
+        <li><b>4 - Dirt</b></li>
+
+        <li><b>5 - Gravel</b></li>
+
+        <li><b>6 - DryLakebed</b></li>
+
+        <li><b>7 - Water</b></li>
+
+        <li><b>8 - Snow</b></li>
+
+        </ul>
+
+        '
+    CountryContract:
+      required:
+      - code
+      type: object
+      properties:
+        code:
+          minLength: 1
+          type: string
+          description: Code
+        name:
+          type:
+          - string
+          - 'null'
+          description: Name
+      additionalProperties: false
+      description: Country data
+    ContinentContract:
+      required:
+      - code
+      type: object
+      properties:
+        code:
+          minLength: 1
+          type: string
+          description: Code
+        name:
+          type:
+          - string
+          - 'null'
+          description: Name
+      additionalProperties: false
+      description: Continent data
+    AirportCodesByEnum:
+      enum:
+      - Icao
+      - Iata
+      type: string
+      description: 'Search by airport code type<p>Possible values:</p>
+
+        <ul>
+
+        <li><b>0 - Icao</b>: ICAO-code</li>
+
+        <li><b>1 - Iata</b>: IATA-code</li>
+
+        </ul>
+
+        '
+    ErrorContract:
+      required:
+      - message
+      type: object
+      properties:
+        message:
+          minLength: 1
+          type: string
+          description: Error message
+      additionalProperties: false
+      description: Error response
