@@ -926,3 +926,9 @@ components:
           description: Error message
       additionalProperties: false
       description: Error response
+x-provenance:
+  method: harvested
+  publisher: AeroDataBox
+  source: https://doc.aerodatabox.com/docs/openapi-direct-v1.json
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
