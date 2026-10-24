@@ -102,6 +102,8 @@ apis:
   humanURL: https://doc.aerodatabox.com/
   baseURL: https://prod.api.market/api/v1/aedbx/aerodatabox
   tags:
+  - Health Check API
+  tags_raw:
   - Healthcheck API
   properties:
   - type: OpenAPI
