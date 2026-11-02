@@ -1,0 +1,67 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: AeroDataBox
+providerId: aerodatabox
+created: '2026-05-04'
+# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
+# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
+method: generated
+modified: '2026-05-05'
+reconciled: false
+notes: AeroDataBox is distributed exclusively through API marketplaces (RapidAPI / api.market /
+  Magic API). Pricing tiers are set on the marketplace listing rather than aerodatabox.com,
+  and the public pages return 403/404 to programmatic fetch. Confirm tier names, monthly fees,
+  and quotas directly on the marketplace listing before marking reconciled.
+tags:
+  - Aviation
+  - Flights
+  - Airport Data
+  - Aerospace
+description: AeroDataBox is a flight, airport, and aircraft data API distributed via API
+  marketplaces. Tiered subscription plans (typically Basic/Pro/Ultra/Mega) include a monthly
+  request quota and a per-second rate limit; pricing is published on the marketplace listing.
+sources:
+  - https://aerodatabox.com/
+  - https://rapidapi.com/aedbx-aedbx/api/aerodatabox
+  - https://prod.api.market/api/v1/aedbx/aerodatabox
+plans:
+  - id: aerodatabox-marketplace
+    name: Marketplace Subscription
+    type: tiered
+    description: Tiered subscriptions (Basic / Pro / Ultra / Mega) sold via RapidAPI and api.market;
+      monthly fee, included monthly quota, per-second rate limit, and overage rate are set per
+      tier on the marketplace listing.
+    entries:
+      - label: Marketplace tier
+        name: marketplace_tier
+        type: subscription
+        metric: month
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: see https://rapidapi.com/aedbx-aedbx/api/aerodatabox
+        userMultiplied: false
+    elements:
+      - name: Flight status and schedules
+      - name: Airport data
+      - name: Aircraft and registration data
+      - name: Statistical endpoints
+      - name: Flight alerts
+x-canonical:
+  generated: '2026-11-01'
+  vocabulary: engine/economics/plans-canonical.yml
+  models:
+  - tiered
+  units:
+  - period
+  plans:
+  - name: Marketplace Subscription
+    access: other
+    model: tiered
+    model_how: stated
+    units:
+    - period
+    periods:
+    - month
