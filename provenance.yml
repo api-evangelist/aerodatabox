@@ -437,6 +437,9 @@ artifacts:
   heartbeat/2026-11-13.yml:
     method: unknown
     evidence: no authorship recorded
+  heartbeat/2026-11-20.yml:
+    method: unknown
+    evidence: no authorship recorded
   integrations/_index.yml:
     method: generated
     evidence: carries an API Evangelist house phrase
@@ -1130,7 +1133,7 @@ artifacts:
   kin/checks-2026-10-23T222754.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
-  kin/checks-2026-11-06T143934.yml:
+  kin/checks-2026-11-13T214628.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
   kin/score-2026-09-23T000603.yml:
@@ -1202,6 +1205,9 @@ artifacts:
   kin/score-2026-11-06T143934.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-11-13T214628.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
   openapi/_original/aerodatabox-openapi.yml:
     method: harvested
     evidence: the same operations as https://doc.aerodatabox.com/docs/openapi-direct-v1.json (sha256 6c7cb259cce9,
@@ -1230,6 +1236,30 @@ artifacts:
   openapi/aerodatabox-statistical-api-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  overlays/aerodatabox-aircraft-api-api-phrasing-overlay.yaml:
+    method: generated
+    evidence: declared in the artifact
+  overlays/aerodatabox-airport-api-api-phrasing-overlay.yaml:
+    method: generated
+    evidence: declared in the artifact
+  overlays/aerodatabox-flight-alert-api-api-phrasing-overlay.yaml:
+    method: generated
+    evidence: declared in the artifact
+  overlays/aerodatabox-flight-api-api-phrasing-overlay.yaml:
+    method: generated
+    evidence: declared in the artifact
+  overlays/aerodatabox-healthcheck-api-api-phrasing-overlay.yaml:
+    method: generated
+    evidence: declared in the artifact
+  overlays/aerodatabox-industry-api-api-phrasing-overlay.yaml:
+    method: generated
+    evidence: declared in the artifact
+  overlays/aerodatabox-miscellaneous-api-api-phrasing-overlay.yaml:
+    method: generated
+    evidence: declared in the artifact
+  overlays/aerodatabox-statistical-api-api-phrasing-overlay.yaml:
+    method: generated
+    evidence: declared in the artifact
   plans/aerodatabox-plans-pricing.yml:
     method: generated
     evidence: declared in the artifact
@@ -1245,9 +1275,6 @@ artifacts:
   security/aerodatabox-domain-security.yml:
     method: unknown
     evidence: no authorship recorded
-  sla/aerodatabox-sla.yml:
-    method: generated
-    evidence: declared in the artifact
   vocabulary/aerodatabox-vocabulary.yaml:
     method: unknown
     evidence: no authorship recorded
