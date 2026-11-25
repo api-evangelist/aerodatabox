@@ -91,7 +91,7 @@ Each property below is a page on APIs.io carrying the machine-readable artifact 
 
 Which operations an agent can call, which act, and which need a human in the loop.
 
-- [Aerodatabox Agentic Access](https://apis.io/agentic-access/aerodatabox/aerodatabox-agentic-access/)
+- [AeroDataBox Agentic Access](https://apis.io/agentic-access/aerodatabox/aerodatabox-agentic-access/)
 
 #### JSON Schema (149)
 
@@ -128,31 +128,31 @@ The data models the API reads and writes.
 
 Data models expressed in JSON Structure.
 
-- [Aerodatabox Aircraft Contract Paged Collection Contract Structure](https://apis.io/json-structure/aerodatabox/aerodatabox-aircraft-contract-paged-collection-contract-structure/)
-- [Aerodatabox Aircraft Contract Structure](https://apis.io/json-structure/aerodatabox/aerodatabox-aircraft-contract-structure/)
-- [Aerodatabox Aircraft Registration Contract Structure](https://apis.io/json-structure/aerodatabox/aerodatabox-aircraft-registration-contract-structure/)
-- [Aerodatabox Aircraft Search By Enum Structure](https://apis.io/json-structure/aerodatabox/aerodatabox-aircraft-search-by-enum-structure/)
-- [Aerodatabox Airport Codes By Enum Structure](https://apis.io/json-structure/aerodatabox/aerodatabox-airport-codes-by-enum-structure/)
-- [Aerodatabox Airport Contract Structure](https://apis.io/json-structure/aerodatabox/aerodatabox-airport-contract-structure/)
-- [Aerodatabox Airport Delay Contract Structure](https://apis.io/json-structure/aerodatabox/aerodatabox-airport-delay-contract-structure/)
-- [Aerodatabox Airport Distance Time Contract Structure](https://apis.io/json-structure/aerodatabox/aerodatabox-airport-distance-time-contract-structure/)
-- [Aerodatabox Airport Feed Service Status Contract Structure](https://apis.io/json-structure/aerodatabox/aerodatabox-airport-feed-service-status-contract-structure/)
-- [Aerodatabox Airport Fids Contract Structure](https://apis.io/json-structure/aerodatabox/aerodatabox-airport-fids-contract-structure/)
-- [Aerodatabox Airport Flight Contract Structure](https://apis.io/json-structure/aerodatabox/aerodatabox-airport-flight-contract-structure/)
-- [Aerodatabox Airport Local Time Contract Structure](https://apis.io/json-structure/aerodatabox/aerodatabox-airport-local-time-contract-structure/)
-- [Aerodatabox Airport Urls Contract Structure](https://apis.io/json-structure/aerodatabox/aerodatabox-airport-urls-contract-structure/)
-- [Aerodatabox Angle Structure](https://apis.io/json-structure/aerodatabox/aerodatabox-angle-structure/)
-- [Aerodatabox Azimuth Structure](https://apis.io/json-structure/aerodatabox/aerodatabox-azimuth-structure/)
-- [Aerodatabox Codeshare Status Structure](https://apis.io/json-structure/aerodatabox/aerodatabox-codeshare-status-structure/)
-- [Aerodatabox Continent Contract Structure](https://apis.io/json-structure/aerodatabox/aerodatabox-continent-contract-structure/)
-- [Aerodatabox Country Contract Structure](https://apis.io/json-structure/aerodatabox/aerodatabox-country-contract-structure/)
-- [Aerodatabox Create Web Hook Subscription Structure](https://apis.io/json-structure/aerodatabox/aerodatabox-create-web-hook-subscription-structure/)
-- [Aerodatabox Daily Route Stat Contract Structure](https://apis.io/json-structure/aerodatabox/aerodatabox-daily-route-stat-contract-structure/)
-- [Aerodatabox Daily Route Stat Record Contract Structure](https://apis.io/json-structure/aerodatabox/aerodatabox-daily-route-stat-record-contract-structure/)
-- [Aerodatabox Date Time Contract Structure](https://apis.io/json-structure/aerodatabox/aerodatabox-date-time-contract-structure/)
-- [Aerodatabox Day Time Structure](https://apis.io/json-structure/aerodatabox/aerodatabox-day-time-structure/)
-- [Aerodatabox Delay Bracket Contract Structure](https://apis.io/json-structure/aerodatabox/aerodatabox-delay-bracket-contract-structure/)
-- [Aerodatabox Distance Flight Plan Unit Contract Structure](https://apis.io/json-structure/aerodatabox/aerodatabox-distance-flight-plan-unit-contract-structure/)
+- [AeroDataBox Aircraft Contract Paged Collection Contract Structure](https://apis.io/json-structure/aerodatabox/aerodatabox-aircraft-contract-paged-collection-contract-structure/)
+- [AeroDataBox Aircraft Contract Structure](https://apis.io/json-structure/aerodatabox/aerodatabox-aircraft-contract-structure/)
+- [AeroDataBox Aircraft Registration Contract Structure](https://apis.io/json-structure/aerodatabox/aerodatabox-aircraft-registration-contract-structure/)
+- [AeroDataBox Aircraft Search By Enum Structure](https://apis.io/json-structure/aerodatabox/aerodatabox-aircraft-search-by-enum-structure/)
+- [AeroDataBox Airport Codes By Enum Structure](https://apis.io/json-structure/aerodatabox/aerodatabox-airport-codes-by-enum-structure/)
+- [AeroDataBox Airport Contract Structure](https://apis.io/json-structure/aerodatabox/aerodatabox-airport-contract-structure/)
+- [AeroDataBox Airport Delay Contract Structure](https://apis.io/json-structure/aerodatabox/aerodatabox-airport-delay-contract-structure/)
+- [AeroDataBox Airport Distance Time Contract Structure](https://apis.io/json-structure/aerodatabox/aerodatabox-airport-distance-time-contract-structure/)
+- [AeroDataBox Airport Feed Service Status Contract Structure](https://apis.io/json-structure/aerodatabox/aerodatabox-airport-feed-service-status-contract-structure/)
+- [AeroDataBox Airport Fids Contract Structure](https://apis.io/json-structure/aerodatabox/aerodatabox-airport-fids-contract-structure/)
+- [AeroDataBox Airport Flight Contract Structure](https://apis.io/json-structure/aerodatabox/aerodatabox-airport-flight-contract-structure/)
+- [AeroDataBox Airport Local Time Contract Structure](https://apis.io/json-structure/aerodatabox/aerodatabox-airport-local-time-contract-structure/)
+- [AeroDataBox Airport Urls Contract Structure](https://apis.io/json-structure/aerodatabox/aerodatabox-airport-urls-contract-structure/)
+- [AeroDataBox Angle Structure](https://apis.io/json-structure/aerodatabox/aerodatabox-angle-structure/)
+- [AeroDataBox Azimuth Structure](https://apis.io/json-structure/aerodatabox/aerodatabox-azimuth-structure/)
+- [AeroDataBox Codeshare Status Structure](https://apis.io/json-structure/aerodatabox/aerodatabox-codeshare-status-structure/)
+- [AeroDataBox Continent Contract Structure](https://apis.io/json-structure/aerodatabox/aerodatabox-continent-contract-structure/)
+- [AeroDataBox Country Contract Structure](https://apis.io/json-structure/aerodatabox/aerodatabox-country-contract-structure/)
+- [AeroDataBox Create Web Hook Subscription Structure](https://apis.io/json-structure/aerodatabox/aerodatabox-create-web-hook-subscription-structure/)
+- [AeroDataBox Daily Route Stat Contract Structure](https://apis.io/json-structure/aerodatabox/aerodatabox-daily-route-stat-contract-structure/)
+- [AeroDataBox Daily Route Stat Record Contract Structure](https://apis.io/json-structure/aerodatabox/aerodatabox-daily-route-stat-record-contract-structure/)
+- [AeroDataBox Date Time Contract Structure](https://apis.io/json-structure/aerodatabox/aerodatabox-date-time-contract-structure/)
+- [AeroDataBox Day Time Structure](https://apis.io/json-structure/aerodatabox/aerodatabox-day-time-structure/)
+- [AeroDataBox Delay Bracket Contract Structure](https://apis.io/json-structure/aerodatabox/aerodatabox-delay-bracket-contract-structure/)
+- [AeroDataBox Distance Flight Plan Unit Contract Structure](https://apis.io/json-structure/aerodatabox/aerodatabox-distance-flight-plan-unit-contract-structure/)
 - …and 53 more published on APIs.io
 
 #### JSON-LD (1)
@@ -171,31 +171,31 @@ The provider's domain terms, defined.
 
 Example requests and responses.
 
-- [Aerodatabox Aircraft Contract Example](https://apis.io/examples/aerodatabox/aerodatabox-aircraft-contract-example/)
-- [Aerodatabox Aircraft Contract Paged Collection Contract Example](https://apis.io/examples/aerodatabox/aerodatabox-aircraft-contract-paged-collection-contract-example/)
-- [Aerodatabox Aircraft Registration Contract Example](https://apis.io/examples/aerodatabox/aerodatabox-aircraft-registration-contract-example/)
-- [Aerodatabox Airport Contract Example](https://apis.io/examples/aerodatabox/aerodatabox-airport-contract-example/)
-- [Aerodatabox Airport Delay Contract Example](https://apis.io/examples/aerodatabox/aerodatabox-airport-delay-contract-example/)
-- [Aerodatabox Airport Distance Time Contract Example](https://apis.io/examples/aerodatabox/aerodatabox-airport-distance-time-contract-example/)
-- [Aerodatabox Airport Feed Service Status Contract Example](https://apis.io/examples/aerodatabox/aerodatabox-airport-feed-service-status-contract-example/)
-- [Aerodatabox Airport Fids Contract Example](https://apis.io/examples/aerodatabox/aerodatabox-airport-fids-contract-example/)
-- [Aerodatabox Airport Flight Contract Example](https://apis.io/examples/aerodatabox/aerodatabox-airport-flight-contract-example/)
-- [Aerodatabox Airport Local Time Contract Example](https://apis.io/examples/aerodatabox/aerodatabox-airport-local-time-contract-example/)
-- [Aerodatabox Airport Urls Contract Example](https://apis.io/examples/aerodatabox/aerodatabox-airport-urls-contract-example/)
-- [Aerodatabox Angle Example](https://apis.io/examples/aerodatabox/aerodatabox-angle-example/)
-- [Aerodatabox Azimuth Example](https://apis.io/examples/aerodatabox/aerodatabox-azimuth-example/)
-- [Aerodatabox Continent Contract Example](https://apis.io/examples/aerodatabox/aerodatabox-continent-contract-example/)
-- [Aerodatabox Country Contract Example](https://apis.io/examples/aerodatabox/aerodatabox-country-contract-example/)
-- [Aerodatabox Create Web Hook Subscription Example](https://apis.io/examples/aerodatabox/aerodatabox-create-web-hook-subscription-example/)
-- [Aerodatabox Daily Route Stat Contract Example](https://apis.io/examples/aerodatabox/aerodatabox-daily-route-stat-contract-example/)
-- [Aerodatabox Daily Route Stat Record Contract Example](https://apis.io/examples/aerodatabox/aerodatabox-daily-route-stat-record-contract-example/)
-- [Aerodatabox Date Time Contract Example](https://apis.io/examples/aerodatabox/aerodatabox-date-time-contract-example/)
-- [Aerodatabox Delay Bracket Contract Example](https://apis.io/examples/aerodatabox/aerodatabox-delay-bracket-contract-example/)
-- [Aerodatabox Distance Example](https://apis.io/examples/aerodatabox/aerodatabox-distance-example/)
-- [Aerodatabox Distance Flight Plan Unit Contract Example](https://apis.io/examples/aerodatabox/aerodatabox-distance-flight-plan-unit-contract-example/)
-- [Aerodatabox Error Contract Example](https://apis.io/examples/aerodatabox/aerodatabox-error-contract-example/)
-- [Aerodatabox Faa Ladd Aircraft Status Contract Example](https://apis.io/examples/aerodatabox/aerodatabox-faa-ladd-aircraft-status-contract-example/)
-- [Aerodatabox Feed Service Status Contract Example](https://apis.io/examples/aerodatabox/aerodatabox-feed-service-status-contract-example/)
+- [AeroDataBox Aircraft Contract Example](https://apis.io/examples/aerodatabox/aerodatabox-aircraft-contract-example/)
+- [AeroDataBox Aircraft Contract Paged Collection Contract Example](https://apis.io/examples/aerodatabox/aerodatabox-aircraft-contract-paged-collection-contract-example/)
+- [AeroDataBox Aircraft Registration Contract Example](https://apis.io/examples/aerodatabox/aerodatabox-aircraft-registration-contract-example/)
+- [AeroDataBox Airport Contract Example](https://apis.io/examples/aerodatabox/aerodatabox-airport-contract-example/)
+- [AeroDataBox Airport Delay Contract Example](https://apis.io/examples/aerodatabox/aerodatabox-airport-delay-contract-example/)
+- [AeroDataBox Airport Distance Time Contract Example](https://apis.io/examples/aerodatabox/aerodatabox-airport-distance-time-contract-example/)
+- [AeroDataBox Airport Feed Service Status Contract Example](https://apis.io/examples/aerodatabox/aerodatabox-airport-feed-service-status-contract-example/)
+- [AeroDataBox Airport Fids Contract Example](https://apis.io/examples/aerodatabox/aerodatabox-airport-fids-contract-example/)
+- [AeroDataBox Airport Flight Contract Example](https://apis.io/examples/aerodatabox/aerodatabox-airport-flight-contract-example/)
+- [AeroDataBox Airport Local Time Contract Example](https://apis.io/examples/aerodatabox/aerodatabox-airport-local-time-contract-example/)
+- [AeroDataBox Airport Urls Contract Example](https://apis.io/examples/aerodatabox/aerodatabox-airport-urls-contract-example/)
+- [AeroDataBox Angle Example](https://apis.io/examples/aerodatabox/aerodatabox-angle-example/)
+- [AeroDataBox Azimuth Example](https://apis.io/examples/aerodatabox/aerodatabox-azimuth-example/)
+- [AeroDataBox Continent Contract Example](https://apis.io/examples/aerodatabox/aerodatabox-continent-contract-example/)
+- [AeroDataBox Country Contract Example](https://apis.io/examples/aerodatabox/aerodatabox-country-contract-example/)
+- [AeroDataBox Create Web Hook Subscription Example](https://apis.io/examples/aerodatabox/aerodatabox-create-web-hook-subscription-example/)
+- [AeroDataBox Daily Route Stat Contract Example](https://apis.io/examples/aerodatabox/aerodatabox-daily-route-stat-contract-example/)
+- [AeroDataBox Daily Route Stat Record Contract Example](https://apis.io/examples/aerodatabox/aerodatabox-daily-route-stat-record-contract-example/)
+- [AeroDataBox Date Time Contract Example](https://apis.io/examples/aerodatabox/aerodatabox-date-time-contract-example/)
+- [AeroDataBox Delay Bracket Contract Example](https://apis.io/examples/aerodatabox/aerodatabox-delay-bracket-contract-example/)
+- [AeroDataBox Distance Example](https://apis.io/examples/aerodatabox/aerodatabox-distance-example/)
+- [AeroDataBox Distance Flight Plan Unit Contract Example](https://apis.io/examples/aerodatabox/aerodatabox-distance-flight-plan-unit-contract-example/)
+- [AeroDataBox Error Contract Example](https://apis.io/examples/aerodatabox/aerodatabox-error-contract-example/)
+- [AeroDataBox Faa Ladd Aircraft Status Contract Example](https://apis.io/examples/aerodatabox/aerodatabox-faa-ladd-aircraft-status-contract-example/)
+- [AeroDataBox Feed Service Status Contract Example](https://apis.io/examples/aerodatabox/aerodatabox-feed-service-status-contract-example/)
 - …and 74 more published on APIs.io
 
 #### Collections (9)
@@ -212,6 +212,19 @@ Postman and Open Collection request collections.
 - [AeroDataBox API - Aviation and Flight Aircraft API Miscellaneous API API](https://apis.io/collections/aerodatabox/open-aerodatabox-miscellaneous-api-api/)
 - [AeroDataBox API - Aviation and Flight Aircraft API Statistical API API](https://apis.io/collections/aerodatabox/open-aerodatabox-statistical-api-api/)
 
+#### Overlays (8)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [AeroDataBox Aircraft Api Api Phrasing Overlay](https://apis.io/overlays/aerodatabox/aerodatabox-aircraft-api-api-phrasing-overlay/)
+- [AeroDataBox Airport Api Api Phrasing Overlay](https://apis.io/overlays/aerodatabox/aerodatabox-airport-api-api-phrasing-overlay/)
+- [AeroDataBox Flight Alert Api Api Phrasing Overlay](https://apis.io/overlays/aerodatabox/aerodatabox-flight-alert-api-api-phrasing-overlay/)
+- [AeroDataBox Flight Api Api Phrasing Overlay](https://apis.io/overlays/aerodatabox/aerodatabox-flight-api-api-phrasing-overlay/)
+- [AeroDataBox Healthcheck Api Api Phrasing Overlay](https://apis.io/overlays/aerodatabox/aerodatabox-healthcheck-api-api-phrasing-overlay/)
+- [AeroDataBox Industry Api Api Phrasing Overlay](https://apis.io/overlays/aerodatabox/aerodatabox-industry-api-api-phrasing-overlay/)
+- [AeroDataBox Miscellaneous Api Api Phrasing Overlay](https://apis.io/overlays/aerodatabox/aerodatabox-miscellaneous-api-api-phrasing-overlay/)
+- [AeroDataBox Statistical Api Api Phrasing Overlay](https://apis.io/overlays/aerodatabox/aerodatabox-statistical-api-api-phrasing-overlay/)
+
 #### Governance rules (2)
 
 Spectral rulesets for the provider's contracts.
@@ -223,25 +236,25 @@ Spectral rulesets for the provider's contracts.
 
 Authentication, trust centre, and vulnerability disclosure.
 
-- [Aerodatabox Domain Security](https://apis.io/security/aerodatabox/aerodatabox-domain-security/)
+- [AeroDataBox Domain Security](https://apis.io/security/aerodatabox/aerodatabox-domain-security/)
 
 #### Plans and pricing (1)
 
 Published plans, tiers and prices.
 
-- [Aerodatabox Plans Pricing](https://apis.io/plans/aerodatabox/aerodatabox-plans-pricing/)
+- [AeroDataBox Plans Pricing](https://apis.io/plans/aerodatabox/aerodatabox-plans-pricing/)
 
 #### Rate limits (1)
 
 Published request limits.
 
-- [Aerodatabox Rate Limits](https://apis.io/rate-limits/aerodatabox/aerodatabox-rate-limits/)
+- [AeroDataBox Rate Limits](https://apis.io/rate-limits/aerodatabox/aerodatabox-rate-limits/)
 
 #### FinOps (1)
 
 What the API costs to run, by operation.
 
-- [Aerodatabox Finops](https://apis.io/finops/aerodatabox/aerodatabox-finops/)
+- [AeroDataBox Finops](https://apis.io/finops/aerodatabox/aerodatabox-finops/)
 
 ## Where to find this API
 
@@ -256,18 +269,18 @@ Links to the company's own pages. This repository publishes no copy of their spe
 
 ## API Evangelist rating
 
-**Kin Score 36.4** — thin · rubric 0.24.0 · scored 2026-10-17
+**Kin Score 36.1** — thin · rubric 0.28.1 · scored 2026-11-21
 
 | Facet | Score |
 |---|---|
-| Discoverability | 66.1 |
-| Contract quality | 57.5 |
+| Discoverability | 73.2 |
+| Contract quality | 63.0 |
 | Contract governance | 27.3 |
-| Operational transparency | 5.3 |
+| Operational transparency | 4.8 |
 | Developer ergonomics | 21.4 |
-| Access clarity | 36.8 |
+| Access clarity | 29.8 |
 
-**Agent readiness 26.2** — agent-aware
+**Agent readiness 25.3** — agent-aware
 
 | Agent-readiness dimension | Result |
 |---|---|
@@ -283,15 +296,21 @@ Links to the company's own pages. This repository publishes no copy of their spe
 | Event Surface Described | — |
 | Agent Skills | — |
 | Well Known Catalog | — |
-| Consent Identity | — |
+| Consent Identity | signal |
 | Agent Card | — |
 | Dry Run Mode | — |
 | Delegated Identity | — |
 | Protected Resource Metadata | — |
 | Dynamic Client Registration | — |
 | Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | — |
+| MCP Tool Quality | na |
+| Onboarding Descriptor | — |
+| Dns Aid Index | na |
+| Markdown Negotiation | na |
 
-**Regulatory alignment 18.6** — Horizontal (data, software, accessibility, platform)
+**Regulatory alignment 12.7** — Horizontal (data, software, accessibility, platform)
 
 The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/aerodatabox/](https://apis.io/providers/aerodatabox/).
 
